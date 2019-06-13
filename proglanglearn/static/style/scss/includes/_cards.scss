@@ -1,0 +1,180 @@
+html[data-theme="dark"]{
+    .card .card-container {
+        .card-title, .card-content {
+            color: $white;
+        }
+        .card-price .last {
+            color: $gray;
+        }
+    }
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    border: 1px solid $gray1;
+
+    &.card-hoverable:hover {
+        box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),
+                    0 2px 6px 2px rgba(60,64,67,.15);
+
+        .card-header .card-image {
+            transform: scale(1.05);
+        }
+    }
+
+    .card-header {
+        width: 100%;
+        overflow: hidden;
+
+        .card-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+    }
+
+    .card-container {
+        padding: 10px;
+
+        .card-title, .card-content {
+            color: $black;
+        }
+
+        .card-content {
+            margin-bottom: 85px;
+        }
+
+        .card-tags {
+            .card-tag {
+                @include set-background($default-language-color);
+                display: inline-block;
+                -webkit-clip-path: polygon(80% 0, 100% 50%, 80% 100%, 0 100%, 0 0);
+                clip-path: polygon(80% 0, 100% 50%, 80% 100%, 0 100%, 0 0);
+                padding: 6px 12px 6px 6px;
+                margin: 5px 2px 5px 5px;
+                line-height: $normal-font-size;
+
+                &::after {
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: $small-font-size;
+                    content: "\f111";
+                    padding-left: 5px;
+                    line-height: $normal-font-size;
+                }
+
+                &:first-child {
+                    margin-left: 5px;
+                }
+                &:last-child {
+                    margin-right: 5px;
+                }
+                &:hover {
+                    background-color: darken($default-tag-color, 20%);
+
+                    &::after {
+                        color: $red;
+                    }
+                }
+            }
+
+            @each $title-color, $color in $languages {
+                .#{$title-color}-tag{
+                    @include set-background($color);
+                    &:hover, &:active, &:focus {
+                        @include set-background(map-get($languages-dark, $title-color));
+                    }
+                }
+            }
+        }
+        
+        .card-info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: calc(#{$normal-font-size} * 0.85);
+
+            * {
+                margin: 7px;
+            }
+
+            .card-experience {
+                &::before {
+                    content: '\f005';
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: $normal-font-size;
+                    margin-right: 5px;
+                    color: $red;
+                }
+            }
+
+            .card-difficulty {
+                &::before {
+                    content: '\f0e7';
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: $normal-font-size;
+                    margin-right: 5px;
+                    color: $yellow1;
+                }
+            }
+
+            .card-date {                
+                &::before {
+                    content: '\f073';
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: $normal-font-size;
+                    margin-right: 5px;
+                    color: $main-blue2;
+                }
+            }
+        }
+
+        .card-price {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            text-align: center;
+
+            .last {
+                font-size: calc(#{$normal-font-size} * 0.85);
+                color: $gray3
+            }
+
+            .reduction {
+                font-weight: bold;
+                color: $red;
+            }
+
+            .new {
+                display: inline-block;
+                font-size: calc(#{$large-font-size} * 0.75);
+                font-weight: bold;
+                margin-top: 3px;
+            }
+        }
+    }
+}
+
+.card__round {
+    border-radius: 4px;
+
+    .card-header .card-image {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+}
+
+@each $title-color, $color in $main-colors {
+    .card__#{$title-color} {
+        @include set-background($color);
+        .card-container .card-title,
+        .card-container .card-content {
+            @include set-background($color);
+        }
+    }
+}

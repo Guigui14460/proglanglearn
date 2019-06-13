@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="language" content="fr" />
+    <meta name="description"
+        content="Apprenez les bases de la programmation en les manipulant dans des exemples simples et des projets plus complexes." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="copyright" content="ProgLangLearn Inc." />
+    <meta name="category" content="web, programming, languages" />
+    <meta name="keywords" content="web, pll, proglanglearn, programming, language" />
+    <meta name="publisher" content="LETELLIER Guillaume" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#c5a31b" />
+    <meta name="msapplication-navbutton-color" content="#c5a31b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+    <title>Recherche - ProgLangLearn</title>
+    <link rel="icon" href="../images/favicon.ico" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../style/css/global.min.css" media="screen" />
+    <link rel="stylesheet" href="../style/css/print.min.css" media="print" />
+    <script src="../js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div class="loader">
+        <img src="../images/load.gif" alt="Loading ..." />
+    </div>
+    <button id="btnScrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <div id="version-switcher">
+        <input type="checkbox" id="switch" class="switch" name="theme" />
+        <label class="switch-label" for="switch">Light/Dark toggle</label>
+        <ul class="languages-switcher">
+            <li class="current" title="Cliquez sur les liens pour changer de langue">
+                <span>Langue : <strong>Fr</strong></span>
+            </li>
+            <li class="other">
+                <a href="index.html?lang=fr" title="Français">Fr</a>
+            </li>
+            <li class="other">
+                <a href="index.html?lang=en" title="Anglais">En</a>
+            </li>
+        </ul>
+    </div>
+    <header>
+        <nav id="main-navbar" class="navbar navbar__primary navbar__fixed">
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <div class="navbar-logo">
+                <a href="../index.html" title="Retour à l'accueil">ProgLangLearn</a>
+            </div>
+            <ul class="navbar-links">
+                <li class="navbar-item">
+                    <a href="course_list.html"><i class="fas fa-laptop-code"></i> Cours</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="article_list.html"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="forum_list.html"><i class="far fa-question-circle"></i> Forum</a>
+                </li>
+            </ul>
+            <div class="navbar-search-expandable" id="expand-search">
+                <form action="search.html" method="get">
+                    <input type="text" placeholder="Recherche" name="q" id="search" />
+                    <input type="submit" value="Recherche" />
+                    <i class="fas fa-search"></i>
+                </form>
+            </div>
+            <div class="navbar-changeable">
+                <div class="dropdown-toggle">
+                    <img src="../images/404.png" alt="Photo de profil"
+                        class="navbar-profile-image profile-image round-image" title="Voir mon profil" />
+                    <span>johndoe</span>
+                    <ul class="navbar-dropdown-menu navbar-dropdown-right">
+                        <li class="navbar-dropdown-item">
+                            <a href="admin_pages/base.html"><i class="fas fa-tools"></i> Administration</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="add_course.html"><i class="far fa-plus-square"></i> Créer un cours</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="add_article.html"><i class="fas fa-newspaper"></i> Créer un article</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="dashboard.html"><i class="fas fa-chart-area"></i> Tableau de bord</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="profile.html"><i class="fas fa-user-tie"></i> Mon profil</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="account.html"><i class="fas fa-user-cog"></i> Mon compte</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="large">Recherche pour "<span id="search-currently">yyjyj</span>"</h1>
+            <form action="search.html" method="get" class="form">
+                <div class="form-group">
+                    <input type="text" id="search2" placeholder="Recherchez ici" name="q2" />
+                </div>
+                <div class="form-group">
+                    <label>Filtrer la recherche</label>
+                    <div class="custom-select select__info" id="profession">
+                        <select name="profession">
+                            <option value="0">Cliquez pour sélectionner votre choix :</option>
+                            <option selected="selected" value="1">Tout</option>
+                            <option value="2">Seulement les cours</option>
+                            <option value="3">Seulement les tutoriels</option>
+                            <option value="4">Seulement les sujets</option>
+                            <option value="5">Seulement les profils</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div id="search-result">
+                <div class="courses">
+                    <span>Tutoriels :</span>
+                    <a href="tutorial_detail.html">
+                        <div class="course">
+                            <h3><i class="fas fa-lock"></i> Mettre un site en ligne avec AWS</h3>
+                        </div>
+                    </a>
+                    <a href="tutorial_detail.html">
+                        <div class="course">
+                            <h3>Créer votre CV en ligne (part 1)</h3>
+                        </div>
+                    </a>
+                    <a href="tutorial_detail.html">
+                        <div class="course">
+                            <h3>Les classes en Go</h3>
+                            <small>Full beginner course on Go</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="articles">
+                    <span>Article du blog :</span>
+                    <a href="article_detail.html">
+                        <div class="article">
+                            <h3>Comment devenir Freelance ?</h3>
+                        </div>
+                    </a>
+                    <a href="article_detail.html">
+                        <div class="article">
+                            <h3>Comment avoir un bon SEO d'après Google ?</h3>
+                        </div>
+                    </a>
+                    <a href="article_detail.html">
+                        <div class="article">
+                            <h3>Les dernières actus (8 juin 2019)</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="subjects">
+                    <span>Sujets du forum :</span>
+                    <a href="forum_detail.html">
+                        <div class="subject">
+                            <h3>Comment utiliser momentjs ?</h3>
+                        </div>
+                    </a>
+                    <a href="forum_detail.html">
+                        <div class="subject">
+                            <h3>Afficher une bar de progression en pygame</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="profiles-search">
+                    <span>Profils d'étudiants en informatique ou développeur :</span>
+                    <div class="profile-grid">
+                        <a href="profile.html">
+                            <div class="profile">
+                                <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
+                                <div>
+                                    <h3>johndoe</h3>
+                                    <small>Developer</small>
+                                </div>
+                            </div>
+                        </a><a href="profile.html">
+                            <div class="profile">
+                                <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
+                                <h3>johndoe</h3>
+                            </div>
+                        </a><a href="profile.html">
+                            <div class="profile">
+                                <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
+                                <h3>johndoe</h3>
+                            </div>
+                        </a><a href="profile.html">
+                            <div class="profile">
+                                <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
+                                <h3>johndoeeeeeeeee-eeeeeeeeeeeeeeeeeeeeeeee ffffffffffffffff</h3>
+                            </div>
+                        </a><a href="profile.html">
+                            <div class="profile">
+                                <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
+                                <h3>johndoe</h3>
+                            </div>
+                        </a><a href="profile.html">
+                            <div class="profile">
+                                <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
+                                <h3>johndoe</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container pt-4 pb-3">
+            <div class="important-links">
+                <a href="terms.html">Termes et conditions d'utilisations</a>
+                <a href="privacy.html">Politique de confidentialité</a>
+                <a href="about.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="social-media my-2">
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Github"><i class="fab fa-github"></i></a>
+                <a href="#" title="Youtube"><i class="fab fa-youtube"></i></a>
+                <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="copyright">
+                <h3>
+                    &copy; <a href="../index.html" class="primary-color">ProgLangLearn Inc.</a>
+                </h3>
+                <p class="mt-0">Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/main.jquery.js"></script>
+    <script>
+        $(function () {
+            $('#search2').keyup(function () {
+                $('#search-currently').text($(this).val());
+
+                // FAIRE LES DEMANDES API ICI
+                // Utiliser AJAX GET methode
+            });
+        });
+    </script>
+</body>
+
+</html>

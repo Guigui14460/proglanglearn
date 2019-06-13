@@ -1,0 +1,480 @@
+header {
+    height: $navbar-line-height;
+
+    @include extra-small-device {
+        height: calc(2 * #{$navbar-line-height});
+    }
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    height: $navbar-line-height;
+    @include set-background($navbar-background-color);
+    width: 100%;
+    line-height: $navbar-line-height;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),
+                0 2px 6px 2px rgba(60,64,67,.15);
+
+    @include extra-small-device {
+        height: calc(2 * #{$navbar-line-height});
+    }
+
+    &.navbar__vertical {
+        display: block;
+        height: 100%;
+
+        @include small-device {
+            height: auto;
+        }
+
+        & > .burger {
+            display: none;
+            padding: 10px;
+            cursor: pointer;
+        
+            div {
+                width: 25px;
+                height: 5px;
+                @include set-background($navbar-color);
+                margin: 4px 4px 4px auto;
+                border-radius: 15px;
+                transition: all 0.3s ease;
+            }
+    
+            &.toggle {
+                .line1 {
+                    transform: rotate(-45deg) translate(-5px, 7px);
+                }
+                .line2 {
+                    opacity: 0;
+                }
+                .line3 {
+                    transform: rotate(45deg) translate(-5px, -8px);
+                }
+            }
+        
+            @include small-device {
+                display: block;
+            }
+        }
+
+        .navbar-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            border-bottom: 1px solid $navbar-color-hover;
+
+            &:last-child {
+                border: none;
+            }
+    
+            &.navbar-active {
+                .navbar-item {
+                    display: block;
+                }
+            }
+    
+            .navbar-item {
+                list-style: none;
+                display: block;
+    
+                @include small-device {
+                    display: none;
+                }
+    
+                a, a:link, a:visited {
+                    @include set-background-and-text($navbar-background-color, $navbar-color);
+                    display: block;
+                    padding-left: 10px;
+                    
+                    &:active, &:hover, &.active {
+                        @include set-background-and-text($navbar-background-color-hover, $navbar-color-hover);
+                    }
+                }
+            }
+        }
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    &.navbar__fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99;
+
+        .navbar-dropdown-menu {
+            z-index: 98;
+        }
+    }
+
+    &.search-expanded {
+        .navbar-search-expandable {
+            flex-grow: 1;
+    
+            form {
+                #search {
+                    @include small-device {
+                        display: block;
+                    }
+                }
+                i.fa-search {
+                    @include small-device {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .navbar-logo {
+            @include small-device {
+                display: none;
+            }
+            @include extra-small-device {
+                display: block;
+            }
+        }
+        .navbar-changeable {
+            @include extra-small-device {
+                display: none;
+            }
+        }
+        .burger {
+            @include extra-small-device {
+                display: none;
+            }
+        }
+    }
+
+    &:not(.navbar__vertical) > .burger {
+        display: none;
+        margin: 0;
+        padding: 10px;
+        cursor: pointer;
+    
+        div {
+            width: 25px;
+            height: 5px;
+            @include set-background($navbar-color);
+            margin: 4px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        &.toggle {
+            .line1 {
+                transform: rotate(-45deg) translate(-5px, 7px);
+            }
+            .line2 {
+                opacity: 0;
+            }
+            .line3 {
+                transform: rotate(45deg) translate(-5px, -8px);
+            }
+        }
+    
+        @include medium-device {
+            display: block;
+        }
+
+        @include extra-small-device {
+            order: 2;
+        }
+    }
+
+    .navbar-logo {
+        font-family: $font-cursive;
+        font-size: 1.5em;
+        display: block;
+        padding: 0 8px;
+
+        a {
+            display: block;
+            color: $navbar-color;
+
+            &:visited, a:link {
+                color: $navbar-color;
+            }
+            &:active, &:hover {
+                @include set-background-and-text($navbar-background-color, $navbar-color);
+                background: none;
+            }
+        }
+
+        @include extra-small-device {
+            text-align: center;
+            order: 1;
+            width: 100%
+        }
+    }
+
+    &:not(.navbar__vertical) > .navbar-links {
+        display: flex;
+        flex: 1;
+        flex-basis: auto;
+        margin-right: auto;
+        margin-left: 10px;
+        justify-content: flex-start;
+
+        @include medium-device {
+            position: absolute;
+            z-index: 97;
+            left: 0px;
+            top: $navbar-line-height;
+            @include set-background-and-text($navbar-background-color, $navbar-color);
+            width: 100%;
+            margin: 0;
+            flex-direction: column;
+            transform: translateX(-100%);
+            transition: transform 0.5s ease-in;
+        }
+
+        @include extra-small-device {
+            top: calc(2 * #{$navbar-line-height});
+        }
+
+        &.navbar-active {
+            transform: translateX(0%);
+        }
+
+        .navbar-item {
+            list-style: none;
+            display: block;
+            margin: 0;
+            line-height: $navbar-line-height;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            @include medium-device {
+                opacity: 0;
+            }
+
+            a, a:link, a:visited {
+                @include set-background-and-text($navbar-background-color, $navbar-color);
+                display: block;
+                padding: 0 15px;
+                font-weight: 700;
+                
+                &:active, &:hover, &.active {
+                    @include set-background-and-text($navbar-background-color-hover, $navbar-color-hover);
+                }
+
+                i {
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+
+    .navbar-search-expandable {
+        width: 200px;
+        height: $navbar-line-height;
+        margin: 0 1rem 0 auto;
+
+        form {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            #search {
+                width: 100%;
+                padding: 8px 8px 8px 8px;
+                outline: none;
+                height: 36px;
+                border: none;
+                margin: 0;
+                border-radius: 2px;
+                font-size: $normal-font-size;
+                background-color: $form-background-color-inactive;
+
+                &:hover {
+                    background-color: $form-background-color-inactive-hover;
+                }
+
+                &::placeholder {
+                    color: $placeholder-color;
+                }
+
+                &:focus {
+                    color: $black;
+                    background-color: $form-background-color;
+                    box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, 0.3),
+                                0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+                    transition: all 0.2s linear;
+                }
+
+                @include small-device {
+                    display: none;
+                }
+            }
+
+            input[type="submit"] {
+                display: none;
+            }
+
+            i.fa-search {
+                display: none;
+
+                @include small-device {
+                    display: block;
+                    margin-left: auto;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        @include small-device {
+            width: auto;
+        }
+
+        @include extra-small-device {
+            order: 3;
+        }
+    }
+
+    .navbar-changeable {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem;
+
+        .navbar-profile-image {
+            margin-right: 6px;
+        }
+
+        @include extra-small-device {
+            order: 4;
+        }
+    }
+
+    .navbar-dropdown-menu {
+        position: absolute;
+        top: $navbar-line-height;
+        display: none;
+        @include set-background-and-text($navbar-background-color, $navbar-color);
+        padding: 0;
+        margin: 0;
+
+        @include extra-small-device {
+            top: calc(2 * #{$navbar-line-height});
+        }
+
+        &.navbar-dropdown-right {
+            right: 0;
+        }
+        &.navbar-dropdown-left {
+            left: 0;
+        }
+
+        .navbar-dropdown-item {
+            display: block;
+            padding: 0;
+            margin: 0;
+
+            a, a:link, a:visited {
+                @include set-background-and-text($navbar-background-color, $navbar-color);
+                display: block;
+                padding: 0 15px;
+                font-weight: 700;
+                text-align: left;
+                
+                &:active, &:hover, &.active {
+                    @include set-background-and-text($navbar-background-color-hover, $navbar-color-hover);
+                }
+
+                i {
+                    padding-right: 10px;
+                }
+            }
+        }
+
+        hr.navbar-dropdown-divider {
+            border: 0.5px solid $navbar-color;
+            margin: 3px;
+        }
+    }
+}
+
+@each $title-color, $color in $main-colors {
+    .navbar.navbar__#{$title-color} {
+        @include set-background($color);
+    
+        &.navbar__vertical {
+            & > .burger div {
+                @include set-background(set-text-color($color));
+            }
+    
+            .navbar-links {
+                border-bottom: 1px solid set-text-color(map-get($main-dark-colors, $title-color));
+                &:last-child{
+                    border: none;
+                }
+
+                .navbar-item {
+                    a, a:link, a:visited {
+                        @include set-background($color);
+                        
+                        &:active, &:hover, &.active {
+                            @include set-background(map-get($main-dark-colors, $title-color));
+                        }
+                    }
+                }
+            }
+        }
+    
+        &:not(.navbar__vertical) > .burger div {
+            @include set-background(set-text-color($color));
+        }
+    
+        .navbar-logo a {
+            color: set-text-color($color);
+            &:visited, &:link {
+                color: set-text-color($color);
+            }
+            &:active, &:hover {
+                color: darken(set-text-color($color), 10%);
+            }
+        }
+    
+        &:not(.navbar__vertical) > .navbar-links {
+            @include medium-device {
+                @include set-background($color);
+            }
+    
+            .navbar-item {    
+                a, a:link, a:visited {
+                    @include set-background($color);
+                    &:active, &:hover, &.active {
+                        @include set-background(map-get($main-dark-colors, $title-color));
+                    }
+                }
+            }
+        }
+    
+        .navbar-dropdown-menu {
+            @include set-background($color);
+    
+            .navbar-dropdown-item {
+                a, a:link, a:visited {
+                    @include set-background($color);
+                    &:active, &:hover, &.active {
+                        @include set-background(map-get($main-dark-colors, $title-color));
+                    }
+                }
+            }
+    
+            hr.navbar-dropdown-divider {
+                border: 0.5px solid set-text-color($color);
+            }
+        }
+    }
+}

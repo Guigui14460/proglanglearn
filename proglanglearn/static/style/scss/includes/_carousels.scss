@@ -1,0 +1,41 @@
+.small-vertical-carousel {
+    margin: 1rem 0;
+
+    img {
+        height: 130px;
+        width: auto;
+        margin: 0 45px;
+    }
+}
+
+.slide-pane, .infinite-scroller {
+    visibility: hidden;
+}
+
+.slide-wrap {
+    height: 200px;
+    width: 100%;
+    position: relative;
+}
+
+.slide-wrap .slide-data {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    overflow: hidden;
+}
+
+.slide-wrap .slide-data ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.slide-wrap .slide-data ul li {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    list-style-type: none;
+}

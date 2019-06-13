@@ -1,0 +1,75 @@
+{% load static %}
+
+<nav id="main-navbar" class="navbar navbar__primary navbar__fixed">
+    <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+    <div class="navbar-logo">
+        <a href="{% url 'main:index' %}" title="Retour à l'accueil">ProgLangLearn</a>
+    </div>
+    <ul class="navbar-links">
+        <li class="navbar-item">
+            <a href="pages/course_list.html"><i class="fas fa-laptop-code"></i> Cours</a>
+        </li>
+        <li class="navbar-item">
+            <a href="pages/article_list.html"><i class="fas fa-blog"></i> Blog</a>
+        </li>
+        <li class="navbar-item">
+            <a href="pages/forum_list.html"><i class="far fa-question-circle"></i> Forum</a>
+        </li>
+    </ul>
+    <div class="navbar-search-expandable" id="expand-search">
+        <form action="pages/search.html" method="get">
+            <input type="text" placeholder="Recherche" name="q" id="search" />
+            <input type="submit" value="Recherche" />
+            <i class="fas fa-search"></i>
+        </form>
+    </div>
+    <div class="navbar-changeable">
+        {% if not user.is_authenticated %}
+            <a href="pages/login.html" class="btn btn__info mr-1">Connexion</a>
+        {% else %}
+            <div class="dropdown-toggle">
+                <img src="{% static 'images/404.png' %}" alt="Photo de profil"
+                    class="navbar-profile-image profile-image round-image" title="Voir mon profil" />
+                <span>{{ user.username }}</span>
+                <ul class="navbar-dropdown-menu navbar-dropdown-right">
+                    {% if user.is_staff %}
+                        <li class="navbar-dropdown-item">
+                            <a href="{% url 'admin:index' %}"><i class="fas fa-tools"></i> Administration</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                    {% endif %}
+                    <li class="navbar-dropdown-item">
+                        <a href="pages/add_course.html"><i class="far fa-plus-square"></i> Créer un cours</a>
+                    </li>
+                    <li class="navbar-dropdown-item">
+                        <hr class="navbar-dropdown-divider" />
+                    </li>
+                    <li class="navbar-dropdown-item">
+                        <a href="pages/add_article.html"><i class="fas fa-newspaper"></i> Créer un article</a>
+                    </li>
+                    <li class="navbar-dropdown-item">
+                        <hr class="navbar-dropdown-divider" />
+                    </li>
+                    <li class="navbar-dropdown-item">
+                        <a href="pages/dashboard.html"><i class="fas fa-chart-area"></i> Tableau de bord</a>
+                    </li>
+                    <li class="navbar-dropdown-item">
+                        <a href="pages/profile.html"><i class="fas fa-user-tie"></i> Mon profil</a>
+                    </li>
+                    <li class="navbar-dropdown-item">
+                        <a href="pages/account.html"><i class="fas fa-user-cog"></i> Mon compte</a>
+                    </li>
+                    <li class="navbar-dropdown-item">
+                        <a href="pages/logout.html"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</nav>

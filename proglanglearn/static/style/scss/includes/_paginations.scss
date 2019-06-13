@@ -1,0 +1,114 @@
+.pagination {
+    display: inline-block;
+
+    a, a:link, a:visited,
+    button, div {
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid $black;
+        color: $black;
+
+        &.active, &:hover,
+        &:active, &:focus {
+            @include set-background(lighten($black, 30%));
+        }
+
+        &.active:hover,
+        &.active:active,
+        &.active:focus {
+            @include set-background($black);
+            border-color: $black;
+        }
+
+        &:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+        &:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+    }
+
+    &.pagination__filled {
+        a, a:link, a:visited,
+        button, div {
+            border: 1px solid $black;
+            @include set-background($black);
+
+            &.active, &:hover,
+            &:active, &:focus {
+                @include set-background(lighten($black, 15%));
+            }
+
+            &.active:hover,
+            &.active:active,
+            &.active:focus {
+                @include set-background(lighten($black, 30%));
+                border-color: lighten($black, 30%);
+            }
+        }
+    }
+
+    @each $title-color, $color in $main-colors {
+        &.pagination__#{$title-color}{
+            a, a:link, a:visited,
+            button, div {
+                border: 1px solid $color;
+                color: $color;
+
+                &.active, &:hover,
+                &:active, &:focus {
+                    @include set-background(map-get($main-light-colors, $title-color));
+                }
+
+                &.active:hover,
+                &.active:active,
+                &.active:focus {
+                    @include set-background(map-get($main-dark-colors, $title-color));
+                    border-color: map-get($main-dark-colors, $title-color);
+                }
+            }
+        }
+    }
+
+    @each $title-color, $color in $main-colors {
+        &.pagination__#{$title-color}{
+            a, a:link, a:visited,
+            button, div {
+                border: 1px solid $color;
+                color: $color;
+
+                &.active, &:hover,
+                &:active, &:focus {
+                    @include set-background(map-get($main-light-colors, $title-color));
+                }
+
+                &.active:hover,
+                &.active:active,
+                &.active:focus {
+                    @include set-background($color);
+                    border-color: $color;
+                }
+            }
+        }
+        &.pagination__filled__#{$title-color} {
+            a, a:link, a:visited,
+            button, div {
+                border: 1px solid $color;
+                @include set-background(map-get($main-light-colors, $title-color));
+    
+                &.active, &:hover,
+                &:active, &:focus {
+                    @include set-background($color);
+                }
+    
+                &.active:hover,
+                &.active:active,
+                &.active:focus {
+                    @include set-background(map-get($main-dark-colors, $title-color));
+                    border-color: map-get($main-dark-colors, $title-color);
+                }
+            }
+        }
+    }
+}

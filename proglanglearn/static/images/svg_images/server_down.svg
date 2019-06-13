@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1119.609" height="688.817" viewBox="0 0 1119.609 688.817">
+  <g id="server_down" transform="translate(0 -10.183)">
+    <g id="Groupe_3" data-name="Groupe 3">
+      <ellipse id="Ellipse_4" data-name="Ellipse 4" cx="283" cy="38.5" rx="283" ry="38.5" transform="translate(553.609 622)" fill="#5e5aa5"/>
+      <path id="Tracé_7" data-name="Tracé 7" d="M494,726.5c90,23,263-30,282-90" transform="translate(-31.391 -100.5)" fill="none" stroke="#2f2e41" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Tracé_10" data-name="Tracé 10" d="M810.1,663.74l-7.878,50.295s-38.782,20.6-11.513,21.209,155.733,0,155.733,0,24.845,0-14.543-21.815l-7.878-52.719Z" transform="translate(-31.391 -100.5)" fill="#2f2e41"/>
+      <path id="Tracé_11" data-name="Tracé 11" d="M785.219,734.7c6.193-5.51,17-11.252,17-11.252l7.878-50.3,113.922.107L931.9,722.84c9.185,5.087,14.875,8.987,18.2,11.978,5.059-1.154,10.587-5.444-18.2-21.389l-7.878-52.719L810.1,663.74l-7.877,50.3S769.63,731.35,785.219,734.7Z" transform="translate(-31.391 -100.5)" opacity="0.1"/>
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="513.253" height="357.52" rx="18.046" transform="translate(578.433 212.689)" fill="#2f2e41"/>
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="478.713" height="267.837" transform="translate(595.703 231.777)" fill="#3f3d56"/>
+      <circle id="Ellipse_6" data-name="Ellipse 6" cx="3.03" cy="3.03" r="3.03" transform="translate(832.03 220.263)" fill="#f2f2f2"/>
+      <path id="Tracé_12" data-name="Tracé 12" d="M1123.08,621.322v31.341a18.044,18.044,0,0,1-18.048,18.046H627.87a18.044,18.044,0,0,1-18.046-18.048V621.322Z" transform="translate(-31.391 -100.5)" fill="#2f2e41"/>
+      <path id="Tracé_13" data-name="Tracé 13" d="M968.978,667.466v6.06H642.968v-4.848l.449-1.212,8.035-21.815h310.86Z" fill="#2f2e41"/>
+      <path id="Tracé_14" data-name="Tracé 14" d="M1125.83,762.034c-.594,2.539-2.836,5.217-7.9,7.75-18.179,9.089-55.143-2.424-55.143-2.424s-28.48-4.848-28.48-17.573a22.726,22.726,0,0,1,2.5-1.485c7.643-4.044,32.984-14.021,77.918.422a18.739,18.739,0,0,1,8.541,5.6C1125.08,756.454,1126.51,759.157,1125.83,762.034Z" transform="translate(-31.391 -100.5)" fill="#2f2e41"/>
+      <path id="Tracé_15" data-name="Tracé 15" d="M1125.83,762.034c-22.251,8.526-42.084,9.162-62.439-4.975-10.265-7.126-19.591-8.89-26.59-8.756,7.643-4.044,32.984-14.021,77.918.422a18.739,18.739,0,0,1,8.541,5.6C1125.08,756.454,1126.51,759.157,1125.83,762.034Z" transform="translate(-31.391 -100.5)" opacity="0.1"/>
+      <ellipse id="Ellipse_7" data-name="Ellipse 7" cx="7.878" cy="2.424" rx="7.878" ry="2.424" transform="translate(1058.662 651.711)" fill="#f2f2f2"/>
+      <circle id="Ellipse_8" data-name="Ellipse 8" cx="11.513" cy="11.513" r="11.513" transform="translate(823.547 534.154)" fill="#f2f2f2"/>
+      <path id="Tracé_16" data-name="Tracé 16" d="M968.978,667.466v6.06H642.968v-4.848l.449-1.212Z" opacity="0.1"/>
+    </g>
+    <g id="Server">
+      <path id="Tracé_8" data-name="Tracé 8" d="M341,359.5s130-36,138,80-107,149-17,172" transform="translate(-31.391 -100.5)" fill="none" stroke="#2f2e41" stroke-miterlimit="10" stroke-width="2"/>
+      <g id="Groupe_1" data-name="Groupe 1">
+        <path id="Tracé_1" data-name="Tracé 1" d="M31.391,151.642c0,77.5,48.618,140.208,108.7,140.208" transform="translate(-31.391 -100.5)" fill="#2f2e41"/>
+        <path id="Tracé_2" data-name="Tracé 2" d="M140.092,291.851c0-78.369,54.255-141.784,121.3-141.784" transform="translate(-31.391 -100.5)" fill="#6c63ff"/>
+        <path id="Tracé_3" data-name="Tracé 3" d="M70.775,158.668c0,73.615,31,133.183,69.316,133.183" transform="translate(-31.391 -100.5)" fill="#6c63ff"/>
+        <path id="Tracé_4" data-name="Tracé 4" d="M140.092,291.851c0-100.138,62.71-181.168,140.208-181.168" transform="translate(-31.391 -100.5)" fill="#2f2e41"/>
+        <path id="Tracé_5" data-name="Tracé 5" d="M117.224,292.839s15.416-.475,20.061-3.783S161,281.8,162.151,287.1s23.167,26.388,5.763,26.529-40.439-2.711-45.076-5.535S117.224,292.839,117.224,292.839Z" transform="translate(-31.391 -100.5)" fill="#a8a8a8"/>
+        <path id="Tracé_6" data-name="Tracé 6" d="M168.224,311.785c-17.4.14-40.439-2.711-45.076-5.535-3.531-2.151-4.938-9.869-5.409-13.43-.326.014-.515.02-.515.02s.976,12.433,5.613,15.257,27.672,5.676,45.076,5.535c5.024-.041,6.759-1.828,6.664-4.475C173.879,310.756,171.963,311.755,168.224,311.785Z" transform="translate(-31.391 -100.5)" opacity="0.2"/>
+        <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="187" cy="25.44" rx="187" ry="25.44" transform="translate(11.609 399.06)" fill="#5e5aa5"/>
+        <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="157" cy="21.359" rx="157" ry="21.359" transform="translate(41.609 403.141)" opacity="0.19"/>
+        <rect id="Rectangle_3" data-name="Rectangle 3" width="208" height="242" transform="translate(108.609 159)" fill="#2f2e41"/>
+        <rect id="Rectangle_4" data-name="Rectangle 4" width="250" height="86" transform="translate(87.609 135)" fill="#3f3d56"/>
+        <rect id="Rectangle_5" data-name="Rectangle 5" width="250" height="86" transform="translate(87.609 237)" fill="#3f3d56"/>
+        <rect id="Rectangle_6" data-name="Rectangle 6" width="250" height="86" transform="translate(87.609 339)" fill="#3f3d56"/>
+      </g>
+      <rect id="Rectangle_7" data-name="Rectangle 7" width="16" height="16" transform="translate(271.609 150)" fill="#6c63ff" opacity="0.4"/>
+      <rect id="Rectangle_8" data-name="Rectangle 8" width="16" height="16" transform="translate(294.609 150)" fill="#6c63ff" opacity="0.8"/>
+      <rect id="Rectangle_9" data-name="Rectangle 9" width="16" height="16" transform="translate(317.609 150)" fill="#6c63ff"/>
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="16" height="16" transform="translate(271.609 251)" fill="#6c63ff" opacity="0.4"/>
+      <rect id="Rectangle_11" data-name="Rectangle 11" width="16" height="16" transform="translate(294.609 251)" fill="#6c63ff" opacity="0.8"/>
+      <rect id="Rectangle_12" data-name="Rectangle 12" width="16" height="16" transform="translate(317.609 251)" fill="#6c63ff"/>
+      <rect id="Rectangle_13" data-name="Rectangle 13" width="16" height="16" transform="translate(271.609 352)" fill="#6c63ff" opacity="0.4"/>
+      <rect id="Rectangle_14" data-name="Rectangle 14" width="16" height="16" transform="translate(294.609 352)" fill="#6c63ff" opacity="0.8"/>
+      <rect id="Rectangle_15" data-name="Rectangle 15" width="16" height="16" transform="translate(317.609 352)" fill="#6c63ff"/>
+    </g>
+    <g id="Groupe_2" data-name="Groupe 2">
+      <ellipse id="Ellipse_5" data-name="Ellipse 5" cx="170" cy="23.127" rx="170" ry="23.127" transform="translate(140.609 622.373)" fill="#5e5aa5"/>
+      <path id="Tracé_9" data-name="Tracé 9" d="M215.4,637.783s39.072-10.82,41.477,24.044-32.16,44.783-5.109,51.7" transform="translate(-31.391 -100.5)" fill="none" stroke="#2f2e41" stroke-miterlimit="10" stroke-width="2"/>
+      <circle id="Ellipse_9" data-name="Ellipse 9" cx="79" cy="79" r="79" transform="translate(237.609 459)" fill="#2f2e41"/>
+      <rect id="Rectangle_16" data-name="Rectangle 16" width="24" height="43" transform="translate(280.609 600)" fill="#2f2e41"/>
+      <rect id="Rectangle_17" data-name="Rectangle 17" width="24" height="43" transform="translate(328.609 600)" fill="#2f2e41"/>
+      <ellipse id="Ellipse_10" data-name="Ellipse 10" cx="20" cy="7.5" rx="20" ry="7.5" transform="translate(280.609 636)" fill="#2f2e41"/>
+      <ellipse id="Ellipse_11" data-name="Ellipse 11" cx="20" cy="7.5" rx="20" ry="7.5" transform="translate(328.609 635)" fill="#2f2e41"/>
+      <circle id="Ellipse_12" data-name="Ellipse 12" cx="27" cy="27" r="27" transform="translate(291.609 491)" fill="#fff"/>
+      <circle id="Ellipse_13" data-name="Ellipse 13" cx="9" cy="9" r="9" transform="translate(309.609 509)" fill="#3f3d56"/>
+      <path id="Tracé_17" data-name="Tracé 17" d="M271.367,565.032c-6.379-28.568,14.012-57.434,45.544-64.475s62.265,10.41,68.644,38.978-14.519,39.1-46.051,46.145S277.746,593.6,271.367,565.032Z" transform="translate(-31.391 -100.5)" fill="#6c63ff"/>
+      <ellipse id="Ellipse_14" data-name="Ellipse 14" cx="39.5" cy="12.4" rx="39.5" ry="12.4" transform="translate(344.63 514.984) rotate(-23.171)" fill="#2f2e41"/>
+      <ellipse id="Ellipse_15" data-name="Ellipse 15" cx="39.5" cy="12.4" rx="39.5" ry="12.4" transform="translate(196.631 567.984) rotate(-23.171)" fill="#2f2e41"/>
+      <path id="Tracé_18" data-name="Tracé 18" d="M394,661.5c0,7.732-19.909,23-42,23s-43-14.268-43-22,20.909-6,43-6S394,653.768,394,661.5Z" transform="translate(-31.391 -100.5)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

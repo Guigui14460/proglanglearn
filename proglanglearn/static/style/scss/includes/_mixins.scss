@@ -1,0 +1,36 @@
+@mixin extra-small-device {
+    @media (max-width: #{$breakpoint-extra-small}) {
+        @content;
+    }
+}
+
+@mixin small-device {
+    @media (max-width: #{$breakpoint-small}) {
+        @content;
+    }
+}
+
+@mixin medium-device {
+    @media (max-width: #{$breakpoint-medium}) {
+        @content;
+    }
+}
+
+@mixin large-device {
+    @media (max-width: #{$breakpoint-large}) {
+        @content;
+    }
+}
+
+@mixin extra-large-device {
+    @media (min-width: #{$breakpoint-extra-large}) {
+        @content;
+    }
+}
+
+@mixin user-select($value) {
+    -webkit-user-select: $value; /* Safari 3.1+ */
+    -moz-user-select: $value; /* Firefox 2+ */
+    -ms-user-select: $value; /* IE 10+ */
+    user-select: $value; /* Standard syntax */
+}

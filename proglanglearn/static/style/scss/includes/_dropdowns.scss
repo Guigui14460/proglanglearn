@@ -1,0 +1,142 @@
+.dropdown-toggle {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    span::after {
+        content: "\f0d7";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 700;
+        margin: 0 0 0 6px;
+    }
+
+    &.show-dropdown {
+        .navbar-dropdown-menu,
+        .dropdown-menu {
+            display: block;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),
+                        0 2px 6px 2px rgba(60,64,67,.15);
+        }
+    }
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    @include set-background($white);
+    padding: 0.4rem 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: $normal-font-size;
+    border: 1px solid $black;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &.show-dropdown {
+        @include set-background($black);
+
+        & > .dropdown-menu {
+            display: block;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),
+                        0 2px 6px 2px rgba(60,64,67,.15);
+        }
+    }
+
+    @each $title-color, $color in $main-colors {
+        &.dropdown__#{$title-color}{
+            @include set-background($color);
+            border-color: $color;
+
+            &:hover,
+            &:active,
+            &:focus,
+            &.show-dropdown {
+                @include set-background(map-get($main-dark-colors, $title-color));
+            }
+
+            .dropdown-menu {
+                @include set-background($color);
+                border: 1px solid $color;
+        
+                .dropdown-item {
+                    @include set-background($color);
+
+                    a, a:link, a:visited {
+                        @include set-background($color);                        
+                        &:active, &:hover {
+                            @include set-background(map-get($main-dark-colors, $title-color));
+                        }
+                    }
+                }
+        
+                hr.dropdown-divider {
+                    border-color: set-text-color($color);
+                }
+            }
+        }
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        padding: 0.5rem 0;
+        margin: 0.125rem 0 0;
+        @include set-background($black);
+        border: 1px solid $black;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        border-radius: 0 0 4px 4px;
+
+        &.dropdown-menu-left {
+            right: auto;
+            left: 0;
+        }
+        &.dropdown-menu-right {
+            right: 0;
+            left: auto;
+        }
+
+        .dropdown-item {
+            display: block;
+            min-width: 10rem;
+            @include set-background($black);
+            margin: 0;
+
+            &:last-child a {
+                border-radius: 0 0 4px 4px;
+            }
+
+            a, a:link, a:visited {
+                @include set-background($black);
+                display: block;
+                padding: 0.5rem;
+                font-weight: 600;
+                text-align: left;
+                
+                &:active, &:hover {
+                    @include set-background($white);
+                }
+
+                i {
+                    padding-right: 10px;
+                }
+            }
+        }
+
+        hr.dropdown-divider {
+            border: 0.5px solid $white;
+            margin: 0.5rem 0;
+        }
+    }
+}

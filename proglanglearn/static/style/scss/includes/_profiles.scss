@@ -1,0 +1,143 @@
+.profile {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    grid-gap: 2rem;
+    padding: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+
+    h2 {
+        margin: 0;
+    }
+
+    p {
+        margin: 0.3rem;
+    }
+
+    ul {
+        list-style: none;
+        
+        li {
+            margin-top: 5px;
+        }
+    }
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-areas:
+    "top top"
+    "about about"
+    "experience education"
+    "github github";
+    grid-gap: 2rem;
+
+    @include small-device {
+        grid-template-areas:
+            "top"
+            "about"
+            "experience"
+            "education"
+            "github";
+    }
+
+    p {
+        margin: 0.5rem 0;
+    }
+
+    .profile-top {
+        grid-area: top;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        img {
+            width: 250px;
+        }
+
+        .icons a,
+        .icons a:visited,
+        .icons a:link {
+            color: $white;
+            margin: 0 0.6rem;
+
+            &:hover,
+            &:active,
+            &:focus {
+                color: darken($white, 20%);
+            }
+        }
+    }
+
+    .profile-about {
+        grid-area: about;
+        text-align: center;
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    .profile-experience {
+        grid-area: experience;
+    }
+
+    .profile-education {
+        grid-area: education;
+    }
+
+    .profile-experience,
+    .profile-education {
+        & > div {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid $gray;
+
+            &:last-child {
+                border: none;
+            }
+        }
+    }
+
+    .profile-github {
+        grid-area: github;
+
+        .repo {
+            display: flex;
+
+            & > div:first-child {
+                flex: 7;
+                flex-basis: 70%;
+            }
+
+            & > div:last-child {
+                flex: 3;
+                flex-basis: 20%;
+            }
+
+            h4 {
+                margin: 0;
+            }
+
+            ul {
+                @include small-device {
+                    padding: 0;
+                }
+
+                li {
+                    margin: 5px 0 0 0;
+                }
+            }
+
+            @include small-device {
+                flex-direction: column;
+            }
+        }
+    }
+}

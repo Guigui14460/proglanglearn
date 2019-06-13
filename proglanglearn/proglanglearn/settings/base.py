@@ -2,7 +2,8 @@ import os
 from decouple import config
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 
 SECRET_KEY = config('SECRET_KEY')
 
@@ -54,7 +55,7 @@ WSGI_APPLICATION = 'proglanglearn.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-Fr'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
@@ -64,9 +65,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Redirect configs
 LOGIN__URL = 'login'

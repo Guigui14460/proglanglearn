@@ -1,0 +1,65 @@
+html[data-theme="dark"]{
+    .collapsible .collapsible-panel {
+        @include set-background($main-black-container);
+    }
+}
+
+.collapsible {
+    .collapsible-btn {
+        display: none;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+        font-size: calc(1.2 * #{$normal-font-size});
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        line-height: 1;
+        vertical-align: middle;
+
+        &.active, &:hover {
+            @include set-background(darken($white, 10%));
+        }
+
+        &::after {
+            content: '\f078';
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: $normal-font-size;
+            float: right;
+            margin-left: 5px;
+        }
+
+        &.active::after {
+            content: '\f077';
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+        @include small-device {
+            display: block;
+        }
+    }
+
+    .collapsible-panel {
+        padding: 0 10px;
+        @include set-background($white);
+        overflow: hidden;
+
+        p {
+            margin: 10px 0;
+        }
+    }
+
+    @each $title-color, $color in $main-colors {
+        &.collapsible__#{$title-color}{
+            .collapsible-btn {
+                @include set-background($color);
+                &.active, &:hover {
+                    @include set-background(map-get($main-dark-colors, $title-color));
+                }
+            }
+        }
+    }
+}

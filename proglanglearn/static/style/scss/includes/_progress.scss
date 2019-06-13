@@ -1,0 +1,20 @@
+.progress-bar {
+    width: 100%;
+    background-color: #dddddd;
+
+    .progress-bar-line {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 5px;
+        height: 30px;
+        @include set-background($gray4);
+
+        @each $title-color, $color in $main-colors {
+            &.progress-bar__#{$title-color}{
+                @include set-background($color);
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+.note {
+    display: block;
+    @include set-background($gray2);
+    border-left: 6px solid $gray4;
+    border-radius: 0 4px 4px 0;
+    
+    p {
+        padding: 10px 1rem;
+
+        &::before {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: $normal-font-size;
+            margin-right: 10px;
+        }
+    }
+    a, a:link, a:visited {
+        text-decoration: underline;
+        color: set-text-color($gray2);
+        &:hover, &:active, &:focus {
+            font-weight: bolder;
+        }
+    }
+}
+
+@each $title-color, $color in $main-colors {
+    .note__#{$title-color} {
+        @include set-background(map-get($main-light-colors, $title-color));
+        border-color: $color;
+        @if ($title-color == "danger") {
+            p::before {
+                content: "\f071";
+            }
+        } @else if ($title-color == 'info') {
+            p::before {
+                content: "\f05a";
+            }
+        } @else if ($title-color == 'warning') {
+            p::before {
+                content: "\f06a";
+            }
+        } @else {
+            p::before {
+                content: "\f058";
+            }
+        }
+        a, a:link, a:visited {
+            text-decoration: underline;
+            color: set-text-color(map-get($main-light-colors, $title-color));
+            &:hover, &:active, &:focus {
+                font-weight: bolder;
+            }
+        }
+    }
+}

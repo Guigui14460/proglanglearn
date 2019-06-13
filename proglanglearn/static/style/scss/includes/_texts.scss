@@ -1,0 +1,162 @@
+@function set-text-color($color) {
+    @if (lightness($color) > 45) {
+        @return $black;
+    } @else {
+        @return $main-white;
+    }
+}
+
+@mixin set-background($color) {
+    background-color: $color;
+    color: set-text-color($color);
+}
+
+@mixin set-background-and-text($bgcolor, $txtcolor) {
+    background-color: $bgcolor;
+    color: $txtcolor;
+}
+
+@each $title-color, $color in $all-colors {
+    .bg-#{$title-color} {
+        @include set-background($color);
+        border: 1px solid $gray2;
+    }
+    .bg-light-#{$title-color} {
+        @include set-background(map-get($all-light-colors, $title-color));
+        border: 1px solid $gray2;
+    }
+    .#{$title-color}-color {
+        color: $color !important;
+    }
+}
+
+a,
+a:visited,
+a:link {
+    text-decoration: none;
+    color: $main-blue1;
+    outline: none;
+
+    &:hover,
+    &:focus {
+        color: $main-blue3;
+    }
+}
+
+.x-large {
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    @include small-device {
+        font-size: 3rem;
+    }
+}
+
+.large {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    @include small-device {
+        font-size: 2rem;
+    }
+}
+
+.lead {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+
+    @include small-device {
+        font-size: 1.1rem;
+    }
+}
+
+.normal-fs {
+    font-size: 1rem;
+}
+
+.small-fs {
+    font-size: 0.75rem;
+}
+
+.extra-small-fs {
+    font-size: 0.5rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3, h4, h5, h6 {
+    margin: 4px 0;
+}
+
+p {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.required-input {
+    color: $red;
+    font-weight: bold;
+}
+
+.center-text {
+    text-align: center;
+    justify-content: center;
+}
+
+.fw-normal {
+    font-weight: normal;
+}
+
+hr {
+    display: block;
+    margin: 5px;
+    border: .5px solid $gray2;
+
+    &.dashed {
+        border-style: dashed;
+    }
+}
+
+html[data-theme="dark"]{
+    kbd {
+        @include set-background($main-white);
+    }
+}
+
+kbd {
+    @include set-background($main-black-dark-30);
+    font-weight: 400;
+    padding: 0.15rem 0.3rem;
+    border-radius: 2px;
+}
+
+html[data-theme="dark"]{
+    blockquote::before,
+    blockquote::after {
+        color: $white;
+    }
+}
+
+blockquote {
+    &::before {
+        content: "\f10d";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 700;
+        color: $black;
+        font-size: 2rem;
+        margin-right: 15px;
+    }
+    &::after {
+        content: "\f10e";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 700;
+        color: $black;
+        font-size: 2rem;
+        margin-left: 15px;
+    }
+}

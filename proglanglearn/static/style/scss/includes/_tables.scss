@@ -1,0 +1,65 @@
+html[data-theme="dark"]{
+    .table {
+        tr:nth-child(even){
+            background-color: $black-dark-theme;
+        }
+        tr:nth-child(odd){
+            background-color: $gray4;
+        }
+    }
+    @each $title-color, $color in $main-colors {
+        .table__#{$title-color}{
+            tr:first-child {
+                @include set-background($color);
+            }
+        }
+    }
+}
+
+.table {
+    overflow-x: auto;
+    padding: 0;
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 1;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    table, th, td {
+        border: 1px solid $black;
+    }
+
+    tr:nth-child(even){
+        background-color: $gray1;
+    }
+    tr:nth-child(odd){
+        background-color: $white;
+    }
+
+    .table-btn {
+        text-align: center;
+        width: auto;
+    }
+}
+
+@each $title-color, $color in $main-colors {
+    .table__#{$title-color}{
+        border-color: $color;
+
+        tr:first-child {
+            @include set-background($color);
+        }
+
+        table, th, td {
+            border-color: $color;
+        }
+    }
+}

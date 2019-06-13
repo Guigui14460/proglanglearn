@@ -1,0 +1,48 @@
+html[data-theme="dark"] {
+    .tooltip .tooltiptext {
+        @include set-background($main-white);
+        &::after {
+            border-color: $white transparent transparent transparent;
+        }
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+    &:hover .tooltiptext,
+    &:active .tooltiptext,
+    &:focus .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
+
+    .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        @include set-background($main-black);
+        text-align: center;
+        font-weight: normal;
+        border-radius: 4px;
+        padding: 5px;
+        position: absolute;
+        z-index: 2;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-20px);
+        opacity: 0;
+        transition: 0.5s;
+        
+        &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border: 5px solid #000000;
+            border-color: $main-black transparent transparent transparent;
+        }
+    }
+}

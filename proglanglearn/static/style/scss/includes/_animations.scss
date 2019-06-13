@@ -1,0 +1,108 @@
+@-webkit-keyframes NavLinkFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+@-moz-keyframes NavLinkFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+@keyframes NavLinkFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@-webkit-keyframes FadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+@-moz-keyframes FadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+@keyframes FadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@-webkit-keyframes fadein {
+    0% {bottom: 0; opacity: 0;} 
+    50% {bottom: 0; opacity: 0;} 
+    100% {bottom: 30px; opacity: 1;}
+}
+@-moz-keyframes fadein {
+    0% {bottom: 0; opacity: 0;} 
+    50% {bottom: 0; opacity: 0;} 
+    100% {bottom: 30px; opacity: 1;}
+}
+@keyframes fadein {
+    0% {bottom: 0; opacity: 0;} 
+    50% {bottom: 0; opacity: 0;} 
+    100% {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+@-moz-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes sliderAnimate {
+    0%{
+        left: 0;
+    }
+    20%{
+        left: 0;
+    }
+    25%{
+        left: -100%;
+    }
+    45%{
+        left: -100%;
+    }
+    50%{
+        left: -200%;
+    }
+    70%{
+        left: -200%;
+    }
+    75%{
+        left: -300%;
+    }
+    95%{
+        left: -300%;
+    }
+    100%{
+        left: -300%;
+    }
+}

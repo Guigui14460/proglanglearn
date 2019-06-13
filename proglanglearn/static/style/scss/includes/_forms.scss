@@ -1,0 +1,488 @@
+html[data-theme="dark"]{
+    .form {
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="url"],
+        input[type="number"],
+        input[type="date"],
+        input[type="datetime"],
+        input[type="datetime-local"],
+        input[type="week"],
+        input[type="month"],
+        select,
+        textarea {
+            color: $white;
+            border-color: $white;
+
+            &::placeholder {
+                color: darken($gray1, 5%);
+            }
+
+            &:valid {
+                border-color: $green;
+            }
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover, 
+            &:-webkit-autofill:focus, 
+            &:-webkit-autofill:active {
+                color: $white;
+            }
+        }
+
+        fieldset {
+            border-color: $white;
+        }
+    }
+
+    .social-input i { 
+        @each $social, $color in $social-network-colors {
+            @if ($social == github) {
+                &.fa-#{$social} {
+                    color: map-get($social-network-light-colors, $social);
+                }
+            } @else {
+                &.fa-#{$social} {
+                    color: $color;
+                }
+            }
+        }
+    }
+
+    .custom-select {
+        .select-selected {
+            @include set-background($main-black-container);
+
+            &:hover {
+                @include set-background(darken($main-black-container, 5%));
+            }
+        }
+    
+        .select-items {
+            @include set-background($main-black-container);
+        }
+    
+        .select-items div,.select-selected {
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .select-items div:hover, .same-as-selected {
+            @include set-background(darken($main-black-container, 5%));
+        }
+    }
+
+    @each $title-color, $color in $main-colors {
+        .custom-select.select__#{$title-color}{
+            .select-selected {
+                @include set-background($color);
+    
+                &:hover {
+                    @include set-background(map-get($main-dark-colors, $title-color));
+                }
+    
+                .select-items {
+                    @include set-background($color);
+                }
+            }
+            .select-items div, .select-selected {
+                @include set-background($color);
+            }
+    
+            .select-items div:hover, .same-as-selected {
+                @include set-background(map-get($main-dark-colors, $title-color));
+            }
+        }
+    }
+
+    .custom-multiple-select select {
+        @include set-background($main-black-container)
+    }
+
+    .password label.eye::before {
+        color: $white;
+    }
+
+    input[type="checkbox"]{
+        &::before {
+            border-color: $white;
+        }
+        &:checked::before {
+            border-color: $green;
+        }
+    }
+
+    input[type="radio"] + label::before {
+        background-color: $main-black-container;
+    }
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 1.2rem;
+    height: 1.2rem;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    margin-right: 5px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 3px solid $black;
+        box-sizing: border-box;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+
+    &:checked::before {
+        border-left: none;
+        border-top: none;
+        width: 0.6rem;
+        border-color: $green;
+        transform: rotate(45deg) translate(5px, -10px);
+    }
+}
+
+input[type="radio"]{
+    position: absolute;
+    display: none;
+
+    & + label {
+        position: relative;
+        padding: 0 0 0 30px;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $white;
+            border: 2px solid $info;
+            height: $normal-font-size;
+            width: $normal-font-size;
+            border-radius: 50%;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background-color: $info;
+            height: calc(#{$normal-font-size} - 4px);
+            width: calc(#{$normal-font-size} - 4px);
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(2);
+            transition: transform 0.3s linear, opacity 0.3s linear;
+        }
+    }
+
+    &:checked + label::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.form {
+    .form-group {
+        margin: 1.2rem 0;
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 0.3rem;
+        color: $gray2;
+    }
+
+    label.abs-icon {
+        position: relative;
+
+        i.fas,
+        i.fab,
+        i.far {
+            position: absolute;
+            top: calc(#{$font-size-form} * 1.8);
+            left: 0.1rem;
+        }
+        input {
+            padding-left: calc(#{$font-size-form} * 1.5);
+        }
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    input[type="number"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="week"],
+    input[type="month"],
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 0.4rem;
+        font-size: $font-size-form;
+        font-family: $font-base;
+        outline: none;
+        margin-top: 0.2rem;
+        border: none;
+        border-bottom: 2px solid $black;
+        background: transparent;
+        color: $black;
+
+        &:valid {
+            border-color: $green;
+        }
+        
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover, 
+        &:-webkit-autofill:focus, 
+        &:-webkit-autofill:active {
+            background: transparent;
+            color: $black;
+        }
+    }
+
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"] {
+        &::-webkit-datetime-edit-text {
+            color: $red;
+            padding: 0 0.5rem;
+        }
+        &::-webkit-inner-spin-button {
+            display: none;
+        }
+        &::-webkit-calendar-picker-indicator {
+            @include set-background($red);
+            padding: 5px;
+            margin-left: 10px;
+        }
+    }
+
+    .social-input {
+        display: flex;
+        i {
+            padding: 0.3rem 0.5rem 0 0;
+            width: 3rem;
+
+            &.fa-instagram {
+                color: #cc2366;
+            }
+
+            @each $social, $color in $social-network-colors {
+                @if ($social == "facebook"){
+                    &.fa-#{$social}-square {
+                        color: $color;
+                    }
+                } @else {
+                    &.fa-#{$social} {
+                        color: $color;
+                    }
+                }
+            }
+        }
+    }
+
+    textarea {
+        resize: none;
+        height: calc(#{$font-size-form} * 7);
+    }
+
+    .custom-select {
+        position: relative;
+        width: 100%;
+        font-size: $font-size-form;
+        margin-top: 0.2rem;
+
+        select {
+            display: none;
+        }
+
+        .select-selected {
+            border-radius: 4px;
+            @include set-background($white);
+
+            &:hover {
+                @include set-background(rgb(228, 220, 220));
+            }
+        
+            &::after {
+                position: absolute;
+                content: "\f078";
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                font-size: $font-size-form;
+                top: 0.7rem;
+                right: 0.4rem;
+            }
+    
+            &.select-arrow-active {
+                border-radius: 4px 4px 0 0;
+                &::after {
+                    content: '\f077';
+                }
+            }
+        }
+    
+        .select-items {
+            position: absolute;
+            @include set-background($white);
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 4;
+            overflow-y: auto;
+            max-height: 20em;
+        }
+    
+        .select-items div,.select-selected {
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-color: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            @include user-select(none);
+        }
+    
+        .select-hide {
+            display: none;
+        }
+    
+        .select-items div:hover, .same-as-selected {
+            @include set-background(rgb(228, 220, 220));
+        }
+    }
+
+    fieldset {
+        border: 2px solid $black;
+        border-radius: 5px;
+        padding: 0 $font-size-form;
+        margin: 1.3rem 0;
+
+        legend {
+            font-size: 1.1rem;
+            padding: 0 0.5rem;
+        }
+
+        .form-group {
+            margin: 1.2rem;
+        }
+    }
+
+    .custom-multiple-select {
+        margin-top: 0.2rem;
+
+        select {
+            width: 100%;
+            font-size: $font-size-form;
+            padding: 8px 16px;
+        }
+
+        @each $title-color, $color in $main-colors {
+            &.select-multiple__#{$title-color} select{
+                @include set-background($color);
+            }
+        }
+    }
+}
+
+.social-btn {
+    .btn__ {
+        @each $social, $color in $social-network-colors {
+            &#{$social} {
+                @include set-background($color);
+                box-shadow: 0 1px 2px 0 rgba(60,64,67,.3),
+                            0 2px 6px 2px rgba(60,64,67,.15);
+
+                &:hover,
+                &:active,
+                &:focus {
+                    @include set-background(map-get($social-network-dark-colors, $social));
+                }
+            }
+        }
+    }
+}
+
+.password {
+    position: relative;
+
+    input {
+        width: 100%;
+        &[type="checkbox"]{
+            display: none;
+        }
+    }
+    label.eye::before {
+        position: absolute;
+        content: "\f070";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 500;
+        font-size: $normal-font-size;
+        color: $black;
+        right: 10px;
+        top: 1.9rem;
+        z-index: 2;
+        cursor: pointer;
+    }
+    input[type="checkbox"]:checked + label.eye::before {
+        content: "\f06e";
+    }
+}
+
+@each $title-color, $color in $main-colors {
+    .custom-select.select__#{$title-color}{
+        .select-selected {
+            @include set-background($color);
+
+            &:hover {
+                @include set-background(map-get($main-dark-colors, $title-color));
+            }
+
+            .select-items {
+                @include set-background($color);
+            }
+        }
+        .select-items div, .select-selected {
+            @include set-background($color);
+        }
+
+        .select-items div:hover, .same-as-selected {
+            @include set-background(map-get($main-dark-colors, $title-color));
+        }
+    }
+}
+
+// STRIPE CSS
+.StripeElement {
+    box-sizing: border-box;
+    height: 40px;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}

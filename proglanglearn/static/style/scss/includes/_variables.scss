@@ -1,0 +1,316 @@
+// COLORS //
+// Black
+$black: #000000;
+$main-black: #1a1616;
+$main-black-container: lighten($black, 20%);
+$main-black-dark-30: darken($main-black, 30%);
+$main-black-light-30: lighten($main-black, 30%);
+$black-dark-theme: #1f1f1f;
+$black-footer: #131212;
+
+// White
+$white: #ffffff;
+$main-white: #fdfdfd;
+$main-white-container: darken($main-white, 10%);
+$main-white-dark-30: darken($main-white, 30%);
+$main-white-light-30: lighten($main-white, 30%);
+$white-dark-theme: #f6f2f2;
+
+// Gray
+$main-gray: #b7aeae;
+$gray: #c5c2c2;
+$gray1: #babac0;
+$gray2: #8b8484;
+$gray3: #7e7d7d;
+$gray4: #343a40;
+
+// Blue
+$blue: #0000ff;
+$blue-navy: navy;
+$main-blue1: #1da1f2;
+$main-blue2: #1c62b9;
+$main-blue3: #4343c8;
+$main-blue4: #0077b5;
+
+// Red
+$red: #ff0000;
+$red1: #e62739;
+$red2: #df3333;
+$red3: #cc2333;
+
+// Green
+$green: #00ff00;
+$green2: #318331;
+
+// Yellow
+$yellow1: rgb(218, 214, 29);
+
+// Credit Cards colors
+$cc-colors: (
+    visa: #906902,
+    mastercard: #f00212,
+    amex: #74c7ee,
+    discover: #62a3c3,
+    diners-club: $gray,
+    jcb: #2b5286,
+);
+
+// Social Networks colors
+$facebook: #3b5998;
+$twitter: #00aced;
+$reddit: #ff4500;
+$github: #333333;
+$youtube: #bb0000;
+$linkedin: #007bb6;
+$snapchat: #fffc00;
+$google: $white;
+$discord: #7289da;
+
+$social-network-colors: (
+    facebook: $facebook,
+    google: $google,
+    twitter: $twitter,
+    reddit: $reddit,
+    github: $github,
+    youtube: $youtube,
+    linkedin: $linkedin,
+    snapchat: $snapchat,
+    discord: $discord,
+);
+
+$social-network-light-colors: (
+    facebook: lighten($facebook, 20%),
+    google: lighten($google, 20%),
+    twitter: lighten($twitter, 20%),
+    reddit: lighten($reddit, 20%),
+    github: lighten($github, 20%),
+    youtube: lighten($youtube, 20%),
+    linkedin: lighten($linkedin, 20%),
+    snapchat: lighten($snapchat, 20%),
+    discord: lighten($discord, 20%),
+);
+
+$social-network-dark-colors: (
+    facebook: darken($facebook, 10%),
+    google: darken($google, 10%),
+    twitter: darken($twitter, 10%),
+    reddit: darken($reddit, 10%),
+    github: darken($github, 10%),
+    youtube: darken($youtube, 10%),
+    linkedin: darken($linkedin, 10%),
+    snapchat: darken($snapchat, 15%),
+    discord: darken($discord, 10%),
+);
+
+// Other
+$gold: #867329;
+
+// Theme colors
+$default: #f5ecec;
+$default-dark: darken($default, 10%);
+$default-light: lighten($default, 10%);
+
+$dark: #343a40;
+$dark-dark: darken($dark, 10%);
+$dark-light: lighten($dark, 20%);
+
+$primary: #c5a31b;
+$primary-dark: darken($primary, 10%);
+$primary-light: lighten($primary, 20%);
+$primary-hover: #b99c28;
+
+$danger: #c21717;
+$danger-dark: darken($danger, 20%);
+$danger-light: lighten($danger, 20%);
+
+$success: #28a745;
+$success-light: lighten($success, 30%);
+$success-dark: darken($success, 20%);
+
+$warning: #e2ce1c;
+$warning-dark: darken($warning, 10%);
+$warning-light: lighten($warning, 20%);
+
+$info: #2499bd;
+$info-dark: darken($info, 15%);
+$info-light: lighten($info, 20%);
+
+$light: #f4f4f4;
+$light-dark: darken($light, 15%);
+$light-light: lighten($light, 15%);
+
+// Languages
+$python: #ffde57;
+$javascript: #f7df1e;
+$html: #e34f26;
+$css: #264de4;
+$java: #f53607;
+$swift: #f66916;
+$c: #6295cd;
+$cpp: #00427f;
+$php: #6572ac;
+$go: #f7d99d;
+
+// Tag colors
+$default-language-color: #646464;
+$languages: (
+    python: $python,
+    javascript: $javascript,
+    html: $html,
+    css: $css,
+    java: $java,
+    swift: $swift,
+    c: $c,
+    cpp: $cpp,
+    php: $php,
+    go: $go
+);
+$languages-dark: (
+    python: darken($python, 10%),
+    javascript: darken($javascript, 10%),
+    html: darken($html, 10%),
+    css: darken($css, 10%),
+    java: darken($java, 10%),
+    swift: darken($swift, 10%),
+    c: darken($c, 10%),
+    cpp: darken($cpp, 10%),
+    php: darken($php, 10%),
+    go: darken($go, 10%)
+);
+$default-tag-color: #cccccc;
+
+$main-colors: (
+    "default": $default,
+    primary: $primary,
+    danger: $danger,
+    success: $success,
+    warning: $warning,
+    dark: $dark,
+    info: $info,
+    light: $light,
+    "white": $white,
+    "black": $black
+);
+
+$all-colors: map-merge(
+    $main-colors,
+    (
+        "blue": $main-blue3,
+        "red": red,
+        "gray": $gray,
+        "white": $white,
+    )
+);
+
+$main-dark-colors: (
+    "default": $default-dark,
+    primary: $primary-dark,
+    danger: $danger-dark,
+    success: $success-dark,
+    warning: $warning-dark,
+    dark: $dark-dark,
+    info: $info-dark,
+    light: $light-dark,
+    "white": $white,
+    "black": $black,
+);
+
+$all-dark-colors: map-merge(
+    $main-dark-colors,
+    (
+        "blue": $main-blue3,
+        "red": red,
+        "gray": $gray,
+        "white": $white,
+    )
+);
+
+$main-light-colors: (
+    "default": $default-light,
+    primary: $primary-light,
+    danger: $danger-light,
+    success: $success-light,
+    warning: $warning-light,
+    dark: $dark-light,
+    info: $info-light,
+    light: $light-light,
+    "white": $white,
+    "black": $black,
+);
+
+$all-light-colors: map-merge(
+    $main-light-colors,
+    (
+        "blue": $main-blue3,
+        "red": red,
+        "gray": $gray,
+        "white": $white,
+    )
+);
+
+// FONTS //
+@font-face {
+    font-family: Roboto;
+    src: url(../font/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: Charm;
+    src: url(../font/Charm-Regular.ttf);
+}
+@font-face {
+    font-family: UbuntuCondensed;
+    src: url(../font/UbuntuCondensed-Regular.ttf);
+}
+@font-face {
+    font-family: Righteous;
+    src: url(../font/Righteous-Regular.ttf);
+}
+@font-face {
+    font-family: Ubuntu;
+    src: url(../font/Ubuntu-Regular.ttf);
+}
+@font-face {
+    font-family: Heebo;
+    src: url(../font/Heebo-Regular.ttf);
+}
+@font-face {
+    font-family: Audiowide;
+    src: url(../font/Audiowide-Regular.ttf);
+}
+
+// Font styles
+$font-base: Roboto, Arial, Helvetica, sans-serif;
+$font-cursive: Audiowide, cursive;
+$font-logo: Charm, sans-serif;
+
+// Font sizes
+$small-font-size: 10px;
+$normal-font-size: 16px;
+$large-font-size: 30px;
+
+// MEDIA QUERIES //
+$breakpoint-extra-small: 500px;
+$breakpoint-small: 800px;
+$breakpoint-medium: 1050px;
+$breakpoint-large: 1300px;
+$breakpoint-extra-large: 1600px;
+
+// NAVBAR SETTINGS //
+$navbar-color: $gray4;
+$navbar-color-hover: $black;
+$navbar-background-color: $white;
+$navbar-background-color-hover: darken($white, 10%);
+$navbar-line-height: 50px;
+
+// FORMS //
+$placeholder-color: #677282;
+$form-background-color: #f5f6f7;
+$form-background-color-inactive: #e8eaed;
+$form-background-color-inactive-hover: #cbced3;
+$font-size-form: 1.1rem;
+
+
+// CONTAINER //
+$container-width: 85%;
+$container-width-small: 90%;
+$container-width-extra-small: 95%;

@@ -1,0 +1,124 @@
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: -16px -16px 0 -16px;
+
+    &.small-device {
+        @include small-device {
+            margin: -16px 0 0 0;
+        }
+
+        .col-25.small-device,
+        .col-50.small-device,
+        .col-75.small-device,
+        .col-33.small-device,
+        .col-66.small-device {
+            @include small-device {
+                padding: 0;
+                &:nth-child(0n+2){
+                    margin-top: -16px;
+                }
+            }
+        }
+    }
+
+    &.extra-small-device {
+        @include extra-small-device {
+            margin: -16px 0 0 0;
+        }
+
+        .col-25.extra-small-device,
+        .col-50.extra-small-device,
+        .col-75.extra-small-device,
+        .col-33.extra-small-device,
+        .col-66.extra-small-device {
+            @include extra-small-device {
+                padding: 0;
+                &:nth-child(0n+2){
+                    margin-top: -16px;
+                }
+            }
+        }
+    }
+}
+
+
+.col-25 {
+    -ms-flex: 25%;
+    flex: 25%;
+    padding: 0 16px;
+
+    &.hide-small-device {
+        @include small-device {
+            display: none;
+        }
+    }
+}
+.col-50 {
+    -ms-flex: 50%;
+    flex: 50%;
+    padding: 0 16px;
+
+    &.hide-small-device {
+        @include small-device {
+            display: none;
+        }
+    }
+}
+.col-75 {
+    -ms-flex: 75%;
+    flex: 75%;
+    padding: 0 16px;
+
+    &.hide-small-device {
+        @include small-device {
+            display: none;
+        }
+    }
+}
+.col-66 {
+    -ms-flex: 66.67%;
+    flex: 66.67%;
+    padding: 0 16px;
+
+    &.hide-small-device {
+        @include small-device {
+            display: none;
+        }
+    }
+}
+.col-33 {
+    -ms-flex: 33.33%;
+    flex: 33.33%;
+    padding: 0 16px;
+
+    &.hide-small-device {
+        @include small-device {
+            display: none;
+        }
+    }
+}
+
+.col-25.small-device,
+.col-50.small-device,
+.col-75.small-device,
+.col-33.small-device,
+.col-66.small-device {
+    @include small-device {
+        -ms-flex: 100%;
+        flex: 100%;
+    }
+}
+.col-25.extra-small-device,
+.col-50.extra-small-device,
+.col-75.extra-small-device,
+.col-33.extra-small-device,
+.col-66.extra-small-device {
+    @include extra-small-device {
+        -ms-flex: 100%;
+        flex: 100%;
+    }
+}

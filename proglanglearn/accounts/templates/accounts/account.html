@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="language" content="fr" />
+    <meta name="description"
+        content="Apprenez les bases de la programmation en les manipulant dans des exemples simples et des projets plus complexes." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="copyright" content="ProgLangLearn Inc." />
+    <meta name="category" content="web, programming, languages" />
+    <meta name="keywords" content="web, pll, proglanglearn, programming, language" />
+    <meta name="publisher" content="LETELLIER Guillaume" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#c5a31b" />
+    <meta name="msapplication-navbutton-color" content="#c5a31b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+    <title>Compte - ProgLangLearn</title>
+    <link rel="icon" href="../images/favicon.ico" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../style/css/global.min.css" media="screen" />
+    <link rel="stylesheet" href="../style/css/print.min.css" media="print" />
+    <script src="../js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div class="loader">
+        <img src="../images/load.gif" alt="Loading ..." />
+    </div>
+    <button id="btnScrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <div id="version-switcher">
+        <input type="checkbox" id="switch" class="switch" name="theme" />
+        <label class="switch-label" for="switch">Light/Dark toggle</label>
+        <ul class="languages-switcher">
+            <li class="current" title="Cliquez sur les liens pour changer de langue">
+                <span>Langue : <strong>Fr</strong></span>
+            </li>
+            <li class="other">
+                <a href="index.html?lang=fr" title="Français">Fr</a>
+            </li>
+            <li class="other">
+                <a href="index.html?lang=en" title="Anglais">En</a>
+            </li>
+        </ul>
+    </div>
+    <header>
+        <nav id="main-navbar" class="navbar navbar__primary navbar__fixed">
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <div class="navbar-logo">
+                <a href="../index.html" title="Retour à l'accueil">ProgLangLearn</a>
+            </div>
+            <ul class="navbar-links">
+                <li class="navbar-item">
+                    <a href="course_list.html"><i class="fas fa-laptop-code"></i> Cours</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="article_list.html"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="forum_list.html"><i class="far fa-question-circle"></i> Forum</a>
+                </li>
+            </ul>
+            <div class="navbar-search-expandable" id="expand-search">
+                <form action="search.html" method="get">
+                    <input type="text" placeholder="Recherche" name="q" id="search" />
+                    <input type="submit" value="Recherche" />
+                    <i class="fas fa-search"></i>
+                </form>
+            </div>
+            <div class="navbar-changeable">
+                <div class="dropdown-toggle">
+                    <img src="../images/404.png" alt="Photo de profil"
+                        class="navbar-profile-image profile-image round-image" title="Voir mon profil" />
+                    <span>johndoe</span>
+                    <ul class="navbar-dropdown-menu navbar-dropdown-right">
+                        <li class="navbar-dropdown-item">
+                            <a href="admin_pages/base.html"><i class="fas fa-tools"></i> Administration</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="add_course.html"><i class="far fa-plus-square"></i> Créer un cours</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="add_article.html"><i class="fas fa-newspaper"></i> Créer un article</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="dashboard.html"><i class="fas fa-chart-area"></i> Tableau de bord</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="profile.html"><i class="fas fa-user-tie"></i> Mon profil</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a class="active" href="account.html"><i class="fas fa-user-cog"></i> Mon compte</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="alert alert__danger alert__dismissable">
+                Un problème est survenu lors du changement de mot de passe. Veuillez réessayer plus tard.
+            </div>
+            <h1 class="large">Réglages de votre compte</h1>
+            <p class="lead"><i class="fas fa-user-cog"></i> Modifier les paramètres et informations de votre compte !
+            </p>
+            <p><a href="profile.html" class="btn btn__success btn__300 btn__block btn__large">Voir mon
+                    profil</a></p>
+            <div class="row small-device">
+                <div class="col-25 hide-small-device">
+                    <div class="sticky-box">
+                        <div><a href="#personal-info">Modifier mes informations personnelles</a></div>
+                        <div><a href="#change-password">Changer mon mot de passe</a></div>
+                        <div><a href="#profile">Modifier les informations visibles sur mon profil</a></div>
+                        <div><a href="#danger-zone">Zone de danger</a></div>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <section id="personal-info">
+                        <h2>Modifier mes informations personnelles</h2>
+                        <form action="account.html" class="form">
+                            <fieldset>
+                                <legend><i class="fas fa-user"></i> Informations générales</legend>
+                                <div class="form-group">
+                                    <label>Photo de profil :<br><input type="file" name="user-image"
+                                            class="btn btn__outline__purple btn__block" /></label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom d'utilisateur : <span class="required-input">*</span><br><input
+                                            type="text" placeholder="johndoe" value="johndoe" name="user-name"
+                                            required /></label>
+                                </div>
+                                <!-- Ne pas afficher si connecté avec un compte non ProgLangLearn -->
+                                <div class="form-group">
+                                    <label>E-Mail : <span class="required-input">*</span><br><input type="email"
+                                            placeholder="johndoe@gmail.com" value="johndoe@gmail.com" name="user-email"
+                                            required /></label>
+                                </div>
+                                <!-- Obligatoire pour les développeurs et étudiants -->
+                                <div class="row small-device">
+                                    <div class="col-50 small-device">
+                                        <div class="form-group">
+                                            <label>Prénom : <span class="required-input">*</span><br><input type="text"
+                                                    placeholder="John" value="John" name="user-firstname"
+                                                    required /></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-50 small-device">
+                                        <div class="form-group">
+                                            <label>Nom : <span class="required-input">*</span><br><input type="text"
+                                                    placeholder="Doe" value="Doe" name="user-lastname"
+                                                    required /></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quel statut en programmation avez-vous ?</label>
+                                    <div class="custom-select select__info" id="profession">
+                                        <select name="profession">
+                                            <option value="0">Cliquez pour sélectionner votre choix :</option>
+                                            <option selected="selected" value="1">Amateur</option>
+                                            <option value="2">Étudiant en informatique</option>
+                                            <option value="3">Développeur web, logiciel, ...</option>
+                                        </select>
+                                    </div>
+                                    <small class="form-text">
+                                        Les statuts de développeur et étudiant permet de vous mettre en avant en
+                                        activant la
+                                        visibilité de votre profil (informations générales, éducatives et
+                                        professionnelles)
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Pays :</label>
+                                    <div class="custom-select select__info" id="country">
+                                        <select name="country">
+                                            <option selected="selected" value="0">Cliquez pour sélectionner votre pays :
+                                            </option>
+                                            <option value="1">France</option>
+                                            <option value="2">États-Unis</option>
+                                            <option value="3">Chine</option>
+                                            <option value="4">Corée du Nord</option>
+                                        </select>
+                                    </div>
+                                    <small class="form-text">
+                                        Le renseignement de votre pays permet aux étudiants et développeurs
+                                        d'être mis en avant. Cette donnée est utilisée pour statistiques
+                                    </small>
+                                </div>
+                            </fieldset>
+                            <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span>
+                                sont
+                                obligatoires.</small>
+                            <div class="center-text">
+                                <button type="submit" class="btn btn__primary btn__large btn__300">Changer</button>
+                            </div>
+                        </form>
+                    </section>
+                    <hr class="dashed mx-1 my-2">
+                    <section id="change-password">
+                        <h2>Changer mon mot de passe</h2>
+                        <form action="account.html" class="form">
+                            <fieldset>
+                                <legend><i class="fas fa-user-lock"></i> Mot de passe</legend>
+                                <div class="form-group">
+                                    <div class="password">
+                                        <label>Mot de passe : <span class="required-input">*</span><br><input
+                                                type="password" id="showPWDInput"
+                                                placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                                                minlength="10" maxlength="32" name="user-password" required /></label>
+                                        <input type="checkbox" id="showPWD">
+                                        <label class="eye" for="showPWD"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="password">
+                                        <label>Mot de passe : <span class="required-input">*</span><br><input
+                                                type="password" id="showNewPWDInput"
+                                                placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                                                minlength="10" maxlength="32" name="user-newpassword"
+                                                required /></label>
+                                        <input type="checkbox" id="showNewPWD">
+                                        <label class="eye" for="showNewPWD"></label>
+                                    </div>
+                                    <small class="form-text">
+                                        Doit comporter entre 10 et 32 caractères (alphanumériques et symboles)
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <div class="password">
+                                        <label>Mot de passe : <span class="required-input">*</span><br><input
+                                                type="password" id="showNewPWDConfirmInput"
+                                                placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                                                minlength="10" maxlength="32" name="user-password" required /></label>
+                                        <input type="checkbox" id="showNewPWDConfirm">
+                                        <label class="eye" for="showNewPWDConfirm"></label>
+                                    </div>
+                                    <small class="form-text">
+                                        Doit être le même que le nouveau mot de passe renseigné
+                                    </small>
+                                </div>
+                            </fieldset>
+                            <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span>
+                                sont
+                                obligatoires.</small>
+                            <div class="center-text">
+                                <button type="submit" class="btn btn__primary btn__large btn__300">Changer</button>
+                            </div>
+                        </form>
+                    </section>
+                    <hr class="dashed mx-1 my-2">
+                    <section id="profile">
+                        <h2>Modifier les informations sur mon profil</h2>
+                        <form action="account.html" class="form">
+                            <fieldset>
+                                <legend><i class="fas fa-user-tie"></i> Informations importantes</legend>
+                                <div class="form-group">
+                                    <label for="biography">Biographie :</label><br>
+                                    <textarea name="user-biography" id="biography"
+                                        placeholder="Une courte biographie ..."></textarea>
+                                    <small class="form-text">
+                                        Courte biographie ou phrase aimée pour vous décrire rapidement
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="skills">Choisissez des compétences (langage ou
+                                        bibliothèque) :</label>
+                                    <div class="custom-multiple-select select-multiple__light">
+                                        <select id="skills" name="skills" multiple size="7">
+                                            <option value="1">HTML / CSS</option>
+                                            <option value="2">JavaScript</option>
+                                            <option value="3">Python</option>
+                                            <option value="4">C</option>
+                                            <option value="5">C++</option>
+                                            <option value="6">Java</option>
+                                            <option value="7">Swift</option>
+                                            <option value="8">Sass / Scss</option>
+                                            <option value="9">TypeScript</option>
+                                            <option value="10">JQuery</option>
+                                            <option value="11">React JS</option>
+                                            <option value="12">Electron JS</option>
+                                        </select>
+                                    </div>
+                                    <small class="form-text">
+                                        N.B. : multiple sélection possible <br>
+                                        S'il manque une bibliothèque ou un langage, demandez à le <a
+                                            href="contact.html#subject">rajouter</a>. Un mail vous sera envoyer pour
+                                        vous mettre au courant du rajout ou du rejet de votre demande
+                                    </small>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend><i class="fas fa-external-link-alt"></i> Liens externes</legend>
+                                <div class="form-group social-input">
+                                    <i class="fas fa-globe fa-2x"></i>
+                                    <input type="url" placeholder="Website URL" name="user-website" />
+                                </div>
+                                <div class="form-group social-input">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                    <input type="url" placeholder="Twitter URL" name="user-website" />
+                                </div>
+                                <div class="form-group social-input">
+                                    <i class="fab fa-facebook-square fa-2x"></i>
+                                    <input type="url" placeholder="Facebook URL" name="user-website" />
+                                </div>
+                                <div class="form-group social-input">
+                                    <i class="fab fa-youtube fa-2x"></i>
+                                    <input type="url" placeholder="Youtube URL" name="user-website" />
+                                </div>
+                                <div class="form-group social-input">
+                                    <i class="fab fa-linkedin fa-2x"></i>
+                                    <input type="url" placeholder="LinkedIn URL" name="user-website" />
+                                </div>
+                                <div class="form-group social-input">
+                                    <i class="fab fa-instagram fa-2x"></i>
+                                    <input type="url" placeholder="Instagram URL" name="user-website" />
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend><i class="fab fa-github"></i> Vos dépôts Github</legend>
+                                <div class="form-group">
+                                    <label>E-Mail ou nom d'utilisateur de votre compte Github :<br>
+                                        <input type="text" name="user-github" /></label>
+                                    <small class="form-text">
+                                        <i class="fas fa-exclamation-triangle"></i> En renseignant ce champ, vous
+                                        accepter de publier
+                                        les liens vers vos dépôts
+                                        ajoutés sur votre compte Github
+                                    </small>
+                                </div>
+                            </fieldset>
+                            <!-- Si développeur ou étudiant -->
+                            <p class="mt-0 mb-1">Pour ajouter ou supprimer d'autres informations sur votre profil, vous
+                                devez vous rendre
+                                sur <a href="edit_profile.html">cette page</a>.</p>
+                            <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span>
+                                sont
+                                obligatoires.</small>
+                            <div class="center-text">
+                                <button type="submit" class="btn btn__primary btn__large btn__300">Mettre à jour mon
+                                    profil</button>
+                            </div>
+                        </form>
+                    </section>
+                    <hr class="dashed mx-1 my-2">
+                    <section id="danger-zone">
+                        <h2>Zone de danger</h2>
+                        <form action="delete_account.html" class="form">
+                            <fieldset>
+                                <legend><i class="fas fa-user-times"></i> Supprimer mon compte</legend>
+                                <div class="form-group">
+                                    <div class="password">
+                                        <label>Mot de passe : <span class="required-input">*</span><br><input
+                                                type="password" id="showPWDDeleteConfirmInput"
+                                                placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                                                minlength="10" maxlength="32" name="user-password-danger"
+                                                required /></label>
+                                        <input type="checkbox" id="showPWDDeleteConfirm">
+                                        <label class="eye" for="showPWDDeleteConfirm"></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span>
+                                sont
+                                obligatoires.</small>
+                            <div class="center-text">
+                                <button type="submit" class="btn btn__danger btn__large btn__300">Supprimer</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container pt-4 pb-3">
+            <div class="important-links">
+                <a href="terms.html">Termes et conditions d'utilisations</a>
+                <a href="privacy.html">Politique de confidentialité</a>
+                <a href="about.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="social-media my-2">
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Github"><i class="fab fa-github"></i></a>
+                <a href="#" title="Youtube"><i class="fab fa-youtube"></i></a>
+                <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="copyright">
+                <h3>
+                    &copy; <a href="../index.html" class="primary-color">ProgLangLearn Inc.</a>
+                </h3>
+                <p class="mt-0">Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.jquery.js"></script>
+</body>
+
+</html>

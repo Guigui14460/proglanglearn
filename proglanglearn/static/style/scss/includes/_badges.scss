@@ -1,0 +1,25 @@
+.badge {
+    display: inline-block;
+    padding: 0.3rem 0.4rem;
+    @include set-background($black);
+    border-radius: 4px;
+    line-height: 1;
+}
+
+.badge__small {
+    font-size: $small-font-size;
+}
+
+.badge__large {
+    font-size: $large-font-size;
+}
+
+.badge__block {
+    display: block;
+}
+
+@each $title-color, $color in $main-colors {
+    .badge__#{$title-color}{
+        @include set-background($color);
+    }
+}

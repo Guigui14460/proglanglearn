@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="language" content="fr" />
+    <meta name="description"
+        content="Apprenez les bases de la programmation en les manipulant dans des exemples simples et des projets plus complexes." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="copyright" content="ProgLangLearn Inc." />
+    <meta name="category" content="web, programming, languages" />
+    <meta name="keywords" content="web, pll, proglanglearn, programming, language" />
+    <meta name="publisher" content="LETELLIER Guillaume" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#c5a31b" />
+    <meta name="msapplication-navbutton-color" content="#c5a31b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+    <title>Profil de John Doe - ProgLangLearn</title>
+    <link rel="icon" href="../images/favicon.ico" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../style/css/global.min.css" media="screen" />
+    <link rel="stylesheet" href="../style/css/print.min.css" media="print" />
+    <script src="../js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div class="loader">
+        <img src="../images/load.gif" alt="Loading ..." />
+    </div>
+    <button id="btnScrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <div id="version-switcher">
+        <input type="checkbox" id="switch" class="switch" name="theme" />
+        <label class="switch-label" for="switch">Light/Dark toggle</label>
+        <ul class="languages-switcher">
+            <li class="current" title="Cliquez sur les liens pour changer de langue">
+                <span>Langue : <strong>Fr</strong></span>
+            </li>
+            <li class="other">
+                <a href="index.html?lang=fr" title="Français">Fr</a>
+            </li>
+            <li class="other">
+                <a href="index.html?lang=en" title="Anglais">En</a>
+            </li>
+        </ul>
+    </div>
+    <header>
+        <nav id="main-navbar" class="navbar navbar__primary navbar__fixed">
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <div class="navbar-logo">
+                <a href="../index.html" title="Retour à l'accueil">ProgLangLearn</a>
+            </div>
+            <ul class="navbar-links">
+                <li class="navbar-item">
+                    <a href="course_list.html"><i class="fas fa-laptop-code"></i> Cours</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="article_list.html"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="forum_list.html"><i class="far fa-question-circle"></i> Forum</a>
+                </li>
+            </ul>
+            <div class="navbar-search-expandable" id="expand-search">
+                <form action="search.html" method="get">
+                    <input type="text" placeholder="Recherche" name="q" id="search" />
+                    <input type="submit" value="Recherche" />
+                    <i class="fas fa-search"></i>
+                </form>
+            </div>
+            <div class="navbar-changeable">
+                <div class="dropdown-toggle">
+                    <img src="../images/404.png" alt="Photo de profil"
+                        class="navbar-profile-image profile-image round-image" title="Voir mon profil" />
+                    <span>johndoe</span>
+                    <ul class="navbar-dropdown-menu navbar-dropdown-right">
+                        <li class="navbar-dropdown-item">
+                            <a href="admin_pages/base.html"><i class="fas fa-tools"></i> Administration</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="add_course.html"><i class="far fa-plus-square"></i> Créer un cours</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="add_article.html"><i class="fas fa-newspaper"></i> Créer un article</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <hr class="navbar-dropdown-divider" />
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="dashboard.html"><i class="fas fa-chart-area"></i> Tableau de bord</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a class="active" href="profile.html"><i class="fas fa-user-tie"></i> Mon profil</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="account.html"><i class="fas fa-user-cog"></i> Mon compte</a>
+                        </li>
+                        <li class="navbar-dropdown-item">
+                            <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="d-flex space-between">
+                <a href="profiles.html" class="btn btn__dark mb-1">Voir tous les profils</a>
+                <a href="report.html" class="btn btn__danger mb-1">Signaler le profil</a>
+                <a href="edit_profile.html" class="btn btn__warning mb-1">Éditer mon profil</a>
+            </div>
+            <!-- Si c'est le profil de l'authentifié, modifs possibles sinon, juste en readonly -->
+            <div class="profile-grid my-1">
+                <div class="profile-top bg-info p-2">
+                    <img src="../images/404.png" alt="" class="round-img">
+                    <h1 class="large">John Doe <small>(johndoe)</small></h1>
+                    <p class="lead">Développeur</p>
+                    <p>France</p>
+                    <div class="icons my-1">
+                        <a href="#" title="Website">
+                            <i class="fas fa-globe fa-2x"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-twitter fa-2x"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-facebook-square fa-2x"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-youtube fa-2x"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="profile-about bg-dark p-2">
+                    <h2 class="primary-color">Biographie de John Doe</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, ab totam nihil
+                        necessitatibus a tenetur delectus, sit eius maxime soluta id dolore, earum ad corporis assumenda
+                        sunt iste? Dicta ducimus veritatis delectus corrupti ullam placeat non tenetur animi
+                        reprehenderit fugit molestiae sit nulla laboriosam nostrum harum, ad quaerat quasi cum.</p>
+                    <hr class="my-1">
+                    <h2 class="primary-color">Ses compétences</h2>
+                    <div class="skills">
+                        <div class="p-1">
+                            <i class="fas fa-check"></i> Java
+                        </div>
+                        <div class="p-1">
+                            <i class="fas fa-check"></i> Python
+                        </div>
+                        <div class="p-1">
+                            <i class="fas fa-check"></i> C++
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-experience bg-white p-2">
+                    <h2 class="primary-color">Expériences</h2>
+                    <div>
+                        <h3>Google</h3>
+                        <p>Jan 2017 - Maintenant</p>
+                        <p><strong>Position :</strong> Développeur expérimenté</p>
+                    </div>
+                    <div>
+                        <h3>NASA</h3>
+                        <p>Jun 2010 - Dec 2016</p>
+                        <p><strong>Position :</strong> Développeur apprenti</p>
+                    </div>
+                </div>
+                <div class="profile-education bg-white p-2">
+                    <h2 class="primary-color">Éducation</h2>
+                    <div>
+                        <h3>Université de Caen</h3>
+                        <p>Sep 2018 - Maintenant</p>
+                        <p><strong>Diplôme :</strong> Master en sécurité des systèmes d'information</p>
+                        <p><strong>Domaines d'études :</strong> Informatique</p>
+                    </div>
+                </div>
+                <div class="profile-github">
+                    <h2 class="primary-color my-1">
+                        <i class="fab fa-github"></i> Dépôts Github
+                    </h2>
+                    <div class="repo bg-white my-1 p-1">
+                        <div>
+                            <h4><a href="#">Repo One</a></h4>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus eveniet ut amet
+                                ipsa inventore est illum, quam asperiores, expedita at et pariatur incidunt
+                                repudiandae, sunt laborum ullam officia eos quidem?</p>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="badge badge__danger badge__block">Étoiles : 44</li>
+                                <li class="badge badge__dark badge__block">Vues : 87</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="repo bg-white my-1 p-1">
+                        <div>
+                            <h4><a href="#">Repo One</a></h4>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus eveniet ut amet
+                                ipsa inventore est illum, quam asperiores, expedita at et pariatur incidunt
+                                repudiandae, sunt laborum ullam officia eos quidem?</p>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="badge badge__danger badge__block">Étoiles : 44</li>
+                                <li class="badge badge__dark badge__block">Vues : 87</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container pt-4 pb-3">
+            <div class="important-links">
+                <a href="terms.html">Termes et conditions d'utilisations</a>
+                <a href="privacy.html">Politique de confidentialité</a>
+                <a href="about.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="social-media my-2">
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Github"><i class="fab fa-github"></i></a>
+                <a href="#" title="Youtube"><i class="fab fa-youtube"></i></a>
+                <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="copyright">
+                <h3>
+                    &copy; <a href="../index.html" class="primary-color">ProgLangLearn Inc.</a>
+                </h3>
+                <p class="mt-0">Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.jquery.js"></script>
+</body>
+
+</html>
