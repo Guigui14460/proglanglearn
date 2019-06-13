@@ -1,0 +1,7 @@
+autopep8==1.4.4
+Django==2.2.2
+django-debug-toolbar==1.11
+pycodestyle==2.5.0
+python-decouple==3.1
+pytz==2019.1
+sqlparse==0.3.0
