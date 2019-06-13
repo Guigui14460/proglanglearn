@@ -19,7 +19,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
     <title>{% block title %}{% endblock title%}ProgLangLearn</title>
-    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.jpg' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'style/css/global.min.css' %}" media="screen" />
     <!-- <link rel="stylesheet" href="style/css/print.min.css" media="print" /> -->
@@ -64,10 +64,10 @@
     <footer>
         <div class="container pt-4 pb-3">
             <div class="important-links">
-                <a href="{% url 'main:terms' %}">Termes et conditions d'utilisations</a>
-                <a href="{% url 'main:privacy' %}">Politique de confidentialité</a>
-                <a href="{% url 'main:about' %}">À propos</a>
-                <a href="{% url 'main:contact' %}">Contact</a>
+                <a href="{% url 'accounts:terms' %}">Termes et conditions d'utilisations</a>
+                <a href="{% url 'accounts:privacy' %}">Politique de confidentialité</a>
+                <a href="{% url 'accounts:about' %}">À propos</a>
+                <a href="{% url 'accounts:contact' %}">Contact</a>
             </div>
             <div class="social-media my-2">
                 <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
@@ -78,7 +78,7 @@
             </div>
             <div class="copyright">
                 <h3>
-                    &copy; <a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn Inc.</a>
+                    &copy; <a href="{% url 'accounts:index' %}" class="primary-color">ProgLangLearn Inc.</a>
                 </h3>
                 <p class="mt-0">Tous droits réservés</p>
             </div>
@@ -86,10 +86,6 @@
     </footer>
     <script src="{% static 'js/main.jquery.js' %}"></script>
     {% block javascript %}{% endblock javascript %}
-    <script>
-        $(function(){
-            {% block jquery %}{% endblock jquery %}
-        });
-    </script>
+    <script>$(function(){ {% block jquery %}{% endblock jquery %} });</script>
 </body>
 </html>

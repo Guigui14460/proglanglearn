@@ -18,12 +18,4 @@
 <script src="{% static 'js/typed.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %}
-let typed = new Typed('#lead-type', {
-  strings: ["Ne grandissons pas dans un monde sans le comprendre.", "Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !"],
-  typeSpeed: 35,
-  backSpeed: 15,
-  loop: true,
-});
-$('span.typed-cursor').hide();
-{% endblock jquery %}
+{% block jquery %} let typed = new Typed('#lead-type', { strings: ["Ne grandissons pas dans un monde sans le comprendre.", "Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !"], typeSpeed: 35, backSpeed: 15, loop: true, }); $('span.typed-cursor').hide(); {% endblock jquery %}

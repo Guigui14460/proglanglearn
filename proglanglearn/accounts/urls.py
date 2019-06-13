@@ -8,7 +8,7 @@ from .views import (
     contact
 )
 
-app_name = 'main'
+app_name = 'accounts'
 
 urlpatterns = [
     path('', index, name='index'),

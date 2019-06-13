@@ -76,9 +76,4 @@
 <script src="{% static 'js/TimelineMax.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %}
-let tl = new TimelineMax();
-tl.from('#First_4', 1, { x: '-180', rotation: 20, opacity: 0, ease: Power1.easeIn });
-tl.from('#_0', .6, { y: '-60', opacity: 0, ease: Power0.easeOut }, '-=0.4');
-tl.from('#Second_4', .7, { x: '+100', rotation: -20, opacity: 0, ease: Power1.easeOut }, '-=0.6');
-{% endblock jquery %}
+{% block jquery %} let tl = new TimelineMax(); tl.from('#First_4', 1, { x: '-180', rotation: 20, opacity: 0, ease: Power1.easeIn }); tl.from('#_0', .6, { y: '-60', opacity: 0, ease: Power0.easeOut }, '-=0.4'); tl.from('#Second_4', .7, { x: '+100', rotation: -20, opacity: 0, ease: Power1.easeOut }, '-=0.6'); {% endblock jquery %}

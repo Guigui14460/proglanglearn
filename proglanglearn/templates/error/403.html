@@ -221,8 +221,4 @@
     <script src="{% static 'js/TimelineMax.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %}
-let tl = new TimelineMax();
-tl.from('#Groupe_3', .6, { y: '-180', opacity: 0, ease: Power1.easeIn });
-tl.from('#Groupe_4', .4, { x: '+100', opacity: 0, ease: Power1.easeOut });
-{% endblock jquery %}
+{% block jquery %}let tl = new TimelineMax(); tl.from('#Groupe_3', .6, { y: '-180', opacity: 0, ease: Power1.easeIn }); tl.from('#Groupe_4', .4, { x: '+100', opacity: 0, ease: Power1.easeOut }); {% endblock jquery %}

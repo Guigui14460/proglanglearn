@@ -144,9 +144,4 @@
 <script src="{% static 'js/TimelineMax.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %}
-let tl = new TimelineMax();
-tl.from('#Server', .7, { y: '-100', opacity: 0, ease: Power1.easeIn });
-tl.from('#Groupe_2', 1, { x: '-190', opacity: 0, ease: Bounce.easeOut }, '-=0.3');
-tl.from('#Groupe_3', .7, { x: '+180', opacity: 0, ease: Power1.easeOut }, '-=1.7');
-{% endblock jquery %}
+{% block jquery %} let tl = new TimelineMax(); tl.from('#Server', .7, { y: '-100', opacity: 0, ease: Power1.easeIn }); tl.from('#Groupe_2', 1, { x: '-190', opacity: 0, ease: Bounce.easeOut }, '-=0.3'); tl.from('#Groupe_3', .7, { x: '+180', opacity: 0, ease: Power1.easeOut }, '-=1.7'); {% endblock jquery %}
