@@ -28,3 +28,11 @@ class CurrencyField(models.IntegerField):
         defaults = {'form_class': models.FloatField}
         defaults.update(kwargs)
         return super(CurrencyField, self).formfield(**defaults)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=30, unique=True,
+                            verbose_name=_("Nom du tag"))
+
+    def __str__(self):
+        return self.name

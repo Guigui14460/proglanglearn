@@ -21,6 +21,7 @@ INSTALLED_APPS = [
 
     # My apps
     'accounts.apps.AccountsConfig',
+    'courses.apps.CoursesConfig',
 ]
 
 MIDDLEWARE = [
