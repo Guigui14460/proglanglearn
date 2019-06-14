@@ -32,7 +32,7 @@
             <a href="pages/login.html" class="btn btn__info mr-1">Connexion</a>
         {% else %}
             <div class="dropdown-toggle">
-                <img src="{% static 'images/404.png' %}" alt="Photo de profil"
+                <img src="{{ user.profile.image.url }}" alt="Photo de profil"
                     class="navbar-profile-image profile-image round-image" title="Voir mon profil" />
                 <span>{{ user.username }}</span>
                 <ul class="navbar-dropdown-menu navbar-dropdown-right">
