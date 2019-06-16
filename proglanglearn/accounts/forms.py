@@ -1,57 +1,76 @@
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
+from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
 
-class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(
-        label=_("Mot de passe"), widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label=_("Confirmation du mot de passe"), widget=forms.PasswordInput)
+class SignUpForm(UserCreationForm):
+    username = forms.CharField(label=_("Nom d'utilisateur"), widget=forms.TextInput(attrs={
+        'placeholder': 'johndoe',
+        'autofocus': 'autofocus'
+    }))
+    email = forms.EmailField(label=_("Courriel"), widget=forms.TextInput(attrs={
+        'placeholder': 'johndoe@example.com',
+        'type': 'email',
+        'name': 'email'
+    }), help_text=_("Informez une addresse e-mail valide"), required=True)
+    password1 = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
+        'placeholder': '••••••••••',
+        'id': 'showPWDInput'
+    }), help_text=_(""))
+    password2 = forms.CharField(label=_("Confirmation du mot de passe"), widget=forms.PasswordInput(attrs={
+        'placeholder': '••••••••••',
+        'id': 'showPWDConfirmInput'
+    }), help_text=_("Entrez le même mot de passe"))
 
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'password1', 'password2']
 
-    def clean_password(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError(_("Vos mot de passe sont différents"))
-        return password2
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).count() > 0:
+            raise ValidationError(
+                _("Cette addresse email a déjà été utilisée. Il faut en choisir une autre"))
+        return email
 
-    def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
-        user.set_password(self.cleaned_data['password1'])
-        user.is_active = True
-
-        if commit:
-            user.save()
+    def save(self):
+        user = super(SignUpForm, self).save(commit=False)
+        user.is_active = False
+        user.save()
         return user
 
 
-class UserLoginForm(forms.Form):
-    query = forms.CharField(label=_("Nom d'utilisateur / E-mail"))
-    password = forms.CharField(
-        label=_("Mot de passe"), widget=forms.PasswordInput)
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label=_("Nom d'utilisateur"), widget=forms.TextInput(attrs={
+        'placeholder': 'johndoe',
+        'autofocus': 'autofocus'
+    }))
+    password = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
+        'placeholder': '••••••••••',
+        'id': 'showPWDInput'
+    }))
 
-    def clean(self, *args, **kwargs):
-        query = self.cleaned_data.get('query')
-        password = self.cleaned_data.get('password')
-        user_qs_final = User.objects.filter(
-            Q(username__iexact=query) | Q(email_iexact=query)
-        ).distinct()
-        if not user_qs_final.exists() and user_qs_final.count != 1:
-            raise forms.ValidationError(
-                _("Justificatifs invalides. L'utilisateur n'existe pas"))
-        user_obj = user_qs_final.first()
-        if not user_obj.is_active:
-            raise forms.ValidationError(
-                _("Le compte a été fermé par le titulaire ou a été banni"))
-        if not user_obj.check_password(password):
-            raise forms.ValidationError(_("Champs renseignés incorrects"))
-        self.cleaned_data['user_obj'] = user_obj
-        return super(UserLoginForm, self).clean(*args, **kwargs)
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+
+class PasswordResetForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput(
+            attrs={'autocomplete': 'new-password', 'id': 'showPWDInput'}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password2 = forms.CharField(
+        label=_("New password confirmation"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={'autocomplete': 'new-password', 'id': 'showPWDConfirmInput'}),
+    )

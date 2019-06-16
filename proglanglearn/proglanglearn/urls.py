@@ -3,14 +3,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from accounts.views import (
+from main.views import (
     error_403,
     error_404,
     error_500
 )
 
 urlpatterns = [
-    path('', include('accounts.urls')),
+    path('', include('main.urls')),
+    path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
 ]
 

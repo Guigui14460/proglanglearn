@@ -7,6 +7,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 
 SECRET_KEY = config('SECRET_KEY')
 
+AUTH_USER_MODEL = 'accounts.User'
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,6 +22,7 @@ INSTALLED_APPS = [
     # 'tinymce',
 
     # My apps
+    'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
 ]
@@ -73,9 +76,9 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 # Redirect configs
-LOGIN__URL = 'login'
-LOGIN_REDIRECT_URL = ''
-LOGOUT_REDIRECT_URL = ''
+LOGIN__URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'main:index'
+LOGOUT_REDIRECT_URL = 'main:index'
 
 # Email config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

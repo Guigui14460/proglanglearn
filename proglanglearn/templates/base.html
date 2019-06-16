@@ -57,6 +57,11 @@
     </header>
     <main {% block main_attr %}{% endblock main_attr %}>
         <div class="container">
+            {% for message in messages %}
+                <div class="alert {% if messages.level %}{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert__danger{% else %}alert__{{ message.tags }}{% endif %}{% endif %} alert__dismissable">
+                    {{ message }}
+                </div>
+            {% endfor %}
             {% block main %}{% endblock main %}
         </div>
     </main>
@@ -64,10 +69,10 @@
     <footer>
         <div class="container pt-4 pb-3">
             <div class="important-links">
-                <a href="{% url 'accounts:terms' %}">Termes et conditions d'utilisations</a>
-                <a href="{% url 'accounts:privacy' %}">Politique de confidentialité</a>
-                <a href="{% url 'accounts:about' %}">À propos</a>
-                <a href="{% url 'accounts:contact' %}">Contact</a>
+                <a href="{% url 'main:terms' %}">Termes et conditions</a>
+                <a href="{% url 'main:privacy' %}">Politique de confidentialité</a>
+                <a href="{% url 'main:about' %}">À propos</a>
+                <a href="{% url 'main:contact' %}">Contact</a>
             </div>
             <div class="social-media my-2">
                 <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
@@ -78,7 +83,7 @@
             </div>
             <div class="copyright">
                 <h3>
-                    &copy; <a href="{% url 'accounts:index' %}" class="primary-color">ProgLangLearn Inc.</a>
+                    &copy; <a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn Inc.</a>
                 </h3>
                 <p class="mt-0">Tous droits réservés</p>
             </div>

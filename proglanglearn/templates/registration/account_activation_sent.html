@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Email d'activation envoyé - {% endblock title %}
+
+{% block main %}
+<h1 class="large">ProgLangLearn</h1>
+<div class="my-2">Pour continuer votre inscription, veuillez compléter et suivre les inscriptions données dans le courriel qui vous a été envoyé.</div>
+<div class="d-flex space-between">
+    <a href="{% url 'accounts:login' %}" class="btn btn__large btn__outline__success">Se connecter</a>
+    <a href="{% url 'accounts:register' %}" class="btn btn__large btn__warning">S'enregistrer</a>
+</div>
+{% endblock main %}

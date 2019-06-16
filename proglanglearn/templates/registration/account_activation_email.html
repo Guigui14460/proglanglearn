@@ -1,0 +1,7 @@
+{% autoescape off %}
+Salut {{ user.username }},
+
+Pour activer ton compte, clique sur le lien ci-dessous :
+
+{{ protocol }}://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
+{% endautoescape %}
