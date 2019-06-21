@@ -7,34 +7,43 @@ from .mixins import NavbarSearchMixin
 class IndexView(NavbarSearchMixin, View):
     template_name = "main/index.html"
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {'navbar_search_form': self.form_navbar()})
+    def get(self, *args, **kwargs):
+        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
-def contact(request):
-    return render(request, 'main/contact.html')
+class AboutView(NavbarSearchMixin, View):
+    template_name = "main/about.html"
+
+    def get(self, *args, **kwargs):
+        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
-def terms(request):
-    # form = NavbarSearchForm()
-    # qs = []
-    # if form.is_valid():
-    #     qs = Profile.objects.all()
-    #     form = NavbarSearchForm()
-    # context = {'form': form, 'objects': qs}
-    return render(request, 'main/terms.html', {})
+class ContactView(NavbarSearchMixin, View):
+    template_name = "main/contact.html"
+
+    def get(self, *args, **kwargs):
+        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
-def about(request):
-    return render(request, 'main/about.html')
+class TermsView(NavbarSearchMixin, View):
+    template_name = "main/terms.html"
+
+    def get(self, *args, **kwargs):
+        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
-def privacy(request):
-    return render(request, 'main/privacy.html')
+class PrivacyView(NavbarSearchMixin, View):
+    template_name = "main/privacy.html"
+
+    def get(self, *args, **kwargs):
+        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
-def search(request):
-    return render(request, "main/search.html")
+class SearchView(NavbarSearchMixin, View):
+    template_name = "main/search.html"
+
+    def get(self, *args, **kwargs):
+        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
 def error_403(request, exception):

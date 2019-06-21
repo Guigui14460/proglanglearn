@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} un cours - {% endblock title %}
+
+{% block main %}
+<h1 class="large">{{ title }} un cours</h1>
+<form method="POST" class="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+    <fieldset>
+        <legend>Information générales</legend>
+        <div class="form-group">
+            {{ form.title.errors }}
+            <label>{{ form.title.label }} : <span class="required-input">*</span><br>
+            {{ form.title }}</label>
+        </div>
+        <div class="form-group">
+            {{ form.thumbnail.label_tag }}&nbsp;<span class="required-input">*</span>
+            {{ form.thumbnail }}
+        </div>
+        <div class="form-group">
+            <label for="apercu">{{ form.content_introduction.label }} : <span class="required-input">*</span></label><br>
+            <div>
+                {{ form.media }}
+                {{ form.content_introduction }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{ form.difficulty.label }} : <span class="required-input">*</span></label>
+            <div class="custom-select select__warning">
+                {{ form.difficulty }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.languages.id_for_label }}">{{ form.languages.label }} : <span class="required-input">*</span></label>
+            <div class="custom-multiple-select select-multiple__light">
+                {{ form.languages }}
+            </div>
+            {% if form.languages.field.required %}
+                zegrgvbrtntntnt
+            {% endif %} 
+            <small class="form-text">
+                {{ form.languages.help_text }}
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tags.id_for_label }}">{{ form.tags.label }} : <span class="required-input">*</span></label>
+            <div class="custom-multiple-select select-multiple__light">
+                {{ form.tags }}
+            </div>
+            <small class="form-text">
+                {{ form.tags.help_text|safe }}
+            </small>
+        </div>
+        <div class="form-group">
+            {{ form.pdf.label_tag }}
+            {{ form.pdf }}
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Informations complémentaires</legend>
+        <div class="form-group">
+            {{ form.published_date.label_tag }}&nbsp;<span class="required-input">*</span>
+            {{ form.published_date }}
+            <small class="form-text">{{ form.published_date.help_text }}</small>
+        </div>
+        <div class="form-group">
+            <label>{{ form.old_price.label }} : <span class="required-input">*</span><br>
+            {{ form.old_price }}</label>
+        </div>
+        <div class="form-group">
+            <label>{{ form.new_price.label }} :<br>
+            {{ form.new_price }}</label>
+        </div>
+    </fieldset>
+    <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
+        obligatoires.</small>
+    <div class="center-text">
+        <button type="submit" class="btn btn__success btn__large btn__300">{{ title }}</button>
+    </div>
+</form>
+{% endblock main %}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock javascript %}
+
+{% block jquery %}
+$(".django-ckeditor-widget").css('display', 'block');
+$(".file-upload").css('margin', '0 auto')
+{% endblock jquery %}

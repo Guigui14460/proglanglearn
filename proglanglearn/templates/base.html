@@ -1,4 +1,4 @@
-{% load static %}
+{% load static recaptcha3 %}
 <!DOCTYPE html>
 <html lang="fr" data-theme="light">
 <head>
@@ -25,6 +25,8 @@
     <!-- <link rel="stylesheet" href="style/css/print.min.css" media="print" /> -->
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    {% recaptcha_init %}
+    {% recaptcha_ready action_name='/' %}
     {% block extra_head %}{% endblock extra_head %}
 </head>
 <body>
@@ -83,7 +85,7 @@
             </div>
             <div class="copyright">
                 <h3>
-                    &copy; <a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn Inc.</a>
+                    &copy; <a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn</a>
                 </h3>
                 <p class="mt-0">Tous droits réservés</p>
             </div>

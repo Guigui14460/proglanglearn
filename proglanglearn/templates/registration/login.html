@@ -7,9 +7,10 @@
 <h1 class="large">S'identifier</h1>
 <p class="lead"><i class="fas fa-user"></i> Connectez-vous à votre compte !</p>
 <form method='POST' class="form mb-3">
-    {% for error in form.error %}
-        <div class="danger-color">error</div>
-    {% endfor %}
+    <div class="note note__warning">
+        <p>Si vous ne pouvez pas vous connecter, c'est que votre compte n'est pas <a href="{% url 'accounts:register' %}">activé</a></p>
+    </div>
+    {{ form.errors }}
     {% csrf_token %}
     <div class="form-group">
         <label>{{ form.username.label }} : <span class="required-input">*</span><br>

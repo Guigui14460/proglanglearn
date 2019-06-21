@@ -31,8 +31,8 @@ DATABASES = {
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # debug_toolbar config
 DEBUG_TOOLBAR_PANELS = [
@@ -66,3 +66,6 @@ STRIPE_SECRET_KEY = ''
 
 # HTML minifier
 HTML_MINIFY = True
+
+# ReCaptcha V3 config
+os.environ['RECAPTCHA_DISABLE'] = 'True'

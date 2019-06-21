@@ -11,7 +11,7 @@
     </div>
     <ul class="navbar-links">
         <li class="navbar-item">
-            <a href="pages/course_list.html"><i class="fas fa-laptop-code"></i> Cours</a>
+            <a {% if activate == 'list' %}class="active"{% endif %} href="{% url 'courses:list' %}"><i class="fas fa-laptop-code"></i> Cours</a>
         </li>
         <li class="navbar-item">
             <a href="pages/article_list.html"><i class="fas fa-blog"></i> Blog</a>
@@ -23,8 +23,6 @@
     <div class="navbar-search-expandable" id="expand-search">
         <form action="{% url 'main:search' %}" method="get">
             {{ navbar_search_form.q }}
-            {% comment %} <input type="text" placeholder="Recherche" name="q" id="search" />
-            <input type="submit" value="Recherche" /> {% endcomment %}
             <i class="fas fa-search"></i>
         </form>
     </div>
@@ -53,7 +51,7 @@
                     {% endif %}
                     {% if user.profile.is_teacher %}
                         <li class="navbar-dropdown-item">
-                            <a href="pages/add_course.html"><i class="far fa-plus-square"></i> Créer un cours</a>
+                            <a {% if activate == 'create' %}class="active" {% endif %} href="{% url 'courses:create' %}"><i class="far fa-plus-square"></i> Créer un cours</a>
                         </li>
                         <li class="navbar-dropdown-item">
                             <hr class="navbar-dropdown-divider" />

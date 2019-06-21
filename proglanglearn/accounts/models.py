@@ -7,11 +7,34 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
-from courses.models import Tag
 from .fields import StringListField
+
 
 class User(AbstractUser):
     REQUIRED_FIELDS = ['email']
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=30, unique=True,
+                            verbose_name=_("Nom du tag"))
+
+    class Meta:
+        verbose_name = _("Tag")
+
+    def __str__(self):
+        return self.name
+
+
+class Language(models.Model):
+    name = models.CharField(max_length=30, unique=True,
+                            verbose_name=_("Nom du langage de programmation"))
+
+    class Meta:
+        verbose_name = _("Langage")
+
+    def __str__(self):
+        return self.name
+
 
 class ProfileQuerySet(models.QuerySet):
     def dev_profile_shown(self):
@@ -43,11 +66,12 @@ class Profile(models.Model):
     country = models.CharField(max_length=30)
     biography = models.TextField(max_length=1500,
                                  blank=True, null=True, verbose_name=_("Biographie"))
-    skills = models.ManyToManyField(Tag, verbose_name=_(
-        "Compétences"), blank=True)
+    languages_learnt = models.ManyToManyField(Language, verbose_name=_(
+        "Compétences (langages ou framework)"), blank=True)
     strike = models.PositiveSmallIntegerField(
         default=0, verbose_name=_("Signalement"))
-    email_confirmed = models.BooleanField(default=False, verbose_name=_("Addresse e-mail confirmée"))
+    email_confirmed = models.BooleanField(
+        default=False, verbose_name=_("Addresse e-mail confirmée"))
     # Advanced options
     level = models.PositiveSmallIntegerField(
         default=1, verbose_name=_("Niveau"))
@@ -57,6 +81,8 @@ class Profile(models.Model):
         verbose_name=_("Articles favoris"), default='', null=True, blank=True)
     favorite_subjects = StringListField(verbose_name=_(
         "Sujets marqués comme favoris"), default='', null=True, blank=True)
+    tutorial_finished = StringListField(verbose_name=_(
+        "Tutoriels marqués comme terminé"), default='', blank=True, null=True)
     # Developer options
     github_username = models.CharField(max_length=100,
                                        blank=True, null=True, verbose_name=_("Nom d'utilisateur/Email Github"))
@@ -77,10 +103,11 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         try:
             profile = Profile.objects.get(user__id=self.id)
-            if profile.image != self.image:
+            if profile.image != self.image and profile.image.url != '/media/user_pictures/default.png':
                 profile.image.delete()
             if profile.strike >= 3:
                 print("Banni")
+                # TODO : Banir la personne lorsqu'il a 3 strike
         except:
             pass
         super(Profile, self).save(*args, **kwargs)
@@ -105,7 +132,7 @@ class Education(models.Model):
     entry_date = models.DateField(verbose_name=_("Date d'entrée"))
     exit_date = models.DateField(verbose_name=_(
         "Date de sortie"))
-    
+
     class Meta:
         verbose_name = _("Éducation")
 
@@ -122,7 +149,7 @@ class Experience(models.Model):
     entry_date = models.DateField(verbose_name=_("Date d'entrée"))
     exit_date = models.DateField(verbose_name=_(
         "Date de sortie"))
-    
+
     class Meta:
         verbose_name = _("Expérience")
 

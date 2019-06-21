@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Suppression de "{{ object.title }}" - {% endblock title %}
+
+{% block main %}
+<h1 class="large">Suppression de "{{ object.title }}"</h1>
+<form method="POST" class="form">
+    {% csrf_token %}
+    <div class="note note__danger">
+        <p>La suppression du cours est <strong>irréversible</strong>. Les tutoriels seront <strong>également
+                supprimés</strong> ainsi que les <strong>ressources associées</strong>. Pour modifier les
+            tutoriels, <a href="modify_tutorial.html">cliquez ici</a> !</p>
+    </div>
+    <div class="center-text">
+        <a href="{% url 'courses:detail' id=object.id %}" class="btn btn__primary btn__large btn__300">Retour en
+            arrière</a>
+        <button type="submit" class="btn btn__danger btn__large btn__300">Supprimer
+            définitivement</button>
+    </div>
+</form>
+{% endblock main %}

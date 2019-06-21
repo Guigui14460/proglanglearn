@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }} - {% endblock title %}
+
+{% block main %}
+<h1 class="large">{{ object.title }}</h1>
+{% if object.author == request.user or request.user.is_staff %}
+    <div class="my-2 d-flex space-between">
+        <a href="{% url 'courses:list' %}" class="btn btn__success btn__large">Retour</a>
+        <a href="{% url 'courses:update' id=object.id %}" class="btn btn__info btn__large">Modifier l'aperçu du cours</a>
+        <a href="{% url 'courses:delete' id=object.id %}" class="btn btn__danger btn__large">Supprimer le cours</a>
+    </div>
+{% endif %}
+<section>
+    <h2>Informations générales</h2>
+    <figure>
+        <img src="{{ object.thumbnail.url }}" alt="Vignette du cours">
+    </figure>
+    {{ object.content_introduction|safe }}
+    <p>Cours rédigé par <a href="profile.html">{{ object.author.username }}</a> et paru le {{ object.published_date }}</p>
+    <div>
+        {% if object.get_all_downloadable_resources != 0 %}
+            <div class="lead">
+                <i class="fas fa-file-code"></i> {{ object.get_all_downloadable_resources }} ressources téléchargables
+            </div>
+        {% endif %}
+        {% if object.pdf %}
+            <div class="lead">
+                <i class="fas fa-file-pdf"></i> <a href="{{ object.pdf.url }}">PDF disponible</a>
+            </div>
+        {% endif %}
+        <div class="tags">
+            Tags :
+            {% for lang in course.languages.all %}
+                {% if lang.name == 'C++' %}
+                    <a class="tag cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                {% else %}
+                    <a class="tag {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                {% endif %}
+            {% endfor %}
+            {% for tag in course.tags.all %}
+                <a class="tag" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Liste des tutoriels appartenant à ce cours</h2>
+    <div class="accordion accordion__light">
+        {% for section in object.get_tutorials %}
+            <button class="accordion-btn">{{ forloop.counter }} - {{ section.0.title }}</button>
+            <div class="accordion-panel">
+                <ul class="tutorial-list">
+                    {% for tut in section.1 %}
+                        <li>{% if request.user.is_authenticated %}<a href="tutorial_detail.html">{{ forloop.counter }} - {{ tut.title }}</a>{% else %}{{ forloop.counter }} - {{ tut.title }}{% endif %}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% if not request.user.is_authenticated %}
+    <section>
+        <h2>Enrollez-vous dès maintenant pour accéder à ce cours</h2>
+        <div class="center-text">
+            <a href="payment.html" class="btn btn__danger btn__large">S'enroller 
+                {% if object.new_price %}
+                    {% if object.new_price == 0 %}
+                        gratuitement
+                    {% else %}
+                        pour {{ object.new_price }}€
+                    {% endif %}
+                {% else %}
+                    {% if object.old_price == 0 %}
+                        gratuitement
+                    {% else %}
+                        pour {{ object.old_price }}€
+                    {% endif %}
+                {% endif %}
+            </a>
+        </div>
+    </section>
+{% endif %}
+{% endblock main %}

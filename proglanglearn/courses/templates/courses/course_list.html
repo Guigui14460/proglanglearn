@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Cours - {% endblock title %}
+
+{% block main %}
+<h1 class="large">Tous les cours</h1>
+<div class="grid-cards my-2">
+{% for course in object_list %}
+    <div class="card card__round card-hoverable">
+        <div class="card-header">
+            <a href="{{ course.get_absolute_url }}"><img class="card-image" src="{{ course.thumbnail.url }}"
+                    alt="{{ course.title }}"></a>
+        </div>
+        <div class="card-container">
+            <a href="{{ course.get_absolute_url }}">
+                <h3 class="card-title">{{ course.title }}</h3>
+            </a>
+            <div class="card-tags">
+                Tags :
+                {% for lang in course.languages.all %}
+                    {% if lang.name == 'C++' %}
+                        <a class="card-tag cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                    {% else %}
+                        <a class="card-tag {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% for tag in course.tags.all %}
+                    <a class="card-tag" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+            <a href="{{ course.get_absolute_url }}">
+                <div class="card-content">
+                    {{ course.content_introduction|safe|truncatechars:200 }}
+                </div>
+            </a>
+            <div class="card-info">
+                <div class="card-difficulty">{{ course.get_difficulty_display }}</div>
+                <div class="card-experience">{{ course.get_all_experience }} XP</div>
+                <div class="card-date">{{ course.published_date }}</div>
+            </div>
+            <div class="card-price">
+                {% if course.new_price != None %}
+                    <span class="last"><del>{{ course.old_price }}€</del></span> <span class="reduction">-{{ course.get_percentage_discount }}%</span><br>
+                    <a href="payment.html" class="btn btn__outline__primary new">{% if course.new_price != 0 %}{{ course.new_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
+                {% else %}
+                    <a href="payment.html" class="btn btn__outline__primary new">{% if course.new_price != 0 %}{{ course.old_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% if is_paginated %}
+    {% include "includes/pagination.html" %}
+{% endif %}
+{% endblock main %}

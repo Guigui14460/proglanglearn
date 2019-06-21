@@ -1,13 +1,14 @@
 import os
 from decouple import config
+from django.utils.translation import gettext_lazy as _
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
-SECRET_KEY = config('SECRET_KEY')
+ADMINS = [('Guillaume LETELLIER', 'proglanglearn@gmail.com')]
 
-AUTH_USER_MODEL = 'accounts.User'
+SECRET_KEY = config('SECRET_KEY')
 
 # Application definition
 INSTALLED_APPS = [
@@ -19,13 +20,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third part apps
-    # 'tinymce',
+    'ckeditor',
+    'ckeditor_uploader',
+    'import_export',
+    'snowpenguin.django.recaptcha3',
 
     # My apps
     'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     # HTML minifer
@@ -69,6 +75,11 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+LANGUAGES = [
+    ('fr', _("Français")),
+    ('en', _("Anglais"))
+]
+
 # Static files (CSS, JavaScript, Images, ...)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 VENV_PATH = os.path.dirname(BASE_DIR)
@@ -89,32 +100,37 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASS')
 
-# TinyMCE config
-TINYMCE_DEFAULT_CONFIG = {
-    'height': 360,
-    'width': 'auto',
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 20,
-    'selector': 'textarea',
-    'theme': 'modern',
-    'plugins': '''
-            textcolor save link image media preview codesample contextmenu
-            table code lists fullscreen  insertdatetime  nonbreaking
-            contextmenu directionality searchreplace wordcount visualblocks
-            visualchars code fullscreen autolink lists  charmap print  hr
-            anchor pagebreak
-            ''',
-    'toolbar1': '''
-            fullscreen preview bold italic underline | fontselect,
-            fontsizeselect  | forecolor backcolor | alignleft alignright |
-            aligncenter alignjustify | indent outdent | bullist numlist table |
-            | link image media | codesample |
-            ''',
-    'toolbar2': '''
-            visualblocks visualchars |
-            charmap hr pagebreak nonbreaking anchor |  code |
-            ''',
-    'contextmenu': 'formats | link image',
-    'menubar': True,
-    'statusbar': True,
+# CKEditor config
+CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.4.1.min.js'
+CKEDITOR_UPLOAD_PATH = 'ckeditor/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': 'auto',
+        'height': '250px',
+        'tabSpaces': 4,
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline',
+                'Strike', 'SpellChecker', 'Undo', 'Redo'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor'],
+            ['Smiley', 'SpecialChar'], ['Source', 'CodeSnippet'],
+        ],
+    },
+    'blog': {
+        'toolbar': 'Blog',
+        'toolbar_Blog': [
+            ['Bold', 'Link', 'Source', 'CodeSnippet', 'Youtube', 'Mathjax']
+        ],
+        'extraPlugins': ','.join(['codesnippet', 'youtube', 'mathjax'])
+    }
 }
+
+# ReCaptcha V3 config
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.35

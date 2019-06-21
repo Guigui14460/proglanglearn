@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
+
 User = get_user_model()
 
 
@@ -26,6 +28,7 @@ class SignUpForm(UserCreationForm):
         'placeholder': '••••••••••',
         'id': 'showPWDConfirmInput'
     }), help_text=_("Entrez le même mot de passe"))
+    captcha = ReCaptchaField()
 
     class Meta:
         model = User
@@ -54,10 +57,18 @@ class LoginForm(AuthenticationForm):
         'placeholder': '••••••••••',
         'id': 'showPWDInput'
     }))
+    captcha = ReCaptchaField()
 
     class Meta:
         model = User
         fields = ['username', 'password']
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username) == []:
+            raise forms.ValidationError(
+                _("Le nom d'utilisateur mentionné n'existe pas"))
+        return username
 
 
 class PasswordResetForm(SetPasswordForm):
@@ -74,3 +85,4 @@ class PasswordResetForm(SetPasswordForm):
         widget=forms.PasswordInput(
             attrs={'autocomplete': 'new-password', 'id': 'showPWDConfirmInput'}),
     )
+    captcha = ReCaptchaField()

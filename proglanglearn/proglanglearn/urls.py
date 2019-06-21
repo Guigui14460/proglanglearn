@@ -12,7 +12,9 @@ from main.views import (
 urlpatterns = [
     path('', include('main.urls')),
     path('accounts/', include('accounts.urls')),
+    path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 conf_urls.handler403 = error_403
