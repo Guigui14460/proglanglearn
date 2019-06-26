@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_head %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+{% endblock extra_head %}
+
 {% block header_attr %}class="index"{% endblock header_attr %}
 {% block header %}
 <div class="landing">
@@ -13,10 +17,6 @@
   </div>
 </div>
 {% endblock header %}
-
-{% block extra_head %}
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-{% endblock extra_head %}
 
 {% block main %}
 {% for item in objects %}

@@ -1,25 +1,18 @@
-from django.conf import settings, urls as conf_urls
+from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from main.views import (
-    error_403,
-    error_404,
-    error_500
-)
+from filebrowser.sites import site
 
 urlpatterns = [
     path('', include('main.urls')),
     path('accounts/', include('accounts.urls')),
     path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('admin/filebrowser/', site.urls),
+    path('tinymce/', include('tinymce.urls')),
 ]
-
-conf_urls.handler403 = error_403
-conf_urls.handler404 = error_404
-conf_urls.handler500 = error_500
 
 if settings.DEBUG:
     import debug_toolbar

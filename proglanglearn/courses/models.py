@@ -7,10 +7,9 @@ from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
+from tinymce.models import HTMLField
 
-from accounts.models import Language, Tag
+from accounts.models import Language, Tag, Profile
 
 User = get_user_model()
 
@@ -24,9 +23,6 @@ DIFFICULTY_CHOICES = (
 class CourseQuerySet(models.QuerySet):
     def last_courses(self, number):
         return self.published_courses()[number:]
-
-    def student_enrolled(self):
-        pass
 
     def published_courses(self):
         return self.filter(published_date__lte=timezone.now())
@@ -45,7 +41,7 @@ class CourseManager(models.Manager):
 
 class Course(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, verbose_name=_("Auteur"), related_name='author')
+        User, on_delete=models.SET_NULL, null=True, verbose_name=_("Auteur"), related_name='course')
     title = models.CharField(max_length=150, verbose_name=_("Titre du cours"))
     thumbnail = models.ImageField(
         upload_to='course_thumbnail/', verbose_name=_("Vignette du cours"))
@@ -55,16 +51,18 @@ class Course(models.Model):
         Tag, verbose_name=_("Tags"), blank=True)
     difficulty = models.CharField(
         max_length=1, choices=DIFFICULTY_CHOICES, verbose_name=_("Difficulté du cours"))
-    content_introduction = RichTextUploadingField(
-        verbose_name=_("Contenu d'introduction au cours"), null=True)
+    content_introduction = HTMLField(
+        verbose_name=_("Contenu d'introduction au cours"))
     pdf = models.FileField(upload_to="pdf_course/",
                            verbose_name=_("Version PDF du cours"), blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
     published_date = models.DateField(
         verbose_name=_("Date de publication"))
-    old_price = models.FloatField(default=0, verbose_name=_(
-        "Prix (ou ancien prix si nouveau)"))
-    new_price = models.FloatField(verbose_name=_(
-        "Nouveau prix"), null=True, blank=True)
+    old_price = models.DecimalField(default=0, verbose_name=_(
+        "Prix (ou ancien prix si nouveau)"), decimal_places=2, max_digits=6)
+    new_price = models.DecimalField(verbose_name=_(
+        "Nouveau prix"), null=True, blank=True, decimal_places=2, max_digits=6)
+    students = models.ManyToManyField(Profile, verbose_name=_(
+        "Étudiants enrollés"), blank=True)
 
     objects = CourseManager()
 
@@ -74,7 +72,7 @@ class Course(models.Model):
         verbose_name_plural = _("Cours")
 
     def __str__(self):
-        return f"{self.title} -- {self.author.username}"
+        return f"{self.id} - {self.title} -> {self.author.username}"
 
     def save(self, *args, **kwargs):
         try:
@@ -91,20 +89,17 @@ class Course(models.Model):
 
     def get_all_experience(self):
         exp = 0
-        qs = self.get_sections()
-        for section in qs:
-            qs2 = Tutorial.objects.filter(section__id=section.id)
-            for tut in qs2:
-                exp += tut.experience
+        qs = self.get_tutorials()
+        for tut in qs:
+            exp += tut.experience
         return exp
 
     def get_all_downloadable_resources(self):
-        tuts = self.get_tutorials()
-        num = 0
-        for sec, tut in tuts:
-            if tut.resources is not None:
-                num += 1
-        return num
+        count = 0
+        for tut in self.get_tutorials():
+            if tut.resources.is_exists():
+                count += 1
+        return count
 
     def get_percentage_discount(self):
         try:
@@ -113,15 +108,8 @@ class Course(models.Model):
             discount = 1
         return int((1 - discount) * 100)
 
-    def get_sections(self):
-        return Section.objects.filter(course__id=self.id).order_by('id')
-
     def get_tutorials(self):
-        tutorials = []
-        for sec in self.get_sections():
-            tutorials.append(
-                (sec, Tutorial.objects.filter(section__id=sec.id)))
-        return tutorials
+        return self.tutorial.all()
 
 
 @receiver(post_delete, sender=Course)
@@ -130,35 +118,14 @@ def submission_course_delete(sender, instance, **kwargs):
         instance.thumbnail.delete(save=False)
 
 
-class Section(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL,
-                               null=True, verbose_name=_("Cours attaché"))
-    title = models.CharField(
-        max_length=100, verbose_name=_("Titre de la section"))
-    short_description = RichTextField(
-        max_length=450, verbose_name=_("Courte description de la section"), blank=True, null=True)
-
-    class Meta:
-        ordering = ['title']
-        verbose_name = _("Section de cours")
-        verbose_name_plural = _("Sections de cours")
-
-    def __str__(self):
-        return f"{self.title} -- {self.course.title}"
-
-
 class Tutorial(models.Model):
-    section = models.ForeignKey(
-        Section, on_delete=models.SET_NULL, null=True, verbose_name=_("Section"))
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, verbose_name=_("Cours rattaché"), related_name='tutorial')
     title = models.CharField(
         max_length=100, verbose_name=_("Title du tutoriel"))
-    content = RichTextUploadingField(verbose_name=_("Contenu du tutoriel"),
-                                     config_name='blog', external_plugin_resources=[
-        ('youtube', '/static/ckeditor/youtube/', 'plugin.js'),
-        ('mathjax', '/static/ckeditor/mathjax/', 'plugin.js')
-    ])
+    content = HTMLField(verbose_name=_("Contenu du tutoriel"))
     resources = models.FileField(verbose_name=_(
-        "Ressources à déposer"), upload_to='resources/', null=True, blank=True)
+        "Ressources à déposer"), upload_to='resources/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar', 'tar.gz'])])
     experience = models.PositiveSmallIntegerField(
         verbose_name=_("Points d'expérience fournis"))
     published_date = models.DateTimeField(
@@ -172,4 +139,14 @@ class Tutorial(models.Model):
         verbose_name_plural = _("Tutoriels")
 
     def __str__(self):
-        return f"{self.title} -- {self.section.title}"
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('courses:tutorial-detail', kwargs={'course_id': self.course.id, 'tutorial_id': self.id})
+
+
+class TutorialComment(models.Model):
+    pass
+
+# TODO https://stackoverflow.com/questions/44837733/how-to-make-add-replies-to-comments-in-django
+# https://github.com/Radi85/Comment/blob/master/comment/models.py

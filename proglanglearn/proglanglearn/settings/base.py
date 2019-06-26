@@ -20,8 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third part apps
-    'ckeditor',
-    'ckeditor_uploader',
+    'tinymce',
+    'filebrowser',
     'import_export',
     'snowpenguin.django.recaptcha3',
 
@@ -100,34 +100,61 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASS')
 
-# CKEditor config
-CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.4.1.min.js'
-CKEDITOR_UPLOAD_PATH = 'ckeditor/'
-CKEDITOR_IMAGE_BACKEND = 'pillow'
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'width': 'auto',
-        'height': '250px',
-        'tabSpaces': 4,
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Styles', 'Format', 'Bold', 'Italic', 'Underline',
-                'Strike', 'SpellChecker', 'Undo', 'Redo'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Flash', 'Table', 'HorizontalRule'],
-            ['TextColor', 'BGColor'],
-            ['Smiley', 'SpecialChar'], ['Source', 'CodeSnippet'],
-        ],
-    },
-    'blog': {
-        'toolbar': 'Blog',
-        'toolbar_Blog': [
-            ['Bold', 'Link', 'Source', 'CodeSnippet', 'Youtube', 'Mathjax']
-        ],
-        'extraPlugins': ','.join(['codesnippet', 'youtube', 'mathjax'])
-    }
+# TinyMCE editor config
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 400,
+    'width': 'auto',
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'codesample_languages': [
+        {'text': 'Bash', 'value': 'bash'},
+        {'text': 'C', 'value': 'c'},
+        {'text': 'C#', 'value': 'csharp'},
+        {'text': 'C++', 'value': 'cpp'},
+        {'text': 'CSS', 'value': 'css'},
+        {'text': 'Django Template', 'value': 'django'},
+        {'text': 'Go', 'value': 'go'},
+        {'text': 'HTML/XML', 'value': 'markup'},
+        {'text': 'Java', 'value': 'java'},
+        {'text': 'JavaScript', 'value': 'javascript'},
+        {'text': 'JSON', 'value': 'json'},
+        {'text': 'Julia', 'value': 'julia'},
+        {'text': 'Kotlin', 'value': 'kotlin'},
+        {'text': 'Markdown', 'value': 'markdown'},
+        {'text': 'PHP', 'value': 'php'},
+        {'text': 'Plaintext', 'value': 'plaintext'},
+        {'text': 'Python', 'value': 'python'},
+        {'text': 'Ruby', 'value': 'ruby'},
+        {'text': 'Sass/Scss', 'value': 'scss'},
+        {'text': 'Swift', 'value': 'swift'},
+        {'text': 'TeX/LaTeX', 'value': 'tex'},
+    ],
+    'theme': 'modern',
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            ''',
+    'toolbar2': '''
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
 }
+
+FILEBROWSER_DIRECTORY = 'tiny_uploads/'
+DIRECTORY = ''
 
 # ReCaptcha V3 config
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')

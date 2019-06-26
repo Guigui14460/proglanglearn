@@ -1,356 +1,161 @@
-<!DOCTYPE html>
-<html lang="fr" data-theme="light">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="language" content="fr" />
-    <meta name="description"
-        content="Apprenez les bases de la programmation en les manipulant dans des exemples simples et des projets plus complexes." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="copyright" content="ProgLangLearn Inc." />
-    <meta name="category" content="web, programming, languages" />
-    <meta name="keywords" content="web, pll, proglanglearn, programming, language" />
-    <meta name="publisher" content="LETELLIER Guillaume" />
-    <meta name="robots" content="index,follow" />
-    <meta name="theme-color" content="#c5a31b" />
-    <meta name="msapplication-navbutton-color" content="#c5a31b" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-    <title>Nom du tutoriel - ProgLangLearn</title>
-    <link rel="icon" href="../images/favicon.ico" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link rel="stylesheet" href="../style/css/global.min.css" media="screen" />
-    <link rel="stylesheet" href="../style/css/print.min.css" media="print" />
-    <link rel="stylesheet" href="../style/css/vs2015.css">
-    <script src="../js/jquery-3.4.1.min.js"></script>
-</head>
+{% block title %}{{ object.title }} - {% endblock title %}
 
-<body>
-    <div class="loader">
-        <img src="../images/load.gif" alt="Loading ..." />
+{% block extra_head %}
+<link rel="stylesheet" href="{% static '/style/css/vs2015.css' %}">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+{% endblock extra_head %}
+
+{% block main_attr %}class="aside"{% endblock main_attr %}
+
+{% block aside_left %}
+<aside class="navbar navbar__dark navbar__vertical">
+    <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
     </div>
-    <button id="btnScrollToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    <div id="version-switcher">
-        <input type="checkbox" id="switch" class="switch" name="theme" />
-        <label class="switch-label" for="switch">Light/Dark toggle</label>
-        <ul class="languages-switcher">
-            <li class="current" title="Cliquez sur les liens pour changer de langue">
-                <span>Langue : <strong>Fr</strong></span>
-            </li>
-            <li class="other">
-                <a href="index.html?lang=fr" title="Français">Fr</a>
-            </li>
-            <li class="other">
-                <a href="index.html?lang=en" title="Anglais">En</a>
-            </li>
-        </ul>
+    <ul class="navbar-links sticky-box">
+        {% for tutorial in course_tutorials %}
+            {% if object == tutorial %}
+                <li class="navbar-item"><a class="active" href="{{ tutorial.get_absolute_url }}" title="{{ tutorial.title|truncatechars:50 }}">{{ forloop.counter }} - {{ tutorial.title }} </a></li>
+            {% else %}
+                <li class="navbar-item"><a href="{{ tutorial.get_absolute_url }}" title="{{ tutorial.title|truncatechars:50 }}">{{ forloop.counter }} - {{ tutorial.title }} </a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</aside>
+{% endblock aside_left %}
+
+{% block main %}
+<h1 class="large">{{ object.title }}</h1>
+{% if request.user.is_staff or object.author == request.user %}
+    <div class="my-2 d-flex space-between">
+        <a href="modify_tutorial.html" class="btn btn__info btn__large">Modifier le tutoriel</a>
+        <a href="#" class="btn btn__danger btn__large">Supprimer le tutoriel</a>
     </div>
-    <header>
-        <nav id="main-navbar" class="navbar navbar__primary navbar__fixed">
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+{% endif %}
+<div class="center-text">
+    <i class="far fa-eye"></i>&nbsp;{{ object.views }}
+</div>
+<div>
+    {{ object.content|safe }}
+</div>
+{% if prev_tutorial or next_tutorial %}
+    <div class="d-flex space-between">
+        {% if prev_tutorial %}
+            <a href="{{ prev_tutorial.get_absolute_url }}" title="{{ prev_tutorial.title }}" class="btn btn__outline__success btn__large">Précédent</a>
+        {% endif %}
+        {% if next_tutorial %}
+            {% if prev_tutorial is None %}
+                <span></span>
+            {% endif %}
+            <a href="{{ next_tutorial.get_absolute_url }}" title="{{ next_tutorial.title }}" class="btn btn__outline__success btn__large">Suivant</a>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock main %}
+
+{% block comments %}
+<div class="comments py-2">
+    <div class="container">
+        <form action="tutorial_detail.html" class="form">
+            <fieldset>
+                <legend>Rédiger un commentaire</legend>
+                <div class="form-group">
+                    <label for="comment">Commentaire : <span class="required-input">*</span></label><br>
+                    <textarea name="tuto-comment" id="comment" placeholder="Blablabla..." required></textarea>
+                </div>
+            </fieldset>
+            <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
+                obligatoires.</small>
+            <div class="center-text">
+                <button type="submit" class="btn btn__info btn__large btn__300">Commenter</button>
             </div>
-            <div class="navbar-logo">
-                <a href="../index.html" title="Retour à l'accueil">ProgLangLearn</a>
-            </div>
-            <ul class="navbar-links">
-                <li class="navbar-item">
-                    <a href="course_list.html"><i class="fas fa-laptop-code"></i> Cours</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="article_list.html"><i class="fas fa-blog"></i> Blog</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="forum_list.html"><i class="far fa-question-circle"></i> Forum</a>
-                </li>
-            </ul>
-            <div class="navbar-search-expandable" id="expand-search">
-                <form action="search.html" method="get">
-                    <input type="text" placeholder="Recherche" name="q" id="search" />
-                    <input type="submit" value="Recherche" />
-                    <i class="fas fa-search"></i>
-                </form>
-            </div>
-            <div class="navbar-changeable">
-                <div class="dropdown-toggle">
-                    <img src="../images/404.png" alt="Photo de profil"
-                        class="navbar-profile-image profile-image round-image" title="Voir mon profil" />
-                    <span>johndoe</span>
-                    <ul class="navbar-dropdown-menu navbar-dropdown-right">
-                        <li class="navbar-dropdown-item">
-                            <a href="admin_pages/base.html"><i class="fas fa-tools"></i> Administration</a>
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <hr class="navbar-dropdown-divider" />
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <a href="add_course.html"><i class="far fa-plus-square"></i> Créer un cours</a>
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <hr class="navbar-dropdown-divider" />
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <a href="add_article.html"><i class="fas fa-newspaper"></i> Créer un article</a>
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <hr class="navbar-dropdown-divider" />
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <a href="dashboard.html"><i class="fas fa-chart-area"></i> Tableau de bord</a>
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <a href="profile.html"><i class="fas fa-user-tie"></i> Mon profil</a>
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <a href="account.html"><i class="fas fa-user-cog"></i> Mon compte</a>
-                        </li>
-                        <li class="navbar-dropdown-item">
-                            <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
-                        </li>
-                    </ul>
+        </form>
+        <div class="mt-2">
+            <div class="comment">
+                <div class="commentary">
+                    <img src="../images/404.png" alt="Photo de profil" class="profile-image round-image" />
+                    <span><a href="profile.html">johndoe</a>, le 7 juin 2019 à 22h00</span>
+                </div>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum temporibus, expedita omnis dolores
+                    beatae error nemo quisquam corporis adipisci molestias ipsa nesciunt non, provident magni velit
+                    eveniet neque sunt officia illo earum consequuntur eaque. Animi cum, dolor cumque accusamus iure
+                    soluta temporibus incidunt et, voluptatum facilis sed, adipisci aspernatur architecto nulla
+                    corporis molestias quas hic omnis illum ad voluptates blanditiis in eos! Reiciendis ab
+                    necessitatibus ratione ducimus deleniti voluptates numquam ea consequatur totam cupiditate
+                    accusamus quasi architecto laudantium rerum, veniam dolor. Consequuntur veritatis quia
+                    laudantium earum fugit! Ipsa natus minus beatae, molestiae, laboriosam nobis neque, aliquam
+                    quisquam dolorem dolorum inventore!
+                </p>
+                <div>
+                    <div class="center-text">
+                        <button class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
+                    </div>
+                    <div class="reply-form"></div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <main class="aside">
-        <aside class="navbar navbar__dark navbar__vertical">
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-            <ul class="navbar-links sticky-box">
-                <li class="navbar-item"><a href="tutorial_detail.html">1 - Nom du tutoriel </a></li>
-                <li class="navbar-item"><a class="active" href="tutorial_detail.html">2 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">3 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">4 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">5 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">6 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">7 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">8 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">9 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">10 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">11 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">12 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">13 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">14 - Nom du tutoriel</a></li>
-                <li class="navbar-item"><a href="tutorial_detail.html">15 - Nom du tutoriel</a></li>
-            </ul>
-        </aside>
-        <div class="container">
-            <h1 class="large">Nom du tutoriel</h1>
-            <!-- Si c'est le créateur du cours ou un membre du staff -->
-            <div class="my-2 d-flex space-between">
-                <a href="modify_tutorial.html" class="btn btn__info btn__large">Modifier le tutoriel</a>
-                <a href="#" class="btn btn__danger btn__large">Supprimer le tutoriel</a>
-            </div>
-            <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae repellat, culpa reiciendis provident
-                cupiditate harum fuga distinctio exercitationem corrupti nulla cumque? Cum dolor repellendus nostrum
-                magnam ipsam eligendi commodi iure dolores eius consequatur? Odit a architecto neque corrupti corporis
-                id distinctio. Eveniet alias, quidem accusamus ea perspiciatis dolores quia sint et impedit facere
-                molestiae sunt odit eos dolore mollitia ducimus quos, nisi cum provident architecto? Nesciunt totam
-                repellat ratione quo exercitationem, iusto facilis excepturi quam numquam iste fugit reprehenderit magni
-                iure maiores quaerat quidem velit vel impedit dignissimos dolores! Quasi officiis sint distinctio dicta
-                at dignissimos voluptatibus nisi. Voluptatem officia aspernatur delectus ea neque? Dolorem nemo omnis
-                quis, laborum nobis natus libero iusto fugiat distinctio, vel quasi. Possimus, suscipit unde consequatur
-                culpa aliquam at voluptates dolorem expedita labore voluptas nobis adipisci fugit ratione velit
-                quibusdam, numquam ipsa. Ea quisquam distinctio nam eius! Et obcaecati corporis voluptates. Laudantium
-                tempore inventore sequi ad, tenetur dolorum corrupti odio quidem quia numquam nisi placeat quae magni
-                eos doloremque dicta consequatur perspiciatis, sunt perferendis minus molestias obcaecati aut eaque
-                praesentium. Vero praesentium omnis, esse accusamus quia accusantium neque possimus. Iure fugit maxime
-                officia nostrum consectetur, accusantium enim aperiam numquam, recusandae rerum, vero odit unde? Facilis
-                totam veniam eos et earum, quisquam nobis fuga harum ut officiis hic dolorum repellat blanditiis quo
-                accusamus consectetur! Fugit, excepturi commodi architecto laudantium quas velit reiciendis consectetur
-                nisi fugiat perferendis qui odio dolorum doloremque quos harum ea mollitia aliquam ratione, cumque minus
-                illum, ipsam pariatur? Consequuntur repudiandae quo optio recusandae molestiae fugit dignissimos fugiat
-                necessitatibus non quisquam. Non sunt nemo itaque qui. Perspiciatis culpa, nostrum quos at natus sit
-                inventore explicabo velit voluptatum! Repellat soluta eveniet aut, exercitationem ut porro blanditiis
-                impedit culpa a odio nulla in sed cupiditate consectetur sint perspiciatis quia nesciunt. Numquam
-                consequatur saepe ex laudantium laborum impedit ducimus repellendus iusto, amet, at eaque totam
-                temporibus neque. Quam nihil libero dicta dolore fugit ut architecto ipsum vero, et eaque distinctio
-                ullam totam est debitis corrupti eligendi expedita accusantium dolorem at odit culpa non? Quibusdam
-                dicta nesciunt, dolorem esse laboriosam repellat amet rerum in aspernatur cupiditate quam, et possimus
-                ad consequatur error maxime non nulla iure delectus magnam facere. Provident quaerat enim officiis dicta
-                aliquid pariatur nostrum tempora iusto, distinctio repellendus sed dignissimos, culpa similique a?
-                Aperiam numquam facilis iusto explicabo porro nostrum eveniet laudantium doloremque quibusdam nam
-                tempore, cum non corporis error ad vel tempora fugit soluta. Ipsam suscipit, corporis hic esse tempora
-                repudiandae? Sunt expedita laboriosam, commodi qui ab sequi ullam velit recusandae aliquid a culpa
-                voluptas hic! Praesentium laboriosam aperiam accusantium quis deleniti quisquam distinctio, nisi velit
-                in provident maiores quos unde eligendi, corrupti nesciunt laborum placeat veritatis illo ratione itaque
-                asperiores doloremque. Obcaecati odit delectus mollitia repellendus maiores ipsum temporibus quidem.
-                Reprehenderit natus quo debitis soluta, excepturi perferendis vitae similique omnis voluptatibus aliquam
-                ab laboriosam reiciendis exercitationem. Aperiam eveniet beatae tempora nostrum sequi magni qui cumque
-                optio explicabo quo corrupti, ullam temporibus molestias dolore eaque iusto ad quasi facere tempore
-                maxime! Excepturi, ipsa nihil?
-                <pre><code class="python">def print_message(message=''):<br>&emsp;&emsp;&emsp;&emsp;print(message)</code></pre>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet velit quo sint quia voluptates eos
-                cumque. Fugiat et maxime vel. Quod iusto porro similique veritatis, libero ratione nobis repellat. Odio
-                quidem, minima fuga asperiores reiciendis enim a. Minima provident itaque ipsam laboriosam ex
-                repudiandae natus cupiditate. Quos totam incidunt, quasi quidem pariatur excepturi veritatis ut sapiente
-                consequuntur eos est voluptate, culpa optio ea molestiae corrupti? Iste aspernatur repudiandae
-                recusandae ducimus. Sequi necessitatibus molestias error fugit accusantium mollitia aliquid aut minima!
-                Consequatur, quisquam eaque. Et officiis fugit excepturi at quidem cum iste, odit maiores, vero maxime
-                aliquam esse unde. Beatae quis totam placeat earum in. Quos dolorem numquam quae voluptatem nisi
-                corporis architecto mollitia, velit illum doloribus incidunt placeat error in cumque hic! Beatae, ipsa
-                qui?
-                <pre><code class="python">def print_message(message=''):<br>&emsp;&emsp;&emsp;&emsp;print(message)<br><br>def print_message(message=''):<br>&emsp;&emsp;&emsp;&emsp;print(message)</code></pre>
-            </div>
-            <div class="d-flex space-between">
-                <a href="tutorial_detail.html" class="btn btn__outline__success btn__large">Précédent</a>
-                <a href="tutorial_detail.html" class="btn btn__outline__success btn__large">Suivant</a>
-            </div>
-        </div>
-    </main>
-    <div class="comments py-2">
-        <div class="container">
-            <form action="tutorial_detail.html" class="form">
-                <fieldset>
-                    <legend>Rédiger un commentaire</legend>
-                    <div class="form-group">
-                        <label for="comment">Commentaire : <span class="required-input">*</span></label><br>
-                        <textarea name="tuto-comment" id="comment" placeholder="Blablabla..." required></textarea>
-                    </div>
-                </fieldset>
-                <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
-                    obligatoires.</small>
-                <div class="center-text">
-                    <button type="submit" class="btn btn__info btn__large btn__300">Commenter</button>
+            <div class="comment">
+                <div class="commentary">
+                    <img src="../images/404.png" alt="Photo de profil" class="profile-image round-image" />
+                    <span><a href="profile.html">johndoe</a>, le 7 juin 2019 à 22h00</span>
                 </div>
-            </form>
-            <div class="mt-2">
-                <div class="comment">
-                    <div class="commentary">
-                        <img src="../images/404.png" alt="Photo de profil" class="profile-image round-image" />
-                        <span><a href="profile.html">johndoe</a>, le 7 juin 2019 à 22h00</span>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum temporibus, expedita omnis dolores
+                    beatae error nemo quisquam corporis adipisci molestias ipsa nesciunt non, provident magni velit
+                    eveniet neque sunt officia illo earum consequuntur eaque. Animi cum, dolor cumque accusamus iure
+                    soluta temporibus incidunt et, voluptatum facilis sed, adipisci aspernatur architecto nulla
+                    corporis molestias quas hic omnis illum ad voluptates blanditiis in eos! Reiciendis ab
+                    necessitatibus ratione ducimus deleniti voluptates numquam ea consequatur totam cupiditate
+                    accusamus quasi architecto laudantium rerum, veniam dolor. Consequuntur veritatis quia
+                    laudantium earum fugit! Ipsa natus minus beatae, molestiae, laboriosam nobis neque, aliquam
+                    quisquam dolorem dolorum inventore!
+                </p>
+                <div>
+                    <div class="center-text">
+                        <button class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
                     </div>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum temporibus, expedita omnis dolores
-                        beatae error nemo quisquam corporis adipisci molestias ipsa nesciunt non, provident magni velit
-                        eveniet neque sunt officia illo earum consequuntur eaque. Animi cum, dolor cumque accusamus iure
-                        soluta temporibus incidunt et, voluptatum facilis sed, adipisci aspernatur architecto nulla
-                        corporis molestias quas hic omnis illum ad voluptates blanditiis in eos! Reiciendis ab
-                        necessitatibus ratione ducimus deleniti voluptates numquam ea consequatur totam cupiditate
-                        accusamus quasi architecto laudantium rerum, veniam dolor. Consequuntur veritatis quia
-                        laudantium earum fugit! Ipsa natus minus beatae, molestiae, laboriosam nobis neque, aliquam
-                        quisquam dolorem dolorum inventore!
-                    </p>
-                    <div>
-                        <div class="center-text">
-                            <button class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
-                        </div>
-                        <div class="reply-form"></div>
-                    </div>
+                    <div class="reply-form"></div>
                 </div>
-                <div class="comment">
-                    <div class="commentary">
-                        <img src="../images/404.png" alt="Photo de profil" class="profile-image round-image" />
-                        <span><a href="profile.html">johndoe</a>, le 7 juin 2019 à 22h00</span>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum temporibus, expedita omnis dolores
-                        beatae error nemo quisquam corporis adipisci molestias ipsa nesciunt non, provident magni velit
-                        eveniet neque sunt officia illo earum consequuntur eaque. Animi cum, dolor cumque accusamus iure
-                        soluta temporibus incidunt et, voluptatum facilis sed, adipisci aspernatur architecto nulla
-                        corporis molestias quas hic omnis illum ad voluptates blanditiis in eos! Reiciendis ab
-                        necessitatibus ratione ducimus deleniti voluptates numquam ea consequatur totam cupiditate
-                        accusamus quasi architecto laudantium rerum, veniam dolor. Consequuntur veritatis quia
-                        laudantium earum fugit! Ipsa natus minus beatae, molestiae, laboriosam nobis neque, aliquam
-                        quisquam dolorem dolorum inventore!
-                    </p>
-                    <div>
-                        <div class="center-text">
-                            <button class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
-                        </div>
-                        <div class="reply-form"></div>
-                    </div>
+            </div>
+            <div class="comment">
+                <div class="commentary">
+                    <img src="../images/404.png" alt="Photo de profil" class="profile-image round-image" />
+                    <span><a href="profile.html">johndoe</a>, le 7 juin 2019 à 22h00</span>
                 </div>
-                <div class="comment">
-                    <div class="commentary">
-                        <img src="../images/404.png" alt="Photo de profil" class="profile-image round-image" />
-                        <span><a href="profile.html">johndoe</a>, le 7 juin 2019 à 22h00</span>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum temporibus, expedita omnis dolores
+                    beatae error nemo quisquam corporis adipisci molestias ipsa nesciunt non, provident magni velit
+                    eveniet neque sunt officia illo earum consequuntur eaque. Animi cum, dolor cumque accusamus iure
+                    soluta temporibus incidunt et, voluptatum facilis sed, adipisci aspernatur architecto nulla
+                    corporis molestias quas hic omnis illum ad voluptates blanditiis in eos! Reiciendis ab
+                    necessitatibus ratione ducimus deleniti voluptates numquam ea consequatur totam cupiditate
+                    accusamus quasi architecto laudantium rerum, veniam dolor. Consequuntur veritatis quia
+                    laudantium earum fugit! Ipsa natus minus beatae, molestiae, laboriosam nobis neque, aliquam
+                    quisquam dolorem dolorum inventore!
+                </p>
+                <div>
+                    <div class="center-text">
+                        <button class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
                     </div>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum temporibus, expedita omnis dolores
-                        beatae error nemo quisquam corporis adipisci molestias ipsa nesciunt non, provident magni velit
-                        eveniet neque sunt officia illo earum consequuntur eaque. Animi cum, dolor cumque accusamus iure
-                        soluta temporibus incidunt et, voluptatum facilis sed, adipisci aspernatur architecto nulla
-                        corporis molestias quas hic omnis illum ad voluptates blanditiis in eos! Reiciendis ab
-                        necessitatibus ratione ducimus deleniti voluptates numquam ea consequatur totam cupiditate
-                        accusamus quasi architecto laudantium rerum, veniam dolor. Consequuntur veritatis quia
-                        laudantium earum fugit! Ipsa natus minus beatae, molestiae, laboriosam nobis neque, aliquam
-                        quisquam dolorem dolorum inventore!
-                    </p>
-                    <div>
-                        <div class="center-text">
-                            <button class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
-                        </div>
-                        <div class="reply-form"></div>
-                    </div>
+                    <div class="reply-form"></div>
                 </div>
             </div>
         </div>
     </div>
-    <footer>
-        <div class="container pt-4 pb-3">
-            <div class="important-links">
-                <a href="terms.html">Termes et conditions d'utilisations</a>
-                <a href="privacy.html">Politique de confidentialité</a>
-                <a href="about.html">À propos</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="social-media my-2">
-                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" title="Github"><i class="fab fa-github"></i></a>
-                <a href="#" title="Youtube"><i class="fab fa-youtube"></i></a>
-                <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
-            </div>
-            <div class="copyright">
-                <h3>
-                    &copy; <a href="../index.html" class="primary-color">ProgLangLearn Inc.</a>
-                </h3>
-                <p class="mt-0">Tous droits réservés</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../js/main.jquery.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script>
-        $(function () {
-            // Reply form
-            $('.reply-form').hide();
-            $('.reply').click(function () {
-                $(this).parent().next().toggle();
-                $(this).parent().next().html(`
-                    <form action="tutorial_detail.html" class="form">
-                        <fieldset>
-                            <legend>Rédiger une réponse</legend>
-                            <div class="form-group">
-                                <label for="comment-reply">Réponse : <span
-                                        class="required-input">*</span></label><br>
-                                <textarea autofocus name="tuto-comment-reply" id="comment-reply"
-                                    placeholder="Blablabla..." required></textarea>
-                            </div>
-                        </fieldset>
-                        <small class="d-block mb-1">Tous les champs avec d'un <span
-                                class="required-input">*</span> sont
-                            obligatoires.</small>
-                        <div class="center-text">
-                            <button type="submit" class="btn btn__info btn__large btn__300"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </form>
-                `);
-            });
-        });
-    </script>
-</body>
+</div>
+{% endblock comments %}
 
-</html>
+{% block javascript %}
+<script src="{% static 'js/highlight.pack.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="{% static 'js/typed.min.js' %}"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+{% endblock javascript %}
+
+{% block jquery %}$('.reply-form').hide();$('.reply').click(function () {$(this).parent().next().toggle();$(this).parent().next().html(`<form action="tutorial_detail.html" class="form"><fieldset><legend>Rédiger une réponse</legend><div class="form-group"><label for="comment-reply">Réponse : <span class="required-input">*</span></label><br><textarea autofocus name="tuto-comment-reply" id="comment-reply"placeholder="Blablabla..." required></textarea></div></fieldset><small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sontobligatoires.</small><div class="center-text"><button type="submit" class="btn btn__info btn__large btn__300"><i class="fas fa-paper-plane"></i></button></div></form>`);});
+{% endblock jquery %}

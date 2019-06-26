@@ -3,8 +3,7 @@ from django.contrib.auth import login, get_user_model
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, reverse
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
@@ -65,7 +64,7 @@ class RegistrationView(NavbarSearchMixin, View):
                     'form': form,
                     'navbar_search_form': self.form_navbar()
                 })
-            return HttpResponseRedirect(reverse('accounts:account_activation_sent'))
+            return redirect('accounts:account_activation_sent')
         users = User.objects.filter(
             username=form.data['username'], email=form.data['email'])
         if users.exists():
@@ -96,11 +95,11 @@ class RegistrationView(NavbarSearchMixin, View):
                         'form': form,
                         'navbar_search_form': self.form_navbar()
                     })
-                return HttpResponseRedirect(reverse('accounts:account_activation_sent'))
+                return redirect('accounts:account_activation_sent')
             else:
                 messages.info(request, _(
                     "Votre compte a déjà été activé. Connectez-vous ou demandez à changer de mot de passe"))
-                return HttpResponseRedirect(reverse('accounts:login'))
+                return redirect('accounts:login')
         messages.error(request, _(
             "Veuillez respecter et remplir correctement <strong>TOUS</strong> les champs obligatoires"))
         context = {
@@ -134,7 +133,7 @@ class ActivateView(View):
             login(request, user)
             messages.success(request, _(
                 "Activation de votre compte effectuée avec succès"))
-            return HttpResponseRedirect(reverse('main:index'))
+            return redirect('main:index')
         return render(request, self.template_name)
 
 

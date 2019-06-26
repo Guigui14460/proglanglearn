@@ -58,6 +58,7 @@
         {% block header %}{% endblock header %}
     </header>
     <main {% block main_attr %}{% endblock main_attr %}>
+        {% block aside_left %}{% endblock aside_left %}
         <div class="container">
             {% for message in messages %}
                 <div class="alert {% if messages.level %}{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert__danger{% else %}alert__{{ message.tags }}{% endif %}{% endif %} alert__dismissable">
@@ -66,6 +67,7 @@
             {% endfor %}
             {% block main %}{% endblock main %}
         </div>
+        {% block aside_right %}{% endblock aside_right %}
     </main>
     {% block comments %}{% endblock comments %}
     <footer>

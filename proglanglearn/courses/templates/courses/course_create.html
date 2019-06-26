@@ -3,10 +3,21 @@
 
 {% block title %}{{ title }} un cours - {% endblock title %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
+{% endblock extra_head %}
+
 {% block main %}
 <h1 class="large">{{ title }} un cours</h1>
+{% if title == 'Modifier' %}
+    <div class="my-2 d-flex space-between">
+        <a href="{% url 'courses:detail' id=object.id %}" class="btn btn__success btn__large">Retour</a>
+        <a href="{% url 'courses:delete' id=object.id %}" class="btn btn__danger btn__large">Supprimer le cours</a>
+    </div>
+{% endif %}
 <form method="POST" class="form" enctype="multipart/form-data">
     {% csrf_token %}
+    {{ form.media }}
     {{ form.errors }}
     {{ form.non_field_errors }}
     <fieldset>
@@ -17,13 +28,12 @@
             {{ form.title }}</label>
         </div>
         <div class="form-group">
-            {{ form.thumbnail.label_tag }}&nbsp;<span class="required-input">*</span>
+            {{ form.thumbnail.label_tag }}&nbsp;<span class="required-input">*</span><br>
             {{ form.thumbnail }}
         </div>
         <div class="form-group">
             <label for="apercu">{{ form.content_introduction.label }} : <span class="required-input">*</span></label><br>
             <div>
-                {{ form.media }}
                 {{ form.content_introduction }}
             </div>
         </div>
@@ -58,6 +68,27 @@
             {{ form.pdf.label_tag }}
             {{ form.pdf }}
         </div>
+        {% if title == 'Modifier' %}
+            <hr class="dashed">
+            <div class="form-group">
+                <ul>
+                    {% for tutorial in tutorials %}
+                        <li>
+                            <div class="d-flex align space-between">
+                                <a href="{% url 'courses:tutorial-detail' course_id=object.id tutorial_id=tutorial.id %}" title="">{{ tutorial.title }}</a>
+                                <span>
+                                    <a href="{% url 'courses:tutorial-update' course_id=object.id tutorial_id=tutorial.id %}" title="Modifier" class="btn btn__outline__info"><i class="fas fa-pen"></i></a>
+                                    <a href="{% url 'courses:tutorial-delete' course_id=object.id tutorial_id=tutorial.id %}" title="Supprimer" class="btn btn__danger"><i class="fas fa-times"></i></a>
+                                </span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="form-group center-text">
+                    <a href="{% url 'courses:tutorial-create' course_id=object.id %}" class="btn btn__large btn__outline__success">Ajouter un tutoriel</a>
+                </div>
+        {% endif %}
     </fieldset>
     <fieldset>
         <legend>Informations complémentaires</legend>
@@ -84,11 +115,6 @@
 {% endblock main %}
 
 {% block javascript %}
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script src="{% static 'js/highlight.pack.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 {% endblock javascript %}
-
-{% block jquery %}
-$(".django-ckeditor-widget").css('display', 'block');
-$(".file-upload").css('margin', '0 auto')
-{% endblock jquery %}
