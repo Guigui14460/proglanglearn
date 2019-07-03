@@ -5,7 +5,7 @@ from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
 
 from accounts.models import Language, Tag
-from .models import Course, Tutorial
+from .models import Course, Tutorial, TutorialComment
 
 
 class CourseModelForm(forms.ModelForm):
@@ -72,3 +72,13 @@ class TutorialModelForm(forms.ModelForm):
             'title', 'content',
             'resources', 'experience',
         ]
+
+
+class TutorialCommentForm(forms.ModelForm):
+    content = forms.CharField(label=_("Commantaire ou réponse"), required=True, widget=forms.Textarea(attrs={
+        'placeholder': _("Contenu")
+    }))
+
+    class Meta:
+        model = TutorialComment
+        fields = ['content']

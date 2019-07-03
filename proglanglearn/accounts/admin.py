@@ -28,7 +28,7 @@ class ProfileAdmin(ImportExportModelAdmin):
     fieldsets = (
         (_("Espace critique"), {'fields': ('strike', 'email_confirmed')}),
         (_("Informations générales"), {'fields': (
-            ('user', 'image', 'biography', 'links', 'languages_learnt'), ('is_dev', 'is_student', 'is_teacher', 'github_username'), 'country')}),
+            'user', 'image', 'biography', 'links', 'languages_learnt', 'is_dev', 'is_student', 'is_teacher', 'github_username', 'country')}),
         (_("Options avancées"), {'fields': ('level', 'level_experience')})
     )
 

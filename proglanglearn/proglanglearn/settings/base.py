@@ -21,10 +21,9 @@ INSTALLED_APPS = [
 
     # Third part apps
     'tinymce',
-    'filebrowser',
     'import_export',
     'snowpenguin.django.recaptcha3',
-
+    
     # My apps
     'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
@@ -88,7 +87,7 @@ MEDIA_URL = '/media/'
 
 # Redirect configs
 LOGIN__URL = 'accounts:login'
-LOGIN_REDIRECT_URL = 'main:index'
+LOGIN_REDIRECT_URL = 'courses:list'
 LOGOUT_REDIRECT_URL = 'main:index'
 
 # Email config

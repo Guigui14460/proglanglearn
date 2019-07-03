@@ -3,7 +3,7 @@ from django.contrib.auth import login, get_user_model
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
@@ -23,6 +23,11 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
     form_class = LoginForm
     template_name = 'registration/login.html'
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('courses:list')
+        return super(CustomLoginView, self).get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['navbar_search_form'] = self.form_navbar()
@@ -33,6 +38,8 @@ class RegistrationView(NavbarSearchMixin, View):
     template_name = "registration/register.html"
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('courses:list')
         context = {'navbar_search_form': self.form_navbar()}
         context['form'] = SignUpForm()
         return render(request, self.template_name, context)
@@ -69,7 +76,7 @@ class RegistrationView(NavbarSearchMixin, View):
             username=form.data['username'], email=form.data['email'])
         if users.exists():
             user = users.first()
-            if not user.is_active:
+            if not user.profile.email_confirmed:
                 user.set_password(form.clean_password2())
                 user.save()
                 try:
@@ -113,6 +120,8 @@ class AccountActivationSentView(NavbarSearchMixin, View):
     template_name = "registration/account_activation_sent.html"
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('courses:list')
         return render(request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
@@ -126,10 +135,9 @@ class ActivateView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
         generator = AccountActivationTokenGenerator()
-        if user is not None and generator.check_token(user, token) and not user.is_active:
-            user.is_active = True
+        if user is not None and generator.check_token(user, token) and not user.profile.email_confirmed:
             user.profile.email_confirmed = True
-            user.save()
+            user.profile.save()
             login(request, user)
             messages.success(request, _(
                 "Activation de votre compte effectuée avec succès"))

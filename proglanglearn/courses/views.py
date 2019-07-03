@@ -2,16 +2,16 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import F
-from django.shortcuts import reverse, redirect, render
+from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView, View
 
 from main.mixins import NavbarSearchMixin
-from .forms import CourseModelForm, TutorialModelForm
+from .forms import CourseModelForm, TutorialModelForm, TutorialCommentForm
 from .mixins import CourseObjectMixin, TutorialObjectMixin, UserCanAddCourse, UserCanModifyCourse, UserCanViewTutorial
-from .models import Course, Tutorial
+from .models import Course, Tutorial, TutorialComment
 
 
 class CourseCreateView(LoginRequiredMixin, UserCanAddCourse, NavbarSearchMixin, View):
@@ -152,12 +152,36 @@ class TutorialDetailView(UserCanViewTutorial, TutorialObjectMixin, NavbarSearchM
         tutorial.save()
         user = request.user
         tuto_finished = user.profile.tutorial_finished
-        if not tutorial.id in [int(tut) for tut in tuto_finished]:
-            tuto_finished += [tutorial.id]
+        if tuto_finished != ['']:
+            if not tutorial.id in [int(tut) for tut in tuto_finished]:
+                tuto_finished += [tutorial.id]
+                user.profile.tutorial_finished = tuto_finished
+                user.profile.level_experience += tutorial.experience
+                user.profile.save()
+        else:
+            tuto_finished = [tutorial.id]
             user.profile.tutorial_finished = tuto_finished
             user.profile.level_experience += tutorial.experience
             user.profile.save()
         return super(TutorialDetailView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        form = TutorialCommentForm(request.POST or None)
+        if form.is_valid() and request.user.is_authenticated:
+            content = form.cleaned_data['content']
+            parent_id = request.POST.get('parent_id')
+            print(request.POST)
+            parent_qs = None
+            if parent_id:
+                parent_qs = TutorialComment.objects.get(id=parent_id)
+            comment = TutorialComment.objects.create(
+                user=request.user,
+                tutorial=Tutorial.objects.get(
+                    id=self.kwargs.get('tutorial_id')),
+                content=content,
+                parent=parent_qs
+            )
+        return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -173,4 +197,6 @@ class TutorialDetailView(UserCanViewTutorial, TutorialObjectMixin, NavbarSearchM
                 except:
                     context['next_tutorial'] = None
         context['navbar_search_form'] = self.form_navbar()
+        context['form'] = TutorialCommentForm()
+        context['parent_comments'] = TutorialComment.objects.tutorial_parent_comments(self.get_object())
         return context

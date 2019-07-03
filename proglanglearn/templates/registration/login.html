@@ -36,32 +36,6 @@
         <button type="submit" class="btn btn__primary btn__large btn__300">S'identifier</button>
     </div>
 </form>
-<div class="social-btn">
-    <div class="center-text my-1">
-        <button class="btn btn__block btn__large btn__google"><i class="fab fa-google fw-normal mr-1"></i>
-            Se connecter
-            avec
-            Google</button>
-    </div>
-    <div class="center-text my-1">
-        <button class="btn btn__block btn__large btn__twitter"><i class="fab fa-twitter fw-normal mr-1"></i>
-            Se connecter
-            avec
-            Twitter</button>
-    </div>
-    <div class="center-text my-1">
-        <button class="btn btn__block btn__large btn__facebook"><i
-                class="fab fa-facebook-f fw-normal mr-1"></i> Se
-            connecter avec
-            Facebook</button>
-    </div>
-    <div class="center-text my-1">
-        <button class="btn btn__block btn__large btn__github"><i class="fab fa-github fw-normal mr-1"></i>
-            Se connecter
-            avec
-            Github</button>
-    </div>
-</div>
 <p class="mt-1">Vous n'avez pas encore de compte ? <a href="{% url 'accounts:register' %}">Inscrivez-vous</a> ! <br>
     Vous avez oublié votre mot de passe ? <a href="{% url 'accounts:password_reset' %}">Changer mon mot de passe</a>.</p>
 {% endblock main %}

@@ -3,14 +3,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from filebrowser.sites import site
-
 urlpatterns = [
     path('', include('main.urls')),
     path('accounts/', include('accounts.urls')),
     path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),
-    path('admin/filebrowser/', site.urls),
     path('tinymce/', include('tinymce.urls')),
 ]
 

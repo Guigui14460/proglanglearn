@@ -44,7 +44,7 @@
                     <span class="last"><del>{{ course.old_price }}€</del></span> <span class="reduction">-{{ course.get_percentage_discount }}%</span><br>
                     <a href="payment.html" class="btn btn__outline__primary new">{% if course.new_price != 0 %}{{ course.new_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
                 {% else %}
-                    <a href="payment.html" class="btn btn__outline__primary new">{% if course.new_price != 0 %}{{ course.old_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
+                    <a href="payment.html" class="btn btn__outline__primary new">{% if course.old_price != 0 %}{{ course.old_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
                 {% endif %}
             </div>
         </div>

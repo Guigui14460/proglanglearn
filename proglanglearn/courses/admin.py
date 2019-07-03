@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Course, Tutorial
+from .models import Course, Tutorial, TutorialComment
 
 
 class CourseAdmin(ImportExportModelAdmin):
@@ -28,5 +28,10 @@ class TutorialAdmin(ImportExportModelAdmin):
     )
 
 
+class TutorialCommentAdmin(ImportExportModelAdmin):
+    pass
+
+
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Tutorial, TutorialAdmin)
+admin.site.register(TutorialComment, TutorialCommentAdmin)
