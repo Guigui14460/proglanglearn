@@ -82,6 +82,7 @@ class Profile(models.Model):
         "Sujets marqués comme favoris"), default='', null=True, blank=True)
     tutorial_finished = StringListField(verbose_name=_(
         "Tutoriels marqués comme terminé"), default='', blank=True, null=True)
+    favorite_tutorials = StringListField(verbose_name=_("Tutoriels favoris"), default='', null=True, blank=True)
     # Developer options
     github_username = models.CharField(max_length=100,
                                        blank=True, null=True, verbose_name=_("Nom d'utilisateur/Email Github"))

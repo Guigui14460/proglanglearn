@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third part apps
+    'rest_framework',
     'tinymce',
     'import_export',
     'snowpenguin.django.recaptcha3',

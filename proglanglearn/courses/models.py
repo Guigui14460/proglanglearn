@@ -144,6 +144,9 @@ class Tutorial(models.Model):
     def get_absolute_url(self):
         return reverse('courses:tutorial-detail', kwargs={'course_id': self.course.id, 'tutorial_id': self.id})
 
+    def get_favorite_url(self):
+        return reverse('courses:tutorial-favorite', kwargs={'course_id': self.course.id, 'tutorial_id': self.id})
+
 
 class TutorialCommentQuerySet(models.QuerySet):
     def all_parent_comments(self):
@@ -189,7 +192,7 @@ class TutorialComment(models.Model):
             return f"Reply by {self.user} : {self.content[:20]}"
 
     def children(self):
-        return TutorialComment.objects.filter(parent=self)
+        return TutorialComment.objects.filter(parent=self).order_by('posted_date')
     
     @property
     def is_parent(self):

@@ -38,7 +38,7 @@
     </div>
 {% endif %}
 <div class="center-text">
-    <i class="far fa-eye"></i>&nbsp;{{ object.views }}
+    <i class="far fa-eye"></i>&nbsp;{{ object.views }}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>
 </div>
 <div>
     {{ object.content|safe }}
@@ -60,85 +60,7 @@
 
 {% block comments %}
 <div class="comments py-2">
-    <div class="container">
-        {% if request.user.is_authenticated %}
-            <form method="POST" class="form">
-                {% csrf_token %}
-                <fieldset>
-                    <legend>Rédiger un commentaire</legend>
-                    <div class="form-group">
-                        {{ form.content.label_tag }}
-                        {{ form.content }}
-                    </div>
-                </fieldset>
-                <div class="center-text">
-                    <button type="submit" class="btn btn__info btn__large btn__300">Commenter</button>
-                </div>
-            </form>
-        {% else %}
-            <p>Vous devez être connecter pour commenter</p>
-        {% endif %}
-        <div class="mt-2">
-            <div class="center-text">
-                {{ parent_comments.count }} Commentaire{{ parent_comments|pluralize }}
-            <div>
-            {% for parent_comment in parent_comments %}
-                <div class="comment">
-                    <div class="commentary">
-                        <img src="{{ parent_comment.user.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
-                        <span><a href="profile.html">{{ parent_comment.user.username }}</a>, {{ parent_comment.posted_date }}</span>
-                    </div>
-                    <p>{{ parent_comment.content }}</p>
-                    <div>
-                        <div>
-                            {% for reply in parent_comment.children %}
-                                <div class="comment">
-                                    <div class="commentary">
-                                        <img src="{{ parent_comment.user.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
-                                        <span><a href="profile.html">{{ reply.user.username }}</a>, {{ reply.posted_date }}</span>
-                                    </div>
-                                    <p>{{ reply.content }}</p>
-                                </div>
-                                <hr>
-                            {% endfor %}
-                        </div>
-                        <div class="center-text">
-                            {% if request.user.is_authenticated %}
-                                <button type="submit" class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
-                            {% else %}
-                                <button disabled type="submit" class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
-                            {% endif %}
-                        </div>
-                        {% if request.user.is_authenticated %}
-                            <div class="reply-form">
-                                {{ parent_comment.id }}
-                                <form method="POST" class="form">
-                                    {% csrf_token %}
-                                    <fieldset>
-                                        <legend>Rédiger une réponse</legend>
-                                        <div class="form-group">
-                                            <input type="hidden" name="parent_id" value="{{ parent_comment.id }}">
-                                            {{ form.content.label_tag }}
-                                            {{ form.content }}
-                                        </div>
-                                    </fieldset>
-                                    <div class="center-text">
-                                        {% if request.user.is_authenticated %}
-                                            <button type="submit" class="btn btn__info btn__large"><i class="fas fa-reply"></i> Envoyer</button>
-                                        {% else %}
-                                            <button disabled type="submit" class="btn btn__info btn__large"><i class="fas fa-reply"></i> Envoyer</button>
-                                        {% endif %}
-                                    </div>
-                                </form>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-                {% empty %}
-                    <h4>Il n'y a pas encore de commentaire.</h4>
-            {% endfor %}
-        </div>
-    </div>
+    {% include 'courses/tutorial_comments.html' %}
 </div>
 {% endblock comments %}
 
@@ -149,5 +71,53 @@
 <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
 {% endblock javascript %}
 
-{% block jquery %}$('.reply-form').hide();$('.reply').click(function () {$(this).parent().next().toggle();});
+{% block jquery %}$('.reply').hide();$('.reply-btn').click(function () {$(this).parent().next().toggle();});
+function ajaxComments(){
+    $('.form.comment-form, .form.reply-form').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            method: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response){
+                $('.comments').html(response.html);
+                $('textarea').val('');
+                $('.reply').hide();$('.reply-btn').click(function () {$(this).parent().next().toggle();});
+                ajaxComments();
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            },
+        });
+    });
+}
+ajaxComments();
+$('.favorite-span').hover(function(e){
+    $(this).css('cursor', 'pointer');
+});
+function favori(ele) {
+    if (ele.hasClass('fas')) {
+        ele.attr('title', "Enlever des favoris");
+    } else {
+        ele.attr('title', "Mettre en favoris");
+    }
+};
+$('.favorite-span').click(function(e){
+    e.preventDefault();
+    $.ajax({
+        url: $(this).attr('href'),
+        method: "GET",
+        data: {
+            favorite: 'ok'
+        },
+        success: function(data){
+            $('.fa-star.favorite').toggleClass('far fas');
+            favori($('.fa-star.favorite'));
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+});
 {% endblock jquery %}

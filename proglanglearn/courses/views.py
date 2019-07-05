@@ -2,11 +2,13 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import F
+from django.http import JsonResponse
 from django.shortcuts import reverse, redirect, render, get_object_or_404
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DeleteView, DetailView, ListView, UpdateView, View
+from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView, View
 
 from main.mixins import NavbarSearchMixin
 from .forms import CourseModelForm, TutorialModelForm, TutorialCommentForm
@@ -144,10 +146,10 @@ class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
         return context
 
 
-class TutorialDetailView(UserCanViewTutorial, TutorialObjectMixin, NavbarSearchMixin, DetailView):
+class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObjectMixin, NavbarSearchMixin, DetailView):
     def get(self, request, *args, **kwargs):
-        id = self.kwargs.get('tutorial_id')
-        tutorial = Tutorial.objects.get(id=id)
+        self.object = self.get_object()
+        tutorial = self.get_object()
         tutorial.views = F('views') + 1
         tutorial.save()
         user = request.user
@@ -163,14 +165,17 @@ class TutorialDetailView(UserCanViewTutorial, TutorialObjectMixin, NavbarSearchM
             user.profile.tutorial_finished = tuto_finished
             user.profile.level_experience += tutorial.experience
             user.profile.save()
+        if request.is_ajax():
+            print(True if 'favorite' in str(request.body) else False)
+            return JsonResponse({'data': 'ok'})
         return super(TutorialDetailView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
         form = TutorialCommentForm(request.POST or None)
         if form.is_valid() and request.user.is_authenticated:
             content = form.cleaned_data['content']
             parent_id = request.POST.get('parent_id')
-            print(request.POST)
             parent_qs = None
             if parent_id:
                 parent_qs = TutorialComment.objects.get(id=parent_id)
@@ -181,6 +186,11 @@ class TutorialDetailView(UserCanViewTutorial, TutorialObjectMixin, NavbarSearchM
                 content=content,
                 parent=parent_qs
             )
+        if request.is_ajax():
+            context = self.get_context_data(**kwargs)
+            context['form'] = form
+            html = render_to_string('courses/tutorial_comments.html', context, request=request)
+            return JsonResponse({'html': html})
         return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -199,4 +209,28 @@ class TutorialDetailView(UserCanViewTutorial, TutorialObjectMixin, NavbarSearchM
         context['navbar_search_form'] = self.form_navbar()
         context['form'] = TutorialCommentForm()
         context['parent_comments'] = TutorialComment.objects.tutorial_parent_comments(self.get_object())
+        context['tutorial_in_favorite'] = self.tuto_in_favorite()
         return context
+    
+    def tuto_in_favorite(self):
+        user = self.request.user
+        tuto = self.object
+        liste_tuto = user.profile.favorite_tutorials
+        return str(tuto.id) in liste_tuto
+
+
+class TutorialFavoriteToggleRedirectView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        obj = get_object_or_404(Tutorial, id=kwargs.get('tutorial_id'))
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated:
+            tuto_list = user.profile.favorite_tutorials
+            if str(obj.id) in tuto_list:
+                tuto_list.remove(str(obj.id))
+            else:
+                tuto_list += [str(obj.id)]
+            user.profile.favorite_tutorials = tuto_list
+            user.profile.save()
+        return url_
+

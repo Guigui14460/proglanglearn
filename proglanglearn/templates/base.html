@@ -57,7 +57,7 @@
         <div id="page-scroll-progress"></div>
         {% block header %}{% endblock header %}
     </header>
-    <main {% block main_attr %}{% endblock main_attr %}>
+    <main {% block main_attr %}{% endblock main_attr %} role="main">
         {% block aside_left %}{% endblock aside_left %}
         <div class="container">
             {% for message in messages %}
@@ -69,30 +69,11 @@
         </div>
         {% block aside_right %}{% endblock aside_right %}
     </main>
-    {% block comments %}
-    {% endblock comments %}
+    <main>
+        {% block comments %}{% endblock comments %}
+    </main>
     <footer>
-        <div class="container pt-4 pb-3">
-            <div class="important-links">
-                <a href="{% url 'main:terms' %}">Termes et conditions</a>
-                <a href="{% url 'main:privacy' %}">Politique de confidentialité</a>
-                <a href="{% url 'main:about' %}">À propos</a>
-                <a href="{% url 'main:contact' %}">Contact</a>
-            </div>
-            <div class="social-media my-2">
-                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" title="Github"><i class="fab fa-github"></i></a>
-                <a href="#" title="Youtube"><i class="fab fa-youtube"></i></a>
-                <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
-            </div>
-            <div class="copyright">
-                <h3>
-                    &copy; <a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn</a>
-                </h3>
-                <p class="mt-0">Tous droits réservés</p>
-            </div>
-        </div>
+        {% include 'includes/footer.html' %}
     </footer>
     <script src="{% static 'js/main.jquery.js' %}"></script>
     {% block javascript %}{% endblock javascript %}
