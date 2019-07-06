@@ -25,7 +25,7 @@
                 <div class="commentary">
                     <img src="{{ parent_comment.user.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
                     <span><a href="profile.html">{{ parent_comment.user.username }}</a>, {{ parent_comment.posted_date }}</span>
-                    <span class="ml-auto"><a href="#" title="Signaler le commentaire">Signaler</a></span>
+                    <span class="ml-auto"><a href="{{ parent_comment.get_report_url }}" title="Signaler le commentaire">Signaler</a></span>
                 </div>
                 <p>{{ parent_comment.content }}</p>
                 <div>
@@ -33,9 +33,9 @@
                         {% for reply in parent_comment.children %}
                             <div class="comment">
                                 <div class="commentary">
-                                    <img src="{{ parent_comment.user.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
+                                    <img src="{{ reply.user.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
                                     <span><a href="profile.html">{{ reply.user.username }}</a>, {{ reply.posted_date }}</span>
-                                    <span class="ml-auto"><a href="#" title="Signaler le commentaire">Signaler</a></span>
+                                    <span class="ml-auto"><a href="{{ reply.get_report_url }}" title="Signaler le commentaire">Signaler</a></span>
                                 </div>
                                 <p>{{ reply.content }}</p>
                             </div>

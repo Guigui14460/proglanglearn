@@ -70,8 +70,9 @@ class LoginForm(AuthenticationForm):
         return username
     
     def confirm_login_allowed(self, user):
-        if not user.is_active or not user.profile.email_confirmed:
+        if not user.profile.email_confirmed:
             raise forms.ValidationError(_("Votre compte n'a pas été activé. Vérifiez vos emails et votre dossier spam et si vous ne trouvez pas le mail, réinscrivez-vous avec les identifiants renseignés"))
+
 
 class PasswordResetForm(SetPasswordForm):
     new_password1 = forms.CharField(

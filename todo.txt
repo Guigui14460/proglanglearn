@@ -1,5 +1,1 @@
-Ajaxify comment and reply in TutorialComment
-Favorite course, tutorial
-Report comment and reply
-System of users reporting
 Modify favorite model to a M2MF

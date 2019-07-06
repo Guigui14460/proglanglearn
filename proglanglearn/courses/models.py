@@ -191,6 +191,9 @@ class TutorialComment(models.Model):
         else:
             return f"Reply by {self.user} : {self.content[:20]}"
 
+    def get_report_url(self):
+        return reverse('courses:report-comment', kwargs={'comment_id': self.id})
+
     def children(self):
         return TutorialComment.objects.filter(parent=self).order_by('posted_date')
     
@@ -199,3 +202,17 @@ class TutorialComment(models.Model):
         if self.parent == None:
             return False
         return True
+
+
+class TutorialCommentReport(models.Model):
+    comment = models.ForeignKey(TutorialComment, on_delete=models.CASCADE, related_name='reports', verbose_name=_("Commentaire de tutoriel"))
+    alerter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("Signaleur"))
+    type_alert = models.CharField(max_length=100, verbose_name=_("Type du signalement"))
+    content_alert = models.TextField(verbose_name=_("Contenu du signalement"))
+
+    class Meta:
+        verbose_name = _("Signalement de commentaire de tutoriel")
+        verbose_name_plural = _("Signalements de commentaire de tutoriel")
+
+    def __str__(self):
+        return f"{self.comment.id} reported by {self.alerter.username}"

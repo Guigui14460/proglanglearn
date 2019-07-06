@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import F
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -11,9 +11,9 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView, View
 
 from main.mixins import NavbarSearchMixin
-from .forms import CourseModelForm, TutorialModelForm, TutorialCommentForm
+from .forms import CourseModelForm, TutorialModelForm, TutorialCommentForm, TutorialCommentReportForm
 from .mixins import CourseObjectMixin, TutorialObjectMixin, UserCanAddCourse, UserCanModifyCourse, UserCanViewTutorial
-from .models import Course, Tutorial, TutorialComment
+from .models import Course, Tutorial, TutorialComment, TutorialCommentReport
 
 
 class CourseCreateView(LoginRequiredMixin, UserCanAddCourse, NavbarSearchMixin, View):
@@ -165,9 +165,6 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
             user.profile.tutorial_finished = tuto_finished
             user.profile.level_experience += tutorial.experience
             user.profile.save()
-        if request.is_ajax():
-            print(True if 'favorite' in str(request.body) else False)
-            return JsonResponse({'data': 'ok'})
         return super(TutorialDetailView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -234,3 +231,33 @@ class TutorialFavoriteToggleRedirectView(RedirectView):
             user.profile.save()
         return url_
 
+
+class TutorialCommentReportView(NavbarSearchMixin, View):
+    template_name = 'courses/report.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data(**kwargs))
+
+    def post(self, request, *args, **kwargs):
+        form = TutorialCommentReportForm(request.POST or None)
+        if form.is_valid():
+            user = request.user
+            if not user.is_authenticated:
+                user = None
+            comment_obj = get_object_or_404(TutorialComment, id=kwargs.get('comment_id'))
+            try:
+                report = form.save(commit=False)
+                report.comment = comment_obj
+                report.alerter = user
+                report.save()
+                messages.success(request, _("Le commentaire a été signalé"))
+                return HttpResponseRedirect(comment_obj.tutorial.get_absolute_url())
+            except Exception as e:
+                messages.error(request, _("Le commentaire n'a pas pu être signalé"))
+        return self.get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = {**kwargs}
+        context['navbar_search_form'] = self.form_navbar()
+        context['form'] = TutorialCommentReportForm()
+        return context

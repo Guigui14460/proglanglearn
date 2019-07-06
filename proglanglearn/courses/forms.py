@@ -5,7 +5,7 @@ from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
 
 from accounts.models import Language, Tag
-from .models import Course, Tutorial, TutorialComment
+from .models import Course, Tutorial, TutorialComment, TutorialCommentReport
 
 
 class CourseModelForm(forms.ModelForm):
@@ -82,3 +82,18 @@ class TutorialCommentForm(forms.ModelForm):
     class Meta:
         model = TutorialComment
         fields = ['content']
+
+
+class TutorialCommentReportForm(forms.ModelForm):
+    class Meta:
+        model = TutorialCommentReport
+        fields = ['type_alert', 'content_alert']
+
+        widgets = {
+            'type_alert': forms.TextInput(attrs={
+                'placeholder': _("Racisme, discrimination, allusions ou endoctrinement à des idées racistes ou discriminatoires ...")
+            }),
+            'content_alert': forms.Textarea(attrs={
+                'placeholder': _("Description des faits")
+            })
+        }
