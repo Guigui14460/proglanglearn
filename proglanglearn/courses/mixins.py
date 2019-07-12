@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import redirect_to_login
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Course, Tutorial
 
@@ -28,7 +28,7 @@ class UserCanViewTutorial(UserPassesTestMixin):
         tutorial = self.get_object()
         if tutorial is not None:
             course = tutorial.course
-            return user.profile in course.students.all() or user == course.author or user.is_staff
+            return user in course.students.all() or user == course.author or user.is_staff
         return False
 
     def dispatch(self, request, *args, **kwargs):

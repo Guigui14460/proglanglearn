@@ -20,18 +20,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third part apps
-    'rest_framework',
-    'tinymce',
     'import_export',
+    'rest_framework',
     'snowpenguin.django.recaptcha3',
-    
+    'tinymce',
+
     # My apps
-    'main.apps.MainConfig',
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
+    'main.apps.MainConfig',
 ]
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'main.User'
+FORCE_SESSION_TO_ONE = True
+FORCE_INACTIVE_USER_ENDSESSION = True
 
 MIDDLEWARE = [
     # HTML minifer

@@ -1,17 +1,18 @@
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import post_delete
-from django.dispatch import receiver
 from django.shortcuts import reverse
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from tinymce.models import HTMLField
 
-from accounts.models import Language, Tag, Profile
+from main.models import Language, Tag
 
-User = get_user_model()
+
+User = settings.AUTH_USER_MODEL
 
 DIFFICULTY_CHOICES = (
     ('B', _('Débutant')),
@@ -27,6 +28,9 @@ class CourseQuerySet(models.QuerySet):
     def published_courses(self):
         return self.filter(published_date__lte=timezone.now())
 
+    def search(self, query):
+        return self.filter((Q(title__icontains=query) | Q(content_introduction__icontains=query)).distinct())
+
 
 class CourseManager(models.Manager):
     def get_queryset(self):
@@ -38,30 +42,33 @@ class CourseManager(models.Manager):
     def get_published_courses(self):
         return self.get_queryset().published_courses()
 
+    def search(self, query):
+        return self.get_queryset().search(query)
+
 
 class Course(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, verbose_name=_("Auteur"), related_name='course')
+        User, on_delete=models.SET_NULL, null=True, verbose_name=_("Auteur"), related_name='courses')
     title = models.CharField(max_length=150, verbose_name=_("Titre du cours"))
     thumbnail = models.ImageField(
-        upload_to='course_thumbnail/', verbose_name=_("Vignette du cours"))
+        upload_to='course_thumbnail/', verbose_name=_("Vignette/vidéo d'introduction"))
     languages = models.ManyToManyField(
-        Language, verbose_name=_("Langages de programmation"))
+        Language, verbose_name=_("Langages utilisés"))
     tags = models.ManyToManyField(
-        Tag, verbose_name=_("Tags"), blank=True)
+        Tag, verbose_name=_("Catégories"), blank=True)
     difficulty = models.CharField(
-        max_length=1, choices=DIFFICULTY_CHOICES, verbose_name=_("Difficulté du cours"))
+        max_length=1, choices=DIFFICULTY_CHOICES, verbose_name=_("Difficulté"))
     content_introduction = HTMLField(
-        verbose_name=_("Contenu d'introduction au cours"))
+        verbose_name=_("Contenu d'introduction"))
     pdf = models.FileField(upload_to="pdf_course/",
-                           verbose_name=_("Version PDF du cours"), blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+                           verbose_name=_("Version PDF du cours"), blank=True, null=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
     published_date = models.DateField(
         verbose_name=_("Date de publication"))
     old_price = models.DecimalField(default=0, verbose_name=_(
         "Prix (ou ancien prix si nouveau)"), decimal_places=2, max_digits=6)
     new_price = models.DecimalField(verbose_name=_(
         "Nouveau prix"), null=True, blank=True, decimal_places=2, max_digits=6)
-    students = models.ManyToManyField(Profile, verbose_name=_(
+    students = models.ManyToManyField(User, verbose_name=_(
         "Étudiants enrollés"), blank=True)
 
     objects = CourseManager()
@@ -112,17 +119,32 @@ class Course(models.Model):
         return self.tutorial.all()
 
 
-@receiver(post_delete, sender=Course)
 def submission_course_delete(sender, instance, **kwargs):
     if instance.thumbnail != None:
         instance.thumbnail.delete(save=False)
+
+
+post_delete.connect(submission_course_delete, sender=Course)
+
+
+class TutorialQuerySet(models.QuerySet):
+    def search(self, query):
+        return self.filter((Q(title__icontains=query) | Q(content__icontains=query)).distinct())
+
+
+class TutorialManager(models.Manager):
+    def get_queryset(self):
+        return TutorialQuerySet(self.model, using=self._db)
+
+    def search(self, query):
+        return self.get_queryset().search(query)
 
 
 class Tutorial(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, verbose_name=_("Cours rattaché"), related_name='tutorial')
     title = models.CharField(
-        max_length=100, verbose_name=_("Title du tutoriel"))
+        max_length=100, verbose_name=_("Titre du tutoriel"))
     content = HTMLField(verbose_name=_("Contenu du tutoriel"))
     resources = models.FileField(verbose_name=_(
         "Ressources à déposer"), upload_to='resources/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar', 'tar.gz'])])
@@ -134,7 +156,7 @@ class Tutorial(models.Model):
         "Nombre de vues"), blank=True, default=0)
 
     class Meta:
-        ordering = ['title', 'experience']
+        ordering = ['-views', 'title', 'experience']
         verbose_name = _("Tutoriel")
         verbose_name_plural = _("Tutoriels")
 
@@ -146,73 +168,3 @@ class Tutorial(models.Model):
 
     def get_favorite_url(self):
         return reverse('courses:tutorial-favorite', kwargs={'course_id': self.course.id, 'tutorial_id': self.id})
-
-
-class TutorialCommentQuerySet(models.QuerySet):
-    def all_parent_comments(self):
-        return self.filter(parent=None).order_by('posted_date')
-
-    def tutorial_parent_comments(self, tutorial):
-        return self.filter(tutorial=tutorial, parent=None).order_by('posted_date')
-
-    def children_comments(self, parent):
-        return self.filter(parent=parent).order_by('posted_date')
-
-
-class TutorialCommentManager(models.Manager):
-    def get_queryset(self):
-        return TutorialCommentQuerySet(self.model, using=self._db)
-
-    def all_parent_comments(self):
-        return self.get_queryset().all_parent_comments()
-
-    def tutorial_parent_comments(self, tutorial):
-        return self.get_queryset().tutorial_parent_comments(tutorial)
-
-
-class TutorialComment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    tutorial = models.ForeignKey(Tutorial, on_delete=models.CASCADE)
-    parent = models.ForeignKey(
-        'self', on_delete=models.CASCADE, null=True, blank=True)
-    content = models.TextField()
-    posted_date = models.DateTimeField(auto_now_add=True)
-
-    objects = TutorialCommentManager()
-
-    class Meta:
-        ordering = ['-posted_date']
-        verbose_name = _("Commentaire de tutoriel")
-        verbose_name_plural = _("Commentaires de tutoriel")
-
-    def __str__(self):
-        if self.parent is None:
-            return f"Comment by {self.user} : {self.content[:20]}"
-        else:
-            return f"Reply by {self.user} : {self.content[:20]}"
-
-    def get_report_url(self):
-        return reverse('courses:report-comment', kwargs={'comment_id': self.id})
-
-    def children(self):
-        return TutorialComment.objects.filter(parent=self).order_by('posted_date')
-    
-    @property
-    def is_parent(self):
-        if self.parent == None:
-            return False
-        return True
-
-
-class TutorialCommentReport(models.Model):
-    comment = models.ForeignKey(TutorialComment, on_delete=models.CASCADE, related_name='reports', verbose_name=_("Commentaire de tutoriel"))
-    alerter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("Signaleur"))
-    type_alert = models.CharField(max_length=100, verbose_name=_("Type du signalement"))
-    content_alert = models.TextField(verbose_name=_("Contenu du signalement"))
-
-    class Meta:
-        verbose_name = _("Signalement de commentaire de tutoriel")
-        verbose_name_plural = _("Signalements de commentaire de tutoriel")
-
-    def __str__(self):
-        return f"{self.comment.id} reported by {self.alerter.username}"

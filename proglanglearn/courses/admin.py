@@ -1,9 +1,9 @@
 from django.contrib import admin
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Course, Tutorial, TutorialComment, TutorialCommentReport
+from .models import Course, Tutorial
 
 
 class CourseAdmin(ImportExportModelAdmin):
@@ -28,11 +28,5 @@ class TutorialAdmin(ImportExportModelAdmin):
     )
 
 
-class TutorialCommentAdmin(ImportExportModelAdmin):
-    pass
-
-
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Tutorial, TutorialAdmin)
-admin.site.register(TutorialComment, TutorialCommentAdmin)
-admin.site.register(TutorialCommentReport)

@@ -8,13 +8,14 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 
 from .forms import LoginForm, SignUpForm, PasswordResetForm
 from .models import Profile
 from .tokens import AccountActivationTokenGenerator
 from main.mixins import NavbarSearchMixin
+from main.utils import get_ip_address_client
 
 User = get_user_model()
 
@@ -27,6 +28,25 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
         if request.user.is_authenticated:
             return redirect('courses:list')
         return super(CustomLoginView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        super().post(request, *args, **kwargs)
+        user = request.user
+        if user.ip_address != None and get_ip_address_client(request) != user.ip_address:
+            try:
+                current_site = get_current_site(request)
+                subject = _(
+                    "Suspicion de compromission de votre compte ProgLangLearn")
+                message = render_to_string('accounts/ip_address_email.html', {
+                    'protocol': 'http',  # ou https
+                    'domain': current_site.domain,
+                })
+                msg = EmailMultiAlternatives(
+                    subject, message, "proglanglearn@gmail.com", to=[user.email])
+                msg.send()
+            except:
+                pass
+        return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,7 +68,9 @@ class RegistrationView(NavbarSearchMixin, View):
         form = SignUpForm(request.POST or None)
         if form.is_valid():
             try:
-                user = form.save()
+                user = form.save(commit=False)
+                user.ip_address = get_ip_address_client(request)
+                user.save()
                 current_site = get_current_site(request)
                 generator = AccountActivationTokenGenerator()
                 subject = _("Activez votre compte ProgLangLearn")
@@ -138,6 +160,8 @@ class ActivateView(View):
         if user is not None and generator.check_token(user, token) and not user.profile.email_confirmed:
             user.profile.email_confirmed = True
             user.profile.save()
+            user.is_active = True
+            user.save()
             login(request, user)
             messages.success(request, _(
                 "Activation de votre compte effectuée avec succès"))

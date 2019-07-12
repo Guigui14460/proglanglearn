@@ -1,38 +1,15 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_delete, post_save
-from django.dispatch import receiver
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from .fields import StringListField
+from courses.models import Course, Tutorial
+from main.models import Language, Tag
 
 
-class User(AbstractUser):
-    REQUIRED_FIELDS = ['email']
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=30, unique=True,
-                            verbose_name=_("Nom du tag"))
-
-    class Meta:
-        verbose_name = _("Tag")
-
-    def __str__(self):
-        return self.name
-
-
-class Language(models.Model):
-    name = models.CharField(max_length=30, unique=True,
-                            verbose_name=_("Nom du langage de programmation"))
-
-    class Meta:
-        verbose_name = _("Langage")
-
-    def __str__(self):
-        return self.name
+User = get_user_model()
 
 
 class ProfileQuerySet(models.QuerySet):
@@ -66,7 +43,9 @@ class Profile(models.Model):
     biography = models.TextField(max_length=1500,
                                  blank=True, null=True, verbose_name=_("Biographie"))
     languages_learnt = models.ManyToManyField(Language, verbose_name=_(
-        "Compétences (langages ou framework)"), blank=True)
+        "Langages maîtrisés"), blank=True)
+    tag_learnt = models.ManyToManyField(Tag, verbose_name=_(
+        "Compétences apprises"), blank=True)
     strike = models.PositiveSmallIntegerField(
         default=0, verbose_name=_("Signalement"))
     email_confirmed = models.BooleanField(
@@ -80,9 +59,10 @@ class Profile(models.Model):
         verbose_name=_("Articles favoris"), default='', null=True, blank=True)
     favorite_subjects = StringListField(verbose_name=_(
         "Sujets marqués comme favoris"), default='', null=True, blank=True)
-    tutorial_finished = StringListField(verbose_name=_(
-        "Tutoriels marqués comme terminé"), default='', blank=True, null=True)
-    favorite_tutorials = StringListField(verbose_name=_("Tutoriels favoris"), default='', null=True, blank=True)
+    tutorial_finished = models.ManyToManyField(Tutorial, verbose_name=_(
+        "Tutoriels marqués comme terminé"), blank=True, related_name='tutorial_finished')
+    favorite_tutorials = models.ManyToManyField(Tutorial, verbose_name=_(
+        "Tutoriels favoris"), blank=True, related_name='tutorial_favorite')
     # Developer options
     github_username = models.CharField(max_length=100,
                                        blank=True, null=True, verbose_name=_("Nom d'utilisateur/Email Github"))
@@ -91,7 +71,7 @@ class Profile(models.Model):
     objects = ProfileManager()
 
     class Meta:
-        ordering = ['user', 'level']
+        ordering = ['-level', '-level_experience']
         verbose_name = _("Profil")
 
     def __str__(self):
@@ -105,24 +85,23 @@ class Profile(models.Model):
             profile = Profile.objects.get(user__id=self.id)
             if profile.image != self.image and profile.image.url != '/media/user_pictures/default.png':
                 profile.image.delete()
-            if profile.strike >= 3:
-                print("Banni")
-                # TODO : Banir la personne lorsqu'il a 3 strike
         except:
             pass
         super(Profile, self).save(*args, **kwargs)
 
 
-@receiver(post_delete, sender=Profile)
 def submission_user_delete(sender, instance, **kwargs):
     if instance.image.url != '/media/user_pictures/default.png':
         instance.image.delete(save=False)
 
 
-@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if kwargs.get('created', True) and not kwargs.get('raw', False):
         Profile.objects.get_or_create(user=instance)
+
+
+post_delete.connect(submission_user_delete, sender=Profile)
+post_save.connect(create_user_profile, sender=User)
 
 
 class Education(models.Model):

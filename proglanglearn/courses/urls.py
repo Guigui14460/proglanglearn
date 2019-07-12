@@ -7,7 +7,6 @@ from .views import (
     CourseListView,
     CourseUpdateView,
     CourseUserEnrolledView,
-    TutorialCommentReportView,
     TutorialCreateView,
     TutorialDetailView,
     TutorialFavoriteToggleRedirectView,
@@ -31,6 +30,6 @@ urlpatterns = [
          TutorialDetailView.as_view(), name='tutorial-update'),
     path('<int:course_id>/<int:tutorial_id>/delete/',
          TutorialDetailView.as_view(), name='tutorial-delete'),
-    path('<int:course_id>/<int:tutorial_id>/favorite/', TutorialFavoriteToggleRedirectView.as_view(), name='tutorial-favorite'),
-    path('comments/report/<int:comment_id>/', TutorialCommentReportView.as_view(), name='report-comment')
+    path('<int:course_id>/<int:tutorial_id>/favorite/',
+         TutorialFavoriteToggleRedirectView.as_view(), name='tutorial-favorite'),
 ]

@@ -3,6 +3,7 @@ from django.urls import path
 from .views import (
     IndexView,
     AboutView,
+    CommentReportView,
     ContactView,
     PrivacyView,
     TermsView,
@@ -18,4 +19,5 @@ urlpatterns = [
     path('privacy/', PrivacyView.as_view(), name='privacy'),
     path('terms/', TermsView.as_view(), name='terms'),
     path('search/', SearchView.as_view(), name='search'),
+    path('report/<int:comment_id>/', CommentReportView.as_view(), name='report-comment')
 ]

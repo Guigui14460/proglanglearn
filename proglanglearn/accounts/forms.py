@@ -1,11 +1,12 @@
 from django import forms
-from django.contrib.auth import get_user_model, password_validation
+from django.contrib import messages
+from django.contrib.auth import password_validation, get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
 from django.core.exceptions import ValidationError
-from django.db.models import Q
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
+
 
 User = get_user_model()
 
@@ -41,12 +42,6 @@ class SignUpForm(UserCreationForm):
                 _("Cette addresse email a déjà été utilisée. Il faut en choisir une autre"))
         return email
 
-    def save(self):
-        user = super(SignUpForm, self).save(commit=False)
-        user.is_active = False
-        user.save()
-        return user
-
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label=_("Nom d'utilisateur"), widget=forms.TextInput(attrs={
@@ -66,12 +61,15 @@ class LoginForm(AuthenticationForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username) == []:
-            raise forms.ValidationError(_("Le nom d'utilisateur mentionné n'existe pas"))
+            raise forms.ValidationError(
+                _("Le nom d'utilisateur mentionné n'existe pas"))
         return username
-    
+
     def confirm_login_allowed(self, user):
         if not user.profile.email_confirmed:
-            raise forms.ValidationError(_("Votre compte n'a pas été activé. Vérifiez vos emails et votre dossier spam et si vous ne trouvez pas le mail, réinscrivez-vous avec les identifiants renseignés"))
+            messages.error(self.request, _(
+                "Votre compte n'a pas été activé. Vérifiez vos emails et votre dossier spam et si vous ne trouvez pas le mail, réinscrivez-vous avec les identifiants renseignés"))
+            raise forms.ValidationError('')
 
 
 class PasswordResetForm(SetPasswordForm):

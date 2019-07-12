@@ -1,17 +1,16 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import Group
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Profile, Education, Experience, Tag, Language
-
-User = get_user_model()
+from .models import Education, Experience, Profile
 
 
-class CustomUserAdmin(UserAdmin, ImportExportModelAdmin):
+class EducationAdmin(ImportExportModelAdmin):
+    pass
+
+
+class ExperienceAdmin(ImportExportModelAdmin):
     pass
 
 
@@ -33,26 +32,6 @@ class ProfileAdmin(ImportExportModelAdmin):
     )
 
 
-class ExperienceAdmin(ImportExportModelAdmin):
-    pass
-
-
-class EducationAdmin(ImportExportModelAdmin):
-    pass
-
-
-class TagAdmin(ImportExportModelAdmin):
-    pass
-
-
-class LanguageAdmin(ImportExportModelAdmin):
-    pass
-
-
-admin.site.unregister(Group)
-admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Education, EducationAdmin)
 admin.site.register(Experience, ExperienceAdmin)
-admin.site.register(User, CustomUserAdmin)
-admin.site.register(Tag, TagAdmin)
-admin.site.register(Language, LanguageAdmin)
+admin.site.register(Profile, ProfileAdmin)
