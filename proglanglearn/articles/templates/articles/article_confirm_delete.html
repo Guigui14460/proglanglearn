@@ -12,7 +12,7 @@
                 supprimés</strong> ainsi que les <strong>ressources associées</strong>.</p>
     </div>
     <div class="center-text">
-        <a href="{% url 'articles:detail' slug=object.slug %}" class="btn btn__primary btn__large btn__300">Retour en
+        <a href="{% url 'articles:detail' article_slug=object.slug %}" class="btn btn__primary btn__large btn__300">Retour en
             arrière</a>
         <button type="submit" class="btn btn__danger btn__large btn__300">Supprimer
             définitivement</button>
