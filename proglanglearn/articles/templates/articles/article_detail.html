@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ object.title }} - {% endblock title %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+{% endblock extra_head %}
+
+{% block main %}
+<div class="mt-2">
+    <div class="row small-device">
+        <div class="col-75 small-device mb-2">
+            <img src="{{ object.thumbnail.url }}" alt="" />
+            <h2 class="article-title">{{ object.title }}&nbsp;<a href="{{ object.get_favorite_url }}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h2>
+            <div class="my-1">
+                <div class="tags">
+                    Tags :
+                    {% for lang in object.languages.all %}
+                        {% if lang.name == 'C++' %}
+                            <a class="tag cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                        {% else %}
+                            <a class="tag {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% for tag in object.tags.all %}
+                        <a class="tag" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
+                    {% endfor %}
+                </div>
+                <div class="mt-1 d-flex flex-end">
+                    <a href="{% url 'articles:update' article_slug=object.slug %}" class="btn">Mettre à jour</a>
+                    <a href="{% url 'articles:delete' article_slug=object.slug %}" class="ml-1 btn">Supprimer</a>
+                </div>
+                <div class="my-1 d-flex align">
+                    <img src="{{ object.author.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
+                    <a class="d-block" style="margin-left: 10px;" href="profile.html">{{ object.author.username }}</a>
+                    <span class="d-inline-block mx-1">|</span>
+                    <div class="d-inline-block">
+                        <i class="far fa-clock"></i>&nbsp;{{ object.timestamp }}&nbsp;{% if object.last_modification != object.timestamp %}modifié le&nbsp;{{ object.last_modification }}{% endif %}
+                    </div>
+                    <span class="d-inline-block mx-1">|</span>
+                    <div class="d-inline-block">
+                        <i class="far fa-eye"></i>&nbsp;{{ object.views }}
+                    </div>
+                    <span class="d-inline-block mx-1">|</span>
+                    <div class="d-inline-block">
+                        <i class="far fa-comments"></i>&nbsp;{{ object.get_comments_count }}
+                    </div>
+                </div>
+            </div>
+            <div>{{ object.content|safe }}</div>
+        </div>
+        <div class="col-25 small-device">
+            {% include 'articles/article_aside.html' %}
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block comments %}
+<div class="comments py-2">
+    {% include 'main/comments.html' %}
+</div>
+{% endblock comments %}
+
+{% block javascript %}
+<script src="{% static 'js/highlight.pack.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+{% endblock javascript %}
+
+{% block jquery %}$('.reply').hide();$('.reply-btn').click(function () {$(this).parent().next().toggle();});
+function ajaxComments(){
+    $('.form.comment-form, .form.reply-form').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            method: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response){
+                $('.comments').html(response.html);
+                $('textarea').val('');
+                $('.reply').hide();$('.reply-btn').click(function () {$(this).parent().next().toggle();});
+                ajaxComments();
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            },
+        });
+    });
+}
+ajaxComments();
+$('.favorite-span').hover(function(e){
+    $(this).css('cursor', 'pointer');
+});
+function favori(ele) {
+    if (ele.hasClass('fas')) {
+        ele.attr('title', "Enlever des favoris");
+    } else {
+        ele.attr('title', "Mettre en favoris");
+    }
+};
+$('.favorite-span').click(function(e){
+    e.preventDefault();
+    let href = $(this).attr('href');
+    let stars = [];
+    $(".favorite-span").each(function(e){
+        if($(this).attr('href') == href){stars.push($(this).children('.fa-star.favorite'))}
+    });
+    stars = $(stars);
+    console.log(stars);
+    $.ajax({
+        url: $(this).attr('href'),
+        method: "GET",
+        data: {
+            favorite: 'ok'
+        },
+        success: function(data){
+            stars.toggleClass('far fas');
+            favori(stars);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+});
+{% endblock jquery %}

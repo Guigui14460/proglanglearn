@@ -184,7 +184,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
             context = self.get_context_data(**kwargs)
             context['form'] = form
             html = render_to_string(
-                'courses/tutorial_comments.html', context, request=request)
+                'main/comments.html', context, request=request)
             return JsonResponse({'html': html})
         return self.get(request, *args, **kwargs)
 

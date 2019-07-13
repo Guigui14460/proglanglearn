@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog - {% endblock title %}
+
+{% block main %}
+<h1 class="large">Articles du blog</h1>
+<div class="row small-device">
+    <div class="col-75 small-device mb-2 mt-1">
+        {% for article in object_list %}
+            <div class="mb-2">
+                <a href="{% url 'articles:detail' article_slug=article.slug %}"><img src="{{ article.thumbnail.url }}" alt="" /></a>
+                <h3 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>&nbsp;<a href="{{ article.get_favorite_url }}" class="favorite-span"><i class="{% if article in request.user.profile.favorite_articles.all %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
+                <div class="my-1">
+                    <div class="tags small-fs">
+                        Tags :
+                        {% for lang in article.languages.all %}
+                            {% if lang.name == 'C++' %}
+                                <a class="tag cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                            {% else %}
+                                <a class="tag {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% for tag in article.tags.all %}
+                            <a class="tag" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="my-1 d-flex align">
+                        <img src="{{ article.author.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
+                        <a class="d-block" style="margin-left: 10px;" href="profile.html">{{ article.author.username }}</a>
+                        <span class="d-inline-block mx-1">|</span>
+                        <div class="d-inline-block">
+                            <i class="far fa-clock"></i>&nbsp;{{ article.timestamp }}
+                        </div>
+                        <span class="d-inline-block mx-1">|</span>
+                        <div class="d-inline-block">
+                            <i class="far fa-eye"></i>&nbsp;{{ article.views }}
+                        </div>
+                        <span class="d-inline-block mx-1">|</span>
+                        <div class="d-inline-block">
+                            <i class="far fa-comments"></i>&nbsp;{{ article.get_comments_count }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="center-text mb-2">
+            {% if is_paginated %}
+                {% include "includes/pagination.html" %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-25 small-device">
+        {% include 'articles/article_aside.html' %}
+    </div>
+</div>
+{% endblock main %}
+
+{% block jquery %}
+$('.favorite-span').hover(function(e){
+    $(this).css('cursor', 'pointer');
+});
+function favori(ele) {
+    if (ele.hasClass('fas')) {
+        ele.attr('title', "Enlever des favoris");
+    } else {
+        ele.attr('title', "Mettre en favoris");
+    }
+};
+$('.favorite-span').click(function(e){
+    e.preventDefault();
+    let href = $(this).attr('href');
+    let stars = [];
+    $(".favorite-span").each(function(e){
+        if($(this).attr('href') == href){stars.push($(this).children('.fa-star.favorite'))}
+    });
+    stars = $(stars);
+    console.log(stars);
+    $.ajax({
+        url: $(this).attr('href'),
+        method: "GET",
+        data: {
+            favorite: 'ok'
+        },
+        success: function(data){
+            stars.toggleClass('far fas');
+            favori(stars);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+});
+{% endblock jquery %}

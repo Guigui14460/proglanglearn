@@ -5,6 +5,7 @@ from django.db.models.signals import post_delete, post_save
 from django.utils.translation import ugettext as _
 
 from .fields import StringListField
+from articles.models import Article
 from courses.models import Course, Tutorial
 from main.models import Language, Tag
 
@@ -55,8 +56,8 @@ class Profile(models.Model):
         default=1, verbose_name=_("Niveau"))
     level_experience = models.PositiveIntegerField(
         default=0, verbose_name=_("Expérience acquise"))
-    favorite_articles = StringListField(
-        verbose_name=_("Articles favoris"), default='', null=True, blank=True)
+    favorite_articles = models.ManyToManyField(Article,
+                                               verbose_name=_("Articles favoris"), blank=True, related_name='article_favorite')
     favorite_subjects = StringListField(verbose_name=_(
         "Sujets marqués comme favoris"), default='', null=True, blank=True)
     tutorial_finished = models.ManyToManyField(Tutorial, verbose_name=_(

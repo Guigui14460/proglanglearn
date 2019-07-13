@@ -14,7 +14,7 @@
             <a {% if activate == 'list' %}class="active"{% endif %} href="{% url 'courses:list' %}"><i class="fas fa-laptop-code"></i> Cours</a>
         </li>
         <li class="navbar-item">
-            <a href="pages/article_list.html"><i class="fas fa-blog"></i> Blog</a>
+            <a {% if activate == 'article-list' %}class="active"{% endif %} href="{% url 'articles:list' %}"><i class="fas fa-blog"></i> Blog</a>
         </li>
         <li class="navbar-item">
             <a href="pages/forum_list.html"><i class="far fa-question-circle"></i> Forum</a>
@@ -43,7 +43,7 @@
                             <hr class="navbar-dropdown-divider" />
                         </li>
                         <li class="navbar-dropdown-item">
-                            <a href="pages/add_article.html"><i class="fas fa-newspaper"></i> Créer un article</a>
+                            <a {% if activate == 'article-create' %}class="active" {% endif %} href="{% url 'articles:create' %}"><i class="fas fa-newspaper"></i> Créer un article</a>
                         </li>
                         <li class="navbar-dropdown-item">
                             <hr class="navbar-dropdown-divider" />

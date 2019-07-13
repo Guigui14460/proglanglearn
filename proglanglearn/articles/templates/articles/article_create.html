@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ title }} un article - {% endblock title %}
+
+{% block main %}
+<h1 class="large">{{ title }} un article</h1>
+<form method="POST" class="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+    <fieldset>
+        <legend>Information générales</legend>
+        <div class="form-group">
+            {{ form.title.label_tag }}&nbsp;<span class="required-input">*</span>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            {{ form.thumbnail.label_tag }}&nbsp;<span class="required-input">*</span>
+            {{ form.thumbnail }}
+        </div>
+        <div class="form-group">
+            {{ form.content.label_tag }}&nbsp;<span class="required-input">*</span>
+            {{ form.content }}
+        </div>
+        <div class="form-group">
+            {{ form.languages.label_tag }}
+            <div class="custom-multiple-select select-multiple__light">
+                {{ form.languages }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.tags.label_tag }}
+            <div class="custom-multiple-select select-multiple__light">
+                {{ form.tags }}
+            </div>
+            <small class="form-text">
+                {{ form.tags.help_text|safe }}
+            </small>
+        </div>
+    </fieldset>
+    {% if form.timestamp %}
+        <fieldset>
+            <legend>Informations complémentaires</legend>
+            <div class="form-group">
+                <label>Parution de l'article :<br>{{ form.timestamp }}</label>
+            </div>
+        </fieldset>
+    {% endif %}
+    <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
+        obligatoires.</small>
+    <div class="center-text">
+        <button type="submit" class="btn btn__success btn__large btn__300">{{ title }}</button>
+    </div>
+</form>
+{% endblock main %}

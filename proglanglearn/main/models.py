@@ -6,7 +6,6 @@ from django.shortcuts import reverse
 from django.utils.translation import ugettext as _
 
 from .signals import comment_signal
-from .utils import get_ip_address_client
 
 
 ALERT_CHOICES = (
@@ -78,7 +77,7 @@ class Comment(models.Model):
     @property
     def children(self):
         c_type = ContentType.objects.get_for_model(self)
-        return Comment.objects.filter(content_type=c_type, object_id=self.id)
+        return Comment.objects.filter(content_type=c_type, object_id=self.id).order_by('timestamp')
 
     @property
     def get_report_url(self):

@@ -7,8 +7,9 @@ urlpatterns = [
     path('', include('main.urls')),
     path('accounts/', include('accounts.urls')),
     path('courses/', include('courses.urls')),
-    path('admin/', admin.site.urls),
+    path('articles/', include('articles.urls')),
     path('tinymce/', include('tinymce.urls')),
+    path('admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:

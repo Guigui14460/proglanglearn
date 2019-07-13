@@ -10,8 +10,12 @@
         <a href="{% url 'main:terms' %}">termes et conditions d'utilisation</a> donc ne faîtes pas de signalement
         abusif.</p>
     <div class="my-2">
-        <h3>Commentaire de {{ object.author.username }} du {{ object.timestamp }}</h3>
-        <p>{{ object.content }}</p>
+        <div class="card card__info">
+            <div class="card-container">
+                <h3 class="card-title">Commentaire de {{ object.author.username }} du {{ object.timestamp }}</h3>
+                <div class="card-content p-1">{{ object.content }}</div>
+            </div>
+        </div>
     </div>
     <form method="POST" class="form">
         {% csrf_token %}

@@ -29,11 +29,10 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
     'main.apps.MainConfig',
+    'articles.apps.ArticlesConfig',
 ]
 
 AUTH_USER_MODEL = 'main.User'
-FORCE_SESSION_TO_ONE = True
-FORCE_INACTIVE_USER_ENDSESSION = True
 
 MIDDLEWARE = [
     # HTML minifer

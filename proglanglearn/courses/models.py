@@ -158,7 +158,6 @@ class Tutorial(models.Model):
     class Meta:
         ordering = ['-views', 'title', 'experience']
         verbose_name = _("Tutoriel")
-        verbose_name_plural = _("Tutoriels")
 
     def __str__(self):
         return self.title
