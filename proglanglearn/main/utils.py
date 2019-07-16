@@ -1,4 +1,6 @@
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 
 import random
 import string
@@ -31,3 +33,16 @@ def get_ip_address_client(request):
     else:
         ip = request.META.get('REMOVE_ADDR', None)
     return ip
+
+
+def get_thumbnail_preview(obj):
+    if obj.pk:
+        return mark_safe("""<a href="{src}" target="_blank"><img src="{src}" alt="{title}" style="width: 100%; height: auto;" /></a>""".format(
+            src=obj.thumbnail.url,
+            title=obj.title,
+        ))
+    return _("Choisissez une image et continuez d'éditer pour voir la prévisualisation de l'image")
+
+
+get_thumbnail_preview.allow_tags = True
+get_thumbnail_preview.short_description = _("Visualisation de la vignette")

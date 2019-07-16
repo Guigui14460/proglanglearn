@@ -10,6 +10,8 @@ from .views import (
     TutorialCreateView,
     TutorialDetailView,
     TutorialFavoriteToggleRedirectView,
+    TutorialUpdateView,
+    TutorialDeleteView
 )
 
 app_name = 'courses'
@@ -17,19 +19,19 @@ app_name = 'courses'
 urlpatterns = [
     path('', CourseListView.as_view(), name='list'),
     path('add/', CourseCreateView.as_view(), name='create'),
-    path('<int:id>/', CourseDetailView.as_view(), name='detail'),
-    path('<int:id>/user-enrolling/',
+    path('<str:slug>/', CourseDetailView.as_view(), name='detail'),
+    path('<str:slug>/user-enrolling/',
          CourseUserEnrolledView.as_view(), name='user-enrolling'),
-    path('<int:id>/update/', CourseUpdateView.as_view(), name='update'),
-    path('<int:id>/delete/', CourseDeleteView.as_view(), name='delete'),
-    path('<int:course_id>/add/',
+    path('<str:slug>/update/', CourseUpdateView.as_view(), name='update'),
+    path('<str:slug>/delete/', CourseDeleteView.as_view(), name='delete'),
+    path('<str:course_slug>/add/',
          TutorialCreateView.as_view(), name='tutorial-create'),
-    path('<int:course_id>/<int:tutorial_id>/',
+    path('<str:course_slug>/<str:tutorial_slug>/',
          TutorialDetailView.as_view(), name='tutorial-detail'),
-    path('<int:course_id>/<int:tutorial_id>/update/',
-         TutorialDetailView.as_view(), name='tutorial-update'),
-    path('<int:course_id>/<int:tutorial_id>/delete/',
-         TutorialDetailView.as_view(), name='tutorial-delete'),
-    path('<int:course_id>/<int:tutorial_id>/favorite/',
+    path('<str:course_slug>/<str:slug>/update/',
+         TutorialUpdateView.as_view(), name='tutorial-update'),
+    path('<str:course_slug>/<str:tutorial_slug>/delete/',
+         TutorialDeleteView.as_view(), name='tutorial-delete'),
+    path('<str:course_slug>/<str:tutorial_slug>/favorite/',
          TutorialFavoriteToggleRedirectView.as_view(), name='tutorial-favorite'),
 ]

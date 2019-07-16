@@ -45,7 +45,7 @@
                     </div>
                     <span class="d-inline-block mx-1">|</span>
                     <div class="d-inline-block">
-                        <i class="far fa-comments"></i>&nbsp;{{ object.get_comments_count }}
+                        <i class="far fa-comments"></i>&nbsp;<span class="article-comments-count">{{ object.get_comments_count }}</span>
                     </div>
                 </div>
             </div>
@@ -83,6 +83,7 @@ function ajaxComments(){
                 $('.comments').html(response.html);
                 $('textarea').val('');
                 $('.reply').hide();$('.reply-btn').click(function () {$(this).parent().next().toggle();});
+                $('.article-comments-count').each(function(){$(this).text(response.comments_count)});
                 ajaxComments();
             },
             error: function(rs, e){
@@ -95,12 +96,15 @@ ajaxComments();
 $('.favorite-span').hover(function(e){
     $(this).css('cursor', 'pointer');
 });
-function favori(ele) {
-    if (ele.hasClass('fas')) {
-        ele.attr('title', "Enlever des favoris");
+function favori(star) {
+    if (star.hasClass('fas')) {
+        star.parent().attr('title', "Enlever des favoris");
+        $('body').append("<div class='toast'>Article ajouté aux favoris</div>");
     } else {
-        ele.attr('title', "Mettre en favoris");
+        star.parent().attr('title', "Mettre en favoris");
+        $('body').append("<div class='toast'>Article enlevé des favoris</div>");
     }
+    $('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');
 };
 $('.favorite-span').click(function(e){
     e.preventDefault();
@@ -110,20 +114,15 @@ $('.favorite-span').click(function(e){
         if($(this).attr('href') == href){stars.push($(this).children('.fa-star.favorite'))}
     });
     stars = $(stars);
-    console.log(stars);
     $.ajax({
         url: $(this).attr('href'),
         method: "GET",
-        data: {
-            favorite: 'ok'
-        },
+        data: {favorite: 'ok'},
         success: function(data){
             stars.toggleClass('far fas');
-            favori(stars);
+            stars.each(function(e){favori($(this));});
         },
-        error: function(error){
-            console.log(error);
-        }
+        error: function(error){console.log(error);}
     });
 });
 {% endblock jquery %}

@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import View
+from django.views.generic import View, RedirectView
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import CommentReportForm
@@ -82,3 +82,7 @@ class CommentReportView(NavbarSearchMixin, View):
         context['object'] = Comment.objects.get(id=kwargs.get('comment_id'))
         context['form'] = CommentReportForm()
         return context
+
+
+class ChangeLanguageRedirectView(RedirectView):
+    pass

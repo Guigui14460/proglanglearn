@@ -68,7 +68,7 @@ class Article(models.Model):
 
     class Meta:
         ordering = ['-timestamp', '-views']
-        verbose_name = _("Article")
+        verbose_name = _("article")
 
     def __str__(self):
         return f"{self.id} - {self.title} -> {self.author.username}"

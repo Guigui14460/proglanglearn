@@ -36,6 +36,32 @@ class CourseModelForm(forms.ModelForm):
         }
 
 
+class CourseUpdateModelForm(forms.ModelForm):
+    captcha = ReCaptchaField(score_threshold=0.5)
+
+    class Meta:
+        model = Course
+        fields = [
+            'title', 'thumbnail', 'languages',
+            'tags', 'content_introduction', 'pdf',
+            'difficulty',
+            'old_price', 'new_price'
+        ]
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': _("Gestionnaire de ...")}),
+            'thumbnail': forms.ClearableFileInput(attrs={'class': 'btn btn__block'}),
+            'content_introduction': TinyMCE(attrs={'placeholder': _('Introduction au cours')}),
+            'languages': forms.SelectMultiple(attrs={'size': 7}),
+            'tags': forms.SelectMultiple(attrs={'size': 7}),
+            'pdf': forms.ClearableFileInput(attrs={'class': 'btn btn__block btn__dark'}),
+            'old_price': forms.NumberInput(attrs={'step': 'any', 'min': 0}),
+            'new_price': forms.NumberInput(attrs={'step': 'any', 'min': 0})
+        }
+        help_text = {
+            'tags': _("S'il manque une catégorie, demandez à le <a href='contact.html#subject'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
+        }
+
+
 class TutorialModelForm(forms.ModelForm):
     class Meta:
         model = Tutorial

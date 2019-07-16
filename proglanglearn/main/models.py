@@ -28,7 +28,8 @@ class Language(models.Model):
                             verbose_name=_("Nom du langage de programmation"))
 
     class Meta:
-        verbose_name = _("Langage")
+        verbose_name = _("langage de programmation")
+        verbose_name_plural = _("langages de programmation")
 
     def __str__(self):
         return self.name
@@ -39,7 +40,7 @@ class Tag(models.Model):
                             verbose_name=_("Nom du tag"))
 
     class Meta:
-        verbose_name = _("Catégorie")
+        verbose_name = _("catégorie")
 
     def __str__(self):
         return self.name
@@ -59,8 +60,7 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
-        verbose_name = _("Commentaire")
-        verbose_name_plural = _("Commentaires")
+        verbose_name = _("commentaire")
 
     def __str__(self):
         c_type = ContentType.objects.get_for_model(self)
@@ -112,8 +112,8 @@ class CommentReport(models.Model):
         "Contenu du signalement"), null=True, blank=True)
 
     class Meta:
-        verbose_name = _("Signalement de commentaire")
-        verbose_name_plural = _("Signalements de commentaire")
+        verbose_name = _("signalement de commentaire")
+        verbose_name_plural = _("signalements de commentaire")
 
     def __str__(self):
         return f"{self.comment.id} reported by {self.alerter.username}"

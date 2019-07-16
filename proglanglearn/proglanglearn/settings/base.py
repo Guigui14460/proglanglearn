@@ -1,6 +1,6 @@
 import os
 from decouple import config
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(
@@ -27,9 +27,9 @@ INSTALLED_APPS = [
 
     # My apps
     'accounts.apps.AccountsConfig',
+    'articles.apps.ArticlesConfig',
     'courses.apps.CoursesConfig',
     'main.apps.MainConfig',
-    'articles.apps.ArticlesConfig',
 ]
 
 AUTH_USER_MODEL = 'main.User'
@@ -70,7 +70,7 @@ WSGI_APPLICATION = 'proglanglearn.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-LANGUAGE_CODE = 'fr-Fr'
+LANGUAGE_CODE = 'fr'  # fr-Fr
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True

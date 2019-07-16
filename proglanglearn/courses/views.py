@@ -15,7 +15,7 @@ from main.forms import CommentModelForm
 from main.mixins import NavbarSearchMixin
 from main.models import Comment
 from main.signals import comment_signal
-from .forms import CourseModelForm, TutorialModelForm
+from .forms import CourseModelForm, CourseUpdateModelForm, TutorialModelForm
 from .mixins import CourseObjectMixin, TutorialObjectMixin, UserCanAddCourse, UserCanModifyCourse, UserCanViewTutorial
 from .models import Course, Tutorial
 
@@ -76,7 +76,7 @@ class CourseListView(NavbarSearchMixin, ListView):
 
 class CourseUpdateView(LoginRequiredMixin, CourseObjectMixin, UserCanModifyCourse, SuccessMessageMixin, NavbarSearchMixin, UpdateView):
     template_name = 'courses/course_create.html'
-    form_class = CourseModelForm
+    form_class = CourseUpdateModelForm
     success_message = _("Cours modifié avec succès")
 
     def get_context_data(self, **kwargs):
@@ -87,8 +87,7 @@ class CourseUpdateView(LoginRequiredMixin, CourseObjectMixin, UserCanModifyCours
         return context
 
     def get_success_url(self):
-        id_ = self.kwargs.get('id')
-        return reverse('courses:detail', kwargs={'id': id_})
+        return reverse('courses:detail', kwargs={'slug': self.get_object().slug})
 
 
 class CourseDeleteView(LoginRequiredMixin, CourseObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
@@ -111,10 +110,12 @@ class CourseUserEnrolledView(LoginRequiredMixin, CourseObjectMixin, SuccessMessa
         if user in course.students.all():
             messages.info(request, _("Vous êtes déjà inscrit au cours"))
         else:
+            # TODO : Make the redirection payment here
+            # and add the 3 last lines in PaymentView
             course.students.add(user)
             messages.success(request, _(
                 f"Bienvenue au cours : {course.title}"))
-        return redirect('courses:tutorial-detail', course_id=course.id, tutorial_id=course.tutorial.first().id)
+        return redirect('courses:tutorial-detail', course_slug=course.slug, tutorial_slug=course.tutorial.first().slug)
 
 
 class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
@@ -122,30 +123,31 @@ class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
     success_message = _("Tutoriel ajouté avec succès")
 
     def get(self, request, *args, **kwargs):
-        course = Course.objects.get(id=self.kwargs.get('course_id'))
+        course = Course.objects.get(slug=self.kwargs.get('course_slug'))
         if request.user != course.author and not request.user.is_staff:
             messages.warning(request, _(
                 "Vous ne pouvez pas créer un tutoriel car vous ne faîtes pas partie de l'administration de ProgLangLearn ou vous n'êtes pas l'auteur du cours"))
-            return redirect('courses:detail', id=course.id)
+            return redirect('courses:detail', slug=course.slug)
         context = self.get_context_data(**kwargs)
         context['form'] = TutorialModelForm()
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        course = Course.objects.get(id=self.kwargs.get('course_id'))
+        course = Course.objects.get(slug=self.kwargs.get('course_slug'))
         form = TutorialModelForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             tutorial = form.save(commit=False)
             tutorial.course = course
             tutorial.published_date = timezone.now()
             tutorial.save()
-            return redirect('courses:tutorial-detail', course_id=course.id, tutorial_id=tutorial.id)
-        return redirect('courses:update', id=course.id)
+            return redirect('courses:tutorial-detail', course_slug=course.slug, tutorial_slug=tutorial.slug)
+        return redirect('courses:update', slug=course.slug)
 
     def get_context_data(self, **kwargs):
         context = {**kwargs}
         context['title'] = _("Ajouter")
-        context['course'] = Course.objects.get(id=self.kwargs.get('course_id'))
+        context['course'] = Course.objects.get(
+            slug=self.kwargs.get('course_slug'))
         context['navbar_search_form'] = self.form_navbar()
         return context
 
@@ -219,7 +221,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
 
 class TutorialFavoriteToggleRedirectView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        obj = get_object_or_404(Tutorial, id=kwargs.get('tutorial_id'))
+        obj = get_object_or_404(Tutorial, slug=kwargs.get('tutorial_slug'))
         user = self.request.user
         if user.is_authenticated:
             if obj in user.profile.favorite_tutorials.all():
@@ -227,3 +229,34 @@ class TutorialFavoriteToggleRedirectView(RedirectView):
             else:
                 user.profile.favorite_tutorials.add(obj)
         return obj.get_absolute_url()
+
+
+class TutorialUpdateView(LoginRequiredMixin, SuccessMessageMixin, NavbarSearchMixin, UpdateView):
+    template_name = 'courses/course_create.html'
+    form_class = TutorialModelForm
+    model = Tutorial
+    success_message = _("Tutoriel modifié avec succès")
+
+    def get_context_data(self, **kwargs):
+        context = {**kwargs}
+        context['title'] = _("Modifier")
+        context['navbar_search_form'] = self.form_navbar()
+        return context
+
+    def get_success_url(self):
+        course_slug = self.kwargs.get('course_slug')
+        tutorial_slug = self.kwargs.get('tutorial_slug')
+        return reverse('courses:tutorial-detail', kwargs={'course_slug': course_slug, 'slug': tutorial_slug})
+
+
+class TutorialDeleteView(LoginRequiredMixin, TutorialObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
+    success_message = _("Cours supprimé avec succès")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['navbar_search_form'] = self.form_navbar()
+        return context
+
+    def get_success_url(self):
+        course_slug = self.kwargs.get('course_slug')
+        return reverse('courses:detail', kwargs={'slug': course_slug})

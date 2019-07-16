@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, pre_save
 from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from tinymce.models import HTMLField
 
 from main.models import Language, Tag
+from main.utils import unique_slug_generator
 
 
 User = settings.AUTH_USER_MODEL
@@ -50,6 +51,8 @@ class Course(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name=_("Auteur"), related_name='courses')
     title = models.CharField(max_length=150, verbose_name=_("Titre du cours"))
+    slug = models.URLField(verbose_name=_(
+        "URL d'accès"), blank=True, null=True)
     thumbnail = models.ImageField(
         upload_to='course_thumbnail/', verbose_name=_("Vignette/vidéo d'introduction"))
     languages = models.ManyToManyField(
@@ -75,8 +78,8 @@ class Course(models.Model):
 
     class Meta:
         ordering = ['-published_date', 'title']
-        verbose_name = _("Cours")
-        verbose_name_plural = _("Cours")
+        verbose_name = _("cours")
+        verbose_name_plural = _("cours")
 
     def __str__(self):
         return f"{self.id} - {self.title} -> {self.author.username}"
@@ -92,7 +95,7 @@ class Course(models.Model):
         super(Course, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('courses:detail', kwargs={'id': self.id})
+        return reverse('courses:detail', kwargs={'slug': self.slug})
 
     def get_all_experience(self):
         exp = 0
@@ -127,6 +130,14 @@ def submission_course_delete(sender, instance, **kwargs):
 post_delete.connect(submission_course_delete, sender=Course)
 
 
+def pre_save_course_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(pre_save_course_receiver, sender=Course)
+
+
 class TutorialQuerySet(models.QuerySet):
     def search(self, query):
         return self.filter((Q(title__icontains=query) | Q(content__icontains=query)).distinct())
@@ -143,6 +154,8 @@ class TutorialManager(models.Manager):
 class Tutorial(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, verbose_name=_("Cours rattaché"), related_name='tutorial')
+    slug = models.URLField(verbose_name=_(
+        "URL d'accès"), blank=True, null=True)
     title = models.CharField(
         max_length=100, verbose_name=_("Titre du tutoriel"))
     content = HTMLField(verbose_name=_("Contenu du tutoriel"))
@@ -157,13 +170,21 @@ class Tutorial(models.Model):
 
     class Meta:
         ordering = ['-views', 'title', 'experience']
-        verbose_name = _("Tutoriel")
+        verbose_name = _("tutoriel")
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('courses:tutorial-detail', kwargs={'course_id': self.course.id, 'tutorial_id': self.id})
+        return reverse('courses:tutorial-detail', kwargs={'course_slug': self.course.slug, 'tutorial_slug': self.slug})
 
     def get_favorite_url(self):
-        return reverse('courses:tutorial-favorite', kwargs={'course_id': self.course.id, 'tutorial_id': self.id})
+        return reverse('courses:tutorial-favorite', kwargs={'course_slug': self.course.slug, 'tutorial_slug': self.slug})
+
+
+def pre_save_tutorial_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(pre_save_tutorial_receiver, sender=Tutorial)

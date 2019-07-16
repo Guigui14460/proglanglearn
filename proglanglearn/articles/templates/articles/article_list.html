@@ -60,12 +60,15 @@
 $('.favorite-span').hover(function(e){
     $(this).css('cursor', 'pointer');
 });
-function favori(ele) {
-    if (ele.hasClass('fas')) {
-        ele.attr('title', "Enlever des favoris");
+function favori(star) {
+    if (star.hasClass('fas')) {
+        star.parent().attr('title', "Enlever des favoris");
+        $('body').append("<div class='toast'>Article ajouté aux favoris</div>");
     } else {
-        ele.attr('title', "Mettre en favoris");
+        star.parent().attr('title', "Mettre en favoris");
+        $('body').append("<div class='toast'>Article enlevé des favoris</div>");
     }
+    $('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');
 };
 $('.favorite-span').click(function(e){
     e.preventDefault();
@@ -75,20 +78,15 @@ $('.favorite-span').click(function(e){
         if($(this).attr('href') == href){stars.push($(this).children('.fa-star.favorite'))}
     });
     stars = $(stars);
-    console.log(stars);
     $.ajax({
         url: $(this).attr('href'),
         method: "GET",
-        data: {
-            favorite: 'ok'
-        },
+        data: {favorite: 'ok'},
         success: function(data){
             stars.toggleClass('far fas');
-            favori(stars);
+            stars.each(function(e){favori($(this));});
         },
-        error: function(error){
-            console.log(error);
-        }
+        error: function(error){console.log(error);}
     });
 });
 {% endblock jquery %}

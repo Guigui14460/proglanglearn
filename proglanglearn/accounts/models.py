@@ -73,7 +73,7 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ['-level', '-level_experience']
-        verbose_name = _("Profil")
+        verbose_name = _("profil")
 
     def __str__(self):
         return self.user.username
@@ -114,7 +114,7 @@ class Education(models.Model):
         "Date de sortie"))
 
     class Meta:
-        verbose_name = _("Éducation")
+        verbose_name = _("éducation")
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.school}"
@@ -131,7 +131,7 @@ class Experience(models.Model):
         "Date de sortie"))
 
     class Meta:
-        verbose_name = _("Expérience")
+        verbose_name = _("expérience")
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.entreprise}"

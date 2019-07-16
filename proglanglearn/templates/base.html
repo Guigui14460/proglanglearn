@@ -1,6 +1,6 @@
-{% load static recaptcha3 %}
+{% load static recaptcha3 i18n %}
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr" data-theme="light" class="transition">
 <head>
     <meta charset="UTF-8" />
     <meta name="language" content="fr" />
@@ -10,8 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="copyright" content="ProgLangLearn Inc." />
     <meta name="category" content="web, programming, languages" />
-    {% comment %} Faire un block pour les keywords {% endcomment %}
-    <meta name="keywords" content="web, pll, proglanglearn, programming, language" />
+    <meta name="keywords" content="{% block keyword %}{% endblock keyword %}, web, pll, proglanglearn, programming, language" />
     <meta name="publisher" content="LETELLIER Guillaume" />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#c5a31b" />

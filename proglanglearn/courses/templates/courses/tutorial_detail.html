@@ -33,8 +33,8 @@
 <h1 class="large">{{ object.title }}</h1>
 {% if request.user.is_staff or object.author == request.user %}
     <div class="my-2 d-flex space-between">
-        <a href="modify_tutorial.html" class="btn btn__info btn__large">Modifier le tutoriel</a>
-        <a href="#" class="btn btn__danger btn__large">Supprimer le tutoriel</a>
+        <a href="{% url 'courses:tutorial-update' course_slug=object.course.slug slug=object.slug %}" class="btn btn__info btn__large">Modifier le tutoriel</a>
+        <a href="{% url 'courses:tutorial-delete' course_slug=object.course.slug tutorial_slug=object.slug %}" class="btn btn__danger btn__large">Supprimer le tutoriel</a>
     </div>
 {% endif %}
 <div class="center-text">
@@ -96,12 +96,15 @@ ajaxComments();
 $('.favorite-span').hover(function(e){
     $(this).css('cursor', 'pointer');
 });
-function favori(ele) {
-    if (ele.hasClass('fas')) {
-        ele.attr('title', "Enlever des favoris");
+function favori(star) {
+    if (star.hasClass('fas')) {
+        star.parent().attr('title', "Enlever des favoris");
+        $('body').append("<div class='toast'>Tutoriel ajouté aux favoris</div>");
     } else {
-        ele.attr('title', "Mettre en favoris");
+        star.parent().attr('title', "Mettre en favoris");
+        $('body').append("<div class='toast'>Tutoriel enlevé des favoris</div>");
     }
+    $('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');
 };
 $('.favorite-span').click(function(e){
     e.preventDefault();
@@ -111,20 +114,15 @@ $('.favorite-span').click(function(e){
         if($(this).attr('href') == href){stars.push($(this).children('.fa-star.favorite'))}
     });
     stars = $(stars);
-    console.log(stars);
     $.ajax({
         url: $(this).attr('href'),
         method: "GET",
-        data: {
-            favorite: 'ok'
-        },
+        data: {favorite: 'ok'},
         success: function(data){
             stars.toggleClass('far fas');
-            favori(stars);
+            stars.each(function(e){favori($(this));});
         },
-        error: function(error){
-            console.log(error);
-        }
+        error: function(error){console.log(error);}
     });
 });
 {% endblock jquery %}

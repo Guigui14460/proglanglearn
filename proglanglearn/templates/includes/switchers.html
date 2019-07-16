@@ -1,15 +1,19 @@
+{% load i18n %}
+
 <div id="version-switcher">
     <input type="checkbox" id="switch" class="switch" name="theme" />
     <label class="switch-label" for="switch">Light/Dark toggle</label>
     <ul class="languages-switcher">
-        <li class="current" title="Cliquez sur les liens pour changer de langue">
-            <span>Langue : <strong>Fr</strong></span>
+        {% get_current_language as CURRENT_LANGUAGE %}
+        <li class="current" title="{% trans 'Cliquez sur les liens pour changer de langue' %}">
+            <span>{% trans 'Langue' %} : <strong>{{ CURRENT_LANGUAGE|title }}</strong></span>
         </li>
-        <li class="other">
-            <a href="index.html?lang=fr" title="Français">Fr</a>
-        </li>
-        <li class="other">
-            <a href="index.html?lang=en" title="Anglais">En</a>
-        </li>
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as langs %}
+        {% for lang in langs %}
+            <li class="other">
+                <a href="/{{ lang.code }}{{ request.get_full_path|slice:'3:' }}" title="{{ lang.name_translated }}">{{ lang.code|title }}</a>
+            </li>
+        {% endfor %}
     </ul>
 </div>

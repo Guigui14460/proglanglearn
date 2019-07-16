@@ -11,8 +11,8 @@
 <h1 class="large">{{ title }} un cours</h1>
 {% if title == 'Modifier' %}
     <div class="my-2 d-flex space-between">
-        <a href="{% url 'courses:detail' id=object.id %}" class="btn btn__success btn__large">Retour</a>
-        <a href="{% url 'courses:delete' id=object.id %}" class="btn btn__danger btn__large">Supprimer le cours</a>
+        <a href="{% url 'courses:detail' slug=object.slug %}" class="btn btn__success btn__large">Retour</a>
+        <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">Supprimer le cours</a>
     </div>
 {% endif %}
 <form method="POST" class="form" enctype="multipart/form-data">
@@ -77,8 +77,8 @@
                             <div class="d-flex align space-between">
                                 <a href="{% url 'courses:tutorial-detail' course_id=object.id tutorial_id=tutorial.id %}" title="">{{ tutorial.title }}</a>
                                 <span>
-                                    <a href="{% url 'courses:tutorial-update' course_id=object.id tutorial_id=tutorial.id %}" title="Modifier" class="btn btn__outline__info"><i class="fas fa-pen"></i></a>
-                                    <a href="{% url 'courses:tutorial-delete' course_id=object.id tutorial_id=tutorial.id %}" title="Supprimer" class="btn btn__danger"><i class="fas fa-times"></i></a>
+                                    <a href="{% url 'courses:tutorial-update' course_slug=object.slug slug=tutorial.slug %}" title="Modifier" class="btn btn__outline__info"><i class="fas fa-pen"></i></a>
+                                    <a href="{% url 'courses:tutorial-delete' course_slug=object.slug tutorial_slug=tutorial.slug %}" title="Supprimer" class="btn btn__danger"><i class="fas fa-times"></i></a>
                                 </span>
                             </div>
                         </li>
@@ -86,17 +86,19 @@
                 </ul>
             </div>
             <div class="form-group center-text">
-                    <a href="{% url 'courses:tutorial-create' course_id=object.id %}" class="btn btn__large btn__outline__success">Ajouter un tutoriel</a>
+                    <a href="{% url 'courses:tutorial-create' course_slug=object.slug %}" class="btn btn__large btn__outline__success">Ajouter un tutoriel</a>
                 </div>
         {% endif %}
     </fieldset>
     <fieldset>
         <legend>Informations complémentaires</legend>
-        <div class="form-group">
-            {{ form.published_date.label_tag }}&nbsp;<span class="required-input">*</span>
-            {{ form.published_date }}
-            <small class="form-text">{{ form.published_date.help_text }}</small>
-        </div>
+        {% if form.published_date %}
+            <div class="form-group">
+                {{ form.published_date.label_tag }}&nbsp;<span class="required-input">*</span>
+                {{ form.published_date }}
+                <small class="form-text">{{ form.published_date.help_text }}</small>
+            </div>
+        {% endif %}
         <div class="form-group">
             <label>{{ form.old_price.label }} : <span class="required-input">*</span><br>
             {{ form.old_price }}</label>

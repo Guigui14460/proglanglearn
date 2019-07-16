@@ -1,4 +1,12 @@
 Report System for administration
+Make an url to set language for internationalisation
+Dashboard and display fovrite articles, tutorials, etc
+Profile and Account systems
+Level and experience management
+Search engine
+Payment engine
+Billing app (like Just Django's e-commerce website)
+Poll app (to add in course to add more experience)
 
 https://www.youtube.com/watch?v=nkAhOKoQ6h4
 https://www.youtube.com/watch?v=1wi0AHxjcn8
@@ -8,3 +16,14 @@ https://www.youtube.com/watch?v=zojnkKGRXp0
 https://www.youtube.com/watch?v=tG6O8YF91HE
 https://www.youtube.com/watch?v=HLW5u6PGGZ0
 https://www.django-rest-framework.org/api-guide/validators/
+https://www.youtube.com/watch?v=Qj6XM3wVhTA
+
+Django administration
+https://www.youtube.com/watch?v=TcC14FvIfso
+https://www.youtube.com/watch?v=zdtaQNQ9-9E
+https://www.youtube.com/watch?v=MaTKomu1VWc
+https://www.youtube.com/watch?v=JQCJxHuyQac
+https://www.youtube.com/watch?v=gk3A1CKildM
+https://www.youtube.com/watch?v=JFp3c8o5RMI
+https://www.youtube.com/watch?v=BqrzW8oznB0
+https://www.youtube.com/watch?v=KK_U8RhxlIQ

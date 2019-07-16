@@ -1,9 +1,11 @@
+{% load i18n %}
+
 <div class="container pt-4 pb-3">
     <div class="important-links">
-        <a href="{% url 'main:terms' %}">Termes et conditions</a>
-        <a href="{% url 'main:privacy' %}">Politique de confidentialité</a>
-        <a href="{% url 'main:about' %}">À propos</a>
-        <a href="{% url 'main:contact' %}">Contact</a>
+        <a href="{% url 'main:terms' %}">{% trans 'Termes et conditions' %}</a>
+        <a href="{% url 'main:privacy' %}">{% trans 'Politique de confidentialité' %}</a>
+        <a href="{% url 'main:about' %}">{% trans 'À propos' %}</a>
+        <a href="{% url 'main:contact' %}">{% trans 'Contact' %}</a>
     </div>
     <div class="social-media my-2">
         <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
@@ -16,6 +18,6 @@
         <h3>
             &copy; <a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn</a>
         </h3>
-        <p class="mt-0">Tous droits réservés</p>
+        <p class="mt-0">{% trans 'Tous droits réservés' %}</p>
     </div>
 </div>

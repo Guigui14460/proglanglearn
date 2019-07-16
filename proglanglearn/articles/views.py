@@ -58,6 +58,10 @@ class ArticleCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
             article.author = self.request.user
             article.last_modification = timezone.now()
             article.save()
+            for language in form.cleaned_data['languages']:
+                article.languages.add(language)
+            for tag in form.cleaned_data['tags']:
+                article.tags.add(tag)
             messages.success(request, self.success_message)
             return redirect('articles:detail', article_slug=article.slug)
         messages.error(request, self.error_message)
@@ -98,7 +102,7 @@ class ArticleDetailView(LoginRequiredMixin, ArticleObjectMixin, NavbarSearchMixi
             context['form'] = form
             html = render_to_string(
                 'main/comments.html', context, request=request)
-            return JsonResponse({'html': html})
+            return JsonResponse({'html': html, 'comments_count': context['parent_comments'].count()})
         return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

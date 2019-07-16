@@ -17,7 +17,7 @@ class UserCanViewTutorial(UserPassesTestMixin):
             if tutorial is not None:
                 course = tutorial.course
                 messages.error(self.request, self.permission_denied_message)
-                return redirect('courses:detail', id=course.id)
+                return redirect('courses:detail', slug=course.slug)
             messages.info(self.request, _(
                 "Le tutoriel ou le cours auquel vous essayez d'accéder n'existe pas ou plus ou est inaccessible"))
             return Http404
@@ -69,10 +69,10 @@ class CourseObjectMixin(object):
     model = Course
 
     def get_object(self):
-        id = self.kwargs.get('id')
+        slug = self.kwargs.get('slug')
         obj = None
-        if id is not None:
-            obj = get_object_or_404(self.model, id=id)
+        if slug is not None:
+            obj = get_object_or_404(self.model, slug=slug)
         return obj
 
 
@@ -81,16 +81,16 @@ class TutorialObjectMixin(object):
     parent_model = Course
 
     def get_object(self):
-        id = self.kwargs.get('tutorial_id')
+        slug = self.kwargs.get('tutorial_slug')
         obj = None
-        if id is not None:
-            obj = get_object_or_404(self.model, id=id)
+        if slug is not None:
+            obj = get_object_or_404(self.model, slug=slug)
         return obj
 
     def get_other_tutorial(self):
-        id = self.kwargs.get('course_id')
+        slug = self.kwargs.get('course_slug')
         obj = None
-        if id is not None:
-            obj = get_object_or_404(self.parent_model, id=id)
+        if slug is not None:
+            obj = get_object_or_404(self.parent_model, slug=slug)
             return obj.get_tutorials()
         return []

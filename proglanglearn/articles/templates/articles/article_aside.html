@@ -15,7 +15,7 @@
                         </div>
                         <span class="d-inline-block mx-1">|</span>
                         <div class="d-inline-block">
-                            <i class="far fa-comments"></i>&nbsp;{{ article.get_comments_count }}
+                            <i class="far fa-comments"></i>&nbsp;{% if article == object %}<span class="article-comments-count">{{ article.get_comments_count }}</span>{% else %}{{ article.get_comments_count }}{% endif %}
                         </div>
                     </div>
                 </div>
