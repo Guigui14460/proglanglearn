@@ -22,7 +22,7 @@ class ProfileAdmin(ImportExportModelAdmin):
     ordering = ('user', 'level', 'strike', 'is_dev',
                 'is_student', 'is_teacher')
     search_fields = ['user']
-
+    list_filter = ['strike', 'level']
     empty_value_display = _("Inconnu")
     fieldsets = (
         (_("Espace critique"), {'fields': ('strike', 'email_confirmed')}),

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static course_extras %}
+{% load i18n %}
 
 {% block title %}{{ object.title }} - {% endblock title %}
 
@@ -38,7 +39,7 @@
     </div>
 {% endif %}
 <div class="center-text">
-    <i class="far fa-eye"></i>&nbsp;{{ object.views }}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>
+    <i class="far fa-clock"></i>&nbsp;{% trans 'Temps de lecture :' %}&nbsp;{{ object.content|safe|time_estimate }}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>
 </div>
 <div>
     {{ object.content|safe }}

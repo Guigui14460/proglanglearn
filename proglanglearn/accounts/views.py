@@ -204,11 +204,17 @@ class CustomPasswordResetCompleteView(NavbarSearchMixin, PasswordResetCompleteVi
         return context
 
 
-class PandasTestView(View):
+class PandasTestView(NavbarSearchMixin, View):
     template_name = 'accounts/pandas.html'
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            check = check_level(request)
-            return render(request, self.template_name, {'check': check})
+            context = self.get_context_data(**kwargs)
+            context['check'] = check_level(request)
+            return render(request, self.template_name, context)
         return redirect('accounts:login')
+    
+    def get_context_data(self, **kwargs):
+        context = {**kwargs}
+        context['navbar_search_form'] = self.form_navbar()
+        return context

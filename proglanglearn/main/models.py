@@ -110,6 +110,8 @@ class CommentReport(models.Model):
         max_length=1, choices=ALERT_CHOICES, verbose_name=_("Type de signalement"))
     content_alert = models.TextField(verbose_name=_(
         "Contenu du signalement"), null=True, blank=True)
+    verified = models.BooleanField(verbose_name=_("Vérifié"), default=False)
+    striked = models.BooleanField(verbose_name=_("Striké"), default=False)
 
     class Meta:
         verbose_name = _("signalement de commentaire")
