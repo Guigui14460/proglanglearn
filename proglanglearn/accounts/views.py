@@ -13,6 +13,7 @@ from django.views.generic import View
 
 from .forms import LoginForm, SignUpForm, PasswordResetForm
 from .models import Profile
+from .utils import check_level, get_user_type
 from .tokens import AccountActivationTokenGenerator
 from main.mixins import NavbarSearchMixin
 from main.utils import get_ip_address_client
@@ -201,3 +202,13 @@ class CustomPasswordResetCompleteView(NavbarSearchMixin, PasswordResetCompleteVi
         context = super().get_context_data(**kwargs)
         context['navbar_search_form'] = self.form_navbar()
         return context
+
+
+class PandasTestView(View):
+    template_name = 'accounts/pandas.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            check = check_level(request)
+            return render(request, self.template_name, {'check': check})
+        return redirect('accounts:login')

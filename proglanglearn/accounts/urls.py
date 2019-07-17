@@ -9,7 +9,9 @@ from .views import (
     CustomPasswordResetView,
     CustomPasswordResetDoneView,
     CustomPasswordResetConfirmView,
-    CustomPasswordResetCompleteView
+    CustomPasswordResetCompleteView,
+
+    PandasTestView
 )
 
 app_name = 'accounts'
@@ -28,4 +30,5 @@ urlpatterns = [
          CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password-reset/complete/', CustomPasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
+    path('pandas/', PandasTestView.as_view(), name='pandas'),
 ]

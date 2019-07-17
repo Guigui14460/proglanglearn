@@ -2,6 +2,7 @@ Report System for administration
 Make an url to set language for internationalisation
 Dashboard and display fovrite articles, tutorials, etc
 Profile and Account systems
+Preview of profile picture
 Level and experience management
 Search engine
 Payment engine
