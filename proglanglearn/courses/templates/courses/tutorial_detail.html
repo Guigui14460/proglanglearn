@@ -39,7 +39,7 @@
     </div>
 {% endif %}
 <div class="center-text">
-    {{ object.experience }}&nbsp;EXP&nbsp;|&nbsp;<i class="far fa-clock"></i>&nbsp;{{ object.content|safe|time_estimate }}&nbsp;{% trans 'minutes' %}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" title="{% if tutorial_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>
+    {{ object.experience }}&nbsp;EXP&nbsp;|&nbsp;<i class="far fa-clock"></i>&nbsp;{{ object.content|safe|time_estimate }}&nbsp;{% trans 'minutes' %}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}{% if request.user.is_authenticated %}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" title="{% if tutorial_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}
 </div>
 <div>
     {{ object.content|safe }}
@@ -64,7 +64,7 @@
 
 {% block comments %}
 <div class="comments py-2">
-    {% include 'main/comments.html' %}
+    {% include 'main/includes/comments.html' %}
 </div>
 {% endblock comments %}
 
@@ -75,60 +75,9 @@
 <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
 {% endblock javascript %}
 
-{% block jquery %}$('.reply').hide();$('.reply-btn').click(function () {$(this).parent().next().toggle();});
-function ajaxComments(){
-    $('.form.comment-form, .form.reply-form').submit(function(e){
-        e.preventDefault();
-        $.ajax({
-            method: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response){
-                $('.comments').html(response.html);
-                $('textarea').val('');
-                $('.reply').hide();$('.reply-btn').click(function () {$(this).parent().next().toggle();});
-                ajaxComments();
-            },
-            error: function(rs, e){
-                console.log(rs.responseText);
-            },
-        });
-    });
-}
-ajaxComments();
-$('.favorite-span').hover(function(e){
-    $(this).css('cursor', 'pointer');
-});
-function favori(star) {
-    if (star.hasClass('fas')) {
-        star.parent().attr('title', "Enlever des favoris");
-        $('body').append("<div class='toast'>Tutoriel ajouté aux favoris</div>");
-    } else {
-        star.parent().attr('title', "Mettre en favoris");
-        $('body').append("<div class='toast'>Tutoriel enlevé des favoris</div>");
-    }
-    $('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');
-};
-$('.favorite-span').click(function(e){
-    e.preventDefault();
-    let href = $(this).attr('href');
-    let stars = [];
-    $(".favorite-span").each(function(e){
-        if($(this).attr('href') == href){stars.push($(this).children('.fa-star.favorite'))}
-    });
-    stars = $(stars);
-    $.ajax({
-        url: $(this).attr('href'),
-        method: "GET",
-        data: {favorite: 'ok'},
-        success: function(data){
-            stars.toggleClass('far fas');
-            stars.each(function(e){favori($(this));});
-        },
-        error: function(error){console.log(error);}
-    });
-});
+{% block jquery %}
+{% include 'main/includes/ajax_comments.html' %}
+{% include 'main/includes/ajax_favorite.html' %}
 $('.tutorial-finished-link').click(function(e){
     e.preventDefault();
     $.ajax({

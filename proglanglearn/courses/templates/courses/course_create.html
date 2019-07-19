@@ -48,9 +48,9 @@
             <div class="custom-multiple-select select-multiple__light">
                 {{ form.languages }}
             </div>
-            {% if form.languages.field.required %}
+            {% comment %} {% if form.languages.field.required %}
                 zegrgvbrtntntnt
-            {% endif %} 
+            {% endif %}  {% endcomment %}
             <small class="form-text">
                 {{ form.languages.help_text }}
             </small>
@@ -115,8 +115,3 @@
     </div>
 </form>
 {% endblock main %}
-
-{% block javascript %}
-<script src="{% static 'js/highlight.pack.js' %}"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-{% endblock javascript %}

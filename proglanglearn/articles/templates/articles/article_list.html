@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block title %}Blog - {% endblock title %}
 
@@ -13,17 +13,7 @@
                 <h3 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if article in request.user.profile.favorite_articles.all %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
                 <div class="my-1">
                     <div class="tags small-fs">
-                        Tags :
-                        {% for lang in article.languages.all %}
-                            {% if lang.name == 'C++' %}
-                                <a class="tag cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-                            {% else %}
-                                <a class="tag {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-                            {% endif %}
-                        {% endfor %}
-                        {% for tag in article.tags.all %}
-                            <a class="tag" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
-                        {% endfor %}
+                        {% include 'main/includes/tags.html' with object=article %}
                     </div>
                     <div class="my-1 d-flex align">
                         <img src="{{ article.author.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
@@ -57,36 +47,5 @@
 {% endblock main %}
 
 {% block jquery %}
-$('.favorite-span').hover(function(e){
-    $(this).css('cursor', 'pointer');
-});
-function favori(star) {
-    if (star.hasClass('fas')) {
-        star.parent().attr('title', "Enlever des favoris");
-        $('body').append("<div class='toast'>Article ajouté aux favoris</div>");
-    } else {
-        star.parent().attr('title', "Mettre en favoris");
-        $('body').append("<div class='toast'>Article enlevé des favoris</div>");
-    }
-    $('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');
-};
-$('.favorite-span').click(function(e){
-    e.preventDefault();
-    let href = $(this).attr('href');
-    let stars = [];
-    $(".favorite-span").each(function(e){
-        if($(this).attr('href') == href){stars.push($(this).children('.fa-star.favorite'))}
-    });
-    stars = $(stars);
-    $.ajax({
-        url: $(this).attr('href'),
-        method: "GET",
-        data: {favorite: 'ok'},
-        success: function(data){
-            stars.toggleClass('far fas');
-            stars.each(function(e){favori($(this));});
-        },
-        error: function(error){console.log(error);}
-    });
-});
+{% include 'main/includes/ajax_favorite.html' %}
 {% endblock jquery %}

@@ -17,17 +17,7 @@
                 <h3 class="card-title">{{ course.title }}</h3>
             </a>
             <div class="card-tags">
-                Tags :
-                {% for lang in course.languages.all %}
-                    {% if lang.name == 'C++' %}
-                        <a class="card-tag cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-                    {% else %}
-                        <a class="card-tag {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-                    {% endif %}
-                {% endfor %}
-                {% for tag in course.tags.all %}
-                    <a class="card-tag" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
-                {% endfor %}
+                {% include 'main/includes/tags.html' with object=course card=True %}
             </div>
             <a href="{{ course.get_absolute_url }}">
                 <div class="card-content">

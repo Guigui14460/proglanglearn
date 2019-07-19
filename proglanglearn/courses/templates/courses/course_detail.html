@@ -30,17 +30,7 @@
             </div>
         {% endif %}
         <div class="tags">
-            Tags :
-            {% for lang in object.languages.all %}
-                {% if lang.name == 'C++' %}
-                    <a class="tag cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-                {% else %}
-                    <a class="tag {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-                {% endif %}
-            {% endfor %}
-            {% for tag in object.tags.all %}
-                <a class="tag" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
-            {% endfor %}
+            {% include "main/includes/tags.html" with object=object %}
         </div>
     </div>
 </section>

@@ -78,7 +78,7 @@ class ArticleCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
         return context
 
 
-class ArticleDetailView(LoginRequiredMixin, ArticleObjectMixin, NavbarSearchMixin, DetailView):
+class ArticleDetailView(ArticleObjectMixin, NavbarSearchMixin, DetailView):
     def get(self, request, *args, **kwargs):
         article = self.get_object()
         self.object = article
@@ -121,6 +121,8 @@ class ArticleDetailView(LoginRequiredMixin, ArticleObjectMixin, NavbarSearchMixi
     def article_in_favorite(self):
         user = self.request.user
         tuto = self.object
+        if not user.is_authenticated:
+            return False
         liste_article = user.profile.favorite_articles.all()
         return tuto in liste_article
 
