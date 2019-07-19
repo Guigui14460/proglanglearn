@@ -1,11 +1,14 @@
+from itertools import chain
+
 from django.contrib import messages
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, RedirectView
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import CommentReportForm
 from .mixins import NavbarSearchMixin
-from .models import Comment
+from .models import Comment, Language, Tag
 
 
 class IndexView(NavbarSearchMixin, View):
@@ -86,3 +89,21 @@ class CommentReportView(NavbarSearchMixin, View):
 
 class ChangeLanguageRedirectView(RedirectView):
     pass
+
+
+class LanguagesTagsView(NavbarSearchMixin, View):
+    template_name = "main/tag.html"
+
+    def get(self, *args, **kwargs):
+        return render(self.request, self.template_name, self.get_context_data(**kwargs))
+
+    def get_context_data(self, **kwargs):
+        context = {**kwargs}
+        obj_lang = Language.objects.filter(slug=self.kwargs.get('slug'))
+        obj_tag = Tag.objects.filter(slug=self.kwargs.get('slug'))
+        obj_list = list(chain(obj_lang, obj_tag))
+        if obj_list == []:
+            raise Http404
+        context['navbar_search_form'] = self.form_navbar()
+        context['tag'] = obj_list[0]
+        return context

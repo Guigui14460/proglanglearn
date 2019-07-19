@@ -2,8 +2,12 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models.signals import pre_save
 from django.shortcuts import reverse
+from django.utils.text import slugify
 from django.utils.translation import ugettext as _
+
+from tinymce.models import HTMLField
 
 from .signals import comment_signal
 
@@ -26,6 +30,12 @@ class User(AbstractUser):
 class Language(models.Model):
     name = models.CharField(max_length=30, unique=True,
                             verbose_name=_("Nom du langage de programmation"))
+    slug = models.SlugField(null=True, blank=True,
+                            verbose_name=_("URL d'accès"))
+    image = models.ImageField(
+        upload_to='languages_tags/', verbose_name=_("Logo"), null=True, blank=True)
+    content = HTMLField(verbose_name=_(
+        "Description du langage"), null=True, blank=True)
 
     class Meta:
         verbose_name = _("langage de programmation")
@@ -34,16 +44,37 @@ class Language(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('main:language_tag', slug=self.slug)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True,
-                            verbose_name=_("Nom du tag"))
+                            verbose_name=_("Nom de la catégorie"))
+    slug = models.SlugField(null=True, blank=True,
+                            verbose_name=_("URL d'accès"))
+    image = models.ImageField(upload_to='languages_tags/',
+                              verbose_name=_("Illustration"), null=True, blank=True)
+    content = HTMLField(verbose_name=_(
+        "Description de la catégorie"), null=True, blank=True)
 
     class Meta:
         verbose_name = _("catégorie")
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('main:language_tag', slug=self.slug)
+
+
+def pre_save_language_tag_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.name)
+
+
+pre_save.connect(pre_save_language_tag_receiver, sender=Language)
+pre_save.connect(pre_save_language_tag_receiver, sender=Tag)
 
 
 class Comment(models.Model):

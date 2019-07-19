@@ -1,13 +1,9 @@
 {% if object.languages.all.count > 0 %}
     Tags :
     {% for lang in object.languages.all %}
-        {% if lang.name == 'C++' %}
-            <a class="{% if card %}card-tag{% else %}tag{% endif %} cpp-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-        {% else %}
-            <a class="{% if card %}card-tag{% else %}tag{% endif %} {{ lang.name|lower }}-tag" href="#" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
-        {% endif %}
+        <a class="{% if card %}card-tag{% else %}tag{% endif %} {% if lang.name == 'C++' %}cpp-tag{% else %}{{ lang.name|lower }}-tag{% endif %}" href="{% url 'main:language_tag' slug=lang.slug %}" alt="{{ lang.name|upper }}">{{ lang.name }}</a>
     {% endfor %}
     {% for tag in object.tags.all %}
-        <a class="{% if card %}card-tag{% else %}tag{% endif %}" href="#" alt="{{ tag.name }}">{{ tag.name }}</a>
+        <a class="{% if card %}card-tag{% else %}tag{% endif %}" href="{% url 'main:language_tag' slug=tag.slug %}" alt="{{ tag.name }}">{{ tag.name }}</a>
     {% endfor %}
 {% endif %}

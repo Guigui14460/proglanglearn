@@ -34,7 +34,7 @@
 <h1 class="large">{{ object.title }}</h1>
 {% if request.user.is_staff or object.author == request.user %}
     <div class="my-2 d-flex space-between">
-        <a href="{% url 'courses:tutorial-update' course_slug=object.course.slug slug=object.slug %}" class="btn btn__info btn__large">Modifier le tutoriel</a>
+        <a href="{% url 'courses:tutorial-update' course_slug=object.course.slug tutorial_slug=object.slug %}" class="btn btn__info btn__large">Modifier le tutoriel</a>
         <a href="{% url 'courses:tutorial-delete' course_slug=object.course.slug tutorial_slug=object.slug %}" class="btn btn__danger btn__large">Supprimer le tutoriel</a>
     </div>
 {% endif %}

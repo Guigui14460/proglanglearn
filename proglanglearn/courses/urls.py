@@ -29,7 +29,7 @@ urlpatterns = [
          TutorialCreateView.as_view(), name='tutorial-create'),
     path('<str:course_slug>/<str:tutorial_slug>/',
          TutorialDetailView.as_view(), name='tutorial-detail'),
-    path('<str:course_slug>/<str:slug>/update/',
+    path('<str:course_slug>/<str:tutorial_slug>/update/',
          TutorialUpdateView.as_view(), name='tutorial-update'),
     path('<str:course_slug>/<str:tutorial_slug>/delete/',
          TutorialDeleteView.as_view(), name='tutorial-delete'),

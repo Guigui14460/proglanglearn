@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tag.name }} - {% endblock title %}
+
+{% block main %}
+<h1 class="large">{{ tag.name }}</h1>
+<div class="my-1">
+    {% if tag.image %}
+        <img class="mb-2" src="{{ tag.image.url }}" alt="Illustration image">
+    {% endif %}
+    {{ tag.content|safe }}
+</div>
+{% endblock main %}

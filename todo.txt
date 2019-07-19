@@ -1,14 +1,13 @@
+Tag hover view (if possible)
 Report System for administration
 Dashboard and display fovrite articles, tutorials, etc
 Profile and Account systems
-Tag with own page (illustration picture and explication of the language)
 Poll/Quiz app (to add in course to add more experience)
 Payment engine
 Billing app (like Just Django's e-commerce website)
 Forum app
-Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8
 Level and experience management
-Fix TutorialUpdateView
+Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8
 Make an url to set language for internationalisation
 
 # https://www.youtube.com/watch?v=SMRaHSZiwWE

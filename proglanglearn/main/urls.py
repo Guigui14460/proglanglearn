@@ -8,6 +8,7 @@ from .views import (
     PrivacyView,
     TermsView,
     SearchView,
+    LanguagesTagsView,
 )
 
 app_name = 'main'
@@ -19,5 +20,7 @@ urlpatterns = [
     path('privacy/', PrivacyView.as_view(), name='privacy'),
     path('terms/', TermsView.as_view(), name='terms'),
     path('search/', SearchView.as_view(), name='search'),
-    path('report/<int:comment_id>/', CommentReportView.as_view(), name='report-comment')
+    path('report/<int:comment_id>/',
+         CommentReportView.as_view(), name='report-comment'),
+    path('tags/<str:slug>/', LanguagesTagsView.as_view(), name='language_tag'),
 ]

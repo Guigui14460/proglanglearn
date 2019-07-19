@@ -220,20 +220,21 @@ class TutorialFavoriteToggleRedirectView(RedirectView):
         return obj.get_absolute_url()
 
 
-class TutorialUpdateView(LoginRequiredMixin, SuccessMessageMixin, NavbarSearchMixin, UpdateView):
-    template_name = 'courses/course_create.html'
+class TutorialUpdateView(LoginRequiredMixin, TutorialObjectMixin, UserCanModifyCourse, SuccessMessageMixin, NavbarSearchMixin, UpdateView):
+    template_name = 'courses/tutorial_create.html'
     form_class = TutorialModelForm
-    model = Tutorial
     success_message = _("Tutoriel modifié avec succès")
 
     def get_context_data(self, **kwargs):
-        context = {**kwargs}
+        context = super().get_context_data(**kwargs)
         context['title'] = _("Modifier")
         context['navbar_search_form'] = self.form_navbar()
+        context['course'] = Course.objects.get(
+            slug=self.kwargs.get('course_slug'))
         return context
 
     def get_success_url(self):
-        return reverse('courses:list')
+        return reverse('courses:tutorial-detail', kwargs={'course_slug': self.get_object().course.slug, 'tutorial_slug': self.get_object().slug})
 
 
 class TutorialDeleteView(LoginRequiredMixin, TutorialObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
