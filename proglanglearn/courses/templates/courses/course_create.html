@@ -75,7 +75,7 @@
                     {% for tutorial in tutorials %}
                         <li>
                             <div class="d-flex align space-between">
-                                <a href="{% url 'courses:tutorial-detail' course_id=object.id tutorial_id=tutorial.id %}" title="">{{ tutorial.title }}</a>
+                                <a href="{% url 'courses:tutorial-detail' course_slug=object.slug tutorial_slug=tutorial.slug %}" title="">{{ tutorial.title }}</a>
                                 <span>
                                     <a href="{% url 'courses:tutorial-update' course_slug=object.slug slug=tutorial.slug %}" title="Modifier" class="btn btn__outline__info"><i class="fas fa-pen"></i></a>
                                     <a href="{% url 'courses:tutorial-delete' course_slug=object.slug tutorial_slug=tutorial.slug %}" title="Supprimer" class="btn btn__danger"><i class="fas fa-times"></i></a>

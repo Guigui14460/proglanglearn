@@ -158,17 +158,6 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
         tutorial = self.get_object()
         tutorial.views = F('views') + 1
         tutorial.save()
-        user = request.user
-        tuto_finished = user.profile.tutorial_finished.all()
-        if tuto_finished != []:
-            if not tutorial in tuto_finished:
-                user.profile.tutorial_finished.add(tutorial)
-                user.profile.level_experience += tutorial.experience
-                user.profile.save()
-        else:
-            user.profile.tutorial_finished.add(tutorial)
-            user.profile.level_experience += tutorial.experience
-            user.profile.save()
         return super(TutorialDetailView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -244,9 +233,7 @@ class TutorialUpdateView(LoginRequiredMixin, SuccessMessageMixin, NavbarSearchMi
         return context
 
     def get_success_url(self):
-        course_slug = self.kwargs.get('course_slug')
-        tutorial_slug = self.kwargs.get('tutorial_slug')
-        return reverse('courses:tutorial-detail', kwargs={'course_slug': course_slug, 'slug': tutorial_slug})
+        return reverse('courses:list')
 
 
 class TutorialDeleteView(LoginRequiredMixin, TutorialObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
@@ -260,3 +247,20 @@ class TutorialDeleteView(LoginRequiredMixin, TutorialObjectMixin, SuccessMessage
     def get_success_url(self):
         course_slug = self.kwargs.get('course_slug')
         return reverse('courses:detail', kwargs={'slug': course_slug})
+
+
+class TutorialFinishedToggleRedirectView(LoginRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        obj = get_object_or_404(Tutorial, slug=kwargs.get('tutorial_slug'))
+        user = self.request.user
+        if user.is_authenticated:
+            tuto_finished = user.profile.tutorial_finished.all()
+            if not obj in tuto_finished:
+                user.profile.tutorial_finished.add(obj)
+                user.profile.level_experience += obj.experience
+                user.profile.save()
+            else:
+                user.profile.tutorial_finished.remove(obj)
+                user.profile.level_experience -= obj.experience
+                user.profile.save()
+        return obj.get_absolute_url()

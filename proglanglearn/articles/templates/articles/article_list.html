@@ -10,7 +10,7 @@
         {% for article in object_list %}
             <div class="mb-2">
                 <a href="{% url 'articles:detail' article_slug=article.slug %}"><img src="{{ article.thumbnail.url }}" alt="" /></a>
-                <h3 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>&nbsp;<a href="{{ article.get_favorite_url }}" class="favorite-span"><i class="{% if article in request.user.profile.favorite_articles.all %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
+                <h3 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if article in request.user.profile.favorite_articles.all %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
                 <div class="my-1">
                     <div class="tags small-fs">
                         Tags :

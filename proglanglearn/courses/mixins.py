@@ -81,7 +81,7 @@ class TutorialObjectMixin(object):
     parent_model = Course
 
     def get_object(self):
-        slug = self.kwargs.get('tutorial_slug')
+        slug = self.kwargs.get('tutorial_slug') or self.kwargs.get('slug')
         obj = None
         if slug is not None:
             obj = get_object_or_404(self.model, slug=slug)

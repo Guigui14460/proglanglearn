@@ -2,7 +2,6 @@ import os
 from decouple import config
 from django.utils.translation import ugettext_lazy as _
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
@@ -12,6 +11,8 @@ SECRET_KEY = config('SECRET_KEY')
 
 # Application definition
 INSTALLED_APPS = [
+    'filebrowser',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,6 +87,9 @@ LANGUAGES = [
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+
 
 # Redirect configs
 LOGIN__URL = 'accounts:login'
@@ -153,8 +157,9 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
 }
+TINYMCE_FILEBROWSER = True
 
-FILEBROWSER_DIRECTORY = 'tiny_uploads/'
+FILEBROWSER_DIRECTORY = 'uploads/'  # tiny_uploads/
 DIRECTORY = ''
 
 # ReCaptcha V3 config
@@ -162,3 +167,18 @@ RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.35
+
+# Filebrowser
+FILEBROWSER_URL_FILEBROWSER_MEDIA = '/media_root/filebrowser/'
+FILEBROWSER_PATH_FILEBROWSER_MEDIA = BASE_DIR + FILEBROWSER_URL_FILEBROWSER_MEDIA
+FILEBROWSER_SHOW_IN_DASHBOARD = False
+FILEBROWSER_NORMALIZE_FILENAME = True
+FILEBROWSER_LIST_PER_PAGE = 100
+FILEBROWSER_MEDIA_ROOT = MEDIA_ROOT
+FILEBROWSER_MEDIA_URL = MEDIA_URL
+FILEBROWSER_STATIC_ROOT = STATIC_ROOT
+FILEBROWSER_STATIC_URL = STATIC_URL
+URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser/'
+PATH_FILEBROWSER_MEDIA = STATIC_ROOT + 'filebrowser/'
+URL_TINYMCE = STATIC_URL + 'tinymce/'
+PATH_TINYMCE = STATIC_ROOT + 'tinymce/'

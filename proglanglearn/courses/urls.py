@@ -10,6 +10,7 @@ from .views import (
     TutorialCreateView,
     TutorialDetailView,
     TutorialFavoriteToggleRedirectView,
+    TutorialFinishedToggleRedirectView,
     TutorialUpdateView,
     TutorialDeleteView
 )
@@ -34,4 +35,6 @@ urlpatterns = [
          TutorialDeleteView.as_view(), name='tutorial-delete'),
     path('<str:course_slug>/<str:tutorial_slug>/favorite/',
          TutorialFavoriteToggleRedirectView.as_view(), name='tutorial-favorite'),
+    path('<str:course_slug>/<str:tutorial_slug>/finished/',
+         TutorialFinishedToggleRedirectView.as_view(), name='tutorial-finished'),
 ]

@@ -181,6 +181,9 @@ class Tutorial(models.Model):
     def get_favorite_url(self):
         return reverse('courses:tutorial-favorite', kwargs={'course_slug': self.course.slug, 'tutorial_slug': self.slug})
 
+    def get_finished_url(self):
+        return reverse('courses:tutorial-finished', kwargs={'course_slug': self.course.slug, 'tutorial_slug': self.slug})
+
 
 def pre_save_tutorial_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:

@@ -13,7 +13,7 @@
     <div class="row small-device">
         <div class="col-75 small-device mb-2">
             <img src="{{ object.thumbnail.url }}" alt="" />
-            <h2 class="article-title">{{ object.title }}&nbsp;<a href="{{ object.get_favorite_url }}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h2>
+            <h2 class="article-title">{{ object.title }}&nbsp;<a href="{{ object.get_favorite_url }}" title="{% if article_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h2>
             <div class="my-1">
                 <div class="tags">
                     Tags :
@@ -98,10 +98,10 @@ $('.favorite-span').hover(function(e){
 });
 function favori(star) {
     if (star.hasClass('fas')) {
-        star.parent().attr('title', "Enlever des favoris");
+        star.parent().attr('title', {% trans "Enlever des favoris" %});
         $('body').append("<div class='toast'>Article ajouté aux favoris</div>");
     } else {
-        star.parent().attr('title', "Mettre en favoris");
+        star.parent().attr('title', {% trans "Mettre en favoris" %});
         $('body').append("<div class='toast'>Article enlevé des favoris</div>");
     }
     $('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');

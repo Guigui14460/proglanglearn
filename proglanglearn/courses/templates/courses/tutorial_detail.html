@@ -39,10 +39,13 @@
     </div>
 {% endif %}
 <div class="center-text">
-    <i class="far fa-clock"></i>&nbsp;{% trans 'Temps de lecture :' %}&nbsp;{{ object.content|safe|time_estimate }}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>
+    {{ object.experience }}&nbsp;EXP&nbsp;|&nbsp;<i class="far fa-clock"></i>&nbsp;{{ object.content|safe|time_estimate }}&nbsp;{% trans 'minutes' %}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" title="{% if tutorial_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>
 </div>
 <div>
     {{ object.content|safe }}
+</div>
+<div class="my-2 d-flex" style="justify-content: space-around;">
+    <a class="tutorial-finished-link btn btn__large btn__success" href="{{ object.get_finished_url }}"><i class="tutorial-finished-icon far {% if object in request.user.profile.tutorial_finished.all %}fa-check-square{% else %}fa-square{% endif %}"></i>&nbsp;Tutoriel terminé</a>
 </div>
 {% if prev_tutorial or next_tutorial %}
     <div class="d-flex space-between">
@@ -124,6 +127,18 @@ $('.favorite-span').click(function(e){
             stars.each(function(e){favori($(this));});
         },
         error: function(error){console.log(error);}
+    });
+});
+$('.tutorial-finished-link').click(function(e){
+    e.preventDefault();
+    $.ajax({
+        url: $(this).attr('href'),
+        method: 'GET',
+        data: {finished: 'ok'},
+        success: function(data){
+            $('.tutorial-finished-icon').toggleClass('fa-check-square fa-square')
+        },
+        error: function(error){console.log(error);},
     });
 });
 {% endblock jquery %}
