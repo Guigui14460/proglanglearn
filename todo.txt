@@ -1,3 +1,4 @@
+Send email when a course is viewing if another course email was not sent, add published boolean field
 Payment engine
 Billing app (like Just Django's e-commerce website)
 Report System for administration
@@ -15,3 +16,11 @@ https://www.youtube.com/watch?v=zojnkKGRXp0
 https://www.youtube.com/watch?v=tG6O8YF91HE
 https://www.django-rest-framework.org/api-guide/validators/
 https://www.youtube.com/watch?v=Qj6XM3wVhTA
+
+def send_course_link(sender, instance, created, **kwargs):
+    if created:
+    	all_users_course_subscription = Profile.objects.filter(new_course_email=True)
+    	all_users_course_subscription_email = [user_subscription.user.email for user_subscription in all_users_course_subscription]
+    	send_mail("Un nouveau cours viens d'être créer !", "Viens le voir ! " + instance.title, settings.EMAIL_HOST_USER, all_users_course_subscription_email, fail_silently=False)
+
+post_save.connect(send_course_link, sender=Course)
