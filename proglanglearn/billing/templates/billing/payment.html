@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}Paiement - {% endblock title %}
+
+{% block main %}
+<h1 class="large">Procéder au paiement</h1>
+<p class="lead pb-2"><i class="fas fa-user-shield"></i> Payez en toute sécurité !</p>
+<div class="row small-device" id="payment">
+    <div class="col-66 small-device">
+        <input type="radio" name="payment-type" value="1" id="ptype-cc">
+        <label for="ptype-cc">Carte de crédit</label><br><br>
+        <input type="radio" name="payment-type" value="2" id="ptype-pp">
+        <label for="ptype-pp">PayPal</label>
+        <div id="paymentDiv" class="mt-1">
+            <div id="creditCard">
+                <div>
+                    Cartes bancaires acceptées : <br><i title="VISA" class="fab fa-cc-visa"></i> <i
+                        class="fab fa-cc-mastercard" title="MasterCard"></i> <i class="fab fa-cc-amex"
+                        title="American Express"></i> <i class="fab fa-cc-discover" title="Discover"></i> <i
+                        class="fab fa-cc-diners-club" title="Diners Club"></i> <i class="fab fa-cc-jcb"
+                        title="JCB"></i>
+                </div>
+                <form action="payment.html" method="GET" class="form">
+                    <div class="form-group">
+                        <label class="abs-icon">Numéro de carte bancaire : <span
+                                class="required-input">*</span><br><i class="fas fa-credit-card"></i><input
+                                type="text" placeholder="4242 4242 4242 4242" name="cc-num" maxlength="16"
+                                minlength="16" data-mask="0000 0000 0000 0000" required /></label></div>
+                    <div class="row extra-small-device">
+                        <div class="col-50 extra-small-device">
+                            <div class="form-group"><label class="abs-icon">Date d'expiration : <span
+                                        class="required-input">*</span><br><i
+                                        class="fas fa-calendar-times"></i><input type="text"
+                                        placeholder="MM / YY" name="cc-exp" data-mask="00 / 00"
+                                        minlength="4" maxlength="4" required /></label></div>
+                        </div>
+                        <div class="col-50 extra-small-device">
+                            <div class="form-group"><label class="abs-icon">CVC : <span
+                                        class="required-input">*</span><br><i class="fas fa-key"></i><input
+                                        type="text" placeholder="???" name="cc-cvc" data-mask="0000"
+                                        minlength="3" maxlength="4" required /></label></div>
+                        </div>
+                    </div>
+                    <div class="form-group"><label><input type="checkbox" name="cc-terms" required />
+                            Accepter les <a href="terms.html#payment">termes et conditions de vente</a> de
+                            Proglanglearn <span class="required-input">*</span></label></div><small
+                        class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span>
+                        sont obligatoires.</small>
+                    <div class="center-text"><button type="submit"
+                            class="btn btn__primary btn__large btn__300">Payer</button></div>
+                </form>
+            </div>
+            <div id="paypal">
+                <div class="center-text"><a href="#" class="btn btn__info btn__large tooltip">Payer avec
+                        PayPal<span class="tooltiptext">Vous allez être redirigé vers PayPal</span></a>
+                </div>
+            </div>
+            <!-- <div style="height: 25vh;"></div> -->
+        </div>
+    </div>
+    <div class="col-33 small-device">
+        <div id="paymentItems">
+            <div>
+                <div>
+                    <a href="course_detail.html">Django for beginner : Full course</a>
+                </div>
+                <div>
+                    80€
+                </div>
+            </div>
+            <div>
+                <div>
+                    <a href="course_detail.html">Password Manager Project in Swift</a>
+                </div>
+                <div>
+                    120€
+                </div>
+            </div>
+            <div class="success-color">
+                <div>
+                    FIRSTPURCHASE
+                </div>
+                <div>
+                    -50€
+                </div>
+            </div>
+            <div>
+                <form action="payment.html" class="form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Entrez un code promotionnel" />
+                    </div>
+                    <div class="center-text" style="justify-content: center;">
+                        <button type="submit" class="btn btn__success btn__large">Activer le code</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <div>Total :</div>
+                <div>150 €</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block jquery %}
+$('#creditCard').hide();
+$('#paypal').hide();
+$('#ptype-cc').click(function () {
+    if ($(this).is(':checked')) {
+        $('#paypal').hide('fast', function () { $('#creditCard').show('slow'); });
+    } else {
+        $('#creditCard').hide('fast', function () { $('#paypal').show('slow'); });
+    }
+});
+$('#ptype-pp').click(function () {
+    if ($(this).is(':checked')) {
+        $('#creditCard').hide('fast', function () { $('#paypal').show('slow'); });
+    } else {
+        $('#paypal').hide('fast', function () { $('#creditCard').show('slow'); });
+    }
+});
+{% endblock jquery %}

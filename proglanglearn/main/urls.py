@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from .views import (
     IndexView,
@@ -23,4 +23,5 @@ urlpatterns = [
     path('report/<int:comment_id>/',
          CommentReportView.as_view(), name='report-comment'),
     path('tags/<str:slug>/', LanguagesTagsView.as_view(), name='language_tag'),
+    path('payment/', include('billing.urls')),
 ]

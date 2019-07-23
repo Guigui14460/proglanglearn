@@ -20,11 +20,7 @@
     </div>
     <ul class="navbar-links sticky-box">
         {% for tutorial in course_tutorials %}
-            {% if object == tutorial %}
-                <li class="navbar-item"><a class="active" href="{{ tutorial.get_absolute_url }}" title="{{ tutorial.title|truncatechars:25 }}">{{ forloop.counter }} - {{ tutorial.title }} </a></li>
-            {% else %}
-                <li class="navbar-item"><a href="{{ tutorial.get_absolute_url }}" title="{{ tutorial.title|truncatechars:25 }}">{{ forloop.counter }} - {{ tutorial.title }} </a></li>
-            {% endif %}
+            <li class="navbar-item"><a {% if object == tutorial %}class="active"{% endif %} href="{{ tutorial.get_absolute_url }}" title="{{ tutorial.title|truncatechars:25 }}">{{ forloop.counter }} - {{ tutorial.title }} </a></li>
         {% endfor %}
     </ul>
 </aside>
@@ -43,9 +39,6 @@
 </div>
 <div>
     {{ object.content|safe }}
-</div>
-<div class="my-2 d-flex" style="justify-content: space-around;">
-    <a class="tutorial-finished-link btn btn__large btn__success" href="{{ object.get_finished_url }}"><i class="tutorial-finished-icon far {% if object in request.user.profile.tutorial_finished.all %}fa-check-square{% else %}fa-square{% endif %}"></i>&nbsp;Tutoriel terminé</a>
 </div>
 {% if prev_tutorial or next_tutorial %}
     <div class="d-flex space-between">
@@ -78,16 +71,4 @@
 {% block jquery %}
 {% include 'main/includes/ajax_comments.html' %}
 {% include 'main/includes/ajax_favorite.html' %}
-$('.tutorial-finished-link').click(function(e){
-    e.preventDefault();
-    $.ajax({
-        url: $(this).attr('href'),
-        method: 'GET',
-        data: {finished: 'ok'},
-        success: function(data){
-            $('.tutorial-finished-icon').toggleClass('fa-check-square fa-square')
-        },
-        error: function(error){console.log(error);},
-    });
-});
 {% endblock jquery %}

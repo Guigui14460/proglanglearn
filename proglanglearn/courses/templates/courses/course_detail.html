@@ -35,12 +35,24 @@
     </div>
 </section>
 <section>
-    <h2>Liste des tutoriels appartenant à ce cours</h2>
-    <ul class="tutorial-list">
-        {% for tut in object.get_tutorials %}
-            <li>{% if can_view %}<a href="{{ tut.get_absolute_url }}">{{ forloop.counter }} - {{ tut.title }}</a>{% else %}{{ forloop.counter }} - {{ tut.title }}{% endif %}</li>
-        {% endfor %}
-    </ul>
+    <div class="mt-1">
+        <h2>Tutoriels appartenant au cours</h2>
+        <ul class="tutorial-list">
+            {% for tut in object.get_tutorials %}
+                <li>{% if can_view %}<a href="{{ tut.get_absolute_url }}">{{ forloop.counter }} - {{ tut.title }}</a>{% else %}{{ forloop.counter }} - {{ tut.title }}{% endif %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if object.quizzes.all.count > 0 %}
+        <div class="mt-1">
+        <h2>Quiz appartenant au cours</h2>
+            <ul class="tutorial-list pt-1">
+                {% for quiz in object.quizzes.all %}
+                    <li>{% if can_view %}<a href="{{ quiz.get_absolute_url }}">{{ forloop.counter }} - {{ quiz.title }}</a>{% else %}{{ forloop.counter }} - {{ quiz.title }}{% endif %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 </section>
 {% if not can_view %}
     <section>

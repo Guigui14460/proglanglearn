@@ -35,7 +35,7 @@ class YearListFilter(admin.SimpleListFilter):
 
 class TutorialInline(admin.StackedInline):
     model = Tutorial
-    extra = 0
+    extra = 2
     fields = ('title', 'content', 'resources', 'experience')
     readonly_fields = ["get_edit_link"]
 
@@ -53,7 +53,7 @@ class CourseAdmin(ImportExportModelAdmin):
     list_display = ('title', 'get_author_profile', get_thumbnail_preview, 'difficulty', 'published_date',
                     'old_price', 'new_price')
     ordering = ('published_date', 'old_price', 'new_price')
-    search_fields = ['title']
+    search_fields = ['title', 'author__username']
     fields = ('author', 'title', 'thumbnail', get_thumbnail_preview, 'content_introduction',
               'difficulty', 'languages', 'tags', 'pdf', 'published_date', 'old_price', 'new_price')
     list_filter = ['published_date', YearListFilter]
@@ -64,7 +64,7 @@ class CourseAdmin(ImportExportModelAdmin):
 
     def get_author_profile(self, obj=None):
         if obj.pk:
-            return mark_safe(f"<a href='{reverse('main:index')}'>{obj.author.username}</a>")
+            return mark_safe(f"<a href='{reverse('admin:{}_{}_change'.format(obj.author.profile._meta.app_label, obj.author.profile._meta.model_name), args=(obj.author.profile.pk,))}'>{obj.author.username}</a>")
         return _("Enregistrez pour avoir le lien de l'auteur du cours")
     get_author_profile.allow_tags = True
     get_author_profile.short_description = _("Auteur")

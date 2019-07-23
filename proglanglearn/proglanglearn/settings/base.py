@@ -29,8 +29,10 @@ INSTALLED_APPS = [
     # My apps
     'accounts.apps.AccountsConfig',
     'articles.apps.ArticlesConfig',
+    'billing.apps.BillingConfig',
     'courses.apps.CoursesConfig',
     'main.apps.MainConfig',
+    'polls.apps.PollsConfig',
 ]
 
 AUTH_USER_MODEL = 'main.User'
@@ -66,6 +68,8 @@ TEMPLATES = [
         },
     },
 ]
+
+CONN_MAX_AGE = 30
 
 WSGI_APPLICATION = 'proglanglearn.wsgi.application'
 

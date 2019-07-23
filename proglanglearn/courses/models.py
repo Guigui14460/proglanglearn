@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models import Q
@@ -97,6 +98,19 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse('courses:detail', kwargs={'slug': self.slug})
 
+    def get_student_percentage_finished(self, student):
+        all_tutorials = self.get_tutorials()
+        all_tutorials_count = all_tutorials.count()
+        all_tutorials_student_and_course = student.tutorial_finished.filter(
+            tutorials__in=all_tutorials)
+        all_tutorials_student_and_course_count = all_tutorials_student_and_course.count()
+        try:
+            return int(round(all_tutorials_student_and_course_count / all_tutorials_count))
+        except:
+            raise ImproperlyConfigured(
+                _("Aucun tutoriel n'est relié au cours ! Veuillez en relié au moins un pour obtenir un pourcentage"))
+        return 0
+
     def get_all_experience(self):
         exp = 0
         qs = self.get_tutorials()
@@ -180,9 +194,6 @@ class Tutorial(models.Model):
 
     def get_favorite_url(self):
         return reverse('courses:tutorial-favorite', kwargs={'course_slug': self.course.slug, 'tutorial_slug': self.slug})
-
-    def get_finished_url(self):
-        return reverse('courses:tutorial-finished', kwargs={'course_slug': self.course.slug, 'tutorial_slug': self.slug})
 
 
 def pre_save_tutorial_receiver(sender, instance, *args, **kwargs):
