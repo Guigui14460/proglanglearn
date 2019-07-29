@@ -28,12 +28,13 @@
 
 {% block main %}
 <h1 class="large">{{ object.title }}</h1>
-{% if request.user.is_staff or object.author == request.user %}
-    <div class="my-2 d-flex space-between">
+<div class="my-2 d-flex space-between">
+    <a href="{% url 'courses:detail' slug=object.course.slug %}" class="btn btn__light btn__large">Retour</a>
+    {% if request.user.is_staff or object.author == request.user %}
         <a href="{% url 'courses:tutorial-update' course_slug=object.course.slug tutorial_slug=object.slug %}" class="btn btn__info btn__large">Modifier le tutoriel</a>
         <a href="{% url 'courses:tutorial-delete' course_slug=object.course.slug tutorial_slug=object.slug %}" class="btn btn__danger btn__large">Supprimer le tutoriel</a>
-    </div>
-{% endif %}
+    {% endif %}
+</div>
 <div class="center-text">
     {{ object.experience }}&nbsp;EXP&nbsp;|&nbsp;<i class="far fa-clock"></i>&nbsp;{{ object.content|safe|time_estimate }}&nbsp;{% trans 'minutes' %}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}{% if request.user.is_authenticated %}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" title="{% if tutorial_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if tutorial_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}
 </div>

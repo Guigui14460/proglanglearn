@@ -29,14 +29,16 @@
                 <div class="card-experience">{{ course.get_all_experience }} XP</div>
                 <div class="card-date">{{ course.published_date }}</div>
             </div>
-            <div class="card-price">
-                {% if course.new_price != None %}
-                    <span class="last"><del>{{ course.old_price }}€</del></span> <span class="reduction">-{{ course.get_percentage_discount }}%</span><br>
-                    <a href="payment.html" class="btn btn__outline__primary new">{% if course.new_price != 0 %}{{ course.new_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
-                {% else %}
-                    <a href="payment.html" class="btn btn__outline__primary new">{% if course.old_price != 0 %}{{ course.old_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
-                {% endif %}
-            </div>
+            {% if not request.user == course.author and not user.is_staff and not request.user in course.students.all %}
+                <div class="card-price">
+                    {% if course.new_price != None %}
+                        <span class="last"><del>{{ course.old_price }}€</del></span> <span class="reduction">-{{ course.get_percentage_discount }}%</span><br>
+                        <a href="{% url 'courses:user-enrolling' slug=course.slug %}" class="btn btn__outline__primary new">{% if course.new_price != 0 %}{{ course.new_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
+                    {% else %}
+                        <a href="{% url 'courses:user-enrolling' slug=course.slug %}" class="btn btn__outline__primary new">{% if course.old_price != 0 %}{{ course.old_price }}€{% else %}{% trans 'Gratuit' %}{% endif %}</a>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endfor %}

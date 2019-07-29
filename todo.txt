@@ -1,11 +1,10 @@
 Send email when a course is viewing if another course email was not sent, add published boolean field
-Payment engine
-Billing app (like Just Django's e-commerce website)
 Report System for administration
 Dashboard and display fovrite articles, tutorials, etc
 Profile and Account systems
+User notifications for change in course where he being enrolled
 Forum app
-Level and experience management
+Level and experience management (pandas)
 Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8
 Poll/Quiz app (to add in course to add more experience)
 Tag hover view (if possible)

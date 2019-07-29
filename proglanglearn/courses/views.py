@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView, View
 
+from billing.views import add_to_cart
 from main.forms import CommentModelForm
 from main.mixins import NavbarSearchMixin
 from main.models import Comment
@@ -54,7 +55,7 @@ class CourseDetailView(CourseObjectMixin, NavbarSearchMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-            ternary = True if self.request.user.profile in self.get_object(
+            ternary = True if self.request.user in self.get_object(
             ).students.all() or self.request.user == self.get_object().author or self.request.user.is_staff else False
         except:
             ternary = False
@@ -107,15 +108,15 @@ class CourseUserEnrolledView(LoginRequiredMixin, CourseObjectMixin, SuccessMessa
     def post(self, request, *args, **kwargs):
         course = self.get_object()
         user = request.user
-        if user in course.students.all():
+        if user in course.students.all() or user.is_staff or user == course.author:
             messages.info(request, _("Vous êtes déjà inscrit au cours"))
+            return redirect('courses:tutorial-detail', course_slug=course.slug, tutorial_slug=course.tutorial.first().slug)
         else:
-            # TODO : Make the redirection payment here
-            # and add the 3 last lines in PaymentView
-            course.students.add(user)
-            messages.success(request, _(
-                f"Bienvenue au cours : {course.title}"))
-        return redirect('courses:tutorial-detail', course_slug=course.slug, tutorial_slug=course.tutorial.first().slug)
+            if course.old_price == 0 or (course.new_price is not None and course.new_price == 0):
+                course.students.add(request.user)
+                messages.info(request, _(f"Bienvenue au cours : {course.title}"))
+                return redirect('courses:tutorial-detail', course_slug=course.slug, tutorial_slug=course.tutorial.first().slug)
+            return add_to_cart(request, course)
 
 
 class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
@@ -182,7 +183,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
             context = self.get_context_data(**kwargs)
             context['form'] = form
             html = render_to_string(
-                'main/comments.html', context, request=request)
+                'main/includes/comments.html', context, request=request)
             return JsonResponse({'html': html, 'comments_count': context['parent_comments'].count()})
         return self.get(request, *args, **kwargs)
 

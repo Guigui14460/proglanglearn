@@ -770,6 +770,14 @@ footer {
                         &:focus .fa-#{$social}-in {
                             color: map-get($social-network-dark-colors, $social);
                         }
+                    } @else if ($social == facebook){
+                        .fa-#{$social}-square {
+                            color: $color;
+                        }
+                        &:hover .fa-#{$social}-square,
+                        &:focus .fa-#{$social}-square {
+                            color: map-get($social-network-dark-colors, $social);
+                        }
                     } @else {
                         .fa-#{$social} {
                             color: $color;

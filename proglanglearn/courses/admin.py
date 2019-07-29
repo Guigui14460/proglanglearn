@@ -52,7 +52,7 @@ class TutorialInline(admin.StackedInline):
 class CourseAdmin(ImportExportModelAdmin):
     list_display = ('title', 'get_author_profile', get_thumbnail_preview, 'difficulty', 'published_date',
                     'old_price', 'new_price')
-    ordering = ('published_date', 'old_price', 'new_price')
+    ordering = ('-published_date', 'old_price', 'new_price')
     search_fields = ['title', 'author__username']
     fields = ('author', 'title', 'thumbnail', get_thumbnail_preview, 'content_introduction',
               'difficulty', 'languages', 'tags', 'pdf', 'published_date', 'old_price', 'new_price')

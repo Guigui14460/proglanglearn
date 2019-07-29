@@ -1,0 +1,52 @@
+<div id="paymentItems">
+    {% for course in order.courses.all %}
+        <div>
+            <div>
+                <a href="{% url 'courses:detail' slug=course.slug %}">{{ course.title }}</a>
+            </div>
+            <div>
+                {% if course.new_price and type == 'cart' %}
+                    <del>{{ course.old_price }}€</del>&nbsp;&nbsp;<span class="danger-color">{{ course.new_price }}€</span>
+                {% elif type != 'cart' %}
+                    <span class="danger-color">{% if course.new_price %}{{ course.new_price }}{% else %}{{ course.old_price }}{% endif %}€</span>
+                {% else %}
+                    <span class="danger-color">{{ course.old_price }}€</span>
+                {% endif %}
+                {% if type == 'cart' %}
+                    &nbsp;<a href="{{ course.get_remove_course_to_cart_url }}" class="danger-color"><i class="fas fa-trash"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% if order.coupon %}
+        <div>
+            <div class="success-color">{{ order.coupon.code }}</div>
+            <div>
+                <span class="success-color">-{{ order.coupon.discount_price }}€</span>&nbsp;
+                <a href="{{ order.coupon.get_remove_coupon_to_cart_url }}" class="danger-color"><i class="fas fa-trash"></i></a>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            <form action="{% url 'main:billing:add-coupon' %}" method="POST" class="form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ coupon_form.code }}
+                </div>
+                <div class="center-text" style="justify-content: center;">
+                    <button type="submit" class="btn btn__primary" style="margin: 0 auto;">Activer le code</button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+    <div>
+        <div>Total :</div>
+        <div>
+            {% if order.get_old_total != order.get_new_total %}
+                <del>{{ order.get_old_total }}€</del>&nbsp;&nbsp;{{ order.get_new_total }}€
+            {% else %}
+                {{ order.get_old_total }}€
+            {% endif %}
+        </div>
+    </div>
+</div>

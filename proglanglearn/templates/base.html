@@ -60,7 +60,7 @@
         {% block aside_left %}{% endblock aside_left %}
         <div class="container">
             {% for message in messages %}
-                <div class="alert {% if messages.level %}{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert__danger{% else %}alert__{{ message.tags }}{% endif %}{% endif %} alert__dismissable">
+                <div type="alert" class="alert {% if messages.level %}{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert__danger{% else %}alert__{{ message.tags }}{% endif %}{% endif %} alert__dismissable">
                     {{ message }}
                 </div>
             {% endfor %}

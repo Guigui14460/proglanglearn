@@ -1,0 +1,8 @@
+{% autoescape off %}
+Vous recevez ce mail car une erreur est survenue lors d'un paiement sur ProgLangLearn.
+
+Voici l'erreur générée :
+{{ error }}
+
+Cliquez sur ce lien pour aller directement sur notre site : {{ protocol }}://{{ domain }}{% url 'main:index' %}
+{% endautoescape %}

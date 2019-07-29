@@ -1,7 +1,7 @@
 html[data-theme="dark"]{
     .card .card-container {
-        .card-title, .card-content {
-            color: $white;
+        .card-title, .card-content, .card-content:hover, .card-content:active, .card-content:focus {
+            color: $white !important;
         }
         .card-price .last {
             color: $gray;
@@ -38,12 +38,22 @@ html[data-theme="dark"]{
     .card-container {
         padding: 10px;
 
-        .card-title, .card-content {
-            color: $black;
+        p {
+            margin: 0 auto;
+        }
+
+        .card-title, .card-content, .card-content:hover, .card-content:active, .card-content:focus {
+            color: $black !important;
         }
 
         .card-content {
-            margin-bottom: 85px;
+            display: block;
+            & > p:first-child {
+                margin-top: 10px;
+            }
+            & > p:last-child {
+                margin-bottom: 90px;
+            }
         }
 
         .card-tags {

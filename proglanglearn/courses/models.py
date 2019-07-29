@@ -52,7 +52,7 @@ class Course(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, verbose_name=_("Auteur"), related_name='courses')
     title = models.CharField(max_length=150, verbose_name=_("Titre du cours"))
-    slug = models.URLField(verbose_name=_(
+    slug = models.SlugField(verbose_name=_(
         "URL d'accès"), blank=True, null=True)
     thumbnail = models.ImageField(
         upload_to='course_thumbnail/', verbose_name=_("Vignette/vidéo d'introduction"))
@@ -97,6 +97,9 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         return reverse('courses:detail', kwargs={'slug': self.slug})
+
+    def get_remove_course_to_cart_url(self):
+        return reverse('main:billing:remove-course-to-cart', kwargs={'slug': self.slug})
 
     def get_student_percentage_finished(self, student):
         all_tutorials = self.get_tutorials()
@@ -168,7 +171,7 @@ class TutorialManager(models.Manager):
 class Tutorial(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, verbose_name=_("Cours rattaché"), related_name='tutorial')
-    slug = models.URLField(verbose_name=_(
+    slug = models.SlugField(verbose_name=_(
         "URL d'accès"), blank=True, null=True)
     title = models.CharField(
         max_length=100, verbose_name=_("Titre du tutoriel"))

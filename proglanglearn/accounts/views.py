@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
@@ -33,13 +34,13 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
     def post(self, request, *args, **kwargs):
         super().post(request, *args, **kwargs)
         user = request.user
-        if user.ip_address != None and get_ip_address_client(request) != user.ip_address:
+        if user.is_authenticated and user.ip_address != None and get_ip_address_client(request) != user.ip_address:
             try:
                 current_site = get_current_site(request)
                 subject = _(
                     "Suspicion de compromission de votre compte ProgLangLearn")
                 message = render_to_string('accounts/ip_address_email.html', {
-                    'protocol': 'http',  # ou https
+                    'protocol': settings.PROTOCOL,
                     'domain': current_site.domain,
                 })
                 msg = EmailMultiAlternatives(
@@ -77,7 +78,7 @@ class RegistrationView(NavbarSearchMixin, View):
                 subject = _("Activez votre compte ProgLangLearn")
                 message = render_to_string('registration/account_activation_email.html', {
                     'user': user,
-                    'protocol': 'http',  # ou https
+                    'protocol': settings.PROTOCOL,
                     'domain': current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': generator.make_token(user),
@@ -86,7 +87,7 @@ class RegistrationView(NavbarSearchMixin, View):
                     subject, message, "proglanglearn@gmail.com", to=[user.email])
                 msg.send()
                 messages.success(request, _(
-                    f"Envoi du mail d'activation du compte {user.username} envoyé avec succès"))
+                    f"Envoi du mail d'activation du compte {user.username} effectué avec succès"))
             except:
                 messages.warning(request, _(
                     "Échec de l'envoi de l'email d'activation"))
@@ -108,7 +109,7 @@ class RegistrationView(NavbarSearchMixin, View):
                     subject = _("Activez votre compte ProgLangLearn")
                     message = render_to_string('registration/account_activation_email.html', {
                         'user': user,
-                        'protocol': 'http',  # ou https
+                        'protocol': settings.PROTOCOL,
                         'domain': current_site.domain,
                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                         'token': generator.make_token(user),
@@ -117,7 +118,7 @@ class RegistrationView(NavbarSearchMixin, View):
                         subject, message, "proglanglearn@gmail.com", to=[user.email])
                     msg.send()
                     messages.warning(request, _(
-                        f"Votre compte existait déjà mais n'a pas été activé. Envoi du mail d'activation du compte {user.username} envoyé avec succès"))
+                        f"Votre compte existait déjà mais n'a pas été activé. Envoi du mail d'activation du compte {user.username} effectué avec succès"))
                 except:
                     messages.warning(request,
                                      _("Échec de l'envoi de l'email d'activation"))

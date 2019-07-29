@@ -3,6 +3,7 @@ from .base import *
 
 DEBUG = config('DEBUG', cast=bool)
 
+PROTOCOL = 'http'
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
 INTERNAL_IPS = [
     # debug_toolbar
@@ -61,8 +62,8 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 # Stripe config
-STRIPE_PUBLIC_KEY = ''
-STRIPE_SECRET_KEY = ''
+STRIPE_PUBLIC_KEY = 'pk_test_buF4FsDmstqHzKr4Nc5TKxbH00rXE4mpbI'
+STRIPE_SECRET_KEY = 'sk_test_bokSwLp3jIVrQ0WYZP4ff8tx009fk1ZPGJ'
 
 # HTML minifier
 HTML_MINIFY = True

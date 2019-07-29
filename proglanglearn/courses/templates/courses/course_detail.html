@@ -58,8 +58,7 @@
     <section>
         <h2>Enrollez-vous dès maintenant pour accéder à ce cours</h2>
         <div class="center-text">
-        {% comment %} TODO : paiement quand ce sera fait {% endcomment %}
-            <a href="{% url 'courses:user-enrolling' slug=object.slug %}" class="btn btn__danger btn__large">S'enroller 
+            <a href="{% url 'courses:user-enrolling' slug=object.slug %}" class="btn btn__light btn__large">S'enroller 
                 {% if object.new_price %}
                     {% if object.new_price == 0 %}
                         gratuitement
@@ -74,6 +73,7 @@
                     {% endif %}
                 {% endif %}
             </a>
+            <a href="{{ object.get_remove_course_to_cart_url }}" class="btn btn__danger btn__large">Enlever du panier</a>
         </div>
     </section>
 {% endif %}

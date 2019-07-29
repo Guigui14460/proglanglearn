@@ -2,6 +2,7 @@ from .base import *
 
 
 DEBUG = config('DEBUG', cast=bool)
+PROTOCOL = 'https'
 ALLOWED_HOSTS = ['127.0.0.1',
                  'guillaumeletellier.pythonanywhere.com',
                  'proglanglearn.com']
@@ -47,5 +48,5 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Stripe config
-STRIPE_PUBLIC_KEY = ''
-STRIPE_SECRET_KEY = ''
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')

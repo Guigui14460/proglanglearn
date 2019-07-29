@@ -47,7 +47,7 @@ class Article(models.Model):
         User, on_delete=models.SET_NULL, null=True, verbose_name=_("Auteur"), related_name='articles')
     title = models.CharField(
         max_length=150, verbose_name=_("Titre de l'article"))
-    slug = models.URLField(verbose_name=_(
+    slug = models.SlugField(verbose_name=_(
         "URL d'accès"), blank=True, null=True)
     thumbnail = models.ImageField(
         upload_to='blog_thumbnail/', verbose_name=_("Vignette/vidéo d'article"))
