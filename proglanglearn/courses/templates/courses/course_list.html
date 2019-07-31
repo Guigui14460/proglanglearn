@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}Cours - {% endblock title %}
+{% block title %}{% trans 'Cours' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Tous les cours</h1>
+<h1 class="large">{% trans 'Tous les cours' %}</h1>
 <div class="grid-cards my-2">
 {% for course in object_list %}
     <div class="card card__round card-hoverable">
@@ -26,7 +26,7 @@
             </a>
             <div class="card-info">
                 <div class="card-difficulty">{{ course.get_difficulty_display }}</div>
-                <div class="card-experience">{{ course.get_all_experience }} XP</div>
+                <div class="card-experience">{{ course.get_all_experience }} EXP</div>
                 <div class="card-date">{{ course.published_date }}</div>
             </div>
             {% if not request.user == course.author and not user.is_staff and not request.user in course.students.all %}

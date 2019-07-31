@@ -1,14 +1,16 @@
-Send email when a course is viewing if another course email was not sent, add published boolean field
+﻿Change views function to class-based views in billing.views
+Send email when a course is viewing if another course email was not sent, add published boolean field (get method of the CourseListView)
 Report System for administration
 Dashboard and display fovrite articles, tutorials, etc
 Profile and Account systems
 User notifications for change in course where he being enrolled
 Forum app
 Level and experience management (pandas)
-Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8
+Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template)
 Poll/Quiz app (to add in course to add more experience)
 Tag hover view (if possible)
 Make an url to set language for internationalisation
+PayPal integration (see PrettyPrinted's Paypal integration in Flask video)
 
 # https://www.youtube.com/watch?v=SMRaHSZiwWE
 https://www.youtube.com/watch?v=zojnkKGRXp0

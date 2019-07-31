@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import redirect_to_login
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
 
 from courses.models import Course
 from .models import Quiz
@@ -54,5 +54,6 @@ class QuizObjectMixin(object):
             obj = get_object_or_404(self.model, id=id)
         if obj.course == course:
             return obj
-        messages.warning(self.request, _("Le quiz que vous essayez d'accéder n'appartient pas ou plus au cours"))
+        messages.warning(self.request, _(
+            "Le quiz que vous essayez d'accéder n'appartient pas ou plus au cours"))
         return Http404

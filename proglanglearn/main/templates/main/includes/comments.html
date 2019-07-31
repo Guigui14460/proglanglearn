@@ -1,21 +1,23 @@
+{% load i18n %}
+
 <div class="comments py-2">
     <div class="container">
         {% if request.user.is_authenticated %}
             <form method="POST" class="form comment-form" action=".">
                 {% csrf_token %}
                 <fieldset>
-                    <legend>Rédiger un commentaire</legend>
+                    <legend>{% trans 'Rédiger un commentaire' %}</legend>
                     <div class="form-group">
                         {{ form.content.label_tag }}
                         {{ form.content }}
                     </div>
                 </fieldset>
                 <div class="center-text">
-                    <button type="submit" class="btn btn__info btn__large btn__300">Commenter</button>
+                    <button type="submit" class="btn btn__info btn__large btn__300">{% trans 'Commenter' %}</button>
                 </div>
             </form>
         {% else %}
-            <h4 class="center-text">Vous devez être connecter pour commenter</h4>
+            <h4 class="center-text">{% trans 'Vous devez être connecter pour commenter' %}</h4>
         {% endif %}
         <div class="mt-2">
             <div class="center-text">
@@ -24,9 +26,9 @@
             {% for parent_comment in parent_comments %}
                 <div class="comment">
                     <div class="commentary">
-                        <img src="{{ parent_comment.author.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
-                        <span><a href="profile.html">{{ parent_comment.author.username }}</a>, {{ parent_comment.timestamp }}</span>
-                        <span class="ml-auto"><a href="{{ parent_comment.get_report_url }}" title="Signaler le commentaire">Signaler</a></span>
+                        <img src="{{ parent_comment.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
+                        <span><a href="profile.html">{{ parent_comment.author.username }}</a>, {{ parent_comment.timestamp|timesince }}</span>
+                        <span class="ml-auto"><a href="{{ parent_comment.get_report_url }}" title="{% trans 'Signaler le commentaire' %}">{% trans 'Signaler' %}</a></span>
                     </div>
                     <p>{{ parent_comment.content }}</p>
                     <div>
@@ -34,9 +36,9 @@
                             {% for reply in parent_comment.children %}
                                 <div class="comment">
                                     <div class="commentary">
-                                        <img src="{{ reply.author.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
-                                        <span><a href="profile.html">{{ reply.author.username }}</a>, {{ reply.timestamp }}</span>
-                                        <span class="ml-auto"><a href="{{ reply.get_report_url }}" title="Signaler le commentaire">Signaler</a></span>
+                                        <img src="{{ reply.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
+                                        <span><a href="profile.html">{{ reply.author.username }}</a>, {{ reply.timestamp|timesince }}</span>
+                                        <span class="ml-auto"><a href="{{ reply.get_report_url }}" title="{% trans 'Signaler le commentaire' %}">{% trans 'Signaler' %}</a></span>
                                     </div>
                                     <p>{{ reply.content }}</p>
                                 </div>
@@ -45,9 +47,9 @@
                         </div>
                         <div class="center-text">
                             {% if request.user.is_authenticated %}
-                                <button type="submit" class="reply-btn btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
+                                <button type="submit" class="reply-btn btn btn__outline__info"><i class="fas fa-reply"></i>&nbsp;{% trans 'Répondre' %}</button>
                             {% else %}
-                                <button disabled type="submit" class="reply btn btn__outline__info"><i class="fas fa-reply"></i> Répondre</button>
+                                <button disabled type="submit" class="reply btn btn__outline__info"><i class="fas fa-reply"></i>&nbsp;{% trans 'Répondre' %}</button>
                             {% endif %}
                         </div>
                         {% if request.user.is_authenticated %}
@@ -55,7 +57,7 @@
                                 <form method="POST" class="form reply-form" action=".">
                                     {% csrf_token %}
                                     <fieldset>
-                                        <legend>Rédiger une réponse</legend>
+                                        <legend>{% trans 'Rédiger une réponse' %}</legend>
                                         <div class="form-group">
                                             <input type="hidden" name="parent_id" value="{{ parent_comment.id }}">
                                             {{ form.content.label_tag }}
@@ -64,9 +66,9 @@
                                     </fieldset>
                                     <div class="center-text">
                                         {% if request.user.is_authenticated %}
-                                            <button type="submit" class="btn btn__info btn__large"><i class="fas fa-reply"></i> Envoyer</button>
+                                            <button type="submit" class="btn btn__info btn__large"><i class="fas fa-reply"></i>&nbsp;{% trans 'Envoyer' %}</button>
                                         {% else %}
-                                            <button disabled type="submit" class="btn btn__info btn__large"><i class="fas fa-reply"></i> Envoyer</button>
+                                            <button disabled type="submit" class="btn btn__info btn__large"><i class="fas fa-reply"></i>&nbsp;{% trans 'Envoyer' %}</button>
                                         {% endif %}
                                     </div>
                                 </form>
@@ -75,7 +77,7 @@
                     </div>
                 </div>
                 {% empty %}
-                    <h4 class="center-text">Il n'y a pas encore de commentaire.</h4>
+                    <h4 class="center-text">{% trans 'Il n\'y a pas encore de commentaire.' %}</h4>
             {% endfor %}
         </div>
     </div>

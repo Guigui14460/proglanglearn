@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Problème interne serveur - {% endblock title %}
+{% block title %}{% trans 'Problème interne serveur' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Problème de serveur !</h1>
-<p class="lead">Un problème est survenu lors de la requête au serveur. Réessayer de revenir plus tard.</p>
+<h1 class="large">{% trans 'Problème de serveur !' %}</h1>
+<p class="lead">{% trans 'Un problème est survenu lors de la requête au serveur. Veuillez réitérer votre réquête.' %}</p>
 <div class="center-image">
     <svg class="my-2" xmlns="http://www.w3.org/2000/svg" width="1119.609" height="688.817"
         viewBox="0 0 1119.609 688.817">
@@ -137,7 +137,7 @@
         </g>
     </svg>
 </div>
-<p class="error-type">Code erreur : <span class="red-color">500</span></p>
+<p class="error-type">{% trans 'Code erreur' %} : <span class="red-color">500</span></p>
 {% endblock main %}
 
 {% block javascript %}
@@ -145,4 +145,4 @@
 <script src="{% static 'js/TimelineMax.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %} let tl = new TimelineMax(); tl.from('#Server', .7, { y: '-100', opacity: 0, ease: Power1.easeIn }); tl.from('#Groupe_2', 1, { x: '-190', opacity: 0, ease: Bounce.easeOut }, '-=0.3'); tl.from('#Groupe_3', .7, { x: '+180', opacity: 0, ease: Power1.easeOut }, '-=1.7'); {% endblock jquery %}
+{% block jquery %} var tl = new TimelineMax(); tl.from('#Server', .7, { y: '-100', opacity: 0, ease: Power1.easeIn }).from('#Groupe_2', 1, { x: '-190', opacity: 0, ease: Bounce.easeOut }, '-=0.3').from('#Groupe_3', .7, { x: '+180', opacity: 0, ease: Power1.easeOut }, '-=1.7'); {% endblock jquery %}

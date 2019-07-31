@@ -1,7 +1,9 @@
-{% autoescape off %}
-Salut {{ user.username }},
+{% load i18n %}
 
-Pour activer ton compte, clique sur le lien ci-dessous :
+{% autoescape off %}
+{% blocktrans %}Salut {{ user.username }},
+
+Pour activer ton compte, clique sur le lien ci-dessous :{% endblocktrans %}
 
 {{ protocol }}://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
 {% endautoescape %}

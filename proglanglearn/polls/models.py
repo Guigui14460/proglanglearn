@@ -4,16 +4,16 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ImproperlyConfigured
 from django.core.validators import validate_comma_separated_integer_list
 from django.db import models
 from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
 from tinymce.models import HTMLField
 
+from .managers import SittingManager
 
 User = get_user_model()
 
@@ -21,13 +21,13 @@ User = get_user_model()
 class Quiz(models.Model):
     course = models.ForeignKey(
         'courses.Course', on_delete=models.CASCADE, related_name='quizzes')
-    title = models.CharField(max_length=30, verbose_name=_("Titre"))
+    title = models.CharField(max_length=30, verbose_name=_("titre"))
     description = HTMLField(verbose_name=_(
-        "Description"), blank=True, null=True)
+        "description"), blank=True, null=True)
     random_order = models.BooleanField(default=True, verbose_name=_(
-        "Ordre aléatoire ?"), help_text=_("Afficher aléatoirement les questions ?"))
+        "ordre aléatoire ?"), help_text=_("Afficher aléatoirement les questions ?"))
     single_attempt = models.BooleanField(
-        default=False, verbose_name=_("Un seul essai"))
+        default=False, verbose_name=_("un seul essai"))
 
     class Meta:
         verbose_name = _("quiz")
@@ -63,12 +63,16 @@ class Question(models.Model):
     quiz = models.ManyToManyField(
         Quiz, verbose_name=_("Quiz"), related_name='questions')
     question_text = HTMLField(
-        max_length=1000, verbose_name=_("Question"))
+        max_length=1000, verbose_name=_("question"))
     explanation = HTMLField(blank=True, null=True,
-                            max_length=2000, verbose_name=_("Explication"))
+                            max_length=2000, verbose_name=_("explication"))
     random_answer_display = models.BooleanField(default=True, verbose_name=_(
-        "Ordre aléatoire ?"), help_text=_("Afficher les réponses dans le désordre ?"))
-    experience = models.PositiveSmallIntegerField(verbose_name=_("Expérience"), default=20)
+        "ordre aléatoire ?"), help_text=_("Afficher les réponses dans le désordre ?"))
+    experience = models.PositiveSmallIntegerField(verbose_name=_("expérience"), default=20)
+
+    class Meta:
+        verbose_name = _("question")
+        verbose_name_plural = _("questions")
 
     def __str__(self):
         return mark_safe(self.question_text)
@@ -88,73 +92,45 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, verbose_name=_(
-        "Question"), on_delete=models.CASCADE, related_name='answers')
+        "question"), on_delete=models.CASCADE, related_name='answers')
     content = HTMLField(max_length=450, verbose_name=_(
-        "Contenu"), help_text=_("Entrez la réponse que vous voulez afficher"))
+        "contenu"), help_text=_("Entrez la réponse que vous voulez afficher"))
     correct = models.BooleanField(default=False, verbose_name=_(
-        "Correct"), help_text=_("Est-ce la bonne réponse ?"))
+        "correct"), help_text=_("Est-ce la bonne réponse ?"))
 
     def __str__(self):
         return mark_safe(self.content)
 
     class Meta:
         verbose_name = _("réponse")
-
-
-class SittingManager(models.Manager):
-    def new_sitting(self, user, quiz):
-        question_set = quiz.order_question()
-        question_set = [item.id for item in question_set]
-        if len(question_set) == 0:
-            raise ImproperlyConfigured(
-                'Aucune question n\'a été reliée au quiz. Configurez les questions correctement')
-        questions = ",".join(map(str, question_set)) + ","
-        new_sitting = self.create(user=user,
-                                  quiz=quiz,
-                                  question_order=questions,
-                                  question_list=questions,
-                                  incorrect_questions="",
-                                  current_score=0,
-                                  complete=False,
-                                  user_answers='{}')
-        return new_sitting
-
-    def user_sitting(self, user, quiz):
-        if quiz.single_attempt is True and self.filter(user=user, quiz=quiz, complete=True).exists():
-            return False
-        try:
-            sitting = self.get(user=user, quiz=quiz, complete=False)
-        except Sitting.DoesNotExist:
-            sitting = self.new_sitting(user, quiz)
-        except Sitting.MultipleObjectsReturned:
-            sitting = self.filter(user=user, quiz=quiz, complete=False)[0]
-        return sitting
+        verbose_name_plural = _("réponses")
 
 
 class Sitting(models.Model):
     user = models.ForeignKey(User, verbose_name=_(
-        "Utilisateur"), on_delete=models.CASCADE)
+        "utilisateur"), on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, verbose_name=_(
-        "Quiz"), on_delete=models.CASCADE)
+        "quiz"), on_delete=models.CASCADE)
     question_order = models.CharField(max_length=1024, verbose_name=_(
-        "Ordre des questions"), validators=[validate_comma_separated_integer_list])
+        "ordre des questions"), validators=[validate_comma_separated_integer_list])
     question_list = models.CharField(max_length=1024, verbose_name=_(
-        "Liste des questions"), validators=[validate_comma_separated_integer_list])
+        "liste des questions"), validators=[validate_comma_separated_integer_list])
     incorrect_questions = models.CharField(max_length=1024, blank=True, verbose_name=_(
-        "Questions incorrectes"), validators=[validate_comma_separated_integer_list])
-    current_score = models.IntegerField(verbose_name=_("Score actuel"))
+        "questions incorrectes"), validators=[validate_comma_separated_integer_list])
+    current_score = models.IntegerField(verbose_name=_("score actuel"))
     complete = models.BooleanField(
-        default=False, verbose_name=_("Terminé"))
+        default=False, verbose_name=_("terminé"))
     user_answers = models.TextField(
-        blank=True, default='{}', verbose_name=_("Réponses de l'utilisateur"))
+        blank=True, default='{}', verbose_name=_("réponses de l'utilisateur"))
     start = models.DateTimeField(
-        auto_now_add=True, verbose_name=_("Commencement"))
-    end = models.DateTimeField(null=True, blank=True, verbose_name=_("Fin"))
+        auto_now_add=True, verbose_name=_("commencement"))
+    end = models.DateTimeField(null=True, blank=True, verbose_name=_("fin"))
 
     objects = SittingManager()
 
     class Meta:
         verbose_name = _("séance")
+        verbose_name_plural = _("séances")
 
     def get_first_question(self):
         if not self.question_list:

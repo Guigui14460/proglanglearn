@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
 from django.views.generic import View
 
 from .forms import LoginForm, SignUpForm, PasswordResetForm
@@ -18,6 +18,7 @@ from .utils import check_level, get_user_type
 from .tokens import AccountActivationTokenGenerator
 from main.mixins import NavbarSearchMixin
 from main.utils import get_ip_address_client
+
 
 User = get_user_model()
 
@@ -44,7 +45,7 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
                     'domain': current_site.domain,
                 })
                 msg = EmailMultiAlternatives(
-                    subject, message, "proglanglearn@gmail.com", to=[user.email])
+                    subject, message, "No reply <ProgLangLearn>", to=[user.email])
                 msg.send()
             except:
                 pass
@@ -84,7 +85,7 @@ class RegistrationView(NavbarSearchMixin, View):
                     'token': generator.make_token(user),
                 })
                 msg = EmailMultiAlternatives(
-                    subject, message, "proglanglearn@gmail.com", to=[user.email])
+                    subject, message, "No reply <ProgLangLearn>", to=[user.email])
                 msg.send()
                 messages.success(request, _(
                     f"Envoi du mail d'activation du compte {user.username} effectué avec succès"))
@@ -115,7 +116,7 @@ class RegistrationView(NavbarSearchMixin, View):
                         'token': generator.make_token(user),
                     })
                     msg = EmailMultiAlternatives(
-                        subject, message, "proglanglearn@gmail.com", to=[user.email])
+                        subject, message, "No reply <ProgLangLearn>", to=[user.email])
                     msg.send()
                     messages.warning(request, _(
                         f"Votre compte existait déjà mais n'a pas été activé. Envoi du mail d'activation du compte {user.username} effectué avec succès"))
@@ -214,7 +215,7 @@ class PandasTestView(NavbarSearchMixin, View):
             context['check'] = check_level(request)
             return render(request, self.template_name, context)
         return redirect('accounts:login')
-    
+
     def get_context_data(self, **kwargs):
         context = {**kwargs}
         context['navbar_search_form'] = self.form_navbar()

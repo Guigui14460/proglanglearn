@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
 
 import os
 import pandas as pd

@@ -1,6 +1,9 @@
 import os
-from decouple import config
+
 from django.utils.translation import ugettext_lazy as _
+
+from decouple import config
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -26,6 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'snowpenguin.django.recaptcha3',
     'tinymce',
+    'xhtml2pdf',
 
     # My apps
     'accounts.apps.AccountsConfig',
@@ -97,6 +101,10 @@ LANGUAGES = [
     ('fr', _("Français")),
     ('en', _("Anglais"))
 ]
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 # Static files (CSS, JavaScript, Images, ...)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

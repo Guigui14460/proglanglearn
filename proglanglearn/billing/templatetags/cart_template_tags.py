@@ -13,3 +13,8 @@ def cart_item_count(user):
         if qs.exists():
             return qs.first().courses.count()
     return 0
+
+
+@register.filter
+def zfill(number, fill):
+    return str(number).zfill(int(fill))

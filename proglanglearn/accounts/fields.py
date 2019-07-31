@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
 
 class StringListField(models.TextField):
@@ -18,8 +18,3 @@ class StringListField(models.TextField):
 
     def from_db_value(self, value, expression, connection, context):
         return self.to_python(value)
-
-    # def formfield(self, **kwargs):
-    #     defaults = {'form_class': models.TextField}
-    #     defaults.update(kwargs)
-    #     return super(StringListField, self).formfield(**defaults)

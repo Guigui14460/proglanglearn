@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}{{ object.title }} - {% endblock title %}
 
@@ -6,27 +7,31 @@
 <h1 class="large">{{ object.title }}</h1>
 {% if object.author == request.user or request.user.is_staff %}
     <div class="my-2 d-flex space-between">
-        <a href="{% url 'courses:list' %}" class="btn btn__success btn__large">Retour</a>
-        <a href="{% url 'courses:update' slug=object.slug %}" class="btn btn__info btn__large">Modifier l'aperçu du cours</a>
-        <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">Supprimer le cours</a>
+        <a href="{% url 'courses:list' %}" class="btn btn__success btn__large">{% trans 'Retour' %}</a>
+        <a href="{% url 'courses:update' slug=object.slug %}" class="btn btn__info btn__large">{% trans 'Modifier l\'aperçu du cours' %}</a>
+        <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">{% trans 'Supprimer le cours' %}</a>
     </div>
 {% endif %}
 <section>
-    <h2>Informations générales</h2>
+    <h2>{% trans 'Informations générales' %}</h2>
     <figure>
         <img src="{{ object.thumbnail.url }}" alt="Vignette du cours">
     </figure>
     {{ object.content_introduction|safe }}
-    <p>Cours rédigé par <a href="profile.html">{{ object.author.username }}</a> et paru le {{ object.published_date }}</p>
+    <p>{% trans "Cours rédigé par" %} <a href="profile.html">{{ object.author.username }}</a> {% trans 'et paru le' %} {{ object.published_date }}</p>
     <div>
         {% if object.get_all_downloadable_resources != 0 %}
             <div class="lead">
-                <i class="fas fa-file-code"></i> {{ object.get_all_downloadable_resources }} ressources téléchargables
+                {% blocktrans count counter=object.get_all_downloadable_resources %}
+                    <i class="fas fa-file-code"></i> {{ counter }} ressource téléchargable
+                {% plural %}
+                    <i class="fas fa-file-code"></i> {{ counter }} ressources téléchargables
+                {% endblocktrans %}
             </div>
         {% endif %}
         {% if object.pdf %}
             <div class="lead">
-                <i class="fas fa-file-pdf"></i> <a href="{{ object.pdf.url }}">PDF disponible</a>
+                <i class="fas fa-file-pdf"></i>&nbsp;<a href="{{ object.pdf.url }}">{% trans 'PDF disponible' %}</a>
             </div>
         {% endif %}
         <div class="tags">
@@ -36,7 +41,7 @@
 </section>
 <section>
     <div class="mt-1">
-        <h2>Tutoriels appartenant au cours</h2>
+        <h2>{% trans 'Tutoriels appartenant au cours' %}</h2>
         <ul class="tutorial-list">
             {% for tut in object.get_tutorials %}
                 <li>{% if can_view %}<a href="{{ tut.get_absolute_url }}">{{ forloop.counter }} - {{ tut.title }}</a>{% else %}{{ forloop.counter }} - {{ tut.title }}{% endif %}</li>
@@ -45,7 +50,7 @@
     </div>
     {% if object.quizzes.all.count > 0 %}
         <div class="mt-1">
-        <h2>Quiz appartenant au cours</h2>
+        <h2>{% trans 'Quiz appartenant au cours' %}</h2>
             <ul class="tutorial-list pt-1">
                 {% for quiz in object.quizzes.all %}
                     <li>{% if can_view %}<a href="{{ quiz.get_absolute_url }}">{{ forloop.counter }} - {{ quiz.title }}</a>{% else %}{{ forloop.counter }} - {{ quiz.title }}{% endif %}</li>
@@ -56,24 +61,24 @@
 </section>
 {% if not can_view %}
     <section>
-        <h2>Enrollez-vous dès maintenant pour accéder à ce cours</h2>
+        <h2>{% trans 'Enrollez-vous dès maintenant pour accéder à ce cours' %}</h2>
         <div class="center-text">
-            <a href="{% url 'courses:user-enrolling' slug=object.slug %}" class="btn btn__light btn__large">S'enroller 
+            <a href="{% url 'courses:user-enrolling' slug=object.slug %}" class="btn btn__light btn__large">{% trans 'S\'enroller' %} 
                 {% if object.new_price %}
                     {% if object.new_price == 0 %}
-                        gratuitement
+                        {% trans 'gratuitement' %}
                     {% else %}
-                        pour {{ object.new_price }}€
+                        {% trans 'pour' %} {{ object.new_price }}€
                     {% endif %}
                 {% else %}
                     {% if object.old_price == 0 %}
-                        gratuitement
+                        {% trans 'gratuitement' %}
                     {% else %}
-                        pour {{ object.old_price }}€
+                        {% trans 'pour' %} {{ object.old_price }}€
                     {% endif %}
                 {% endif %}
             </a>
-            <a href="{{ object.get_remove_course_to_cart_url }}" class="btn btn__danger btn__large">Enlever du panier</a>
+            <a href="{{ object.get_remove_course_to_cart_url }}" class="btn btn__danger btn__large">{% trans 'Enlever du panier' %}</a>
         </div>
     </section>
 {% endif %}

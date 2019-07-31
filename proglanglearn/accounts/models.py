@@ -2,72 +2,60 @@ from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_delete, post_save
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
-from .fields import StringListField
+from django_countries.fields import CountryField
+
 from articles.models import Article
 from courses.models import Course, Tutorial
 from main.models import Language, Tag
+from .fields import StringListField
+from .managers import ProfileManager
 
 
 User = get_user_model()
 
 
-class ProfileQuerySet(models.QuerySet):
-    def dev_profile_shown(self):
-        return self.filter(is_dev=True)
-
-    def student_profile_shown(self):
-        return self.filter(is_student=True)
-
-
-class ProfileManager(models.Manager):
-    def get_queryset(self):
-        return ProfileQuerySet(self.model, using=self._db)
-
-    def full_profile_shown(self):
-        return (self.get_queryset().dev_profile_shown() | self.get_queryset().student_profile_shown()).distinct()
-
-
 class Profile(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, verbose_name=_("Utilisateur associé"), related_name='profile')
+        User, on_delete=models.CASCADE, verbose_name=_("utilisateur associé"), related_name='profile')
     is_dev = models.BooleanField(
-        default=False, verbose_name=_("Est un développeur"))
+        default=False, verbose_name=_("est un développeur"))
     is_student = models.BooleanField(
-        default=False, verbose_name=_("Est un étudiant en informatique"))
+        default=False, verbose_name=_("est un étudiant en informatique"))
     is_teacher = models.BooleanField(
-        default=False, verbose_name=_("Est un formateur"))
+        default=False, verbose_name=_("est un formateur"))
     image = models.ImageField(upload_to='user_pictures/',
-                              default='user_pictures/default.png', verbose_name=_("Image de profil"), validators=[FileExtensionValidator(allowed_extensions=['jpeg', 'png', 'jpg'])])
-    country = models.CharField(max_length=30)
+                              default='user_pictures/default.png', verbose_name=_("image de profil"), validators=[FileExtensionValidator(allowed_extensions=['jpeg', 'png', 'jpg'])])
+    country = CountryField(verbose_name=_('pays'))
     biography = models.TextField(max_length=1500,
-                                 blank=True, null=True, verbose_name=_("Biographie"))
+                                 blank=True, null=True, verbose_name=_("biographie"))
     languages_learnt = models.ManyToManyField(Language, verbose_name=_(
-        "Langages maîtrisés"), blank=True)
+        "langages maîtrisés"), blank=True)
     tag_learnt = models.ManyToManyField(Tag, verbose_name=_(
-        "Compétences apprises"), blank=True)
+        "compétences apprises"), blank=True)
     strike = models.PositiveSmallIntegerField(
-        default=0, verbose_name=_("Signalement"))
+        default=0, verbose_name=_("signalement"))
     email_confirmed = models.BooleanField(
-        default=False, verbose_name=_("Addresse e-mail confirmée"))
+        default=False, verbose_name=_("addresse e-mail confirmée"))
     # Advanced options
     level = models.PositiveSmallIntegerField(
-        default=1, verbose_name=_("Niveau"))
+        default=1, verbose_name=_("niveau"))
     level_experience = models.PositiveIntegerField(
-        default=0, verbose_name=_("Expérience acquise"))
+        default=0, verbose_name=_("expérience acquise"))
     favorite_articles = models.ManyToManyField(Article,
-                                               verbose_name=_("Articles favoris"), blank=True, related_name='article_favorite')
+                                               verbose_name=_("articles favoris"), blank=True, related_name='article_favorite')
     favorite_subjects = StringListField(verbose_name=_(
-        "Sujets marqués comme favoris"), default='', null=True, blank=True)
+        "sujets marqués comme favoris"), default='', null=True, blank=True)
     tutorial_finished = models.ManyToManyField(Tutorial, verbose_name=_(
-        "Tutoriels marqués comme terminé"), blank=True, related_name='tutorial_finished')
+        "tutoriels marqués comme terminé"), blank=True, related_name='tutorial_finished')
     favorite_tutorials = models.ManyToManyField(Tutorial, verbose_name=_(
-        "Tutoriels favoris"), blank=True, related_name='tutorial_favorite')
+        "tutoriels favoris"), blank=True, related_name='tutorial_favorite')
     # Developer options
     github_username = models.CharField(max_length=100,
-                                       blank=True, null=True, verbose_name=_("Nom d'utilisateur/Email Github"))
-    links = models.TextField(blank=True, null=True)
+                                       blank=True, null=True, verbose_name=_("nom d'utilisateur/email Github"))
+    links = models.TextField(blank=True, null=True,
+                             verbose_name=_("liens vers les médias sociaux"))
 
     objects = ProfileManager()
 
@@ -106,12 +94,12 @@ post_save.connect(create_user_profile, sender=User)
 
 
 class Education(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    school = models.CharField(max_length=50, verbose_name=_("Nom de l'école"))
-    degree = models.CharField(max_length=50, verbose_name=_("Diplôme"))
-    entry_date = models.DateField(verbose_name=_("Date d'entrée"))
-    exit_date = models.DateField(verbose_name=_(
-        "Date de sortie"))
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, verbose_name=_("profile associé"))
+    school = models.CharField(max_length=50, verbose_name=_("nom de l'école"))
+    degree = models.CharField(max_length=50, verbose_name=_("diplôme"))
+    entry_date = models.DateField(verbose_name=_("date d'entrée"))
+    exit_date = models.DateField(verbose_name=_("date de sortie"))
 
     class Meta:
         verbose_name = _("éducation")
@@ -121,14 +109,15 @@ class Education(models.Model):
 
 
 class Experience(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, verbose_name=_("profile associé"))
     entreprise = models.CharField(
-        max_length=50, verbose_name=_("Nom de l'entreprise"))
+        max_length=50, verbose_name=_("nom de l'entreprise"))
     employment = models.CharField(
-        max_length=250, verbose_name=_("Type d'emploi"))
-    entry_date = models.DateField(verbose_name=_("Date d'entrée"))
+        max_length=250, verbose_name=_("type d'emploi"))
+    entry_date = models.DateField(verbose_name=_("date d'entrée"))
     exit_date = models.DateField(verbose_name=_(
-        "Date de sortie"))
+        "date de sortie"))
 
     class Meta:
         verbose_name = _("expérience")

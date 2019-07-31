@@ -1,16 +1,6 @@
 $('.favorite-span').hover(function(e){
     $(this).css('cursor', 'pointer');
 });
-function favori(star) {
-    if (star.hasClass('fas')) {
-        star.parent().attr('title', "Enlever des favoris");
-        $('body').append("<div class='toast'>Article ajouté aux favoris</div>");
-    } else {
-        star.parent().attr('title', "Mettre en favoris");
-        $('body').append("<div class='toast'>Article enlevé des favoris</div>");
-    }
-    $('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');
-};
 $('.favorite-span').click(function(e){
     e.preventDefault();
     let href = $(this).attr('href');

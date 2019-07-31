@@ -3,15 +3,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import F
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
 from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView, View
 
-from billing.views import add_to_cart
 from main.forms import CommentModelForm
 from main.mixins import NavbarSearchMixin
 from main.models import Comment
@@ -46,7 +45,7 @@ class CourseCreateView(LoginRequiredMixin, UserCanAddCourse, NavbarSearchMixin, 
     def get_context_data(self, **kwargs):
         context = {**kwargs}
         context['activate'] = 'create'
-        context['title'] = _("Ajouter")
+        context['type'] = 'add'
         context['navbar_search_form'] = self.form_navbar()
         return context
 
@@ -82,7 +81,7 @@ class CourseUpdateView(LoginRequiredMixin, CourseObjectMixin, UserCanModifyCours
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _("Modifier")
+        context['type'] = 'modify'
         context['tutorials'] = self.get_object().get_tutorials()
         context['navbar_search_form'] = self.form_navbar()
         return context
@@ -103,9 +102,6 @@ class CourseDeleteView(LoginRequiredMixin, CourseObjectMixin, SuccessMessageMixi
 
 class CourseUserEnrolledView(LoginRequiredMixin, CourseObjectMixin, SuccessMessageMixin, View):
     def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
         course = self.get_object()
         user = request.user
         if user in course.students.all() or user.is_staff or user == course.author:
@@ -116,7 +112,7 @@ class CourseUserEnrolledView(LoginRequiredMixin, CourseObjectMixin, SuccessMessa
                 course.students.add(request.user)
                 messages.info(request, _(f"Bienvenue au cours : {course.title}"))
                 return redirect('courses:tutorial-detail', course_slug=course.slug, tutorial_slug=course.tutorial.first().slug)
-            return add_to_cart(request, course)
+            return redirect('main:billing:add-course', args=(course.slug,))
 
 
 class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
@@ -146,7 +142,7 @@ class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
 
     def get_context_data(self, **kwargs):
         context = {**kwargs}
-        context['title'] = _("Ajouter")
+        context['type'] = 'add'
         context['course'] = Course.objects.get(
             slug=self.kwargs.get('course_slug'))
         context['navbar_search_form'] = self.form_navbar()
@@ -216,7 +212,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
         return tuto in liste_tuto
 
 
-class TutorialFavoriteToggleRedirectView(RedirectView):
+class TutorialFavoriteToggleRedirectView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         obj = get_object_or_404(Tutorial, slug=kwargs.get('tutorial_slug'))
         user = self.request.user
@@ -235,7 +231,7 @@ class TutorialUpdateView(LoginRequiredMixin, TutorialObjectMixin, UserCanModifyC
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _("Modifier")
+        context['type'] = 'modify'
         context['navbar_search_form'] = self.form_navbar()
         context['course'] = Course.objects.get(
             slug=self.kwargs.get('course_slug'))

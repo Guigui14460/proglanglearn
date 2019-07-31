@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.shortcuts import reverse
 from django.utils.text import slugify
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
 from tinymce.models import HTMLField
 
@@ -24,18 +24,18 @@ ALERT_CHOICES = (
 class User(AbstractUser):
     REQUIRED_FIELDS = ['email']
     ip_address = models.GenericIPAddressField(
-        verbose_name=_("Adresse IP"), null=True, blank=True)
+        verbose_name=_("adresse IP"), null=True, blank=True)
 
 
 class Language(models.Model):
     name = models.CharField(max_length=30, unique=True,
-                            verbose_name=_("Nom du langage de programmation"))
+                            verbose_name=_("nom du langage de programmation"))
     slug = models.SlugField(null=True, blank=True,
                             verbose_name=_("URL d'accès"))
     image = models.ImageField(
-        upload_to='languages_tags/', verbose_name=_("Logo"), null=True, blank=True)
+        upload_to='languages_tags/', verbose_name=_("logo"), null=True, blank=True)
     content = HTMLField(verbose_name=_(
-        "Description du langage"), null=True, blank=True)
+        "description du langage"), null=True, blank=True)
 
     class Meta:
         verbose_name = _("langage de programmation")
@@ -50,16 +50,17 @@ class Language(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True,
-                            verbose_name=_("Nom de la catégorie"))
+                            verbose_name=_("nom de la catégorie"))
     slug = models.SlugField(null=True, blank=True,
                             verbose_name=_("URL d'accès"))
     image = models.ImageField(upload_to='languages_tags/',
-                              verbose_name=_("Illustration"), null=True, blank=True)
+                              verbose_name=_("illustration"), null=True, blank=True)
     content = HTMLField(verbose_name=_(
-        "Description de la catégorie"), null=True, blank=True)
+        "description de la catégorie"), null=True, blank=True)
 
     class Meta:
         verbose_name = _("catégorie")
+        verbose_name_plural = _("catégories")
 
     def __str__(self):
         return self.name
@@ -79,19 +80,20 @@ pre_save.connect(pre_save_language_tag_receiver, sender=Tag)
 
 class Comment(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, blank=True, related_name='comments', verbose_name=_("Auteur"))
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name='comments', verbose_name=_("auteur"))
     content_type = models.ForeignKey(
-        ContentType, on_delete=models.CASCADE, verbose_name=_("Modèle de l'objet"))
+        ContentType, on_delete=models.CASCADE, verbose_name=_("modèle de l'objet"))
     object_id = models.PositiveIntegerField(
-        verbose_name=_("Identifiant de l'objet"))
+        verbose_name=_("identifiant de l'objet"))
     content_object = GenericForeignKey('content_type', 'object_id')
-    content = models.TextField(verbose_name=_("Commentaire ou réponse"))
+    content = models.TextField(verbose_name=_("commentaire ou réponse"))
     timestamp = models.DateTimeField(
-        auto_now_add=True, verbose_name=_("Date de publication"))
+        auto_now_add=True, verbose_name=_("date de publication"))
 
     class Meta:
         ordering = ['-timestamp']
         verbose_name = _("commentaire")
+        verbose_name_plural = _("commentaires")
 
     def __str__(self):
         c_type = ContentType.objects.get_for_model(self)
@@ -134,15 +136,15 @@ comment_signal.connect(comment_receiver)
 
 class CommentReport(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE,
-                                related_name='reports', verbose_name=_("Commentaire reporté"))
+                                related_name='reports', verbose_name=_("commentaire reporté"))
     alerter = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, verbose_name=_("Signaleur"))
+        User, on_delete=models.SET_NULL, null=True, verbose_name=_("signaleur"))
     type_alert = models.CharField(
-        max_length=1, choices=ALERT_CHOICES, verbose_name=_("Type de signalement"))
+        max_length=1, choices=ALERT_CHOICES, verbose_name=_("type de signalement"))
     content_alert = models.TextField(verbose_name=_(
-        "Contenu du signalement"), null=True, blank=True)
-    verified = models.BooleanField(verbose_name=_("Vérifié"), default=False)
-    striked = models.BooleanField(verbose_name=_("Striké"), default=False)
+        "contenu du signalement"), null=True, blank=True)
+    verified = models.BooleanField(verbose_name=_("vérifié"), default=False)
+    striked = models.BooleanField(verbose_name=_("striké"), default=False)
 
     class Meta:
         verbose_name = _("signalement de commentaire")

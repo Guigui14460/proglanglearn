@@ -8,7 +8,7 @@ from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
 from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView, View
 
 from main.forms import CommentModelForm
@@ -71,7 +71,7 @@ class ArticleCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
 
     def get_context_data(self, **kwargs):
         context = {**kwargs}
-        context['title'] = _("Ajouter")
+        context['type'] = 'add'
         context['form'] = ArticleModelForm()
         context['activate'] = 'article-create'
         context['navbar_search_form'] = self.form_navbar()
@@ -142,7 +142,7 @@ class ArticleUpdateView(LoginRequiredMixin, ArticleObjectMixin, UserCanModifyArt
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _("Modifier")
+        context['type'] = 'modify'
         context['navbar_search_form'] = self.form_navbar()
         return context
 

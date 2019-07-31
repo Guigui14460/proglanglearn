@@ -1,23 +1,15 @@
-import random
-import string
-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives
-from django.db.models import F
-from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView, View
+from django.utils.translation import gettext as _
+from django.views.generic import RedirectView, View
 from django.views.generic.base import TemplateView
 
 import stripe
@@ -27,6 +19,7 @@ from main.mixins import NavbarSearchMixin
 from .forms import CheckoutForm, CouponForm, RefundForm
 from .mixins import UserCanViewCheckout
 from .models import Order, Coupon, Payment, Refund
+from .utils import create_ref_code, get_coupon, RenderPDF
 
 
 User = get_user_model()
@@ -34,8 +27,17 @@ User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
-def create_ref_code():
-    return ''.join(random.choices(string.ascii_lowercase + string.digits + string.ascii_uppercase, k=20))
+class CartView(LoginRequiredMixin, NavbarSearchMixin, TemplateView):
+    template_name = 'billing/cart.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['navbar_search_form'] = self.form_navbar()
+        context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
+        ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
+        context['type'] = 'cart'
+        context['coupon_form'] = CouponForm()
+        return context
 
 
 class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, View):
@@ -70,7 +72,7 @@ class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, Vi
             )
 
             payment = Payment()
-            payment.stripe_charge_id = charge['id'][2:-3],
+            payment.stripe_charge_id = charge['id'],
             payment.user = request.user
             payment.amount = order.get_new_total
             payment.save()
@@ -149,93 +151,50 @@ class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, Vi
         return context
 
 
-class CartView(LoginRequiredMixin, NavbarSearchMixin, TemplateView):
-    template_name = 'billing/cart.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
-        ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
-        context['type'] = 'cart'
-        context['coupon_form'] = CouponForm()
-        return context
-
-
-def add_to_cart(request, course):
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs.first()
-        if course in order.courses.all():
-            messages.info(request, _(
-                "Le cours que vous essayé d'ajouter se trouve déjà dans le panier"))
+class AddCourseToCart(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        course = get_object_or_404(Course, slug=self.kwargs.get('course_slug'))
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs.first()
+            if course in order.courses.all():
+                messages.info(request, _(
+                    "Le cours que vous essayé d'ajouter se trouve déjà dans le panier"))
+            else:
+                order.courses.add(course)
+                messages.success(request, _("Cours ajouté au panier"))
         else:
+            order = Order.objects.create(user=request.user)
             order.courses.add(course)
-            messages.success(request, _("Cours ajouté au panier"))
-    else:
-        order = Order.objects.create(user=request.user)
-        order.courses.add(course)
-    return redirect('main:billing:cart')
+        return redirect('main:billing:cart')
 
 
-def remove_course_to_cart(request, slug):
-    course = get_object_or_404(Course, slug=slug)
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs.first()
-        if course in order.courses.all():
-            order.courses.remove(course)
-            messages.success(request, _(
-                "Le cours a bien été enlevé de votre panier"))
+class RemoveCourseFromCart(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        course = get_object_or_404(Course, slug=self.kwargs.get('course_slug'))
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs.first()
+            if course in order.courses.all():
+                order.courses.remove(course)
+                messages.success(request, _(
+                    "Le cours a bien été enlevé de votre panier"))
+            else:
+                messages.warning(request, _(
+                    "Le cours ne se trouve pas dans votre panier"))
+            if order.courses.all().count() == 0 and order.coupon is not None:
+                if order.coupon.deactivate_date < timezone.now():
+                    order.coupon.limited += 1
+                    order.coupon.save()
+                order.coupon = None
+                order.save()
         else:
-            messages.warning(request, _(
-                "Le cours ne se trouve pas dans votre panier"))
-        if order.courses.all().count() == 0 and order.coupon is not None:
-            if order.coupon.deactivate_date < timezone.now():
-                order.coupon.limited += 1
-                order.coupon.save()
-            order.coupon = None
-            order.save()
-    else:
-        messages.info(request, _("Votre panier est actuellement vide"))
-    return redirect('courses:detail', slug=course.slug)
+            messages.info(request, _("Votre panier est actuellement vide"))
+        return redirect('courses:detail', slug=course.slug)
 
 
-def remove_coupon_to_cart(request, id):
-    coupon = get_object_or_404(Coupon, id=id)
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs.first()
-        if order.coupon is not None:
-            order.coupon = None
-            order.save()
-            if coupon.deactivate_date < timezone.now():
-                coupon.limited += 1
-                coupon.save()
-            messages.success(request, _(
-                "Le code promotionnel a bien été retiré de votre panier"))
-        else:
-            messages.warning(request, _(
-                "Le code promotionnel n'est pas lié à votre panier et ne peut être retiré"))
-    else:
-        messages.warning(request, _("Votre panier est vide"))
-    return redirect('main:billing:cart')
-
-
-def get_coupon(request, code):
-    try:
-        coupon = Coupon.objects.get(code=code)
-        if coupon.limited == 0 or coupon.deactivate_date < timezone.now():
-            messages.error(request, _("Ce coupon n'est plus valide"))
-            return None
-    except ObjectDoesNotExist:
-        messages.warning(request, _("Ce coupon n'existe pas"))
-        return None
-    return coupon
-
-
-def add_coupon(request):
-    if request.method == 'POST':
+class AddCouponToCart(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
         form = CouponForm(request.POST or None)
         if form.is_valid():
             try:
@@ -261,11 +220,30 @@ def add_coupon(request):
                 messages.warning(request, _(
                     "Vous n'avez aucun cours dans votre panier"))
                 return redirect("course:list")
-    messages.error(request, _("Méthode d'ajout de coupon non acceptée"))
-    return redirect('main:billing:cart')
+        messages.error(request, _("Méthode d'ajout de coupon non acceptée"))
+        return redirect('main:billing:cart')
 
-# TODO : Redefine all view functions by class-based views
-# Make a pdf file to download after payment
+
+class RemoveCouponFromCart(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        coupon = get_object_or_404(Coupon, id=id)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs.first()
+            if order.coupon is not None:
+                order.coupon = None
+                order.save()
+                if coupon.deactivate_date < timezone.now():
+                    coupon.limited += 1
+                    coupon.save()
+                messages.success(request, _(
+                    "Le code promotionnel a bien été retiré de votre panier"))
+            else:
+                messages.warning(request, _(
+                    "Le code promotionnel n'est pas lié à votre panier et ne peut être retiré"))
+        else:
+            messages.warning(request, _("Votre panier est vide"))
+        return redirect('main:billing:cart')
 
 
 class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
@@ -281,7 +259,7 @@ class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
             message = form.cleaned_data.get('message')
             try:
                 order = Order.objects.get(ref_code=ref_code)
-                if Refund.objects.filter(order=order).count() == 0 and order.ordered_date + timezone.timedelta(days=30) > timezone.now():
+                if Refund.objects.filter(order=order).count() == 0 and order.ordered_date + timezone.timedelta(days=14) > timezone.now():
                     order.refund_requested = True
                     order.save()
 
@@ -308,3 +286,17 @@ class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
         context['navbar_search_form'] = self.form_navbar()
         context['form'] = RefundForm()
         return context
+
+
+class PDFPaymentView(LoginRequiredMixin, View):
+    pdf_template_name = 'billing/pdf/confirmation_payment.html'
+
+    def get(self, request, *args, **kwargs):
+        order = get_object_or_404(
+            Order, user=request.user, ref_code=self.kwargs.get('ref_code'), ordered=True)
+        params = {
+            'order': order,
+            'payment': order.payment,
+            'stripe_charge': stripe.Charge.retrieve(order.payment.stripe_charge_id[2:-3])
+        }
+        return RenderPDF.render(self.pdf_template_name, params, f"{order.ref_code}")

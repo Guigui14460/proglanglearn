@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}{{ object.title }} - {% endblock title %}
 
@@ -13,8 +12,8 @@
 <h1 class="large">{{ object.title }}</h1>
 {% if request.user.is_staff or object.course.author == request.user %}
     <div class="my-2 d-flex space-between">
-        <a href="#" class="btn btn__info btn__large">Modifier le quiz</a>
-        <a href="#" class="btn btn__danger btn__large">Supprimer le quiz</a>
+        <a href="#" class="btn btn__info btn__large">{% trans 'Modifier le quiz' %}</a>
+        <a href="#" class="btn btn__danger btn__large">{% trans 'Supprimer le quiz' %}</a>
     </div>
 {% endif %}
 <div class="center-text">
@@ -25,7 +24,7 @@
 </div>
 {% if object.single_attempt %}
     <div class="note note__warning">
-        <p>Attention ! Vous n'avez droit qu'à un seul essai</p>
+        <p>{% trans "Attention ! Vous n'avez droit qu'à un seul essai" %}</p>
     </div>
 {% endif %}
 <div>

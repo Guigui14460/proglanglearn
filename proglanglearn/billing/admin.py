@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import admin, messages
 from django.utils.safestring import mark_safe
 from django.shortcuts import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from import_export.admin import ImportExportModelAdmin
 import stripe
@@ -19,7 +19,7 @@ def make_refund_accepted(model_admin, request, queryset):
             refund.order.refund_requested = False
             refund.order.refund_granted = True
             refund.order.save()
-            charge_id = refund.order.payment.stripe_charge_id
+            charge_id = refund.order.payment.stripe_charge_id[2:-3]
             refund_object = stripe.Refund.create(
                 charge=charge_id
             )
@@ -69,6 +69,11 @@ make_refund_rejected.short_description = _(
     "Rejet de la demande de remboursement")
 
 
+class CouponAdmin(ImportExportModelAdmin):
+    list_display = ('code', 'discount_price', 'limited', 'deactivate_date')
+    search_fields = ['code']
+
+
 class OrderAdmin(ImportExportModelAdmin):
     list_display = ('user', 'ordered_date', 'start_date',
                     'get_payment_link', 'refund_requested', 'refund_granted')
@@ -100,11 +105,6 @@ class PaymentAdmin(ImportExportModelAdmin):
     get_user_link.short_description = _("Lien de l'utilisateur")
 
 
-class CouponAdmin(ImportExportModelAdmin):
-    list_display = ('code', 'discount_price', 'limited', 'deactivate_date')
-    search_fields = ['code']
-
-
 class RefundAdmin(ImportExportModelAdmin):
     list_display = ('order', 'refund_id', 'accepted', 'rejected')
     empty_value_display = _("Remboursement non acceptée")
@@ -113,7 +113,7 @@ class RefundAdmin(ImportExportModelAdmin):
     actions = [make_refund_accepted, make_refund_rejected]
 
 
+admin.site.register(Coupon, CouponAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Payment, PaymentAdmin)
-admin.site.register(Coupon, CouponAdmin)
 admin.site.register(Refund, RefundAdmin)

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block title %}{{ object.title }} - {% endblock title %}
 
@@ -13,21 +13,21 @@
     <div class="row small-device">
         <div class="col-75 small-device mb-2">
             <img src="{{ object.thumbnail.url }}" alt="" />
-            <h2 class="article-title">{{ object.title }}{% if request.user.is_authenticated %}&nbsp;<a href="{{ object.get_favorite_url }}" title="{% if article_in_favorite %}Enlever des favoris{% else %}Ajouter aux favoris{% endif %}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h2>
+            <h2 class="article-title">{{ object.title }}{% if request.user.is_authenticated %}&nbsp;<a href="{{ object.get_favorite_url }}" title="{% if article_in_favorite %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h2>
             <div class="my-1">
                 <div class="tags">
                     {% include 'main/includes/tags.html' with object=object %}
                 </div>
                 <div class="mt-1 d-flex flex-end">
-                    <a href="{% url 'articles:update' article_slug=object.slug %}" class="btn">Mettre à jour</a>
-                    <a href="{% url 'articles:delete' article_slug=object.slug %}" class="ml-1 btn">Supprimer</a>
+                    <a href="{% url 'articles:update' article_slug=object.slug %}" class="btn">{% trans 'Mettre à jour' %}</a>
+                    <a href="{% url 'articles:delete' article_slug=object.slug %}" class="ml-1 btn">{% trans 'Supprimer' %}</a>
                 </div>
                 <div class="my-1 d-flex align">
-                    <img src="{{ object.author.profile.image.url }}" alt="Photo de profil" class="profile-image round-image" />
+                    <img src="{{ object.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
                     <a class="d-block" style="margin-left: 10px;" href="profile.html">{{ object.author.username }}</a>
                     <span class="d-inline-block mx-1">|</span>
                     <div class="d-inline-block">
-                        <i class="far fa-clock"></i>&nbsp;{{ object.timestamp }}&nbsp;{% if object.last_modification != object.timestamp %}modifié le&nbsp;{{ object.last_modification }}{% endif %}
+                        <i class="far fa-clock"></i>&nbsp;{{ object.timestamp }}&nbsp;{% if object.last_modification != object.timestamp %}{% trans 'modifié le' %}&nbsp;{{ object.last_modification }}{% endif %}
                     </div>
                     <span class="d-inline-block mx-1">|</span>
                     <div class="d-inline-block">
@@ -60,5 +60,6 @@
 
 {% block jquery %}
 {% include 'main/includes/ajax_comments.html' %}
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', "Remove favorites");$('body').append("<div class='toast'>Article added to favorites</div>");} else {star.parent().attr('title', "Add to favorites");$('body').append("<div class='toast'>Article removed from favorites</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
 {% include 'main/includes/ajax_favorite.html' %}
 {% endblock jquery %}

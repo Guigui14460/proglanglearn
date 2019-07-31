@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Termes et conditions - {% endblock title %}
+{% trans 'Termes et conditions' %}
+
+{% block title %}{{ title }} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Termes et conditions</h1>
+<h1 class="large">{{ title }}</h1>
 {% endblock main %}

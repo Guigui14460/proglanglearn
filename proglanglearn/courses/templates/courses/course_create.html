@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}{{ title }} un cours - {% endblock title %}
+{% trans 'Ajouter un cours' as adding %}
+{% trans 'Modifier un cours' ad modifying %}
+
+{% block title %}{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %} - {% endblock title %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
 {% endblock extra_head %}
 
 {% block main %}
-<h1 class="large">{{ title }} un cours</h1>
-{% if title == 'Modifier' %}
+<h1 class="large">{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %}</h1>
+{% if type == 'modify' %}
     <div class="my-2 d-flex space-between">
-        <a href="{% url 'courses:detail' slug=object.slug %}" class="btn btn__success btn__large">Retour</a>
-        <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">Supprimer le cours</a>
+        <a href="{% url 'courses:detail' slug=object.slug %}" class="btn btn__success btn__large">{% trans 'Retour' %}</a>
+        <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">{% trans 'Supprimer le cours' %}</a>
     </div>
 {% endif %}
 <form method="POST" class="form" enctype="multipart/form-data">
@@ -21,7 +24,7 @@
     {{ form.errors }}
     {{ form.non_field_errors }}
     <fieldset>
-        <legend>Information générales</legend>
+        <legend>{% trans 'Information générales' %}</legend>
         <div class="form-group">
             {{ form.title.errors }}
             <label>{{ form.title.label }} : <span class="required-input">*</span><br>
@@ -48,9 +51,6 @@
             <div class="custom-multiple-select select-multiple__light">
                 {{ form.languages }}
             </div>
-            {% comment %} {% if form.languages.field.required %}
-                zegrgvbrtntntnt
-            {% endif %}  {% endcomment %}
             <small class="form-text">
                 {{ form.languages.help_text }}
             </small>
@@ -68,7 +68,7 @@
             {{ form.pdf.label_tag }}
             {{ form.pdf }}
         </div>
-        {% if title == 'Modifier' %}
+        {% if type == 'modify' %}
             <hr class="dashed">
             <div class="form-group">
                 <ul>
@@ -86,12 +86,12 @@
                 </ul>
             </div>
             <div class="form-group center-text">
-                    <a href="{% url 'courses:tutorial-create' course_slug=object.slug %}" class="btn btn__large btn__outline__success">Ajouter un tutoriel</a>
+                    <a href="{% url 'courses:tutorial-create' course_slug=object.slug %}" class="btn btn__large btn__outline__success">{% trans 'Ajouter un tutoriel' %}</a>
                 </div>
         {% endif %}
     </fieldset>
     <fieldset>
-        <legend>Informations complémentaires</legend>
+        <legend>{% trans 'Informations complémentaires' %}</legend>
         {% if form.published_date %}
             <div class="form-group">
                 {{ form.published_date.label_tag }}&nbsp;<span class="required-input">*</span>
@@ -108,10 +108,9 @@
             {{ form.new_price }}</label>
         </div>
     </fieldset>
-    <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
-        obligatoires.</small>
+    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
-        <button type="submit" class="btn btn__success btn__large btn__300">{{ title }}</button>
+        <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{% trans 'Ajouter' %}{% else %}{% trans 'Modifier' %}{% endif %}</button>
     </div>
 </form>
 {% endblock main %}

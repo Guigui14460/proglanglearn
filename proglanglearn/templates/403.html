@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Accès interdit - {% endblock title %}
+{% block title %}{% trans 'Accès interdit' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Page à accès restreint !</h1>
-<p class="lead mb-1">La page à laquelle vous essayez d'accéder est sous un accès restreint. Vous n'avez donc
-    pas l'autorisation de voir le contenu qu'elle propose.</p>
-<a href="contact.html#subject">Faire une demande auprès de
-    l'administration</a> ou <a href="contact.html#bug">Faire un rapport
-    d'erreur auprès de
-    l'administration</a>
+<h1 class="large">{% trans 'Page à accès restreint !' %}</h1>
+<p class="lead mb-1">{% trans "La page à laquelle vous essayez d'accéder est sous accès restreint. Vous n'avez donc
+    pas l'autorisation de voir le contenu qu'elle propose." %}</p>
+<a href="contact.html#subject">{% trans "Faire une demande auprès de l'administration" %}</a> {% trans 'ou' %} <a href="contact.html#bug">{% trans "Faire un rapport d'erreur auprès de l'administration" %}</a>
 <div class="center-image">
     <svg class="my-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         width="952.65" height="712.16" viewBox="0 0 952.65 712.16">
@@ -212,7 +209,7 @@
         </g>
     </svg>
 </div>
-<p class="error-type">Code erreur : <span class="red-color">403</span></p>
+<p class="error-type">{% trans 'Code erreur' %} : <span class="red-color">403</span></p>
 {% endblock main %}
 
 {% block javascript %}
@@ -220,4 +217,4 @@
     <script src="{% static 'js/TimelineMax.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %}let tl = new TimelineMax(); tl.from('#Groupe_3', .6, { y: '-180', opacity: 0, ease: Power1.easeIn }); tl.from('#Groupe_4', .4, { x: '+100', opacity: 0, ease: Power1.easeOut }); {% endblock jquery %}
+{% block jquery %}var tl = new TimelineMax(); tl.from('#Groupe_3', .6, { y: '-180', opacity: 0, ease: Power1.easeIn }).from('#Groupe_4', .4, { x: '+100', opacity: 0, ease: Power1.easeOut }); {% endblock jquery %}

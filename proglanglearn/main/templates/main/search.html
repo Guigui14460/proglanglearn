@@ -1,32 +1,31 @@
 {% extends 'base.html' %}
+{% load static i18n %}
 
-{% load static %}
-
-{% block title %}Recherche - {% endblock title %}
+{% block title %}{% trans 'Recherche' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Recherche pour "<span id="search-currently">yyjyj</span>"</h1>
+<h1 class="large">{% trans 'Recherche pour' %} "<span id="search-currently">yyjyj</span>"</h1>
 <form action="search.html" method="get" class="form">
     <div class="form-group">
         <input type="text" id="search2" placeholder="Recherchez ici" name="q2" />
     </div>
 </form>
 <form class="form">
-    <label>Filtrer la recherche</label>
+    <label>{% trans 'Filtrer la recherche' %}</label>
     <div class="custom-select select__info" id="filter-search">
         <select name="filter-search">
-            <option value="0">Cliquez pour sélectionner votre choix :</option>
-            <option selected="selected" value="1">Tout</option>
-            <option value="2">Seulement les cours</option>
-            <option value="3">Seulement les tutoriels</option>
-            <option value="4">Seulement les sujets</option>
-            <option value="5">Seulement les profils</option>
+            <option value="0">{% trans 'Cliquez pour sélectionner votre choix :' %}</option>
+            <option selected="selected" value="1">{% trans 'Tout' %}</option>
+            <option value="2">{% trans 'Seulement les cours' %}</option>
+            <option value="3">{% trans 'Seulement les tutoriels' %}</option>
+            <option value="4">{% trans 'Seulement les sujets' %}</option>
+            <option value="5">{% trans 'Seulement les profils' %}</option>
         </select>
     </div>
 </form>
 <div id="search-result">
     <div class="courses">
-        <span>Tutoriels :</span>
+        <span>{% trans 'Tutoriels' %} :</span>
         <a href="tutorial_detail.html">
             <div class="course">
                 <h3><i class="fas fa-lock"></i> Mettre un site en ligne avec AWS</h3>
@@ -45,7 +44,7 @@
         </a>
     </div>
     <div class="articles">
-        <span>Article du blog :</span>
+        <span>{% trans 'Articles du blog' %} :</span>
         <a href="article_detail.html">
             <div class="article">
                 <h3>Comment devenir Freelance ?</h3>
@@ -63,7 +62,7 @@
         </a>
     </div>
     <div class="subjects">
-        <span>Sujets du forum :</span>
+        <span>{% trans 'Sujets du forum' %} :</span>
         <a href="forum_detail.html">
             <div class="subject">
                 <h3>Comment utiliser momentjs ?</h3>
@@ -76,7 +75,7 @@
         </a>
     </div>
     <div class="profiles-search">
-        <span>Profils d'étudiants en informatique ou développeur :</span>
+        <span>{% trans 'Profils d\'étudiants en informatique ou développeur' %} :</span>
         <div class="profile-grid">
             <a href="profile.html">
                 <div class="profile">

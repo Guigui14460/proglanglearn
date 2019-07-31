@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Contact - {% endblock title %}
+{% block title %}{% trans 'Contact' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Contacter</h1>
-<p class="lead"><i class="fas fa-pen-alt"></i> Contactez-nous dans l'espace approprié à chaque demande !</p>
+<h1 class="large">{% trans 'Contacter' %}</h1>
+<p class="lead"><i class="fas fa-pen-alt"></i>&nbsp;{% trans "Contactez-nous dans l'espace approprié à chaque demande !" %}</p>
 <form id="bug" action="contact.html" method='GET' class="form mb-3">
     <fieldset>
         <legend><i class="fas fa-bug"></i> Rapporter un bug</legend>

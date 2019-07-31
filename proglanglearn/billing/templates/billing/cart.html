@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Panier - {% endblock title %}
+{% block title %}{% trans 'Panier' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Votre panier</h1>
+<h1 class="large">{% trans 'Votre panier' %}</h1>
 <div>
-    {% if order and order.courses.all.count > 0 %}
+    {% if order and order.courses.count > 0 %}
         {% include 'billing/payment_items.html' %}
         <div class="d-flex space-between">
-            <a href="{% url 'courses:list' %}" class="btn btn__outline__dark btn__large">Continuer mes achats</a>
-            <a href="{% url 'main:billing:checkout' %}" class="btn btn__outline__success btn__large"><i class="fas fa-money-check-alt"></i> Procéder au paiement</a>
+            <a href="{% url 'courses:list' %}" class="btn btn__outline__dark btn__large">{% trans 'Continuer mes achats' %}</a>
+            <a href="{% url 'main:billing:checkout' %}" class="btn btn__outline__success btn__large"><i class="fas fa-money-check-alt"></i>&nbsp;{% trans 'Procéder au paiement' %}</a>
         </div>
     {% else %}
-        <h3 class="center-text">Vous n'avez aucun cours à acheter dans votre panier</h3>
+        <h3 class="center-text">{% trans 'Vous n\'avez aucune formation dans votre panier' %}</h3>
     {% endif %}
 </div>
 {% endblock main %}

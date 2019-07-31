@@ -3,14 +3,12 @@ from datetime import datetime, date
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.shortcuts import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Course, Tutorial
-
-
 from main.utils import get_thumbnail_preview
+from .models import Course, Tutorial
 
 
 YEAR_REF = 2019

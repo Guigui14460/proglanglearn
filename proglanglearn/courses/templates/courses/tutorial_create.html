@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}{{ title }} un tutoriel - {% endblock title %}
+{% trans 'Ajouter un tutoriel' as adding %}
+{% trans 'Modifier un tutoriel' ad modifying %}
+{% trans 'Retour' as return %}
+
+{% block title %}{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %} - {% endblock title %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
 {% endblock extra_head %}
 
 {% block main %}
-<h1 class="large">{{ title }} un tutoriel au cours "{{ course.title }}"</h1>
+<h1 class="large">{% if type == 'add' %}{% trans 'Ajouter un tutoriel au cours' %}{% else %}{% trans 'Modifier un tutoriel du cours' %}{% endif %} "{{ course.title }}"</h1>
 <form method="POST" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.errors }}
     {{ form.non_field_errors }}
     <fieldset>
-        <legend>Information générales</legend>
+        <legend>{% trans 'Information générales' %}</legend>
         <div class="form-group">
             {{ form.title.errors }}
             <label>{{ form.title.label }} : <span class="required-input">*</span><br>
@@ -28,7 +32,7 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>Information suplémentaires</legend>
+        <legend>{% trans 'Information suplémentaires' %}</legend>
         <div class="form-group">
             {{ form.experience.errors }}
             {{ form.experience.label_tag }}&nbsp;<span class="required-input">*</span>
@@ -40,15 +44,14 @@
             {{ form.resources }}
         </div>
     </fieldset>
-    <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
-        obligatoires.</small>
+    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
-        {% if title == 'Modifier' %}
-            <a href="{{ object.get_absolute_url }}" class="btn btn__warning btn__large btn__300">Retour</a>
+        {% if type == 'modify' %}
+            <a href="{{ object.get_absolute_url }}" class="btn btn__warning btn__large btn__300">{{ return }}</a>
         {% else %}
-            <a href="{% url 'courses:detail' slug=course.slug %}" class="btn btn__warning btn__large btn__300">Retour</a>
+            <a href="{% url 'courses:detail' slug=course.slug %}" class="btn btn__warning btn__large btn__300">{{ return }}</a>
         {% endif %}
-        <button type="submit" class="btn btn__success btn__large btn__300">{{ title }}</button>
+        <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{% trans 'Ajouter' %}{% else %}{% trans 'Modifier' %}{% endif %}</button>
     </div>
 </form>
 {% endblock main %}

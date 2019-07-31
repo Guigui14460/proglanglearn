@@ -2,8 +2,7 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth import password_validation, get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext_lazy as _
 
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
@@ -38,7 +37,7 @@ class SignUpForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).count() > 0:
-            raise ValidationError(
+            raise forms.ValidationError(
                 _("Cette addresse email a déjà été utilisée. Il faut en choisir une autre"))
         return email
 

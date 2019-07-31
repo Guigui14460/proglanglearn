@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Demande de reboursement - {% endblock title %}
+{% trans 'Demande de reboursement' %}
+
+{% block title %}{{ title }} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Demande de reboursement</h1>
+<h1 class="large">{{ title }}</h1>
 <div>
     <form class="form" method="POST">
         {% csrf_token %}
@@ -15,10 +18,9 @@
             {{ form.message.label_tag }}&nbsp;<span class="required-input">*</span>
             {{ form.message }}
         </div>
-        <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
-            obligatoires.</small>
+        {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
         <div class="center-text">
-            <button type="submit" class="btn btn__outline_info btn__300">Demander</button>
+            <button type="submit" class="btn btn__outline_info btn__300">{% trans 'Demander' %}</button>
         </div>
     </form>
 </div>

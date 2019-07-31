@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block extra_head %}
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
@@ -10,8 +10,12 @@
 <div class="landing">
   <div class="dark-overlay">
     <div class="landing-inner">
-      <h1 class="x-large">Apprenez la programmation informatique</h1>
+      <h1 class="x-large">{% trans 'Apprenez la programmation informatique' %}</h1>
       <p id="lead-type" class="lead"></p>
+      <div style="display: none;">
+        <span class="phrase1">{% trans 'Ne grandissons pas dans un monde sans le comprendre.' %}</span>
+        <span class="phrase2">{% trans "Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !" %}</span>
+      </div>
       <hr>
     </div>
   </div>
@@ -63,11 +67,7 @@ and they are
 
 {% block javascript %}
 <script src="{% static 'js/typed.min.js' %}"></script>
-<script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-        });
-    </script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
 {% endblock javascript %}
 
-{% block jquery %} let typed = new Typed('#lead-type', { strings: ["Ne grandissons pas dans un monde sans le comprendre.", "Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !"], typeSpeed: 35, backSpeed: 15, loop: true, }); $('span.typed-cursor').hide(); {% endblock jquery %}
+{% block jquery %} let typed = new Typed('#lead-type', { strings: [$('.phrase1').text(), $('.phrase2').text()], typeSpeed: 35, backSpeed: 15, loop: true, }); $('span.typed-cursor').hide(); {% endblock jquery %}

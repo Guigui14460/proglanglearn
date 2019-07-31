@@ -1,10 +1,10 @@
 from itertools import chain
 
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View, RedirectView
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext as _
 
 from .forms import CommentReportForm
 from .mixins import NavbarSearchMixin
@@ -15,7 +15,7 @@ class IndexView(NavbarSearchMixin, View):
     template_name = "main/index.html"
 
     def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
+        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar(), 'phrase1': "Ne grandissons pas dans un monde sans le comprendre.", 'phrase2': "Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !"})
 
 
 class AboutView(NavbarSearchMixin, View):

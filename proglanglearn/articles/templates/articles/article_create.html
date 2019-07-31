@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}{{ title }} un article - {% endblock title %}
+{% trans 'Ajouter un article' as adding %}
+{% trans 'Modifier un article' as modifying %}
+
+{% block title %}{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{{ title }} un article</h1>
+<h1 class="large">{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %}</h1>
 <form method="POST" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.media }}
     {{ form.errors }}
     {{ form.non_field_errors }}
     <fieldset>
-        <legend>Information générales</legend>
+        <legend>{% trans 'Information générales' %}</legend>
         <div class="form-group">
             {{ form.title.label_tag }}&nbsp;<span class="required-input">*</span>
             {{ form.title }}
@@ -42,16 +45,15 @@
     </fieldset>
     {% if form.timestamp %}
         <fieldset>
-            <legend>Informations complémentaires</legend>
+            <legend>{% trans 'Informations complémentaires' %}</legend>
             <div class="form-group">
-                <label>Parution de l'article :<br>{{ form.timestamp }}</label>
+                <label>{% trans 'Parution de l\'article' %} :<br>{{ form.timestamp }}</label>
             </div>
         </fieldset>
     {% endif %}
-    <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
-        obligatoires.</small>
+    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
-        <button type="submit" class="btn btn__success btn__large btn__300">{{ title }}</button>
+        <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %}</button>
     </div>
 </form>
 {% endblock main %}

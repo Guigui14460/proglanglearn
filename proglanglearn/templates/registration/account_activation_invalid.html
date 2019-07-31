@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Email d'activation invalide - {% endblock title %}
+{% block title %}{% trans "Email d'activation invalide" %} - {% endblock title %}
 
 {% block main %}
 <h1 class="large">ProgLangLearn</h1>
-<div class="my-2">Le lien de confirmation d'activation est invalide, sûrement car il a déjà été utilisé ou le lien a expiré</div>
+<div class="my-2">{% trans "Le lien de confirmation d'activation est invalide, sûrement car il a déjà été utilisé ou le lien a expiré" %}</div>
 <div class="d-flex space-between">
-    <a href="{% url 'accounts:login' %}" class="btn btn__large btn__outline__success">Se connecter</a>
-    <a href="{% url 'accounts:login' %}" class="btn btn__large btn__danger">Changer mon mot de passe</a>
-    <a href="{% url 'accounts:register' %}" class="btn btn__large btn__warning">S'enregistrer</a>
+    <a href="{% url 'accounts:login' %}" class="btn btn__large btn__outline__success">{% trans 'Se connecter' %}</a>
+    <a href="{% url 'accounts:login' %}" class="btn btn__large btn__danger">{% trans 'Changer mon mot de passe' %}</a>
+    <a href="{% url 'accounts:register' %}" class="btn btn__large btn__warning">{% trans "S'enregistrer" %}</a>
 </div>
 {% endblock main %}

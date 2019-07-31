@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}S'inscrire - {% endblock title %}
+{% trans "S'inscrire" %}
+
+{% block title %}{{ title }} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">S'inscrire</h1>
-<p class="lead"><i class="fas fa-user-plus"></i> Créez votre compte dès maintenant !</p>
+<h1 class="large">{{ title }}</h1>
+<p class="lead"><i class="fas fa-user-plus"></i>&nbsp;{% trans 'Créez votre compte dès maintenant !' %}</p>
 <form method='POST' class="form mb-3">
     {{ form.errors }}
     {% csrf_token %}
@@ -51,15 +54,12 @@
         </small>
     </div>
     <div class="form-group">
-        <label><input type="checkbox" name="user-terms" required />&nbsp;Accepter les <a href="terms.html">termes
-                et
-                conditions d'utilisation</a> de Proglanglearn <span class="required-input">*</span></label>
+        <label><input type="checkbox" name="user-terms" required />&nbsp;{% trans 'Accepter les' %} <a href="{% url 'main:terms' %}">{% blocktrans %}termes et conditions d'utilisation</a> de Proglanglearn <span class="required-input">*</span></label>{% endblocktrans %}
     </div>
-    <small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont
-        obligatoires.</small>
+    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
-        <button type="submit" class="btn btn__primary btn__large btn__300">S'inscrire</button>
+        <button type="submit" class="btn btn__primary btn__large btn__300">{{ title }}</button>
     </div>
 </form>
-<p class="mt-1">Vous avez déjà un compte ? <a href="{% url 'accounts:login' %}">Connectez-vous</a> !</p>
+<p class="mt-1">{% trans 'Vous avez déjà un compte ?' %}&nbsp;<a href="{% url 'accounts:login' %}">{% trans 'Connectez-vous' %}</a>&nbsp;!</p>
 {% endblock main %}

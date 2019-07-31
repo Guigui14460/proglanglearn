@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Suppression de "{{ object.title }}" - {% endblock title %}
+{% trans 'Suppression de' as title %}
+
+{% block title %}{{ title }} "{{ object.title }}" - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Suppression de "{{ object.title }}"</h1>
+<h1 class="large">{{ title }} "{{ object.title }}"</h1>
 <form method="POST" class="form">
     {% csrf_token %}
     <div class="note note__danger">
-        <p>La suppression du cours est <strong>irréversible</strong>. Les tutoriels seront <strong>également
-                supprimés</strong> ainsi que les <strong>ressources associées</strong>. Pour modifier les
-            tutoriels, <a href="modify_tutorial.html">cliquez ici</a> !</p>
+        {% blocktrans %}<p>La suppression du cours est <strong>irréversible</strong>. Les tutoriels seront <strong>également supprimés</strong> ainsi que les <strong>ressources associées</strong>.</p>{% endblocktrans %}
     </div>
     <div class="center-text">
-        <a href="{% url 'courses:detail' slug=object.slug %}" class="btn btn__primary btn__large btn__300">Retour en
-            arrière</a>
-        <button type="submit" class="btn btn__danger btn__large btn__300">Supprimer
-            définitivement</button>
+        <a href="{% url 'courses:detail' slug=object.slug %}" class="btn btn__primary btn__large btn__300">{% trans 'Retour en arrière' %}</a>
+        <button type="submit" class="btn btn__danger btn__large btn__300">{% trans 'Supprimer définitivement' %}</button>
     </div>
 </form>
 {% endblock main %}

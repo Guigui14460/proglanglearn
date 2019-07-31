@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Page non trouvé - {% endblock title %}
+{% trans 'Page non trouvée' as title %}
+
+{% block title %}{{ title }} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">Page non trouvée !</h1>
-<p class="lead">La page que vous essayez d'accéder n'existe pas, plus ou a été déplacé à une autre URL.</p>
+<h1 class="large">{{ title }} !</h1>
+<p class="lead">{% trans "La page que vous essayez d'accéder n'existe pas, plus ou a été déplacée à une autre URL." %}</p>
 <div class="center-image">
     <svg class="my-2" xmlns="http://www.w3.org/2000/svg" width="964.826" height="412.207"
         viewBox="0 0 964.826 412.207">
@@ -69,7 +71,7 @@
         </g>
     </svg>
 </div>
-<p class="error-type">Code erreur : <span class="red-color">404</span></p>
+<p class="error-type">{% trans 'Code erreur' %} : <span class="red-color">404</span></p>
 {% endblock main %}
 
 {% block javascript %}
@@ -77,4 +79,4 @@
 <script src="{% static 'js/TimelineMax.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %} let tl = new TimelineMax(); tl.from('#First_4', 1, { x: '-180', rotation: 20, opacity: 0, ease: Power1.easeIn }); tl.from('#_0', .6, { y: '-60', opacity: 0, ease: Power0.easeOut }, '-=0.4'); tl.from('#Second_4', .7, { x: '+100', rotation: -20, opacity: 0, ease: Power1.easeOut }, '-=0.6'); {% endblock jquery %}
+{% block jquery %} var tl = new TimelineMax(); tl.from('#First_4', 1, { x: '-180', rotation: 20, opacity: 0, ease: Power1.easeIn }).from('#_0', .6, { y: '-60', opacity: 0, ease: Power0.easeOut }, '-=0.4').from('#Second_4', .7, { x: '+100', rotation: -20, opacity: 0, ease: Power1.easeOut }, '-=0.6'); {% endblock jquery %}
