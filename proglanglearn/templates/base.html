@@ -57,6 +57,6 @@
     </footer>
     <script src="{% static 'js/main.jquery.js' %}"></script>
     {% block javascript %}{% endblock javascript %}
-    <script>$(function(){ {% block jquery %}{% endblock jquery %} });</script>
+    <script>$(function(){$("#langForm select").change(function() { $(this).closest('form').submit() }); {% block jquery %}{% endblock jquery %} });</script>
 </body>
 </html>

@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% trans 'Politique de confidentialité et de cookies' as title %}
-
-{% block title %}{{ title }} - {% endblock title %}
+{% block title %}{% trans 'Politique de confidentialité et de cookies' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{{ title }}</h1>
+<h1 class="large">{% trans 'Politique de confidentialité et de cookies' %}</h1>
 {% endblock main %}

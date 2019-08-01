@@ -1,0 +1,2230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-01 17:49+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\accounts\admin.py:26 .\courses\admin.py:71 .\courses\admin.py:90
+#: .\main\admin.py:33 .\polls\admin.py:50 .\polls\admin.py:76
+#: .\polls\admin.py:110
+msgid "Inconnu"
+msgstr ""
+
+#: .\accounts\admin.py:28
+msgid "Espace critique"
+msgstr ""
+
+#: .\accounts\admin.py:30 .\courses\templates\courses\course_detail.html:16
+msgid "Informations générales"
+msgstr ""
+
+#: .\accounts\admin.py:32
+msgid "Options avancées"
+msgstr ""
+
+#: .\accounts\fields.py:7
+msgid "Un champ pour enregistrer une liste en tant que chaîne de caractères"
+msgstr ""
+
+#: .\accounts\forms.py:15 .\accounts\forms.py:49
+msgid "Nom d'utilisateur"
+msgstr ""
+
+#: .\accounts\forms.py:19
+msgid "Courriel"
+msgstr ""
+
+#: .\accounts\forms.py:23
+msgid "Informez une addresse e-mail valide"
+msgstr ""
+
+#: .\accounts\forms.py:24 .\accounts\forms.py:53
+msgid "Mot de passe"
+msgstr ""
+
+#: .\accounts\forms.py:27
+msgid ""
+"Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et "
+"caractères spéciaux)\n"
+"    Votre mot de passe ne devrait pas contenir ou ressembler à votre nom "
+"d'utilisateur.\n"
+"    Il doit aussi contenir {12 if settings.DEBUG else settings."
+"AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']} caractères."
+msgstr ""
+
+#: .\accounts\forms.py:30
+msgid "Confirmation du mot de passe"
+msgstr ""
+
+#: .\accounts\forms.py:33
+msgid "Entrez le même mot de passe"
+msgstr ""
+
+#: .\accounts\forms.py:44
+msgid "Cette addresse email a déjà été utilisée. Il faut en choisir une autre"
+msgstr ""
+
+#: .\accounts\forms.py:67
+msgid "Le nom d'utilisateur mentionné n'existe pas"
+msgstr ""
+
+#: .\accounts\forms.py:73
+msgid ""
+"Votre compte n'a pas été activé. Vérifiez vos emails et votre dossier spam "
+"et si vous ne trouvez pas le mail, réinscrivez-vous avec les identifiants "
+"renseignés"
+msgstr ""
+
+#: .\accounts\forms.py:79
+msgid "New password"
+msgstr ""
+
+#: .\accounts\forms.py:86
+msgid "New password confirmation"
+msgstr ""
+
+#: .\accounts\models.py:21
+msgid "utilisateur associé"
+msgstr ""
+
+#: .\accounts\models.py:23
+msgid "est un développeur"
+msgstr ""
+
+#: .\accounts\models.py:25
+msgid "est un étudiant en informatique"
+msgstr ""
+
+#: .\accounts\models.py:27
+msgid "est un formateur"
+msgstr ""
+
+#: .\accounts\models.py:29
+msgid "image de profil"
+msgstr ""
+
+#: .\accounts\models.py:30
+msgid "pays"
+msgstr ""
+
+#: .\accounts\models.py:32
+msgid "biographie"
+msgstr ""
+
+#: .\accounts\models.py:34
+msgid "langages maîtrisés"
+msgstr ""
+
+#: .\accounts\models.py:36
+msgid "compétences apprises"
+msgstr ""
+
+#: .\accounts\models.py:38
+msgid "signalement"
+msgstr ""
+
+#: .\accounts\models.py:40
+msgid "addresse e-mail confirmée"
+msgstr ""
+
+#: .\accounts\models.py:41
+msgid "notification par email"
+msgstr ""
+
+#: .\accounts\models.py:44
+msgid "niveau"
+msgstr ""
+
+#: .\accounts\models.py:46
+msgid "expérience acquise"
+msgstr ""
+
+#: .\accounts\models.py:48
+msgid "articles favoris"
+msgstr ""
+
+#: .\accounts\models.py:50
+msgid "sujets marqués comme favoris"
+msgstr ""
+
+#: .\accounts\models.py:52
+msgid "tutoriels marqués comme terminé"
+msgstr ""
+
+#: .\accounts\models.py:54
+msgid "tutoriels favoris"
+msgstr ""
+
+#: .\accounts\models.py:57
+msgid "nom d'utilisateur/email Github"
+msgstr ""
+
+#: .\accounts\models.py:59
+msgid "liens vers les médias sociaux"
+msgstr ""
+
+#: .\accounts\models.py:65
+msgid "profil"
+msgstr ""
+
+#: .\accounts\models.py:99 .\accounts\models.py:114
+msgid "profile associé"
+msgstr ""
+
+#: .\accounts\models.py:100
+msgid "nom de l'école"
+msgstr ""
+
+#: .\accounts\models.py:101
+msgid "diplôme"
+msgstr ""
+
+#: .\accounts\models.py:102 .\accounts\models.py:119
+msgid "date d'entrée"
+msgstr ""
+
+#: .\accounts\models.py:103 .\accounts\models.py:121
+msgid "date de sortie"
+msgstr ""
+
+#: .\accounts\models.py:106
+msgid "éducation"
+msgstr ""
+
+#: .\accounts\models.py:116
+msgid "nom de l'entreprise"
+msgstr ""
+
+#: .\accounts\models.py:118
+msgid "type d'emploi"
+msgstr ""
+
+#: .\accounts\models.py:124 .\polls\models.py:71
+msgid "expérience"
+msgstr ""
+
+#: .\accounts\templates\accounts\ip_address_email.html:4
+msgid ""
+"Salut, cher utilisateur de ProgLangLearn,\n"
+"\n"
+"Quelqu'un vient de se connecter à ton compte depuis un autre endroit :(\n"
+"\n"
+"Si c'est vous, aucune inquiétude !\n"
+"\n"
+"Sinon, changez votre mot de passe car votre compte a été certainement "
+"compromis. Nous vous conseillons de changer votre mot de passe à cet url"
+msgstr ""
+
+#: .\accounts\templates\accounts\ip_address_email.html:13
+msgid ""
+"Si vous ne parvenez pas à changer votre mot de passe, cliquez sur le lien ci-"
+"dessous et suivez les instructions."
+msgstr ""
+
+#: .\accounts\utils.py:43
+msgid ""
+"Vous êtes déjà au niveau maximum ! Continuez de vous formez et d'apprendre "
+"car de nouveaux niveaux seront rajoutés ;)"
+msgstr ""
+
+#: .\accounts\utils.py:46
+msgid ""
+"Bravo ! Vous venez de gagner un niveau ! Vous êtes désormais niveau "
+"{actual_user_level}"
+msgstr ""
+
+#: .\accounts\views.py:42
+msgid "Suspicion de compromission de votre compte ProgLangLearn"
+msgstr ""
+
+#: .\accounts\views.py:79 .\accounts\views.py:110
+msgid "Activez votre compte ProgLangLearn"
+msgstr ""
+
+#: .\accounts\views.py:91
+msgid ""
+"Envoi du mail d'activation du compte {user.username} effectué avec succès"
+msgstr ""
+
+#: .\accounts\views.py:94 .\accounts\views.py:125
+msgid "Échec de l'envoi de l'email d'activation"
+msgstr ""
+
+#: .\accounts\views.py:122
+msgid ""
+"Votre compte existait déjà mais n'a pas été activé. Envoi du mail "
+"d'activation du compte {user.username} effectué avec succès"
+msgstr ""
+
+#: .\accounts\views.py:133
+msgid ""
+"Votre compte a déjà été activé. Connectez-vous ou demandez à changer de mot "
+"de passe"
+msgstr ""
+
+#: .\accounts\views.py:136
+msgid ""
+"Veuillez respecter et remplir correctement <strong>TOUS</strong> les champs "
+"obligatoires"
+msgstr ""
+
+#: .\accounts\views.py:170
+msgid "Activation de votre compte effectuée avec succès"
+msgstr ""
+
+#: .\articles\forms.py:20 .\articles\forms.py:41
+msgid "Une IA fait son propre code !! OMG it's so amaziinngg !!"
+msgstr ""
+
+#: .\articles\forms.py:22 .\articles\forms.py:43
+msgid "Corps de l'article"
+msgstr ""
+
+#: .\articles\forms.py:28 .\articles\forms.py:48 .\courses\forms.py:34
+#: .\courses\forms.py:61
+msgid ""
+"S'il manque une catégorie, demandez à le <a href='contact."
+"html#subject'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au "
+"courant du rajout ou du rejet de votre demande"
+msgstr ""
+
+#: .\articles\mixins.py:24
+msgid "Vous n'avez pas l'autorisation de modifier cet article"
+msgstr ""
+
+#: .\articles\mixins.py:33
+msgid ""
+"L'article auquel vous essayez d'accéder n'existe pas ou plus ou est "
+"actuellement inaccessible"
+msgstr ""
+
+#: .\articles\models.py:20 .\courses\models.py:28 .\main\models.py:83
+msgid "auteur"
+msgstr ""
+
+#: .\articles\models.py:22
+msgid "titre de l'article"
+msgstr ""
+
+#: .\articles\models.py:24 .\courses\models.py:31 .\courses\models.py:144
+#: .\main\models.py:34 .\main\models.py:55
+msgid "URL d'accès"
+msgstr ""
+
+#: .\articles\models.py:26
+msgid "vignette/vidéo d'article"
+msgstr ""
+
+#: .\articles\models.py:28 .\courses\models.py:35
+msgid "langages utilisés"
+msgstr ""
+
+#: .\articles\models.py:30 .\courses\models.py:37 .\main\models.py:63
+msgid "catégories"
+msgstr ""
+
+#: .\articles\models.py:32 .\polls\models.py:97
+msgid "contenu"
+msgstr ""
+
+#: .\articles\models.py:34 .\courses\models.py:45 .\courses\models.py:153
+#: .\main\models.py:91
+msgid "date de publication"
+msgstr ""
+
+#: .\articles\models.py:36
+msgid "dernière modification"
+msgstr ""
+
+#: .\articles\models.py:38 .\courses\models.py:155
+msgid "nombre de vues"
+msgstr ""
+
+#: .\articles\models.py:44
+msgid "article"
+msgstr ""
+
+#: .\articles\templates\articles\article_aside.html:5
+msgid "Derniers articles"
+msgstr ""
+
+#: .\articles\templates\articles\article_aside.html:10
+#: .\articles\templates\articles\article_detail.html:16
+#: .\articles\templates\articles\article_list.html:13
+#: .\courses\templates\courses\tutorial_detail.html:38
+msgid "Enlever des favoris"
+msgstr ""
+
+#: .\articles\templates\articles\article_aside.html:10
+#: .\articles\templates\articles\article_detail.html:16
+#: .\articles\templates\articles\article_list.html:13
+#: .\courses\templates\courses\tutorial_detail.html:38
+msgid "Ajouter aux favoris"
+msgstr ""
+
+#: .\articles\templates\articles\article_confirm_delete.html:4
+msgid "Suppression"
+msgstr ""
+
+#: .\articles\templates\articles\article_confirm_delete.html:7
+msgid "Suppression de l\\"
+msgstr ""
+
+#: .\articles\templates\articles\article_confirm_delete.html:11
+msgid ""
+"<p>La suppression de l'article est <strong>irréversible</strong>. Les "
+"commentaires seront <strong>également supprimés</strong> ainsi que les "
+"<strong>ressources associées</strong>.</p>"
+msgstr ""
+
+#: .\articles\templates\articles\article_confirm_delete.html:14
+#: .\courses\templates\courses\course_confirm_delete.html:14
+#: .\courses\templates\courses\tutorial_confirm_delete.html:14
+msgid "Retour en arrière"
+msgstr ""
+
+#: .\articles\templates\articles\article_confirm_delete.html:15
+#: .\courses\templates\courses\course_confirm_delete.html:15
+#: .\courses\templates\courses\tutorial_confirm_delete.html:15
+msgid "Supprimer définitivement"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:4
+#: .\articles\templates\articles\article_create.html:7
+#: .\articles\templates\articles\article_create.html:53
+msgid "Ajouter un article"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:4
+#: .\articles\templates\articles\article_create.html:7
+#: .\articles\templates\articles\article_create.html:53
+msgid "Modifier un article"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:14
+#: .\courses\templates\courses\course_create.html:24
+#: .\courses\templates\courses\tutorial_create.html:17
+msgid "Information générales"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:45
+#: .\courses\templates\courses\course_create.html:91
+msgid "Informations complémentaires"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:47
+msgid "Parution de l\\"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:51
+#: .\billing\templates\billing\refund_request.html:19
+#: .\courses\templates\courses\course_create.html:108
+#: .\courses\templates\courses\tutorial_create.html:43
+#: .\main\templates\main\report.html:32
+#: .\templates\registration\password_reset_form.html:21
+#: .\templates\registration\register.html:59
+msgid ""
+"<small class=\"d-block mb-1\">Tous les champs avec d'un <span class="
+"\"required-input\">*</span> sont obligatoires.</small>"
+msgstr ""
+
+#: .\articles\templates\articles\article_detail.html:22
+msgid "Mettre à jour"
+msgstr ""
+
+#: .\articles\templates\articles\article_detail.html:23
+msgid "Supprimer"
+msgstr ""
+
+#: .\articles\templates\articles\article_detail.html:26
+#: .\articles\templates\articles\article_list.html:19
+#: .\main\templates\main\includes\comments.html:29
+#: .\main\templates\main\includes\comments.html:39
+#: .\templates\includes\navbar.html:39
+msgid "Photo de profil"
+msgstr ""
+
+#: .\articles\templates\articles\article_detail.html:30
+msgid "modifié le"
+msgstr ""
+
+#: .\articles\templates\articles\article_list.html:4
+#: .\templates\includes\navbar.html:17
+msgid "Blog"
+msgstr ""
+
+#: .\articles\templates\articles\article_list.html:7
+#: .\main\templates\main\search.html:47
+msgid "Articles du blog"
+msgstr "Blog articles"
+
+#: .\articles\views.py:46
+msgid "Article ajouté avec succès"
+msgstr ""
+
+#: .\articles\views.py:48
+msgid ""
+"Un problème est survenu ! Réessayez plus tard et si le problème persiste, "
+"contactez l'administration"
+msgstr ""
+
+#: .\articles\views.py:141
+msgid "Article modifié avec succès"
+msgstr ""
+
+#: .\articles\views.py:155 .\courses\views.py:103 .\courses\views.py:254
+msgid "Cours supprimé avec succès"
+msgstr ""
+
+#: .\billing\admin.py:33
+msgid "Remboursements effectués"
+msgstr ""
+
+#: .\billing\admin.py:37 .\billing\views.py:100
+msgid "{err.get('message')}"
+msgstr ""
+
+#: .\billing\admin.py:39 .\billing\views.py:103
+msgid "Rate limit error"
+msgstr ""
+
+#: .\billing\admin.py:41 .\billing\views.py:106
+msgid "Invalid parameters"
+msgstr ""
+
+#: .\billing\admin.py:43 .\billing\views.py:110
+msgid "Not authenticated"
+msgstr ""
+
+#: .\billing\admin.py:45 .\billing\views.py:113
+msgid "Network error"
+msgstr ""
+
+#: .\billing\admin.py:48 .\billing\views.py:118
+msgid "Something went wrong. You were not charged. Please try again"
+msgstr ""
+
+#: .\billing\admin.py:54
+msgid "Mise des commandes vers l'acceptation du remboursement"
+msgstr ""
+
+#: .\billing\admin.py:65
+msgid "Remboursements rejetés avec succès"
+msgstr ""
+
+#: .\billing\admin.py:69
+msgid "Rejet de la demande de remboursement"
+msgstr ""
+
+#: .\billing\admin.py:83 .\billing\admin.py:88
+msgid "Pas encore commandé"
+msgstr ""
+
+#: .\billing\admin.py:90 .\billing\admin.py:103
+msgid "Enregistrez un paiement pour avoir le lien"
+msgstr ""
+
+#: .\billing\admin.py:92
+msgid "Lien du paiement"
+msgstr ""
+
+#: .\billing\admin.py:105
+msgid "Lien de l'utilisateur"
+msgstr ""
+
+#: .\billing\admin.py:110
+msgid "Remboursement non acceptée"
+msgstr ""
+
+#: .\billing\forms.py:9
+msgid "Nom sur la carte"
+msgstr ""
+
+#: .\billing\forms.py:10
+msgid "Numéro de carte bancaire"
+msgstr ""
+
+#: .\billing\forms.py:12
+msgid "Date d'expiration"
+msgstr ""
+
+#: .\billing\forms.py:14
+msgid "CVC"
+msgstr ""
+
+#: .\billing\forms.py:17
+msgid "Sauvegarder la carte pour une prochaine fois"
+msgstr ""
+
+#: .\billing\forms.py:30
+msgid "Entrez un code promotionnel"
+msgstr ""
+
+#: .\billing\forms.py:35
+msgid "Code de référence"
+msgstr ""
+
+#: .\billing\forms.py:38
+msgid "Entrez votre message"
+msgstr ""
+
+#: .\billing\mixins.py:14
+msgid ""
+"Vous ne pouvez pas accéder à la page de paiement. Il vous impérativement "
+"mettre un cours dans votre panier"
+msgstr ""
+
+#: .\billing\models.py:14
+msgid "nom"
+msgstr ""
+
+#: .\billing\models.py:15
+msgid "prix déduit"
+msgstr ""
+
+#: .\billing\models.py:17
+msgid "nombre de personnes qui peuvent utiliser le code"
+msgstr ""
+
+#: .\billing\models.py:19
+msgid "date de désactivation du code"
+msgstr ""
+
+#: .\billing\models.py:21
+msgid "code utilisé par"
+msgstr ""
+
+#: .\billing\models.py:27
+msgid "coupon promotionnel"
+msgstr ""
+
+#: .\billing\models.py:28
+msgid "coupons promotionnels"
+msgstr ""
+
+#: .\billing\models.py:36 .\billing\models.py:91 .\polls\models.py:111
+msgid "utilisateur"
+msgstr ""
+
+#: .\billing\models.py:38
+msgid "code de référence"
+msgstr ""
+
+#: .\billing\models.py:39
+msgid "cours choisis"
+msgstr ""
+
+#: .\billing\models.py:41
+msgid "code de promotion attaché"
+msgstr ""
+
+#: .\billing\models.py:43
+msgid "date de création de l'ordre d'achat"
+msgstr ""
+
+#: .\billing\models.py:45
+msgid "date de la transaction"
+msgstr ""
+
+#: .\billing\models.py:46
+msgid "commandé"
+msgstr ""
+
+#: .\billing\models.py:48
+msgid "paiement associé"
+msgstr ""
+
+#: .\billing\models.py:50
+msgid "demande de remboursement"
+msgstr ""
+
+#: .\billing\models.py:52
+msgid "demande de remboursement acceptée"
+msgstr ""
+
+#: .\billing\models.py:55 .\billing\models.py:106
+msgid "commande"
+msgstr ""
+
+#: .\billing\models.py:56
+msgid "commandes"
+msgstr ""
+
+#: .\billing\models.py:89
+msgid "identifiant de paiement Stripe"
+msgstr ""
+
+#: .\billing\models.py:92
+msgid "montant"
+msgstr ""
+
+#: .\billing\models.py:94
+msgid "date du paiement"
+msgstr ""
+
+#: .\billing\models.py:97
+msgid "paiement"
+msgstr ""
+
+#: .\billing\models.py:98
+msgid "paiements"
+msgstr ""
+
+#: .\billing\models.py:107
+msgid "raison"
+msgstr ""
+
+#: .\billing\models.py:109
+msgid "identifiant de remboursement Stripe"
+msgstr ""
+
+#: .\billing\models.py:110
+msgid "accepté"
+msgstr ""
+
+#: .\billing\models.py:111
+msgid "rejeté"
+msgstr ""
+
+#: .\billing\models.py:114
+msgid "remboursement"
+msgstr ""
+
+#: .\billing\models.py:115
+msgid "remboursements"
+msgstr ""
+
+#: .\billing\templates\billing\cart.html:4 .\templates\includes\navbar.html:24
+msgid "Panier"
+msgstr ""
+
+#: .\billing\templates\billing\cart.html:7
+msgid "Votre panier"
+msgstr ""
+
+#: .\billing\templates\billing\cart.html:12
+msgid "Continuer mes achats"
+msgstr ""
+
+#: .\billing\templates\billing\cart.html:13
+#: .\billing\templates\billing\payment.html:9
+msgid "Procéder au paiement"
+msgstr ""
+
+#: .\billing\templates\billing\cart.html:16
+msgid "Vous n\\"
+msgstr ""
+
+#: .\billing\templates\billing\payment.html:4
+msgid "Paiement"
+msgstr ""
+
+#: .\billing\templates\billing\payment.html:10
+msgid "Payez en toute sécurité !"
+msgstr ""
+
+#: .\billing\templates\billing\payment.html:21
+msgid "Cartes bancaires acceptées"
+msgstr ""
+
+#: .\billing\templates\billing\payment.html:31
+msgid "Carte de crédit ou de débit"
+msgstr ""
+
+#: .\billing\templates\billing\payment.html:36
+msgid "Soumettre le paiement"
+msgstr ""
+
+#: .\billing\templates\billing\payment_error.html:4
+#, python-format
+msgid ""
+"Vous recevez ce mail car une erreur est survenue lors d'un paiement sur "
+"ProgLangLearn.\n"
+"\n"
+"Voici l'erreur générée :\n"
+"%(error)s\n"
+"\n"
+"Cliquez sur ce lien pour aller directement sur notre site :"
+msgstr ""
+
+#: .\billing\templates\billing\payment_items.html:18
+msgid "Supprimer la formation"
+msgstr ""
+
+#: .\billing\templates\billing\payment_items.html:28
+msgid "Supprimer le coupon"
+msgstr ""
+
+#: .\billing\templates\billing\payment_items.html:39
+msgid "Activer le code"
+msgstr ""
+
+#. Translators: Amount of money
+#: .\billing\templates\billing\payment_items.html:46
+#: .\billing\templates\billing\pdf\confirmation_payment.html:119
+#: .\billing\templates\billing\pdf\original_pdf_file.html:145
+msgid "Total"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:9
+#: .\billing\templates\billing\pdf\original_pdf_file.html:9
+#: .\templates\base.html:8 .\templates\maintenance.html:9
+msgid ""
+"Apprenez les bases de la programmation en les manipulant dans des exemples "
+"simples et des projets plus complexes."
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:93
+#: .\billing\templates\billing\pdf\original_pdf_file.html:118
+msgid "Confirmation du paiement"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:97
+#, python-format
+msgid ""
+"<p>Paiement par carte de crédit ou de débit : %(stripe_charge.source.brand|"
+"upper)s %(stripe_charge.source.country|upper)s **** **** **** <strong>%"
+"(stripe_charge.source.last4)s</strong><br>\n"
+"                Date d'expiration : <strong>%(stripe_charge.source.exp_month|"
+"zfill:'2')s / %(stripe_charge.source.exp_year)s</strong><br><br>\n"
+"                Code de référence de votre commande : <strong>%(order."
+"ref_code)s</strong> datant du %(order.ordered_date|date:\"d/m/Y\")s<br>\n"
+"                Votre identifiant unique : %(order.user.id)s</p>"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:102
+#: .\billing\templates\billing\pdf\original_pdf_file.html:127
+msgid "Récapitulatif"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:128
+msgid ""
+"Ce document fait office de confirmation officielle de paiement. Il vous sera "
+"demander de le délivrer en cas de problèmes liés à votre compte (perte et "
+"remplacement par un autre compte) ou lors d'une demande de remboursement "
+"(possible sous 14 jours à compter de la date de la transaction <strong>et</"
+"strong> avec un motif valable)."
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:130
+#: .\billing\templates\billing\pdf\original_pdf_file.html:158
+msgid "Aller sur le site"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\original_pdf_file.html:122
+#, python-format
+msgid ""
+"<p>Paiement par carte de crédit ou de débit : **** **** **** <strong>4242</"
+"strong><br>\n"
+"                Date d'expiration : <strong>04 / 2020</strong><br><br>\n"
+"                Code de référence de votre commande : <strong>%(order."
+"ref_code)s</strong> datant du %(order.ordered_date)s<br>\n"
+"                Votre identifiant unique : %(order.user.id)s</p>"
+msgstr ""
+
+#: .\billing\templates\billing\refund_request.html:4
+#: .\billing\templates\billing\refund_request.html:7
+msgid "Demande de reboursement"
+msgstr ""
+
+#: .\billing\templates\billing\refund_request.html:21
+msgid "Demander"
+msgstr ""
+
+#: .\billing\utils.py:25
+msgid "Ce coupon n'est plus valide"
+msgstr ""
+
+#: .\billing\utils.py:28
+msgid "Ce coupon n'existe pas"
+msgstr ""
+
+#: .\billing\views.py:91 .\courses\views.py:122
+msgid "Bienvenue au cours : {course.title}"
+msgstr ""
+
+#: .\billing\views.py:94
+msgid "Votre commande a été affectué avec succès"
+msgstr ""
+
+#: .\billing\views.py:122
+msgid "Stripe error"
+msgstr ""
+
+#: .\billing\views.py:132
+msgid "A serious error occurred. We have been notified"
+msgstr ""
+
+#: .\billing\views.py:162
+msgid "Le cours que vous essayé d'ajouter se trouve déjà dans le panier"
+msgstr ""
+
+#: .\billing\views.py:165
+msgid "Cours ajouté au panier"
+msgstr ""
+
+#: .\billing\views.py:181
+msgid "Le cours a bien été enlevé de votre panier"
+msgstr ""
+
+#: .\billing\views.py:184
+msgid "Le cours ne se trouve pas dans votre panier"
+msgstr ""
+
+#: .\billing\views.py:192
+msgid "Votre panier est actuellement vide"
+msgstr ""
+
+#: .\billing\views.py:211
+msgid "Coupon {order.coupon.code} ajouté"
+msgstr ""
+
+#: .\billing\views.py:214
+msgid "Vous avez déjà utilisé ce coupon lors d'un précédent achat"
+msgstr ""
+
+#: .\billing\views.py:217
+msgid "Le coupon saisi n'existe pas ou n'est plus disponible"
+msgstr ""
+
+#: .\billing\views.py:221
+msgid "Vous n'avez aucun cours dans votre panier"
+msgstr ""
+
+#: .\billing\views.py:223
+msgid "Méthode d'ajout de coupon non acceptée"
+msgstr ""
+
+#: .\billing\views.py:240
+msgid "Le code promotionnel a bien été retiré de votre panier"
+msgstr ""
+
+#: .\billing\views.py:243
+msgid ""
+"Le code promotionnel n'est pas lié à votre panier et ne peut être retiré"
+msgstr ""
+
+#: .\billing\views.py:245
+msgid "Votre panier est vide"
+msgstr ""
+
+#: .\billing\views.py:271
+msgid "Votre demande a été envoyée"
+msgstr ""
+
+#: .\billing\views.py:275
+msgid "La demande de remboursement a été rejetée"
+msgstr ""
+
+#: .\billing\views.py:277
+msgid ""
+"La période de remboursement a expirée ou vous avez déjà envoyé une demande"
+msgstr ""
+
+#: .\billing\views.py:281
+msgid "Le code de référence mentionné n'existe pas"
+msgstr ""
+
+#: .\courses\admin.py:22
+msgid "Formations publiées avec succès"
+msgstr ""
+
+#: .\courses\admin.py:26
+msgid ""
+"Publication des formations (les rendre visibles si la date est dépassée + "
+"autorisation d'envoi d'email notificatif)"
+msgstr ""
+
+#: .\courses\admin.py:30
+msgid "année de publication"
+msgstr ""
+
+#: .\courses\admin.py:56
+#, python-format
+msgid "Éditer le %s séparement"
+msgstr ""
+
+#: .\courses\admin.py:57
+msgid "Enregistrez et continuez à éditer pour créer un lien"
+msgstr ""
+
+#: .\courses\admin.py:58
+msgid "Édit le lien"
+msgstr ""
+
+#: .\courses\admin.py:80
+msgid "Enregistrez pour avoir le lien de l'auteur du cours"
+msgstr ""
+
+#: .\courses\admin.py:82
+msgid "Auteur"
+msgstr ""
+
+#: .\courses\admin.py:92 .\polls\admin.py:53 .\polls\admin.py:79
+#: .\polls\admin.py:112
+msgid "Info générales"
+msgstr ""
+
+#: .\courses\admin.py:93 .\polls\admin.py:81 .\polls\admin.py:114
+msgid "Info complémentaires"
+msgstr ""
+
+#: .\courses\forms.py:23 .\courses\forms.py:51
+msgid "Gestionnaire de ..."
+msgstr ""
+
+#: .\courses\forms.py:25 .\courses\forms.py:53
+msgid "Introduction au cours"
+msgstr ""
+
+#: .\courses\forms.py:35
+msgid ""
+"Conseil : mettre une période de deux semaines en plus en attente de "
+"vérification de la part de l'administration"
+msgstr ""
+
+#: .\courses\forms.py:70
+msgid "Installation ..."
+msgstr ""
+
+#: .\courses\forms.py:71 .\main\forms.py:20 .\polls\admin.py:69
+msgid "Contenu"
+msgstr ""
+
+#: .\courses\mixins.py:13
+msgid ""
+"Vous n'avez pas accès à ce tutoriel. Veuillez vous enroller dans le cours"
+msgstr ""
+
+#: .\courses\mixins.py:23 .\polls\mixins.py:24
+msgid ""
+"Le tutoriel ou le cours auquel vous essayez d'accéder n'existe pas ou plus "
+"ou est inaccessible"
+msgstr ""
+
+#: .\courses\mixins.py:50
+msgid "Vous n'avez pas l'autorisation de modifier ce cours"
+msgstr ""
+
+#: .\courses\mixins.py:59
+msgid ""
+"Le cours auquel vous essayez d'accéder n'existe pas ou plus ou est "
+"inaccessible"
+msgstr ""
+
+#: .\courses\models.py:20
+msgid "Débutant"
+msgstr ""
+
+#: .\courses\models.py:21
+msgid "Intermédiaire"
+msgstr ""
+
+#: .\courses\models.py:22
+msgid "Expert"
+msgstr ""
+
+#: .\courses\models.py:29
+msgid "titre du cours"
+msgstr ""
+
+#: .\courses\models.py:33
+msgid "vignette/vidéo d'introduction"
+msgstr ""
+
+#: .\courses\models.py:39
+msgid "difficulté"
+msgstr ""
+
+#: .\courses\models.py:41
+msgid "contenu d'introduction"
+msgstr ""
+
+#: .\courses\models.py:43
+msgid "version PDF du cours"
+msgstr ""
+
+#: .\courses\models.py:47
+msgid "formation publiée"
+msgstr ""
+
+#: .\courses\models.py:49
+msgid "email envoyé"
+msgstr ""
+
+#: .\courses\models.py:51
+msgid "prix (ou ancien prix si nouveau)"
+msgstr ""
+
+#: .\courses\models.py:53
+msgid "nouveau prix"
+msgstr ""
+
+#: .\courses\models.py:55
+msgid "étudiants enrollés"
+msgstr ""
+
+#: .\courses\models.py:61 .\courses\models.py:62
+msgid "cours"
+msgstr ""
+
+#: .\courses\models.py:96
+msgid ""
+"Aucun tutoriel n'est relié au cours ! Veuillez en relié au moins un pour "
+"obtenir un pourcentage"
+msgstr ""
+
+#: .\courses\models.py:142
+msgid "cours rattaché"
+msgstr ""
+
+#: .\courses\models.py:146
+msgid "titre du tutoriel"
+msgstr ""
+
+#: .\courses\models.py:147
+msgid "contenu du tutoriel"
+msgstr ""
+
+#: .\courses\models.py:149
+msgid "ressources à déposer"
+msgstr ""
+
+#: .\courses\models.py:151
+msgid "points d'expérience fournis"
+msgstr ""
+
+#: .\courses\models.py:159
+msgid "tutoriel"
+msgstr ""
+
+#: .\courses\models.py:160
+msgid "tutoriels"
+msgstr ""
+
+#: .\courses\templates\courses\course_confirm_delete.html:4
+#: .\courses\templates\courses\course_confirm_delete.html:7
+#: .\courses\templates\courses\tutorial_confirm_delete.html:4
+#: .\courses\templates\courses\tutorial_confirm_delete.html:7
+msgid "Suppression de"
+msgstr ""
+
+#: .\courses\templates\courses\course_confirm_delete.html:11
+msgid ""
+"<p>La suppression du cours est <strong>irréversible</strong>. Les tutoriels "
+"seront <strong>également supprimés</strong> ainsi que les <strong>ressources "
+"associées</strong>.</p>"
+msgstr ""
+
+#: .\courses\templates\courses\course_create.html:4
+#: .\courses\templates\courses\course_create.html:11
+msgid "Ajouter un cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_create.html:4
+#: .\courses\templates\courses\course_create.html:11
+msgid "Modifier un cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_create.html:14
+#: .\courses\templates\courses\course_detail.html:10
+#: .\courses\templates\courses\tutorial_create.html:46
+#: .\courses\templates\courses\tutorial_create.html:48
+#: .\courses\templates\courses\tutorial_detail.html:31
+msgid "Retour"
+msgstr ""
+
+#: .\courses\templates\courses\course_create.html:15
+#: .\courses\templates\courses\course_detail.html:12
+msgid "Supprimer le cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_create.html:86
+#: .\courses\templates\courses\tutorial_create.html:4
+msgid "Ajouter un tutoriel"
+msgstr ""
+
+#: .\courses\templates\courses\course_create.html:110
+#: .\courses\templates\courses\tutorial_create.html:50
+msgid "Ajouter"
+msgstr ""
+
+#: .\courses\templates\courses\course_create.html:110
+#: .\courses\templates\courses\tutorial_create.html:50
+msgid "Modifier"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:11
+msgid "Modifier l\\"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:21
+msgid "Cours rédigé par"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:21
+msgid "et paru le"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:25
+#, python-format
+msgid ""
+"\n"
+"                    <i class=\"fas fa-file-code\"></i> %(counter)s ressource "
+"téléchargable\n"
+"                "
+msgid_plural ""
+"\n"
+"                    <i class=\"fas fa-file-code\"></i> %(counter)s "
+"ressources téléchargables\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\courses\templates\courses\course_detail.html:34
+msgid "PDF disponible"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:44
+msgid "Tutoriels appartenant au cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:53
+msgid "Quiz appartenant au cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:64
+msgid "Enrollez-vous dès maintenant pour accéder à ce cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:66
+msgid "S\\"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:69
+#: .\courses\templates\courses\course_detail.html:75
+msgid "gratuitement"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:71
+#: .\courses\templates\courses\course_detail.html:77
+msgid "pour"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:81
+msgid "Enlever du panier"
+msgstr ""
+
+#: .\courses\templates\courses\course_list.html:4 .\polls\admin.py:124
+#: .\templates\includes\navbar.html:14
+msgid "Cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_list.html:7
+msgid "Tous les cours"
+msgstr ""
+
+#: .\courses\templates\courses\course_list.html:36
+#: .\courses\templates\courses\course_list.html:38
+msgid "Gratuit"
+msgstr ""
+
+#: .\courses\templates\courses\new_course_email.html:4
+#, python-format
+msgid ""
+"Salut, cher utilisateur de ProgLangLearn,\n"
+"\n"
+"Une toute nouvelle formation vient d'être publiée intitulée : \"%(course."
+"title)s\"\n"
+"\n"
+"\n"
+"Tu peux venir regarder les détails de celle-ci par ce lien :"
+msgstr ""
+
+#: .\courses\templates\courses\new_course_email.html:12
+msgid "De la part de toute l\\"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_confirm_delete.html:11
+msgid ""
+"<p>La suppression du tutoriel est <strong>irréversible</strong>. Les "
+"commentaires seront <strong>également supprimés</strong> ainsi que les "
+"<strong>ressources associées</strong>.</p>"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_create.html:4
+msgid "Modifier un tutoriel"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_create.html:11
+msgid "Ajouter un tutoriel au cours"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_create.html:11
+msgid "Modifier un tutoriel du cours"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_create.html:31
+msgid "Information suplémentaires"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_detail.html:33
+msgid "Modifier le tutoriel"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_detail.html:34
+msgid "Supprimer le tutoriel"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_detail.html:38
+msgid "minutes"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_detail.html:46
+#: .\templates\includes\pagination.html:7
+msgid "Précédent"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_detail.html:52
+#: .\templates\includes\pagination.html:17
+msgid "Suivant"
+msgstr ""
+
+#: .\courses\utils.py:13
+msgid "Nouvelle formation en ligne"
+msgstr ""
+
+#: .\courses\views.py:41
+msgid "Cours \"{course.title}\" ajouté avec succès"
+msgstr ""
+
+#: .\courses\views.py:89
+msgid "Cours modifié avec succès"
+msgstr ""
+
+#: .\courses\views.py:117
+msgid "Vous êtes déjà inscrit au cours"
+msgstr ""
+
+#: .\courses\views.py:129
+msgid "Tutoriel ajouté avec succès"
+msgstr ""
+
+#: .\courses\views.py:135
+msgid ""
+"Vous ne pouvez pas créer un tutoriel car vous ne faîtes pas partie de "
+"l'administration de ProgLangLearn ou vous n'êtes pas l'auteur du cours"
+msgstr ""
+
+#: .\courses\views.py:239
+msgid "Tutoriel modifié avec succès"
+msgstr ""
+
+#: .\main\admin.py:16
+msgid "Donner le statut d'administrateur"
+msgstr ""
+
+#: .\main\admin.py:23
+msgid "Striker le commentaire"
+msgstr ""
+
+#: .\main\forms.py:8 .\main\forms.py:10 .\main\templates\main\search.html:4
+msgid "Recherche"
+msgstr ""
+
+#: .\main\forms.py:30
+msgid "Description des faits"
+msgstr ""
+
+#: .\main\mixins.py:23
+msgid ""
+"La page auquel vous essayez d'accéder n'est accessible que par les "
+"administrateurs du site"
+msgstr ""
+
+#: .\main\models.py:16
+msgid "Harcèlement"
+msgstr ""
+
+#: .\main\models.py:17
+msgid "Discriminations physiques, racistes, sexistes"
+msgstr ""
+
+#: .\main\models.py:18
+msgid "Incitations ou apologie du terrorisme"
+msgstr ""
+
+#: .\main\models.py:19
+msgid "Incitations à la violence et à la haine"
+msgstr ""
+
+#: .\main\models.py:20
+msgid "Autre (explications demandées)"
+msgstr ""
+
+#: .\main\models.py:27
+msgid "adresse IP"
+msgstr ""
+
+#: .\main\models.py:32
+msgid "nom du langage de programmation"
+msgstr ""
+
+#: .\main\models.py:36
+msgid "logo"
+msgstr ""
+
+#: .\main\models.py:38
+msgid "description du langage"
+msgstr ""
+
+#: .\main\models.py:41
+msgid "langage de programmation"
+msgstr ""
+
+#: .\main\models.py:42
+msgid "langages de programmation"
+msgstr ""
+
+#: .\main\models.py:53
+msgid "nom de la catégorie"
+msgstr ""
+
+#: .\main\models.py:57
+msgid "illustration"
+msgstr ""
+
+#: .\main\models.py:59
+msgid "description de la catégorie"
+msgstr ""
+
+#: .\main\models.py:62
+msgid "catégorie"
+msgstr ""
+
+#: .\main\models.py:85
+msgid "modèle de l'objet"
+msgstr ""
+
+#: .\main\models.py:87
+msgid "identifiant de l'objet"
+msgstr ""
+
+#: .\main\models.py:89
+msgid "commentaire ou réponse"
+msgstr ""
+
+#: .\main\models.py:95
+msgid "commentaire"
+msgstr ""
+
+#: .\main\models.py:96
+msgid "commentaires"
+msgstr ""
+
+#: .\main\models.py:139
+msgid "commentaire reporté"
+msgstr ""
+
+#: .\main\models.py:141
+msgid "signaleur"
+msgstr ""
+
+#: .\main\models.py:143
+msgid "type de signalement"
+msgstr ""
+
+#: .\main\models.py:145
+msgid "contenu du signalement"
+msgstr ""
+
+#: .\main\models.py:146
+msgid "vérifié"
+msgstr ""
+
+#: .\main\models.py:147
+msgid "striké"
+msgstr ""
+
+#: .\main\models.py:150
+msgid "signalement de commentaire"
+msgstr ""
+
+#: .\main\models.py:151
+msgid "signalements de commentaire"
+msgstr ""
+
+#: .\main\templates\main\about.html:4 .\main\templates\main\about.html:7
+#: .\templates\includes\footer.html:7
+msgid "À propos"
+msgstr "About"
+
+#: .\main\templates\main\about.html:9
+msgid ""
+"<div class=\"my-1\">\n"
+"        Fondé en 2019 par <a href=\"profile.html\">Guillaume Letellier</a>, "
+"étudiant en informatique,\n"
+"        ProgLangLearn est un ensemble d'outil\n"
+"        spécialisé dans le domaine de la programmation informatique. Il "
+"s'adresse à tout public désirant se\n"
+"        former et maîtriser ces outils numériques.\n"
+"    </div>"
+msgstr ""
+
+#: .\main\templates\main\about.html:16
+msgid ""
+"<h2>1. Qu'apprendrez-vous sur ProgLangLearn ?</h2>\n"
+"        <p>Les informations publiées sont accessible pour :</p>\n"
+"        <ul>\n"
+"            <li>Développer vos connaissances</li>\n"
+"            <li>Augmenter votre notoriété</li>\n"
+"            <li>Discuter avec des professionnels ou personnes dans le "
+"domaine de la programmation</li>\n"
+"        </ul>"
+msgstr ""
+
+#: .\main\templates\main\about.html:25
+msgid ""
+"<h2>2. Quelles ressources sont accessibles ?</h2>\n"
+"        <p>Les ressources suivantes sont à votre disposition :</p>\n"
+"        <div class=\"mb-2\">\n"
+"            <h3 class=\"fw-normal\">2.1 Des ressources éducatives gratuites</"
+"h3>\n"
+"            <ul>\n"
+"                <li>Des <strong>articles</strong> donnant des informations, "
+"des astuces sur différents\n"
+"                    langages\n"
+"                    concernant des mises à jour importantes, ou des "
+"fonctionnalités toutes nouvellement\n"
+"                    trouvées\n"
+"                </li>\n"
+"                <li>Des <strong>sujets</strong> proposés par des personnes "
+"pour avoir de l'aide</li>\n"
+"                <li>Des <strong>cours</strong> gratuits, générallement des "
+"introductions à un langage ou un\n"
+"                    framework</li>\n"
+"            </ul>\n"
+"        </div>\n"
+"        <div>\n"
+"            <h3 class=\"fw-normal\">2.2 Les formations complètes (payantes)</"
+"h3>\n"
+"            <ul>\n"
+"                <li>Des <strong>projets complets</strong> destinés à "
+"accomplir une tâche réelle tel qu'un\n"
+"                    logiciel ou un site web</li>\n"
+"            </ul>\n"
+"        </div>"
+msgstr ""
+
+#: .\main\templates\main\about.html:49
+msgid ""
+"<h2>3. Pourquoi utiliser ProgLangLearn ?</h2>\n"
+"        <p>ProgLangLearn permet de centraliser de nombreuses ressources "
+"importantes en\n"
+"            programmation. Nous possédons un service donnant des cours de "
+"programmation standards et des\n"
+"            formations. Nous avons aussi un service permettant l'entreaide "
+"entre développeur, programmeur et\n"
+"            apprentis.</p>"
+msgstr ""
+
+#: .\main\templates\main\about.html:56
+msgid "Au sujet de"
+msgstr ""
+
+#: .\main\templates\main\about.html:58
+msgid ""
+"<p>Guillaume Letellier est actuellement étudiant en informatique à l'<a href="
+"\"www.unicaen.fr\"\n"
+"                target=\"_blank\">Université de Caen</a>, France.</p>\n"
+"        <p>Il a donc fait ProgLangLearn afin de propager ses connaissances "
+"qu'il a pu aquérir et prodiguer\n"
+"            ses\n"
+"            conseils pour programmer plus rapidement, facilement et avec une "
+"meilleur optimisation. Cette\n"
+"            phrase\n"
+"            définit sa vision de pensée de l'avenir :</p>\n"
+"        <blockquote>\n"
+"            Ne grandissons pas dans un monde sans le comprendre. Apprendre "
+"la\n"
+"            programmation, c'est comprendre l'avenir et agir sur celui-ci !\n"
+"        </blockquote>"
+msgstr ""
+
+#: .\main\templates\main\contact.html:4 .\templates\includes\footer.html:8
+msgid "Contact"
+msgstr ""
+
+#: .\main\templates\main\contact.html:7
+msgid "Contacter"
+msgstr ""
+
+#: .\main\templates\main\contact.html:8
+msgid "Contactez-nous dans l'espace approprié à chaque demande !"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:9
+msgid "Rédiger un commentaire"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:16
+msgid "Commenter"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:20
+msgid "Vous devez être connecter pour commenter"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:31
+#: .\main\templates\main\includes\comments.html:41
+msgid "Signaler le commentaire"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:31
+#: .\main\templates\main\includes\comments.html:41
+msgid "Signaler"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:50
+#: .\main\templates\main\includes\comments.html:52
+msgid "Répondre"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:60
+msgid "Rédiger une réponse"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:69
+#: .\main\templates\main\includes\comments.html:71
+msgid "Envoyer"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:80
+msgid "Il n\\"
+msgstr ""
+
+#: .\main\templates\main\includes\tags.html:4
+msgid "Catégories"
+msgstr ""
+
+#: .\main\templates\main\index.html:13
+msgid "Apprenez la programmation informatique"
+msgstr ""
+
+#: .\main\templates\main\index.html:16
+msgid "Ne grandissons pas dans un monde sans le comprendre."
+msgstr ""
+
+#: .\main\templates\main\index.html:17
+msgid ""
+"Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:4 .\main\templates\main\privacy.html:7
+msgid "Politique de confidentialité et de cookies"
+msgstr ""
+
+#: .\main\templates\main\report.html:4
+msgid "Signalement"
+msgstr ""
+
+#: .\main\templates\main\report.html:7
+msgid "Signaler un commentaire"
+msgstr ""
+
+#: .\main\templates\main\report.html:8
+msgid "Signaler un commentaire rapidement"
+msgstr ""
+
+#: .\main\templates\main\report.html:10
+msgid ""
+"Le signalement d'une personne peut avoir de sérieuses conséquences, comme ce "
+"qui est écrit dans les"
+msgstr ""
+
+#: .\main\templates\main\report.html:11
+msgid "termes et conditions d'utilisation"
+msgstr ""
+
+#: .\main\templates\main\report.html:11
+msgid "donc ne faîtes pas de signalement abusif."
+msgstr ""
+
+#: .\main\templates\main\report.html:15
+#, python-format
+msgid ""
+"<h3 class=\"card-title\">Commentaire de %(object.author.username)s posté le %"
+"(object.timestamp)s</h3>"
+msgstr ""
+
+#: .\main\templates\main\report.html:35
+msgid "Envoyer le signalement"
+msgstr ""
+
+#: .\main\templates\main\search.html:7
+msgid "Recherche pour"
+msgstr ""
+
+#: .\main\templates\main\search.html:14
+msgid "Filtrer la recherche"
+msgstr ""
+
+#: .\main\templates\main\search.html:17
+msgid "Cliquez pour sélectionner votre choix :"
+msgstr ""
+
+#: .\main\templates\main\search.html:18
+msgid "Tout"
+msgstr ""
+
+#: .\main\templates\main\search.html:19
+msgid "Seulement les cours"
+msgstr ""
+
+#: .\main\templates\main\search.html:20
+msgid "Seulement les tutoriels"
+msgstr ""
+
+#: .\main\templates\main\search.html:21
+msgid "Seulement les sujets"
+msgstr ""
+
+#: .\main\templates\main\search.html:22
+msgid "Seulement les profils"
+msgstr ""
+
+#: .\main\templates\main\search.html:28
+msgid "Tutoriels"
+msgstr ""
+
+#: .\main\templates\main\search.html:65
+msgid "Sujets du forum"
+msgstr ""
+
+#: .\main\templates\main\search.html:78
+msgid "Profils d\\"
+msgstr ""
+
+#: .\main\templates\main\tag.html:10
+msgid "Image d\\"
+msgstr ""
+
+#: .\main\templates\main\terms.html:4 .\main\templates\main\terms.html:7
+#: .\templates\includes\footer.html:5
+msgid "Termes et conditions"
+msgstr ""
+
+#: .\main\utils.py:44
+msgid ""
+"Choisissez une image et continuez d'éditer pour voir la prévisualisation de "
+"l'image"
+msgstr ""
+
+#: .\main\utils.py:48
+msgid "Visualisation de la vignette"
+msgstr ""
+
+#: .\main\views.py:75
+msgid "Le commentaire a été signalé"
+msgstr ""
+
+#: .\main\views.py:79
+msgid "Le commentaire n'a pas pu être signalé"
+msgstr ""
+
+#: .\polls\admin.py:15
+msgid "Réinitialiser les valeurs booléennes"
+msgstr ""
+
+#: .\polls\admin.py:22
+msgid "Afficher les questions aléatoirement"
+msgstr ""
+
+#: .\polls\admin.py:29
+msgid "Droit qu'à un seul essai"
+msgstr ""
+
+#: .\polls\admin.py:37
+msgid "Afficher les réponses aléatoirement"
+msgstr ""
+
+#: .\polls\admin.py:60
+msgid "Enregistrez pour avoir le lien de la question"
+msgstr ""
+
+#: .\polls\admin.py:62 .\polls\admin.py:102
+msgid "Question"
+msgstr ""
+
+#: .\polls\admin.py:67 .\polls\admin.py:100
+msgid "Enregistrez pour avoir le lien de l'objet"
+msgstr ""
+
+#: .\polls\admin.py:93
+msgid "Enregistrez pour avoir le lien du quiz"
+msgstr ""
+
+#: .\polls\admin.py:95 .\polls\models.py:64
+msgid "Quiz"
+msgstr ""
+
+#: .\polls\admin.py:122
+msgid "Enregistrez pour avoir le lien du cours"
+msgstr ""
+
+#: .\polls\mixins.py:14
+msgid "Vous n'avez pas accès à ce quiz. Veuillez vous enroller dans le cours"
+msgstr ""
+
+#: .\polls\mixins.py:58
+msgid "Le quiz que vous essayez d'accéder n'appartient pas ou plus au cours"
+msgstr ""
+
+#: .\polls\models.py:24
+msgid "titre"
+msgstr ""
+
+#: .\polls\models.py:26
+msgid "description"
+msgstr ""
+
+#: .\polls\models.py:28 .\polls\models.py:70
+msgid "ordre aléatoire ?"
+msgstr ""
+
+#: .\polls\models.py:28
+msgid "Afficher aléatoirement les questions ?"
+msgstr ""
+
+#: .\polls\models.py:30
+msgid "un seul essai"
+msgstr ""
+
+#: .\polls\models.py:33 .\polls\models.py:34 .\polls\models.py:113
+msgid "quiz"
+msgstr ""
+
+#: .\polls\models.py:66 .\polls\models.py:74 .\polls\models.py:95
+msgid "question"
+msgstr ""
+
+#: .\polls\models.py:68
+msgid "explication"
+msgstr ""
+
+#: .\polls\models.py:70
+msgid "Afficher les réponses dans le désordre ?"
+msgstr ""
+
+#: .\polls\models.py:75
+msgid "questions"
+msgstr ""
+
+#: .\polls\models.py:97
+msgid "Entrez la réponse que vous voulez afficher"
+msgstr ""
+
+#: .\polls\models.py:99
+msgid "correct"
+msgstr ""
+
+#: .\polls\models.py:99
+msgid "Est-ce la bonne réponse ?"
+msgstr ""
+
+#: .\polls\models.py:105
+msgid "réponse"
+msgstr ""
+
+#: .\polls\models.py:106
+msgid "réponses"
+msgstr ""
+
+#: .\polls\models.py:115
+msgid "ordre des questions"
+msgstr ""
+
+#: .\polls\models.py:117
+msgid "liste des questions"
+msgstr ""
+
+#: .\polls\models.py:119
+msgid "questions incorrectes"
+msgstr ""
+
+#: .\polls\models.py:120
+msgid "score actuel"
+msgstr ""
+
+#: .\polls\models.py:122
+msgid "terminé"
+msgstr ""
+
+#: .\polls\models.py:124
+msgid "réponses de l'utilisateur"
+msgstr ""
+
+#: .\polls\models.py:126
+msgid "commencement"
+msgstr ""
+
+#: .\polls\models.py:127
+msgid "fin"
+msgstr ""
+
+#: .\polls\models.py:132
+msgid "séance"
+msgstr ""
+
+#: .\polls\models.py:133
+msgid "séances"
+msgstr ""
+
+#: .\polls\templates\polls\quiz_detail.html:15
+msgid "Modifier le quiz"
+msgstr ""
+
+#: .\polls\templates\polls\quiz_detail.html:16
+msgid "Supprimer le quiz"
+msgstr ""
+
+#: .\polls\templates\polls\quiz_detail.html:27
+msgid "Attention ! Vous n'avez droit qu'à un seul essai"
+msgstr ""
+
+#: .\proglanglearn\settings\base.py:105
+msgid "Français"
+msgstr ""
+
+#: .\proglanglearn\settings\base.py:106
+msgid "Anglais"
+msgstr ""
+
+#: .\templates\403.html:4
+msgid "Accès interdit"
+msgstr ""
+
+#: .\templates\403.html:7
+msgid "Page à accès restreint !"
+msgstr ""
+
+#: .\templates\403.html:10
+msgid "Faire une demande auprès de l'administration"
+msgstr ""
+
+#: .\templates\403.html:10
+msgid "ou"
+msgstr ""
+
+#: .\templates\403.html:10
+msgid "Faire un rapport d'erreur auprès de l'administration"
+msgstr ""
+
+#: .\templates\403.html:212 .\templates\404.html:72 .\templates\500.html:140
+msgid "Code erreur"
+msgstr ""
+
+#: .\templates\404.html:4 .\templates\404.html:7
+msgid "Page non trouvée"
+msgstr ""
+
+#: .\templates\404.html:8
+msgid ""
+"La page que vous essayez d'accéder n'existe pas, plus ou a été déplacée à "
+"une autre URL."
+msgstr ""
+
+#: .\templates\500.html:4
+msgid "Problème interne serveur"
+msgstr ""
+
+#: .\templates\500.html:7
+msgid "Problème de serveur !"
+msgstr ""
+
+#: .\templates\500.html:8
+msgid ""
+"Un problème est survenu lors de la requête au serveur. Veuillez réitérer "
+"votre réquête."
+msgstr ""
+
+#: .\templates\includes\footer.html:6
+msgid "Politique de confidentialité"
+msgstr ""
+
+#: .\templates\includes\footer.html:21
+msgid "Tous droits réservés"
+msgstr ""
+
+#: .\templates\includes\navbar.html:10
+msgid "Retour à l\\"
+msgstr ""
+
+#: .\templates\includes\navbar.html:20
+msgid "Forum"
+msgstr ""
+
+#: .\templates\includes\navbar.html:36
+msgid "Se connecter à mon compte"
+msgstr ""
+
+#: .\templates\includes\navbar.html:36 .\templates\registration\login.html:4
+msgid "Connexion"
+msgstr ""
+
+#: .\templates\includes\navbar.html:40
+msgid "Votre photo de profil actuelle"
+msgstr ""
+
+#: .\templates\includes\navbar.html:45
+msgid "Administration"
+msgstr ""
+
+#: .\templates\includes\navbar.html:51
+msgid "Créer un article"
+msgstr ""
+
+#: .\templates\includes\navbar.html:59
+msgid "Créer un cours"
+msgstr ""
+
+#: .\templates\includes\navbar.html:66
+msgid "Tableau de bord"
+msgstr ""
+
+#: .\templates\includes\navbar.html:69
+msgid "Mon profil"
+msgstr ""
+
+#: .\templates\includes\navbar.html:72
+msgid "Mon compte"
+msgstr ""
+
+#: .\templates\includes\navbar.html:75
+msgid "Se déconnecter"
+msgstr ""
+
+#: .\templates\includes\pagination.html:6
+msgid "Aller à la première page"
+msgstr ""
+
+#: .\templates\includes\pagination.html:18
+msgid "Aller à la dernière page"
+msgstr ""
+
+#: .\templates\includes\scrollTop.html:3
+msgid "Retourner en haut de la page"
+msgstr ""
+
+#: .\templates\maintenance.html:21
+msgid "Maintenance"
+msgstr ""
+
+#: .\templates\maintenance.html:34
+msgid "Maintenance du site !"
+msgstr ""
+
+#: .\templates\registration\account_activation_email.html:4
+#, python-format
+msgid ""
+"Salut %(user.username)s,\n"
+"\n"
+"Pour activer ton compte, clique sur le lien ci-dessous :"
+msgstr ""
+
+#: .\templates\registration\account_activation_invalid.html:4
+msgid "Email d'activation invalide"
+msgstr ""
+
+#: .\templates\registration\account_activation_invalid.html:8
+msgid ""
+"Le lien de confirmation d'activation est invalide, sûrement car il a déjà "
+"été utilisé ou le lien a expiré"
+msgstr ""
+
+#: .\templates\registration\account_activation_invalid.html:10
+#: .\templates\registration\account_activation_sent.html:10
+#: .\templates\registration\password_reset_complete.html:10
+msgid "Se connecter"
+msgstr ""
+
+#: .\templates\registration\account_activation_invalid.html:11
+#: .\templates\registration\login.html:35
+msgid "Changer mon mot de passe"
+msgstr ""
+
+#: .\templates\registration\account_activation_invalid.html:12
+#: .\templates\registration\account_activation_sent.html:11
+msgid "S'enregistrer"
+msgstr ""
+
+#: .\templates\registration\account_activation_sent.html:4
+msgid "Email d'activation envoyé"
+msgstr ""
+
+#: .\templates\registration\account_activation_sent.html:8
+msgid ""
+"Pour continuer votre inscription, veuillez compléter et suivre les "
+"inscriptions données dans le courriel qui vous a été envoyé."
+msgstr ""
+
+#: .\templates\registration\login.html:7
+#: .\templates\registration\login.html:32
+msgid "S'identifier"
+msgstr ""
+
+#: .\templates\registration\login.html:8
+msgid "Connectez-vous à votre compte !"
+msgstr ""
+
+#: .\templates\registration\login.html:30
+#: .\templates\registration\password_reset_confirm.html:34
+msgid ""
+"<small class=\"d-block mb-1\">Tous les champs avec un <span class=\"required-"
+"input\">*</span> sont obligatoires.</small>"
+msgstr ""
+
+#: .\templates\registration\login.html:35
+msgid "Vous n'avez pas encore de compte ?"
+msgstr ""
+
+#: .\templates\registration\login.html:35
+msgid "Inscrivez-vous"
+msgstr ""
+
+#: .\templates\registration\login.html:35
+msgid "Vous avez oublié votre mot de passe ?"
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:4
+#: .\templates\registration\password_reset_complete.html:7
+msgid "Réinitialisation complétée"
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:8
+msgid ""
+"Votre mot de passe a été changé. Vous pouvez vous connectez avec vos "
+"identifiants ;)"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:4
+msgid "Réinitialisation"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:7
+#: .\templates\registration\password_reset_form.html:23
+msgid "Réinitialiser mon mot de passe"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:9
+msgid ""
+"Saisissez deux fois votre nouveau mot de passe afin de vérifier qu'il a "
+"correctement été saisi."
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:36
+msgid "Réinitialiser"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:40
+msgid ""
+"Le lien de réinitialisation est invalide, peut-être car il a déjà été "
+"utilisé. Faîtes plutôt une nouvelle demande avec le lien ci-dessus."
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:42
+msgid "Faire une autre demande"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:4
+msgid "Email envoyé"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:7
+#: .\templates\registration\password_reset_form.html:4
+msgid "Demande de réinitialisation de mot de passe"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:9
+msgid ""
+"Nous vous avons envoyé un mail avec les instructions pour créer un nouveau "
+"mot de passe. Si un compte existe avec l'addresse email transmise, vous "
+"devriez recevoir un mail très rapidement !"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:10
+msgid ""
+"Si vous n'avez pas reçu de mail, vérifiez que vous avez entré l'addresse "
+"email avec laquelle vous vous êtes inscrit, et regarder dans votre dossier "
+"spam."
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:4
+msgid ""
+"\n"
+"Vous recevez cet email car vous avez demandé une réinitialisation de mot de "
+"passe sur ProgLangLearn.\n"
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:8
+msgid ""
+"S'il vous plaît, cliquez sur le lien ci-dessous et suivez les instructions "
+"nécessaires à la réinitialisation :"
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:11
+#, python-format
+msgid ""
+"Voici votre nom d'utilisateur, si vous l'avez oublié : %(user.get_username)"
+"s\n"
+"\n"
+"Merci de nous faire confiance et d'utiliser notre site :)\n"
+"\n"
+"\n"
+"De la part de toute l'équipe de ProgLangLearn,\n"
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:11
+msgid ""
+"Vous avez perdu votre mot de passe ? Entrez votre addresse email, et suivez "
+"les instructions pour avoir un nouveau mot de passe encore plus fort :)"
+msgstr ""
+
+#: .\templates\registration\register.html:4
+msgid "S'inscrire"
+msgstr ""
+
+#: .\templates\registration\register.html:10
+msgid "Créez votre compte dès maintenant !"
+msgstr ""
+
+#: .\templates\registration\register.html:57
+msgid "Accepter les"
+msgstr ""
+
+#: .\templates\registration\register.html:57
+msgid ""
+"termes et conditions d'utilisation</a> de Proglanglearn <span class="
+"\"required-input\">*</span></label>"
+msgstr ""
+
+#: .\templates\registration\register.html:64
+msgid "Vous avez déjà un compte ?"
+msgstr ""
+
+#: .\templates\registration\register.html:64
+msgid "Connectez-vous"
+msgstr ""

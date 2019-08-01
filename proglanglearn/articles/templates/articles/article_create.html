@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% trans 'Ajouter un article' as adding %}
-{% trans 'Modifier un article' as modifying %}
-
-{% block title %}{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %} - {% endblock title %}
+{% block title %}{% if type == 'add' %}{% trans 'Ajouter un article' %}{% else %}{% trans 'Modifier un article' %}{% endif %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %}</h1>
+<h1 class="large">{% if type == 'add' %}{% trans 'Ajouter un article' %}{% else %}{% trans 'Modifier un article' %}{% endif %}</h1>
 <form method="POST" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.media }}
@@ -53,7 +50,7 @@
     {% endif %}
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
-        <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %}</button>
+        <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{% trans 'Ajouter un article' %}{% else %}{% trans 'Modifier un article' %}{% endif %}</button>
     </div>
 </form>
 {% endblock main %}

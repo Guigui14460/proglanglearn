@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import password_validation, get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
@@ -23,7 +24,9 @@ class SignUpForm(UserCreationForm):
     password1 = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
         'id': 'showPWDInput'
-    }), help_text=_(""))
+    }), help_text=_(f"""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
+    Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.
+    Il doit aussi contenir {12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']} caractères."""))
     password2 = forms.CharField(label=_("Confirmation du mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
         'id': 'showPWDConfirmInput'

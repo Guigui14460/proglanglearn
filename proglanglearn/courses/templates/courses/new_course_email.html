@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% autoescape off %}
+{% blocktrans %}Salut, cher utilisateur de ProgLangLearn,
+
+Une toute nouvelle formation vient d'être publiée intitulée : "{{ course.title }}"
+
+
+Tu peux venir regarder les détails de celle-ci par ce lien :{% endblocktrans %}
+{{ protocol }}://{{ domain }}{% url 'courses:detail' slug=course.slug %}
+
+{% trans 'De la part de toute l\'équipe de ProgLangLearn,' %}
+LETELLIER Guillaume
+{% endautoescape %}

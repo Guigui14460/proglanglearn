@@ -43,6 +43,10 @@ class Course(models.Model):
                            verbose_name=_("version PDF du cours"), blank=True, null=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
     published_date = models.DateField(
         verbose_name=_("date de publication"))
+    published = models.BooleanField(
+        default=False, verbose_name=_("formation publiée"))
+    email_send = models.BooleanField(
+        default=False, verbose_name=_("email envoyé"))
     old_price = models.DecimalField(default=0, verbose_name=_(
         "prix (ou ancien prix si nouveau)"), decimal_places=2, max_digits=6)
     new_price = models.DecimalField(verbose_name=_(

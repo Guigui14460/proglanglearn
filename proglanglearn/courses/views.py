@@ -18,6 +18,7 @@ from main.signals import comment_signal
 from .forms import CourseModelForm, CourseUpdateModelForm, TutorialModelForm
 from .mixins import CourseObjectMixin, TutorialObjectMixin, UserCanAddCourse, UserCanModifyCourse, UserCanViewTutorial
 from .models import Course, Tutorial
+from .utils import send_email_new_course
 
 
 class CourseCreateView(LoginRequiredMixin, UserCanAddCourse, NavbarSearchMixin, View):
@@ -66,6 +67,14 @@ class CourseDetailView(CourseObjectMixin, NavbarSearchMixin, DetailView):
 class CourseListView(NavbarSearchMixin, ListView):
     queryset = Course.objects.get_published_courses()
     paginate_by = 6
+
+    def get(self, request, *args, **kwargs):
+        default = super().get(request, *args, **kwargs)
+        course_email_to_send = Course.objects.get_send_email_course()
+        for course in course_email_to_send:
+            send_email_new_course(request, course)
+        course_email_to_send.update(email_send=True)
+        return default
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

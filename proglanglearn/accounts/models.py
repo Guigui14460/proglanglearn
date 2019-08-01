@@ -38,6 +38,7 @@ class Profile(models.Model):
         default=0, verbose_name=_("signalement"))
     email_confirmed = models.BooleanField(
         default=False, verbose_name=_("addresse e-mail confirmée"))
+    email_notification = models.BooleanField(default=True, verbose_name=_("notification par email"))
     # Advanced options
     level = models.PositiveSmallIntegerField(
         default=1, verbose_name=_("niveau"))

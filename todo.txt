@@ -1,27 +1,17 @@
-﻿Change views function to class-based views in billing.views
-Send email when a course is viewing if another course email was not sent, add published boolean field (get method of the CourseListView)
-Report System for administration
+﻿Report System for administration
 Dashboard and display fovrite articles, tutorials, etc
 Profile and Account systems
-User notifications for change in course where he being enrolled
 Forum app
 Level and experience management (pandas)
 Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template)
 Poll/Quiz app (to add in course to add more experience)
 Tag hover view (if possible)
-Make an url to set language for internationalisation
 PayPal integration (see PrettyPrinted's Paypal integration in Flask video)
+
+Translate all django po files (english)
 
 # https://www.youtube.com/watch?v=SMRaHSZiwWE
 https://www.youtube.com/watch?v=zojnkKGRXp0
 https://www.youtube.com/watch?v=tG6O8YF91HE
 https://www.django-rest-framework.org/api-guide/validators/
 https://www.youtube.com/watch?v=Qj6XM3wVhTA
-
-def send_course_link(sender, instance, created, **kwargs):
-    if created:
-    	all_users_course_subscription = Profile.objects.filter(new_course_email=True)
-    	all_users_course_subscription_email = [user_subscription.user.email for user_subscription in all_users_course_subscription]
-    	send_mail("Un nouveau cours viens d'être créer !", "Viens le voir ! " + instance.title, settings.EMAIL_HOST_USER, all_users_course_subscription_email, fail_silently=False)
-
-post_save.connect(send_course_link, sender=Course)

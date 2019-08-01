@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% trans 'Page non trouvée' as title %}
-
-{% block title %}{{ title }} - {% endblock title %}
+{% block title %}{% trans 'Page non trouvée' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{{ title }} !</h1>
+<h1 class="large">{% trans 'Page non trouvée' %} !</h1>
 <p class="lead">{% trans "La page que vous essayez d'accéder n'existe pas, plus ou a été déplacée à une autre URL." %}</p>
 <div class="center-image">
     <svg class="my-2" xmlns="http://www.w3.org/2000/svg" width="964.826" height="412.207"

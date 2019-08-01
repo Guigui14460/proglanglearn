@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% trans 'Demande de reboursement' %}
-
-{% block title %}{{ title }} - {% endblock title %}
+{% block title %}{% trans 'Demande de reboursement' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{{ title }}</h1>
+<h1 class="large">{% trans 'Demande de reboursement' %}</h1>
 <div>
     <form class="form" method="POST">
         {% csrf_token %}

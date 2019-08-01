@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% trans 'À propos' as title %}
-
-{% block title %}{{ title }} - {% endblock title %}
+{% block title %}{% trans 'À propos' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{{ title }}</h1>
+<h1 class="large">{% trans 'À propos' %}</h1>
 <div class="lead">
     {% blocktrans %}<div class="my-1">
         Fondé en 2019 par <a href="profile.html">Guillaume Letellier</a>, étudiant en informatique,

@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% trans 'Ajouter un tutoriel' as adding %}
-{% trans 'Modifier un tutoriel' ad modifying %}
-{% trans 'Retour' as return %}
-
-{% block title %}{% if type == 'add' %}{{ adding }}{% else %}{{ modifying }}{% endif %} - {% endblock title %}
+{% block title %}{% if type == 'add' %}{% trans 'Ajouter un tutoriel' %}{% else %}{% trans 'Modifier un tutoriel' %}{% endif %} - {% endblock title %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
@@ -47,9 +43,9 @@
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
         {% if type == 'modify' %}
-            <a href="{{ object.get_absolute_url }}" class="btn btn__warning btn__large btn__300">{{ return }}</a>
+            <a href="{{ object.get_absolute_url }}" class="btn btn__warning btn__large btn__300">{% trans 'Retour' %}</a>
         {% else %}
-            <a href="{% url 'courses:detail' slug=course.slug %}" class="btn btn__warning btn__large btn__300">{{ return }}</a>
+            <a href="{% url 'courses:detail' slug=course.slug %}" class="btn btn__warning btn__large btn__300">{% trans 'Retour' %}</a>
         {% endif %}
         <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{% trans 'Ajouter' %}{% else %}{% trans 'Modifier' %}{% endif %}</button>
     </div>

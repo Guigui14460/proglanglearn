@@ -17,6 +17,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
     <title>{{ order.ref_code }} - ProgLangLearn</title>
     <style type="text/css">
+        @font-face {
+            font-family: Nunito;
+            src: url({% url 'style/font/Nunito-Regular.ttf' %});
+        }
+
+        body {
+            font-family: Nunito, Arial, Helvetica, sans-serif;
+        }
         h1 {
             font-size: 30px;
             text-align: center;
@@ -88,7 +96,7 @@
         <div class="container">
             {% blocktrans %}<p>Paiement par carte de crédit ou de débit : {{ stripe_charge.source.brand|upper }} {{ stripe_charge.source.country|upper }} **** **** **** <strong>{{ stripe_charge.source.last4 }}</strong><br>
                 Date d'expiration : <strong>{{ stripe_charge.source.exp_month|zfill:'2' }} / {{ stripe_charge.source.exp_year }}</strong><br><br>
-                Code de référence de votre commande : <strong>{{ order.ref_code }}</strong> datant du {{ order.ordered_date }}<br>
+                Code de référence de votre commande : <strong>{{ order.ref_code }}</strong> datant du {{ order.ordered_date|date:"d/m/Y" }}<br>
                 Votre identifiant unique : {{ order.user.id }}</p>{% endblocktrans %}
             <section>
                 <h2>{% trans 'Récapitulatif' %} :</h2>

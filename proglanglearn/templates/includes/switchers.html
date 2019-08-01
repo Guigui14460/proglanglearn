@@ -3,17 +3,49 @@
 <div id="version-switcher">
     <input type="checkbox" id="switch" class="switch" name="theme" />
     <label class="switch-label" for="switch">Light/Dark toggle</label>
+    <form id="langForm" action="{% url 'set_language' %}" method="POST" style="pointer-events: all;">{% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}">
+        <select name="language" style="display: block; appearance: none; ">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                    {{ language.name_local|title }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+{% comment %} {% load i18n %}
+
+{% get_available_languages as LANGUAGES %}
+
+<div id="version-switcher">
+    <input type="checkbox" id="switch" class="switch" name="theme" />
+    <label class="switch-label" for="switch">Light/Dark toggle</label>
     <ul class="languages-switcher">
         {% get_current_language as CURRENT_LANGUAGE %}
         <li class="current" title="{% trans 'Cliquez sur les liens pour changer de langue' %}">
             <span>{% trans 'Langue' %} : <strong>{{ CURRENT_LANGUAGE|title }}</strong></span>
         </li>
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as langs %}
-        {% for lang in langs %}
+        {% for lang_code, lang_name in LANGUAGES %}
+            {% language lang_code %}
             <li class="other">
-                <a href="/{{ lang.code }}{{ request.get_full_path|slice:'3:' }}" title="{{ lang.name_translated }}">{{ lang.code|title }}</a>
+                <a href="/{{ lang_code }}{{ request.get_full_path|slice:'3:' }}" title="{{ lang_name }}">{{ lang_code|title }}</a>
             </li>
+            {% endlanguage %}
         {% endfor %}
     </ul>
-</div>
+</div> {% endcomment %}
+
+
+
+
+{% comment %} {% trans "View this category in:" %}
+{% for lang_code, lang_name in languages %}
+    {% language lang_code %}
+    <a href="{% url 'category' slug=category.slug %}">{{ lang_name }}</a>
+    {% endlanguage %}
+{% endfor %} {% endcomment %}

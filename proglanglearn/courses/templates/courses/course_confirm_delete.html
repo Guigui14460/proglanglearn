@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% trans 'Suppression de' as title %}
-
-{% block title %}{{ title }} "{{ object.title }}" - {% endblock title %}
+{% block title %}{% trans 'Suppression de' %} "{{ object.title }}" - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{{ title }} "{{ object.title }}"</h1>
+<h1 class="large">{% trans 'Suppression de' %} "{{ object.title }}"</h1>
 <form method="POST" class="form">
     {% csrf_token %}
     <div class="note note__danger">

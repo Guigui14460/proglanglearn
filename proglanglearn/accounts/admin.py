@@ -15,17 +15,18 @@ class ExperienceAdmin(ImportExportModelAdmin):
 
 
 class ProfileAdmin(ImportExportModelAdmin):
-    list_display = ('user', 'level', 'strike', 'is_dev',
+    list_display = ('user', 'level', 'strike', 'email_notification', 'is_dev',
                     'is_student', 'is_teacher')
     list_filter = ('level', 'strike', 'is_dev',
                    'is_student', 'is_teacher')
     ordering = ('user', 'level', 'strike', 'is_dev',
                 'is_student', 'is_teacher')
     search_fields = ['user']
-    list_filter = ['strike', 'level']
+    list_filter = ['strike', 'email_notification', 'level']
     empty_value_display = _("Inconnu")
     fieldsets = (
-        (_("Espace critique"), {'fields': ('strike', 'email_confirmed')}),
+        (_("Espace critique"), {'fields': ('strike',
+                                           'email_confirmed', 'email_notification')}),
         (_("Informations générales"), {'fields': (
             'user', 'image', 'biography', 'links', 'languages_learnt', 'is_dev', 'is_student', 'is_teacher', 'github_username', 'country')}),
         (_("Options avancées"), {'fields': ('level', 'level_experience')})

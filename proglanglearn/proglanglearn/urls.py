@@ -1,14 +1,23 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 
 from filebrowser.sites import site
+
+from .sitemaps import ArticleSitemap, CourseSitemap, TutorialSitemap, StaticViewSitemap
 
 
 site.directory = 'uploads/'
 
 urlpatterns = [
+    path('sitemap.xml', sitemap, {'sitemaps': {'static': StaticViewSitemap, 'articles': ArticleSitemap, 'courses': CourseSitemap, 'tutorials': TutorialSitemap}},
+         name='django.contrib.sitemaps.views.sitemap'),
+]
+
+urlpatterns += [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', include('main.urls')),
     path('accounts/', include('accounts.urls')),
     path('courses/', include('courses.urls')),

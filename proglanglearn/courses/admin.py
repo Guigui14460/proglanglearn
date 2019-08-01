@@ -1,6 +1,6 @@
 from datetime import datetime, date
 
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils.safestring import mark_safe
 from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
@@ -12,6 +12,18 @@ from .models import Course, Tutorial
 
 
 YEAR_REF = 2019
+
+
+def send_email_course(model_admin, request, queryset):
+    for course in queryset:
+        course.published = True
+        course.save()
+    messages.success(request, _(
+        "Formations publiées avec succès"))
+
+
+send_email_course.short_description = _(
+    "Publication des formations (les rendre visibles si la date est dépassée + autorisation d'envoi d'email notificatif)")
 
 
 class YearListFilter(admin.SimpleListFilter):
@@ -49,16 +61,18 @@ class TutorialInline(admin.StackedInline):
 
 class CourseAdmin(ImportExportModelAdmin):
     list_display = ('title', 'get_author_profile', get_thumbnail_preview, 'difficulty', 'published_date',
-                    'old_price', 'new_price')
-    ordering = ('-published_date', 'old_price', 'new_price')
+                    'published', 'email_send', 'old_price', 'new_price')
+    ordering = ('-published_date', 'published',
+                'email_send', 'old_price', 'new_price')
     search_fields = ['title', 'author__username']
     fields = ('author', 'title', 'thumbnail', get_thumbnail_preview, 'content_introduction',
               'difficulty', 'languages', 'tags', 'pdf', 'published_date', 'old_price', 'new_price')
-    list_filter = ['published_date', YearListFilter]
+    list_filter = ['published_date', 'published', 'email_send', YearListFilter]
     empty_value_display = _("Inconnu")
     readonly_fields = [get_thumbnail_preview]
     inlines = [TutorialInline]
     list_editable = ['difficulty']
+    actions = [send_email_course]
 
     def get_author_profile(self, obj=None):
         if obj.pk:

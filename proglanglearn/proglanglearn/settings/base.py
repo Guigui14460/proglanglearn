@@ -1,6 +1,6 @@
 import os
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from decouple import config
 
@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
 ADMINS = [('Guillaume LETELLIER', 'proglanglearn@gmail.com')]
-
+SITE_ID = 1
 SECRET_KEY = config('SECRET_KEY')
 
 # Application definition
@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
     # Third part apps
@@ -32,6 +34,7 @@ INSTALLED_APPS = [
     'xhtml2pdf',
 
     # My apps
+    'proglanglearn',
     'accounts.apps.AccountsConfig',
     'articles.apps.ArticlesConfig',
     'billing.apps.BillingConfig',
@@ -49,6 +52,7 @@ MIDDLEWARE = [
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -91,7 +95,7 @@ WSGI_APPLICATION = 'proglanglearn.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-LANGUAGE_CODE = 'fr'  # fr-Fr
+LANGUAGE_CODE = 'fr-Fr'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True

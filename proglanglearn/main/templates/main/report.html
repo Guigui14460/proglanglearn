@@ -7,9 +7,8 @@
 <h1 class="large">{% trans 'Signaler un commentaire' %}</h1>
 <p class="lead"><i class="fas fa-exclamation-triangle"></i>&nbsp;{% trans 'Signaler un commentaire rapidement' %}</p>
 <div>
-    {% blocktrans %}<p>Le signalement d'une personne peut avoir de sérieuses conséquences, comme ce qui est écrit dans les
-        <a href="{% url 'main:terms' %}">termes et conditions d'utilisation</a> donc ne faîtes pas de signalement
-        abusif.</p>{% endblocktrans %}
+    <p>{% trans "Le signalement d'une personne peut avoir de sérieuses conséquences, comme ce qui est écrit dans les" %}
+        <a href="{% url 'main:terms' %}">{% trans "termes et conditions d'utilisation" %}</a> {% trans "donc ne faîtes pas de signalement abusif." %}</p>
     <div class="my-2">
         <div class="card card__info">
             <div class="card-container">
