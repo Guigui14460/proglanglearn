@@ -88,7 +88,7 @@ class RegistrationView(NavbarSearchMixin, View):
                     subject, message, "No reply <ProgLangLearn>", to=[user.email])
                 msg.send()
                 messages.success(request, _(
-                    f"Envoi du mail d'activation du compte {user.username} effectué avec succès"))
+                    "Envoi du mail d'activation du compte %(username)s effectué avec succès") % {'username': user.username})
             except:
                 messages.warning(request, _(
                     "Échec de l'envoi de l'email d'activation"))
@@ -119,7 +119,7 @@ class RegistrationView(NavbarSearchMixin, View):
                         subject, message, "No reply <ProgLangLearn>", to=[user.email])
                     msg.send()
                     messages.warning(request, _(
-                        f"Votre compte existait déjà mais n'a pas été activé. Envoi du mail d'activation du compte {user.username} effectué avec succès"))
+                        "Votre compte existait déjà mais n'a pas été activé. Envoi du mail d'activation du compte %(username)s effectué avec succès") % {'username': user.username})
                 except:
                     messages.warning(request,
                                      _("Échec de l'envoi de l'email d'activation"))
@@ -168,7 +168,7 @@ class ActivateView(View):
             login(request, user)
             messages.success(request, _(
                 "Activation de votre compte effectuée avec succès"))
-            return redirect('main:index')
+            return redirect('courses:list')
         return render(request, self.template_name)
 
 

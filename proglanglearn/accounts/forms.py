@@ -24,9 +24,9 @@ class SignUpForm(UserCreationForm):
     password1 = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
         'id': 'showPWDInput'
-    }), help_text=_(f"""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
+    }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
     Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.
-    Il doit aussi contenir {12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']} caractères."""))
+    Il doit aussi contenir %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
     password2 = forms.CharField(label=_("Confirmation du mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
         'id': 'showPWDConfirmInput'
@@ -78,7 +78,7 @@ class PasswordResetForm(SetPasswordForm):
     new_password1 = forms.CharField(
         label=_("New password"),
         widget=forms.PasswordInput(
-            attrs={'autocomplete': 'new-password', 'id': 'showPWDInput'}),
+            attrs={'autocomplete': 'off', 'id': 'showPWDInput'}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
@@ -86,6 +86,6 @@ class PasswordResetForm(SetPasswordForm):
         label=_("New password confirmation"),
         strip=False,
         widget=forms.PasswordInput(
-            attrs={'autocomplete': 'new-password', 'id': 'showPWDConfirmInput'}),
+            attrs={'autocomplete': 'off', 'id': 'showPWDConfirmInput'}),
     )
     captcha = ReCaptchaField()

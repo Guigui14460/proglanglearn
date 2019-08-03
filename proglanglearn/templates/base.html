@@ -1,6 +1,6 @@
 {% load static recaptcha3 i18n %}
 <!DOCTYPE html>
-<html lang="fr" data-theme="light" class="transition">
+<html lang="{% get_current_language as LANGUAGE_CODE %}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %} data-theme="light" class="transition">
 <head>
     <meta charset="UTF-8" />
     <meta name="language" content="fr" />

@@ -152,7 +152,7 @@ class ArticleUpdateView(LoginRequiredMixin, ArticleObjectMixin, UserCanModifyArt
 
 
 class ArticleDeleteView(LoginRequiredMixin, ArticleObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
-    success_message = _("Cours supprimé avec succès")
+    success_message = _("Article supprimé avec succès")
     success_url = reverse_lazy('articles:list')
 
     def get_context_data(self, **kwargs):

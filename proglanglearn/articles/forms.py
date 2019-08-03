@@ -1,4 +1,5 @@
 from django import forms
+from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
 
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
@@ -25,7 +26,7 @@ class ArticleModelForm(forms.ModelForm):
             'timestamp': forms.DateInput(attrs={'type': 'date'}),
         }
         help_text = {
-            'tags': _("S'il manque une catégorie, demandez à le <a href='contact.html#subject'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
+            'tags': _("S'il manque une catégorie, demandez à le <a href='%(contact_url)s'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
         }
 
 
@@ -45,5 +46,5 @@ class ArticleUpdateModelForm(forms.ModelForm):
             'tags': forms.SelectMultiple(attrs={'size': 7}),
         }
         help_text = {
-            'tags': _("S'il manque une catégorie, demandez à le <a href='contact.html#subject'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
+            'tags': _("S'il manque une catégorie, demandez à le <a href='%(contact_url)s'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
         }

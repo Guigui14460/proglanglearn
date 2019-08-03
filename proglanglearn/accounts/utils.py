@@ -43,7 +43,7 @@ def check_level(request, actual_user_level=None, user_experience=None):
                 "Vous êtes déjà au niveau maximum ! Continuez de vous formez et d'apprendre car de nouveaux niveaux seront rajoutés ;)"))
         else:
             messages.info(request, _(
-                f"Bravo ! Vous venez de gagner un niveau ! Vous êtes désormais niveau {actual_user_level}"))
+                "Bravo ! Vous venez de gagner un niveau ! Vous êtes désormais niveau %(actual_user_level)s") % {'actual_user_level': actual_user_level})
         return check_level(request, actual_user_level=actual_user_level, user_experience=user_experience)
 
     request.user.profile.level = actual_user_level

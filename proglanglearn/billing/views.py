@@ -88,16 +88,17 @@ class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, Vi
             for course in order.courses.all():
                 course.students.add(request.user)
                 messages.info(request, _(
-                    f"Bienvenue au cours : {course.title}"))
+                    "Bienvenue au cours : %(course_title)s") % {'course_title': course.title})
 
             messages.success(request, _(
-                "Votre commande a été affectué avec succès"))
+                "Votre commande a été effectuée avec succès"))
             return redirect('courses:list')
         except stripe.error.CardError as e:
             # Since it's a decline, stripe.error.CardError will be caught
             body = e.json_body
             err = body.get('error', {})
-            messages.error(request, _(f"{err.get('message')}"))
+            messages.error(request, _("%(message_error)s") %
+                           {'message_error': err.get('message')})
         except stripe.error.RateLimitError as e:
             # Too many requests made to the API too quickly
             messages.error(request, _("Rate limit error"))
@@ -208,7 +209,7 @@ class AddCouponToCart(LoginRequiredMixin, View):
                         coupon.limited -= 1
                         coupon.save()
                         messages.success(request, _(
-                            f"Coupon {order.coupon.code} ajouté"))
+                            "Coupon %(coupon_code)s ajouté") % {'coupon_code': order.coupon.code})
                         return redirect('main:billing:checkout')
                     messages.error(request, _(
                         "Vous avez déjà utilisé ce coupon lors d'un précédent achat"))

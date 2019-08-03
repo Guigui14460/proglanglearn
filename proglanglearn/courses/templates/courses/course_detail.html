@@ -8,7 +8,7 @@
 {% if object.author == request.user or request.user.is_staff %}
     <div class="my-2 d-flex space-between">
         <a href="{% url 'courses:list' %}" class="btn btn__success btn__large">{% trans 'Retour' %}</a>
-        <a href="{% url 'courses:update' slug=object.slug %}" class="btn btn__info btn__large">{% trans 'Modifier l\'aperçu du cours' %}</a>
+        <a href="{% url 'courses:update' slug=object.slug %}" class="btn btn__info btn__large">{% trans "Modifier l'aperçu du cours" %}</a>
         <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">{% trans 'Supprimer le cours' %}</a>
     </div>
 {% endif %}
@@ -63,7 +63,7 @@
     <section>
         <h2>{% trans 'Enrollez-vous dès maintenant pour accéder à ce cours' %}</h2>
         <div class="center-text">
-            <a href="{% url 'courses:user-enrolling' slug=object.slug %}" class="btn btn__light btn__large">{% trans 'S\'enroller' %} 
+            <a href="{% url 'courses:user-enrolling' slug=object.slug %}" class="btn btn__light btn__large">{% trans "S'enroller" %} 
                 {% if object.new_price %}
                     {% if object.new_price == 0 %}
                         {% trans 'gratuitement' %}

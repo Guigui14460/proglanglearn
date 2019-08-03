@@ -146,7 +146,7 @@ class Tutorial(models.Model):
         max_length=100, verbose_name=_("titre du tutoriel"))
     content = HTMLField(verbose_name=_("contenu du tutoriel"))
     resources = models.FileField(verbose_name=_(
-        "ressources à déposer"), upload_to='resources/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar', 'tar.gz'])])
+        "ressources à déposer"), upload_to='resources/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar', 'tar.gz', 'tar'])])
     experience = models.PositiveSmallIntegerField(
         verbose_name=_("points d'expérience fournis"))
     published_date = models.DateTimeField(

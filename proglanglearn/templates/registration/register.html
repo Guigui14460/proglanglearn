@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% trans "S'inscrire" %}
-
-{% block title %}{{ title }} - {% endblock title %}
+{% block title %}{% trans "S'enregistrer" %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{{ title }}</h1>
+<h1 class="large">{% trans "S'enregistrer" %}</h1>
 <p class="lead"><i class="fas fa-user-plus"></i>&nbsp;{% trans 'Créez votre compte dès maintenant !' %}</p>
 <form method='POST' class="form mb-3">
     {{ form.errors }}
@@ -58,7 +56,7 @@
     </div>
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
-        <button type="submit" class="btn btn__primary btn__large btn__300">{{ title }}</button>
+        <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "S'enregistrer" %}</button>
     </div>
 </form>
 <p class="mt-1">{% trans 'Vous avez déjà un compte ?' %}&nbsp;<a href="{% url 'accounts:login' %}">{% trans 'Connectez-vous' %}</a>&nbsp;!</p>

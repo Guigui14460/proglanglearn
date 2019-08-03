@@ -38,7 +38,7 @@ class CourseCreateView(LoginRequiredMixin, UserCanAddCourse, NavbarSearchMixin, 
             course.author = user
             form.save()
             messages.success(request, _(
-                f"Cours \"{course.title}\" ajouté avec succès"))
+                "Cours \"%(course_title)s\" ajouté avec succès") % {'course_title': course.title})
             return redirect('courses:list')
         context['form'] = form
         return render(request, self.template_name, context)
@@ -119,9 +119,10 @@ class CourseUserEnrolledView(LoginRequiredMixin, CourseObjectMixin, SuccessMessa
         else:
             if course.old_price == 0 or (course.new_price is not None and course.new_price == 0):
                 course.students.add(request.user)
-                messages.info(request, _(f"Bienvenue au cours : {course.title}"))
+                messages.info(request, _("Bienvenue au cours : %(course_title)s") % {
+                              'course_title': course.title})
                 return redirect('courses:tutorial-detail', course_slug=course.slug, tutorial_slug=course.tutorial.first().slug)
-            return redirect('main:billing:add-course', args=(course.slug,))
+            return redirect('main:billing:add-course', course_slug=course.slug)
 
 
 class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):

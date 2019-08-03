@@ -38,7 +38,8 @@ class Profile(models.Model):
         default=0, verbose_name=_("signalement"))
     email_confirmed = models.BooleanField(
         default=False, verbose_name=_("addresse e-mail confirmée"))
-    email_notification = models.BooleanField(default=True, verbose_name=_("notification par email"))
+    email_notification = models.BooleanField(
+        default=True, verbose_name=_("notification par email"))
     # Advanced options
     level = models.PositiveSmallIntegerField(
         default=1, verbose_name=_("niveau"))
@@ -104,6 +105,7 @@ class Education(models.Model):
 
     class Meta:
         verbose_name = _("éducation")
+        verbose_name_plural = _("éducations")
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.school}"
@@ -122,6 +124,7 @@ class Experience(models.Model):
 
     class Meta:
         verbose_name = _("expérience")
+        verbose_name_plural = _("expériences")
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.entreprise}"

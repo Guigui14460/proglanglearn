@@ -7,7 +7,7 @@
             {% for article in last_articles %}
                 <div>
                     <a href="{% url 'articles:detail' article_slug=article.slug %}"><img src="{{ article.thumbnail.url }}" alt="" /></a>
-                    <h5 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>{% if request.user.is_authenticated %}&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article_in_favorite %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article in request.user.profile.favorite_articles.all %}fas{% else %}far{% endif %} fa-star favorite""></i></a>{% endif %}</h5>
+                    <h5 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>{% if request.user.is_authenticated %}&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article_in_favorite %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h5>
                     <div>
                         <div class="d-inline-block">
                             <i class="far fa-eye"></i>&nbsp;{{ article.views }}
@@ -22,7 +22,7 @@
         </div>
     </section>
     <section>
-        <h4>Catégories</h4>
+        <h4>{% trans "Catégories" %}</h4>
         <ul class="tutorial-list">
             {% for item in tags_used %}
                 <li><a href="search.html?q={{ item.name|lower }}">{{ item }} <span class="badge badge__danger">{{ item.article.count }}</span></a></li>

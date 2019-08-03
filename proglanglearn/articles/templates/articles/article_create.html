@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
+{% url 'main:contact' as contact_url %}
+{% url 'main:contact' as contact %}
+
 {% block title %}{% if type == 'add' %}{% trans 'Ajouter un article' %}{% else %}{% trans 'Modifier un article' %}{% endif %} - {% endblock title %}
 
 {% block main %}
@@ -44,7 +47,7 @@
         <fieldset>
             <legend>{% trans 'Informations complémentaires' %}</legend>
             <div class="form-group">
-                <label>{% trans 'Parution de l\'article' %} :<br>{{ form.timestamp }}</label>
+                <label>{% trans "Parution de l'article" %} :<br>{{ form.timestamp }}</label>
             </div>
         </fieldset>
     {% endif %}

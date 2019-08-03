@@ -13,7 +13,7 @@
             <a href="{% url 'main:billing:checkout' %}" class="btn btn__outline__success btn__large"><i class="fas fa-money-check-alt"></i>&nbsp;{% trans 'Procéder au paiement' %}</a>
         </div>
     {% else %}
-        <h3 class="center-text">{% trans 'Vous n\'avez aucune formation dans votre panier' %}</h3>
+        <h3 class="center-text">{% trans "Vous n'avez aucune formation dans votre panier" %}</h3>
     {% endif %}
 </div>
 {% endblock main %}

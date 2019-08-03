@@ -1,4 +1,5 @@
 from django import forms
+from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
 
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
@@ -31,7 +32,7 @@ class CourseModelForm(forms.ModelForm):
             'new_price': forms.NumberInput(attrs={'step': 'any', 'min': 0})
         }
         help_text = {
-            'tags': _("S'il manque une catégorie, demandez à le <a href='contact.html#subject'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
+            'tags': _("S'il manque une catégorie, demandez à le <a href='%(contact_url)s'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
             'published_date': _("Conseil : mettre une période de deux semaines en plus en attente de vérification de la part de l'administration")
         }
 
@@ -58,7 +59,7 @@ class CourseUpdateModelForm(forms.ModelForm):
             'new_price': forms.NumberInput(attrs={'step': 'any', 'min': 0})
         }
         help_text = {
-            'tags': _("S'il manque une catégorie, demandez à le <a href='contact.html#subject'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
+            'tags': _("S'il manque une catégorie, demandez à le <a href='%(contact)s'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
         }
 
 

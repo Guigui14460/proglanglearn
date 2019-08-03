@@ -34,7 +34,7 @@ def make_refund_accepted(model_admin, request, queryset):
     except stripe.error.CardError as e:
         body = e.json_body
         err = body.get('error', {})
-        messages.error(request, _(f"{err.get('message')}"))
+        messages.error(request, _("%(error)s") % {'error': err.get('message')})
     except stripe.error.RateLimitError as e:
         messages.error(request, _("Rate limit error"))
     except stripe.error.InvalidRequestError as e:
