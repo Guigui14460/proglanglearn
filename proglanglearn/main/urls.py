@@ -4,6 +4,7 @@ from .views import (
     IndexView,
     AboutView,
     CommentReportView,
+    CommentDeleteView,
     ContactView,
     PrivacyView,
     TermsView,
@@ -22,6 +23,8 @@ urlpatterns = [
     path('search/', SearchView.as_view(), name='search'),
     path('report/<int:comment_id>/',
          CommentReportView.as_view(), name='report-comment'),
+    path('delete/<int:comment_id>/',
+         CommentDeleteView.as_view(), name='delete-comment'),
     path('tags/<str:slug>/', LanguagesTagsView.as_view(), name='language_tag'),
     path('payment/', include('billing.urls')),
 ]

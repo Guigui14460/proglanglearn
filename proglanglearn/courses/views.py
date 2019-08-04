@@ -211,7 +211,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
         instance = self.get_object()
         c_type = ContentType.objects.get_for_model(instance)
         context['parent_comments'] = Comment.objects.filter(
-            content_type=c_type, object_id=instance.id).order_by('timestamp')
+            content_type=c_type, object_id=instance.id, reported=False).order_by('timestamp')
         context['tutorial_in_favorite'] = self.tuto_in_favorite()
         return context
 

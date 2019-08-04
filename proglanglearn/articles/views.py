@@ -112,7 +112,7 @@ class ArticleDetailView(ArticleObjectMixin, NavbarSearchMixin, DetailView):
         instance = self.get_object()
         c_type = ContentType.objects.get_for_model(instance)
         context['parent_comments'] = Comment.objects.filter(
-            content_type=c_type, object_id=instance.id).order_by('timestamp')
+            content_type=c_type, object_id=instance.id, reported=False).order_by('timestamp')
         context['article_in_favorite'] = self.article_in_favorite()
         context['last_articles'] = Article.objects.get_last_articles(3)
         context['tags_used'] = self.get_most_used_tags()

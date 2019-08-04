@@ -72,6 +72,9 @@ class LoginForm(AuthenticationForm):
             messages.error(self.request, _(
                 "Votre compte n'a pas été activé. Vérifiez vos emails et votre dossier spam et si vous ne trouvez pas le mail, réinscrivez-vous avec les identifiants renseignés"))
             raise forms.ValidationError('')
+        if user.profile.strike >= settings.MAX_STRIKE:
+            raise forms.ValidationError(
+                _("Votre compte est banni. Vous n'y avez plus accès"))
 
 
 class PasswordResetForm(SetPasswordForm):

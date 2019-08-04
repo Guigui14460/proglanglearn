@@ -89,6 +89,7 @@ class Comment(models.Model):
     content = models.TextField(verbose_name=_("commentaire ou réponse"))
     timestamp = models.DateTimeField(
         auto_now_add=True, verbose_name=_("date de publication"))
+    reported = models.BooleanField(default=False, verbose_name=_("reporté"))
 
     class Meta:
         ordering = ['-timestamp']
@@ -110,7 +111,7 @@ class Comment(models.Model):
     @property
     def children(self):
         c_type = ContentType.objects.get_for_model(self)
-        return Comment.objects.filter(content_type=c_type, object_id=self.id).order_by('timestamp')
+        return Comment.objects.filter(content_type=c_type, object_id=self.id, reported=False).order_by('timestamp')
 
     @property
     def get_report_url(self):
@@ -118,7 +119,11 @@ class Comment(models.Model):
 
     def comments_instance(self, instance):
         c_type = ContentType.objects.get_for_model(instance)
-        return Comment.objects.filter(content_type=c_type, object_id=instance.id)
+        return Comment.objects.filter(content_type=c_type, object_id=instance.id, reported=False)
+
+    @property
+    def get_delete_url(self):
+        return reverse('main:delete-comment', kwargs={'comment_id': self.id})
 
 
 def comment_receiver(sender, instance, request, *args, **kwargs):
@@ -144,6 +149,7 @@ class CommentReport(models.Model):
     content_alert = models.TextField(verbose_name=_(
         "contenu du signalement"), null=True, blank=True)
     verified = models.BooleanField(verbose_name=_("vérifié"), default=False)
+    to_strike = models.BooleanField(default=False, verbose_name=_("à striker"))
     striked = models.BooleanField(verbose_name=_("striké"), default=False)
 
     class Meta:
@@ -151,4 +157,4 @@ class CommentReport(models.Model):
         verbose_name_plural = _("signalements de commentaire")
 
     def __str__(self):
-        return f"{self.comment.id} reported by {self.alerter.username}"
+        return f"{self.comment.id} reported by {self.alerter.username if self.alerter is not None else 'Unknown'}"

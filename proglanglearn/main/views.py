@@ -8,7 +8,7 @@ from django.views.generic import View
 
 from .forms import CommentReportForm
 from .mixins import NavbarSearchMixin
-from .models import Comment, Language, Tag
+from .models import Comment, Language, Tag, CommentReport
 
 
 class IndexView(NavbarSearchMixin, View):
@@ -73,7 +73,7 @@ class CommentReportView(NavbarSearchMixin, View):
                 report.alerter = user
                 report.save()
                 messages.success(request, _("Le commentaire a été signalé"))
-                return HttpResponseRedirect(comment_obj.tutorial.get_absolute_url())
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             except Exception as e:
                 messages.error(request, _(
                     "Le commentaire n'a pas pu être signalé"))
@@ -85,6 +85,22 @@ class CommentReportView(NavbarSearchMixin, View):
         context['object'] = Comment.objects.get(id=kwargs.get('comment_id'))
         context['form'] = CommentReportForm()
         return context
+
+
+class CommentDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        comment = get_object_or_404(Comment, id=self.kwargs.get('comment_id'))
+        report_qs = CommentReport.objects.filter(comment=comment)
+        if request.user == comment.author and not report_qs.exists():
+            for reply in comment.children:
+                reply.delete()
+            comment.delete()
+            messages.info(request, _(
+                "Votre commentaire et les réponses sont supprimés"))
+        else:
+            messages.warning(request, _(
+                "Vous ne pouvez pas supprimer ou modifier ce commentaire"))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class LanguagesTagsView(NavbarSearchMixin, View):

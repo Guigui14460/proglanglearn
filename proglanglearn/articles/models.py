@@ -64,7 +64,7 @@ class Article(models.Model):
 
     @property
     def get_comments_count(self):
-        return Comment.objects.filter(content_type=ContentType.objects.get_for_model(self), object_id=self.id).count()
+        return Comment.objects.filter(content_type=ContentType.objects.get_for_model(self), object_id=self.id, reported=False).count()
 
 
 def submission_article_delete(sender, instance, **kwargs):

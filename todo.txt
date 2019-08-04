@@ -1,9 +1,8 @@
-﻿Report System for administration
-Dashboard and display fovrite articles, tutorials, etc
+﻿Dashboard (exp, nb of strikes) and display favorite articles and tutorials, enrolled courses, comment report, etc
 Profile and Account systems
 Forum app
 Level and experience management (pandas)
-Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template)
+Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
 Poll/Quiz app (to add in course to add more experience)
 Tag hover view (if possible)
 PayPal integration (see PrettyPrinted's Paypal integration in Flask video)
