@@ -49,7 +49,3 @@ def check_level(request, actual_user_level=None, user_experience=None):
     request.user.profile.level = actual_user_level
     request.user.profile.save()
     return actual_user_level
-
-
-def get_user_type(user):
-    return None

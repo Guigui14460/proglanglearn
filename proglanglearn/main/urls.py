@@ -26,5 +26,6 @@ urlpatterns = [
     path('delete/<int:comment_id>/',
          CommentDeleteView.as_view(), name='delete-comment'),
     path('tags/<str:slug>/', LanguagesTagsView.as_view(), name='language_tag'),
+    path('', include('analytics.urls')),
     path('payment/', include('billing.urls')),
 ]

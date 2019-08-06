@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.generic import DeleteView, DetailView, ListView, RedirectView, UpdateView, View
 
+from analytics.utils import save_user_exp
 from main.forms import CommentModelForm
 from main.mixins import NavbarSearchMixin
 from main.models import Comment
@@ -47,7 +48,6 @@ class CourseCreateView(LoginRequiredMixin, UserCanAddCourse, NavbarSearchMixin, 
         context = {**kwargs}
         context['activate'] = 'create'
         context['type'] = 'add'
-        context['navbar_search_form'] = self.form_navbar()
         return context
 
 
@@ -60,7 +60,6 @@ class CourseDetailView(CourseObjectMixin, NavbarSearchMixin, DetailView):
         except:
             ternary = False
         context['can_view'] = ternary
-        context['navbar_search_form'] = self.form_navbar()
         return context
 
 
@@ -79,7 +78,6 @@ class CourseListView(NavbarSearchMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['activate'] = 'list'
-        context['navbar_search_form'] = self.form_navbar()
         return context
 
 
@@ -92,7 +90,6 @@ class CourseUpdateView(LoginRequiredMixin, CourseObjectMixin, UserCanModifyCours
         context = super().get_context_data(**kwargs)
         context['type'] = 'modify'
         context['tutorials'] = self.get_object().get_tutorials()
-        context['navbar_search_form'] = self.form_navbar()
         return context
 
     def get_success_url(self):
@@ -102,11 +99,6 @@ class CourseUpdateView(LoginRequiredMixin, CourseObjectMixin, UserCanModifyCours
 class CourseDeleteView(LoginRequiredMixin, CourseObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
     success_message = _("Cours supprimé avec succès")
     success_url = reverse_lazy('courses:list')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
 
 
 class CourseUserEnrolledView(LoginRequiredMixin, CourseObjectMixin, SuccessMessageMixin, View):
@@ -155,7 +147,6 @@ class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
         context['type'] = 'add'
         context['course'] = Course.objects.get(
             slug=self.kwargs.get('course_slug'))
-        context['navbar_search_form'] = self.form_navbar()
         return context
 
 
@@ -172,6 +163,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
                 user.profile.tutorial_finished.add(tutorial)
                 user.profile.level_experience += tutorial.experience
                 user.profile.save()
+                save_user_exp(request)
         return super(TutorialDetailView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -206,7 +198,6 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
                     context['next_tutorial'] = context['course_tutorials'][i + 1]
                 except:
                     context['next_tutorial'] = None
-        context['navbar_search_form'] = self.form_navbar()
         context['form'] = CommentModelForm()
         instance = self.get_object()
         c_type = ContentType.objects.get_for_model(instance)
@@ -242,7 +233,6 @@ class TutorialUpdateView(LoginRequiredMixin, TutorialObjectMixin, UserCanModifyC
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['type'] = 'modify'
-        context['navbar_search_form'] = self.form_navbar()
         context['course'] = Course.objects.get(
             slug=self.kwargs.get('course_slug'))
         return context
@@ -253,11 +243,6 @@ class TutorialUpdateView(LoginRequiredMixin, TutorialObjectMixin, UserCanModifyC
 
 class TutorialDeleteView(LoginRequiredMixin, TutorialObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
     success_message = _("Cours supprimé avec succès")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
 
     def get_success_url(self):
         course_slug = self.kwargs.get('course_slug')

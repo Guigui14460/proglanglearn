@@ -32,10 +32,12 @@ INSTALLED_APPS = [
     'snowpenguin.django.recaptcha3',
     'tinymce',
     'xhtml2pdf',
+    'django_plotly_dash',
 
     # My apps
     'proglanglearn',
     'accounts.apps.AccountsConfig',
+    'analytics.apps.AnalyticsConfig',
     'articles.apps.ArticlesConfig',
     'billing.apps.BillingConfig',
     'courses.apps.CoursesConfig',
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'main.User'
+RESET_LOGIN_AFTER_PASSWORD_RESET = False
 
 MIDDLEWARE = [
     # HTML minifer
@@ -96,7 +99,7 @@ WSGI_APPLICATION = 'proglanglearn.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 LANGUAGE_CODE = 'fr-Fr'
-TIME_ZONE = 'Europe/Paris' # 'UTC'
+TIME_ZONE = 'Europe/Paris'  # 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True

@@ -14,7 +14,7 @@ from django.views.generic import View
 
 from .forms import LoginForm, SignUpForm, PasswordResetForm
 from .models import Profile
-from .utils import check_level, get_user_type
+from .utils import check_level
 from .tokens import AccountActivationTokenGenerator
 from main.mixins import NavbarSearchMixin
 from main.utils import get_ip_address_client
@@ -50,11 +50,6 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
             except:
                 pass
         return self.get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
 
 
 class RegistrationView(NavbarSearchMixin, View):
@@ -175,35 +170,19 @@ class ActivateView(View):
 class CustomPasswordResetView(NavbarSearchMixin, PasswordResetView):
     success_url = reverse_lazy('accounts:password_reset_done')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
-
 
 class CustomPasswordResetDoneView(NavbarSearchMixin, PasswordResetDoneView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
+    pass
 
 
 class CustomPasswordResetConfirmView(NavbarSearchMixin, PasswordResetConfirmView):
     success_url = reverse_lazy('accounts:password_reset_complete')
     form_class = PasswordResetForm
-    # post_reset_login = True
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
+    post_reset_login = settings.RESET_LOGIN_AFTER_PASSWORD_RESET
 
 
 class CustomPasswordResetCompleteView(NavbarSearchMixin, PasswordResetCompleteView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
+    pass
 
 
 class PandasTestView(NavbarSearchMixin, View):
@@ -215,8 +194,3 @@ class PandasTestView(NavbarSearchMixin, View):
             context['check'] = check_level(request)
             return render(request, self.template_name, context)
         return redirect('accounts:login')
-
-    def get_context_data(self, **kwargs):
-        context = {**kwargs}
-        context['navbar_search_form'] = self.form_navbar()
-        return context

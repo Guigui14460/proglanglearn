@@ -80,7 +80,7 @@ pre_save.connect(pre_save_language_tag_receiver, sender=Tag)
 
 class Comment(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, blank=True, related_name='comments', verbose_name=_("auteur"))
+        User, on_delete=models.CASCADE, null=True, related_name='comments', verbose_name=_("auteur"))
     content_type = models.ForeignKey(
         ContentType, on_delete=models.CASCADE, verbose_name=_("modèle de l'objet"))
     object_id = models.PositiveIntegerField(

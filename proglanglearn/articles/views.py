@@ -27,7 +27,6 @@ class ArticleListView(NavbarSearchMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['activate'] = 'article-list'
-        context['navbar_search_form'] = self.form_navbar()
         context['last_articles'] = Article.objects.get_last_articles(3)
         context['tags_used'] = self.get_most_used_tags()
         return context
@@ -74,7 +73,6 @@ class ArticleCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
         context['type'] = 'add'
         context['form'] = ArticleModelForm()
         context['activate'] = 'article-create'
-        context['navbar_search_form'] = self.form_navbar()
         return context
 
 
@@ -107,7 +105,6 @@ class ArticleDetailView(ArticleObjectMixin, NavbarSearchMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
         context['form'] = CommentModelForm()
         instance = self.get_object()
         c_type = ContentType.objects.get_for_model(instance)
@@ -143,7 +140,6 @@ class ArticleUpdateView(LoginRequiredMixin, ArticleObjectMixin, UserCanModifyArt
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['type'] = 'modify'
-        context['navbar_search_form'] = self.form_navbar()
         return context
 
     def get_success_url(self):
@@ -154,11 +150,6 @@ class ArticleUpdateView(LoginRequiredMixin, ArticleObjectMixin, UserCanModifyArt
 class ArticleDeleteView(LoginRequiredMixin, ArticleObjectMixin, SuccessMessageMixin, NavbarSearchMixin, DeleteView):
     success_message = _("Article supprimé avec succès")
     success_url = reverse_lazy('articles:list')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
-        return context
 
 
 class ArticleFavoriteToggleRedirectView(RedirectView):

@@ -4,56 +4,38 @@ from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import gettext as _
-from django.views.generic import View
+from django.views.generic import TemplateView, View
 
 from .forms import CommentReportForm
 from .mixins import NavbarSearchMixin
 from .models import Comment, Language, Tag, CommentReport
 
 
-class IndexView(NavbarSearchMixin, View):
+class IndexView(NavbarSearchMixin, TemplateView):
     template_name = "main/index.html"
 
-    def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar(), 'phrase1': _("Ne grandissons pas dans un monde sans le comprendre."), 'phrase2': _("Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !")})
 
-
-class AboutView(NavbarSearchMixin, View):
+class AboutView(NavbarSearchMixin, TemplateView):
     template_name = "main/about.html"
 
-    def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
-
-class ContactView(NavbarSearchMixin, View):
+class ContactView(NavbarSearchMixin, TemplateView):
     template_name = "main/contact.html"
 
-    def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
-
-class TermsView(NavbarSearchMixin, View):
+class TermsView(NavbarSearchMixin, TemplateView):
     template_name = "main/terms.html"
 
-    def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
-
-class PrivacyView(NavbarSearchMixin, View):
+class PrivacyView(NavbarSearchMixin, TemplateView):
     template_name = "main/privacy.html"
 
-    def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
-
-class SearchView(NavbarSearchMixin, View):
+class SearchView(NavbarSearchMixin, TemplateView):
     template_name = "main/search.html"
 
-    def get(self, *args, **kwargs):
-        return render(self.request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
-
-class CommentReportView(NavbarSearchMixin, View):
+class CommentReportView(NavbarSearchMixin, TemplateView):
     template_name = 'main/report.html'
 
     def get(self, request, *args, **kwargs):
@@ -81,7 +63,6 @@ class CommentReportView(NavbarSearchMixin, View):
 
     def get_context_data(self, **kwargs):
         context = {**kwargs}
-        context['navbar_search_form'] = self.form_navbar()
         context['object'] = Comment.objects.get(id=kwargs.get('comment_id'))
         context['form'] = CommentReportForm()
         return context
@@ -103,7 +84,7 @@ class CommentDeleteView(View):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-class LanguagesTagsView(NavbarSearchMixin, View):
+class LanguagesTagsView(NavbarSearchMixin, TemplateView):
     template_name = "main/tag.html"
 
     def get(self, *args, **kwargs):
@@ -116,6 +97,5 @@ class LanguagesTagsView(NavbarSearchMixin, View):
         obj_list = list(chain(obj_lang, obj_tag))
         if obj_list == []:
             raise Http404
-        context['navbar_search_form'] = self.form_navbar()
         context['tag'] = obj_list[0]
         return context

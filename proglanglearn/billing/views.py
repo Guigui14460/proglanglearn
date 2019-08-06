@@ -32,7 +32,6 @@ class CartView(LoginRequiredMixin, NavbarSearchMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['navbar_search_form'] = self.form_navbar()
         context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
         ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
         context['type'] = 'cart'
@@ -144,7 +143,6 @@ class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, Vi
             context = super().get_context_data(**kwargs)
         except:
             context = {**kwargs}
-        context['navbar_search_form'] = self.form_navbar()
         context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
         ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
         context['type'] = 'payment'
@@ -284,7 +282,6 @@ class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
 
     def get_context_data(self, **kwargs):
         context = {**kwargs}
-        context['navbar_search_form'] = self.form_navbar()
         context['form'] = RefundForm()
         return context
 

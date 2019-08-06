@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block main_attr %}class="aside"{% endblock main_attr %}
+
+{% block aside_left %}
+<aside class="navbar navbar__dark navbar__vertical">
+    <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+    <ul class="navbar-links sticky-box">
+        <li class="navbar-item">
+            <a {% if type == 'dashboard' %}class="active"{% endif %} href="{% url 'main:analytics:dashboard' %}">{% trans "Mon expérience" %}</a>
+        </li>
+        <li class="navbar-item">
+            <hr class="navbar-dropdown-divider" />
+        </li>
+        <li class="navbar-item">
+            <a {% if type == 'my_orders' %}class="active"{% endif %} href="#">{% trans "Mes commandes" %}</a>
+        </li>
+        <li class="navbar-item">
+            <hr class="navbar-dropdown-divider" />
+        </li>
+        <li class="navbar-item">
+            <a {% if type == 'my_comment_report' %}class="active"{% endif %} href="#">{% trans "Mes signalements de commentaire" %}</a>
+        </li>
+        <li class="navbar-item">
+            <hr class="navbar-dropdown-divider" />
+        </li>
+        <li class="navbar-item">
+            <a {% if type == 'my_courses' %}class="active"{% endif %} href="#">{% trans "Mes cours" %}</a>
+        </li>
+        <li class="navbar-item">
+            <a {% if type == 'my_favorite_tutorials' %}class="active"{% endif %} href="#">{% trans "Mes tutoriels favoris" %}</a>
+        </li>
+        <li class="navbar-item">
+            <hr class="navbar-dropdown-divider" />
+        </li>
+        <li class="navbar-item">
+            <a {% if type == 'my_favorite_articles' %}class="active"{% endif %} href="#">{% trans "Mes articles favoris" %}</a>
+        </li>
+    </ul>
+</aside>
+{% endblock aside_left %}

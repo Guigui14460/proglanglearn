@@ -87,8 +87,14 @@ def submission_user_delete(sender, instance, **kwargs):
 
 
 def create_user_profile(sender, instance, created, **kwargs):
+    from analytics.models import UserExperienceJournal
     if kwargs.get('created', True) and not kwargs.get('raw', False):
         Profile.objects.get_or_create(user=instance)
+    if created:
+        UserExperienceJournal.objects.create(
+            user=instance,
+            experience=instance.profile.level_experience
+        )
 
 
 post_delete.connect(submission_user_delete, sender=Profile)

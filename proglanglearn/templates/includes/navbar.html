@@ -63,13 +63,13 @@
                         </li>
                     {% endif %}
                     <li class="navbar-dropdown-item">
-                        <a href="pages/dashboard.html"><i class="fas fa-chart-area"></i>&nbsp;{% trans 'Tableau de bord' %}</a>
+                        <a {% if activate == 'dashboard' %}class="active" {% endif %} href="{% url 'main:analytics:dashboard' %}"><i class="fas fa-chart-area"></i>&nbsp;{% trans 'Tableau de bord' %}</a>
                     </li>
                     <li class="navbar-dropdown-item">
-                        <a href="pages/profile.html"><i class="fas fa-user-tie"></i>&nbsp;{% trans 'Mon profil' %}</a>
+                        <a {% if activate == 'profile' %}class="active" {% endif %} href="pages/profile.html"><i class="fas fa-user-tie"></i>&nbsp;{% trans 'Mon profil' %}</a>
                     </li>
                     <li class="navbar-dropdown-item">
-                        <a href="pages/account.html"><i class="fas fa-user-cog"></i>&nbsp;{% trans 'Mon compte' %}</a>
+                        <a {% if activate == 'account' %}class="active" {% endif %} href="pages/account.html"><i class="fas fa-user-cog"></i>&nbsp;{% trans 'Mon compte' %}</a>
                     </li>
                     <li class="navbar-dropdown-item">
                         <a href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp;{% trans 'Se déconnecter' %}</a>

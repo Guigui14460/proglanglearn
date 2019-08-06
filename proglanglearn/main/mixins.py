@@ -17,6 +17,10 @@ class NavbarSearchMixin(object):
             form = NavbarSearchForm(q=form.cleaned_data.get('q'))
         return form
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['navbar_search_form'] = self.form_navbar()
+        return context
 
 class IsStaff(UserPassesTestMixin):
     permission_denied_message = _(
