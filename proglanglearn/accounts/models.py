@@ -11,6 +11,7 @@ from courses.models import Course, Tutorial
 from main.models import Language, Tag
 from .fields import StringListField
 from .managers import ProfileManager
+from .utils import get_user_type
 
 
 User = get_user_model()
@@ -79,6 +80,9 @@ class Profile(models.Model):
         except:
             pass
         super(Profile, self).save(*args, **kwargs)
+
+    def get_user_profile_type(self):
+        return get_user_type(self.level)
 
 
 def submission_user_delete(sender, instance, **kwargs):

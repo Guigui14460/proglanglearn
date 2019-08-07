@@ -21,7 +21,7 @@
                 <div class="piechart-container">
                     <div class="box">
                         <div class="chart" data-percent="{{ level_percent }}">{{ level_experience }}</div>
-                        <h2>{% trans "Niveau" %} {{ level }}</h2>
+                        <h2>{% trans "Niveau" %} {{ level }} : {{ request.user.profile.get_user_profile_type }}</h2>
                     </div>
                 </div>
             </div>

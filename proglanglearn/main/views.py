@@ -39,6 +39,8 @@ class CommentReportView(NavbarSearchMixin, TemplateView):
     template_name = 'main/report.html'
 
     def get(self, request, *args, **kwargs):
+        comment_obj = get_object_or_404(
+            Comment, id=kwargs.get('comment_id'))
         return render(request, self.template_name, self.get_context_data(**kwargs))
 
     def post(self, request, *args, **kwargs):

@@ -6,6 +6,10 @@ import os
 import pandas as pd
 
 
+USER_TYPE = {'apprentice': _("apprenti"), 'advanced': _(
+    "avancé"), 'expert': _("expert"), 'master': _("maître")}
+
+
 df = pd.read_csv(os.path.join(settings.BASE_DIR,
                               'accounts/datasets/levels.csv'))
 
@@ -21,6 +25,15 @@ def get_exp_limit(level, df=df):
         return exp_column[level + 1]
     except:
         return exp_column.iloc[-1]
+
+
+def get_user_type(level, df=df):
+    exp_column = df['type']
+    try:
+        type = exp_column[level + 1]
+    except:
+        type = exp_column.iloc[-1]
+    return USER_TYPE[type]
 
 
 MAX_LEVEL = get_last_level()

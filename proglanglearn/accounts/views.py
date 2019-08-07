@@ -29,7 +29,7 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('courses:list')
+            return redirect('main:analytics:dashboard')
         return super(CustomLoginView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -57,7 +57,7 @@ class RegistrationView(NavbarSearchMixin, View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('courses:list')
+            return redirect('main:analytics:dashboard')
         context = {'navbar_search_form': self.form_navbar()}
         context['form'] = SignUpForm()
         return render(request, self.template_name, context)
@@ -141,7 +141,7 @@ class AccountActivationSentView(NavbarSearchMixin, View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('courses:list')
+            return redirect('accounts:login')
         return render(request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
@@ -163,7 +163,7 @@ class ActivateView(View):
             login(request, user)
             messages.success(request, _(
                 "Activation de votre compte effectuée avec succès"))
-            return redirect('courses:list')
+            return redirect('main:analytics:dashboard')
         return render(request, self.template_name)
 
 
@@ -183,14 +183,3 @@ class CustomPasswordResetConfirmView(NavbarSearchMixin, PasswordResetConfirmView
 
 class CustomPasswordResetCompleteView(NavbarSearchMixin, PasswordResetCompleteView):
     pass
-
-
-class PandasTestView(NavbarSearchMixin, View):
-    template_name = 'accounts/pandas.html'
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            context = self.get_context_data(**kwargs)
-            context['check'] = check_level(request)
-            return render(request, self.template_name, context)
-        return redirect('accounts:login')
