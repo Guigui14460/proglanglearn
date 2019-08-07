@@ -18,28 +18,30 @@
             <hr class="navbar-dropdown-divider" />
         </li>
         <li class="navbar-item">
-            <a {% if type == 'my_orders' %}class="active"{% endif %} href="#">{% trans "Mes commandes" %}</a>
+            <a {% if type == 'my_orders' %}class="active"{% endif %} href="{% url 'main:analytics:orders' %}">{% trans "Mes commandes" %}</a>
         </li>
         <li class="navbar-item">
             <hr class="navbar-dropdown-divider" />
         </li>
         <li class="navbar-item">
-            <a {% if type == 'my_comment_report' %}class="active"{% endif %} href="#">{% trans "Mes signalements de commentaire" %}</a>
+            <a {% if type == 'my_comment_report' %}class="active"{% endif %} href="{% url 'main:analytics:comment-report' %}">{% trans "Mes signalements de commentaire" %}</a>
+        </li>
+        <li class="navbar-item">
+            <hr class="navbar-dropdown-divider" />
+        </li>
+        {% if request.user.profile.is_teacher or request.user.is_staff %}
+            <li class="navbar-item">
+                <a {% if type == 'my_courses' %}class="active"{% endif %} href="{% url 'main:analytics:my-courses' %}">{% trans "Mes cours" %}</a>
+            </li>
+        {% endif %}
+        <li class="navbar-item">
+            <a {% if type == 'my_favorite_tutorials' %}class="active"{% endif %} href="{% url 'main:analytics:favorite-tutorials' %}">{% trans "Mes tutoriels favoris" %}</a>
         </li>
         <li class="navbar-item">
             <hr class="navbar-dropdown-divider" />
         </li>
         <li class="navbar-item">
-            <a {% if type == 'my_courses' %}class="active"{% endif %} href="#">{% trans "Mes cours" %}</a>
-        </li>
-        <li class="navbar-item">
-            <a {% if type == 'my_favorite_tutorials' %}class="active"{% endif %} href="#">{% trans "Mes tutoriels favoris" %}</a>
-        </li>
-        <li class="navbar-item">
-            <hr class="navbar-dropdown-divider" />
-        </li>
-        <li class="navbar-item">
-            <a {% if type == 'my_favorite_articles' %}class="active"{% endif %} href="#">{% trans "Mes articles favoris" %}</a>
+            <a {% if type == 'my_favorite_articles' %}class="active"{% endif %} href="{% url 'main:analytics:favorite-articles' %}">{% trans "Mes articles favoris" %}</a>
         </li>
     </ul>
 </aside>

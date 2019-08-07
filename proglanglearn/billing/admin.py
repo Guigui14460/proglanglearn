@@ -16,7 +16,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def make_refund_accepted(model_admin, request, queryset):
     try:
         for refund in queryset:
-            refund.order.refund_requested = False
+            refund.order.refund_requested = True
             refund.order.refund_granted = True
             refund.order.save()
             charge_id = refund.order.payment.stripe_charge_id[2:-3]
@@ -56,7 +56,7 @@ make_refund_accepted.short_description = _(
 
 def make_refund_rejected(model_admin, request, queryset):
     for refund in queryset:
-        refund.order.refund_requested = False
+        refund.order.refund_requested = True
         refund.order.refund_granted = False
         refund.order.save()
         refund.rejected = True

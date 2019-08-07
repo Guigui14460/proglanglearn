@@ -2,7 +2,7 @@ from itertools import chain
 
 from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView, View
 
@@ -55,7 +55,7 @@ class CommentReportView(NavbarSearchMixin, TemplateView):
                 report.alerter = user
                 report.save()
                 messages.success(request, _("Le commentaire a été signalé"))
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                return redirect('main:analytics:comment-report')
             except Exception as e:
                 messages.error(request, _(
                     "Le commentaire n'a pas pu être signalé"))
@@ -63,7 +63,8 @@ class CommentReportView(NavbarSearchMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = {**kwargs}
-        context['object'] = Comment.objects.get(id=kwargs.get('comment_id'))
+        context['object'] = Comment.objects.get(
+            id=self.kwargs.get('comment_id'))
         context['form'] = CommentReportForm()
         return context
 

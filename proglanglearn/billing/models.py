@@ -80,6 +80,12 @@ class Order(models.Model):
             total -= self.coupon.discount_price
         return round(total, 2)
 
+    def get_refund(self):
+        try:
+            return Refund.objects.get(order=self)
+        except:
+            return Refund.objects.none()
+
     def render_pdf(self):
         return reverse('main:billing:pdf', kwargs={'ref_code': self.ref_code})
 
@@ -117,3 +123,6 @@ class Refund(models.Model):
 
     def __str__(self):
         return f"{self.order.user.username}"
+
+    def get_absolute_url(self):
+        return reverse('main:billing:refund-detail', kwargs={'id': self.id})

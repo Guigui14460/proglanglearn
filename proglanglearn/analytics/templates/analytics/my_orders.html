@@ -1,0 +1,37 @@
+{% extends 'analytics/base_analytic.html' %}
+{% load static i18n js %}
+
+{% block title %}{% trans "Mes commandes" %} - {% endblock title %}
+
+{% block extra_head %}
+<style>
+.dashboard-grid {display: grid; grid-gap: 10px; grid-template-columns: 1fr 1fr;}
+@media screen and (max-width: 1050px){.dashboard-grid{grid-template-columns: 1fr;}}
+</style>
+{% endblock extra_head %}
+
+{% block main %}
+<h1 class="large">{% trans "Mes commandes" %}</h1>
+{% if data %}
+    <div class="dashboard-grid">
+        {% for order in data %}
+            <div class="card card-hoverable">
+                <div class="card-container">
+                    <h4 class="card-title">{% trans "Commande du" %} {{ order.ordered_date }} ({% trans "code de référence" %} : {{ order.ref_code }})</h4>
+                    <div class="card-content mt-2">
+                        {% with refund=order.get_refund %}
+                            {% trans "Demande de remboursement :" %} {% if order.refund_requested and order.refund_accepted %}<a class="success-color" href="{{ refund.get_absolute_url }}">{% trans "Acceptée" %}</a>{% elif order.refund_requested and refund.rejected %}<a class="red-color" href="{{ refund.get_absolute_url }}">{% trans "Rejetée" %}</a>{% elif order.refund_requested %}<a href="{{ refund.get_absolute_url }}">{% trans "En cours de traitement" %}</a>{% else %}{% trans "Aucune demande formulée" %}{% endif %}
+                            <br>{% if not order.refund_requested %}<a href="{% url 'main:billing:refund' %}">{% trans "Formuler une demande" %}</a>{% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="card-content mt-1" style="text-align: right;">
+                        <a href="{{ order.render_pdf }}" target="_blank">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <h3 class="center-text red-color mt-2">{% trans "Vous n'avez encore acheté aucun cours" %}</h3>
+{% endif %}
+{% endblock main %}

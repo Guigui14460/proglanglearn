@@ -163,7 +163,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
                 user.profile.tutorial_finished.add(tutorial)
                 user.profile.level_experience += tutorial.experience
                 user.profile.save()
-                save_user_exp(request)
+                save_user_exp(request, tutorial.experience)
         return super(TutorialDetailView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):

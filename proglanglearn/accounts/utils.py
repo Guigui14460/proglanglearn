@@ -10,12 +10,12 @@ df = pd.read_csv(os.path.join(settings.BASE_DIR,
                               'accounts/datasets/levels.csv'))
 
 
-def get_last_level(df):
+def get_last_level(df=df):
     level_column = df['level']
     return level_column.iloc[-1]
 
 
-def get_exp_limit(df, level):
+def get_exp_limit(level, df=df):
     exp_column = df['experience']
     try:
         return exp_column[level + 1]
@@ -23,8 +23,8 @@ def get_exp_limit(df, level):
         return exp_column.iloc[-1]
 
 
-MAX_LEVEL = get_last_level(df)
-MAX_EXPERIENCE = get_exp_limit(df, 100)
+MAX_LEVEL = get_last_level()
+MAX_EXPERIENCE = get_exp_limit(100)
 
 
 def check_level(request, actual_user_level=None, user_experience=None):
@@ -32,13 +32,13 @@ def check_level(request, actual_user_level=None, user_experience=None):
         actual_user_level = request.user.profile.level
     if user_experience is None:
         user_experience = request.user.profile.level_experience
-    next_experience_limit = get_exp_limit(df, actual_user_level)
+    next_experience_limit = get_exp_limit(actual_user_level, df=df)
     if user_experience > next_experience_limit:
         if user_experience > MAX_EXPERIENCE and actual_user_level == MAX_LEVEL:
             return actual_user_level
         actual_user_level += 1
-        next_experience_limit = get_exp_limit(df, actual_user_level)
-        if actual_user_level == get_last_level(df):
+        next_experience_limit = get_exp_limit(actual_user_level, df=df)
+        if actual_user_level == get_last_level(df=df):
             messages.success(request, _(
                 "Vous êtes déjà au niveau maximum ! Continuez de vous formez et d'apprendre car de nouveaux niveaux seront rajoutés ;)"))
         else:

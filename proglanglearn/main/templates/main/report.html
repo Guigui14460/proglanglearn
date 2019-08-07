@@ -12,7 +12,7 @@
     <div class="my-2">
         <div class="card card__info">
             <div class="card-container">
-                {% blocktrans %}<h3 class="card-title">Commentaire de {{ object.author.username }} posté le {{ object.timestamp }}</h3>{% endblocktrans %}
+                <h3 class="card-title">{% trans "Commentaire de" %} {{ object.author.username }} {% trans "posté le" %} {{ object.timestamp }}</h3>
                 <div class="card-content p-1">{{ object.content }}</div>
             </div>
         </div>

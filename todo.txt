@@ -1,6 +1,4 @@
-﻿Dashboard (exp, nb of strikes) and display favorite articles and tutorials, enrolled courses, comment report, etc
-https://www.youtube.com/watch?v=PWVwtE1pe9U, https://www.youtube.com/watch?v=XywrNTHj7-Y, https://www.youtube.com/watch?v=QWZXJlhjgrs, https://www.youtube.com/watch?v=dI7G6xssl7A
-Profile and Account systems
+﻿Profile and Account systems
 Forum app (+ exp when +1 for help answer and +100 for a best answer)
 Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
 Poll/Quiz app (to add in course to add more experience)

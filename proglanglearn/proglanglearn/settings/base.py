@@ -124,7 +124,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 # Redirect configs
 LOGIN__URL = 'accounts:login'
-LOGIN_REDIRECT_URL = 'courses:list'
+LOGIN_REDIRECT_URL = 'main:analytics:dashboard'
 LOGOUT_REDIRECT_URL = 'main:index'
 
 # Email config

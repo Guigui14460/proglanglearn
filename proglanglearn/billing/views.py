@@ -9,7 +9,7 @@ from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import gettext as _
-from django.views.generic import RedirectView, View
+from django.views.generic import DetailView, RedirectView, View
 from django.views.generic.base import TemplateView
 
 import stripe
@@ -268,13 +268,13 @@ class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
                     refund.save()
 
                     messages.info(request, _("Votre demande a été envoyée"))
-                    return redirect('main:index')
+                    return redirect('main:analytics:orders')
                 if Refund.objects.filter(order=order, rejected=True).count() > 0:
                     messages.error(request, _(
                         "La demande de remboursement a été rejetée"))
                 messages.error(request, _(
                     "La période de remboursement a expirée ou vous avez déjà envoyé une demande"))
-                return redirect('main:billing:refund')
+                return redirect('main:analytics:orders')
             except ObjectDoesNotExist:
                 messages.warning(request, _(
                     "Le code de référence mentionné n'existe pas"))
@@ -286,6 +286,17 @@ class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
         return context
 
 
+class RefundDetailView(LoginRequiredMixin, NavbarSearchMixin, DetailView):
+    model = Refund
+
+    def get_object(self):
+        id = self.kwargs.get('id')
+        obj = None
+        if id is not None:
+            obj = get_object_or_404(self.model, id=id)
+        return obj
+
+
 class PDFPaymentView(LoginRequiredMixin, View):
     pdf_template_name = 'billing/pdf/confirmation_payment.html'
 
@@ -295,6 +306,7 @@ class PDFPaymentView(LoginRequiredMixin, View):
         params = {
             'order': order,
             'payment': order.payment,
-            'stripe_charge': stripe.Charge.retrieve(order.payment.stripe_charge_id[2:-3])
+            'stripe_charge': stripe.Charge.retrieve(order.payment.stripe_charge_id[2:-3]),
+            'refund_url': reverse('main:billing:refund'),
         }
         return RenderPDF.render(self.pdf_template_name, params, f"{order.ref_code}")

@@ -1,0 +1,58 @@
+{% extends 'analytics/base_analytic.html' %}
+{% load static i18n js %}
+
+{% block title %}{% if type == 'my_favorite_tutorials' %}{% trans "Mes tutoriels favoris" %}{% else %}{% trans "Mes articles favoris" %}{% endif %} - {% endblock title %}
+
+{% block extra_head %}
+<style>
+.dashboard-grid {display: grid; grid-gap: 10px; grid-template-columns: 1fr 1fr;}
+@media screen and (max-width: 1050px){.dashboard-grid{grid-template-columns: 1fr;}}
+</style>
+{% endblock extra_head %}
+
+{% block main %}
+<h1 class="large">{% if type == 'my_favorite_tutorials' %}{% trans "Mes tutoriels favoris" %}{% else %}{% trans "Mes articles favoris" %}{% endif %}</h1>
+{% if type == 'my_favorite_tutorials' %}
+    {% for key, val in data.items %}
+        <h3>{{ key }}</h3>
+        <div class="dashboard-grid">
+            {% for tutorial in val %}
+                <div class="card card-hoverable">
+                    <div class="card-container">
+                        <a href="{{ tutorial.get_absolute_url }}">
+                            <h4 class="card-title">{{ tutorial.title }}</h4>
+                        </a>
+                        <div class="card-content center-text">
+                            <a href="{{ tutorial.get_favorite_url }}" title="{% trans 'Enlever des favoris' %}" class="favorite-span info-color"><i class="fas fa-star favorite"></i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="dashboard-grid">
+        {% for article in data %}
+            <div class="card card-hoverable">
+                <div class="card-header">
+                    <a href="{{ article.get_absolute_url }}"><img class="card-image" src="{{ article.thumbnail.url }}"
+                            alt="{{ article.title }}"></a>
+                </div>
+                <div class="card-container">
+                    <a href="{{ article.get_absolute_url }}">
+                        <h3 class="card-title">{{ article.title }}</h3>
+                    </a>
+                    <div class="card-content center-text">
+                        <a href="{{ article.get_favorite_url }}" title="{% trans 'Enlever des favoris' %}" class="favorite-span"><i class="fas fa-star favorite"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock main %}
+
+{% block jquery %}
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', "Remove favorites");$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}Tutorial{% else %}Article{% endif %} added to favorites</div>");} else {star.parent().attr('title', "Add to favorites");$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}Tutorial{% else %}Article{% endif %} removed from favorites</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+{% include 'main/includes/ajax_favorite.html' %}
+{% endblock jquery %}
