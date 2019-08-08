@@ -18,9 +18,13 @@ class NavbarSearchMixin(object):
         return form
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        try:
+            context = super().get_context_data(**kwargs)
+        except AttributeError:
+            context = {**kwargs}
         context['navbar_search_form'] = self.form_navbar()
         return context
+
 
 class IsStaff(UserPassesTestMixin):
     permission_denied_message = _(

@@ -29,7 +29,7 @@ class User(AbstractUser):
 
 class Language(models.Model):
     name = models.CharField(max_length=30, unique=True,
-                            verbose_name=_("nom du langage de programmation"))
+                            verbose_name=_("nom du langage de programmation/bibliothèque"))
     slug = models.SlugField(null=True, blank=True,
                             verbose_name=_("URL d'accès"))
     image = models.ImageField(
@@ -38,8 +38,8 @@ class Language(models.Model):
         "description du langage"), null=True, blank=True)
 
     class Meta:
-        verbose_name = _("langage de programmation")
-        verbose_name_plural = _("langages de programmation")
+        verbose_name = _("langage de programmation ou bibliothèque")
+        verbose_name_plural = _("langages de programmation ou bibliothèques")
 
     def __str__(self):
         return self.name

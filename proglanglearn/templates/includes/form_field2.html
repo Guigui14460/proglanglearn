@@ -1,0 +1,24 @@
+{% load account_extras %}
+
+<div class="form-group">
+    {% comment %} {{ field.errors }} {% endcomment %}
+    {% if field.field.widget.input_type == 'text' and 'password' in field.label or 'passe' in field.label %}
+        <div class="password">
+            {{ field.label_tag }}{% if field.field.required %}&nbsp;<span class="required-input">*</span>{% endif %}
+            {{ field }}
+            <input type="checkbox" id="{{ field.field.widget.attrs.id|id_for_view_password }}">
+            <label class="eye" for="{{ field.field.widget.attrs.id|id_for_view_password }}"></label>
+        </div>
+    {% else %}
+        {{ field.label_tag }}{% if field.field.required %}&nbsp;<span class="required-input">*</span>{% endif %}<br>
+        {% if field.field.widget.input_type == 'select' and not default_select %}
+            <div class="{{ field.field.widget.attrs.class }}">
+                {{ field }}
+            </div>
+        {% else %}
+            {{ field }}
+        {% endif %}
+    {% endif %}
+    {% comment %} {{ field.field.widget.input_type }} {% endcomment %}
+    {% if field.help_text %}<small class="form-text">{{ field.help_text|safe }}</small>{% endif %}
+</div>

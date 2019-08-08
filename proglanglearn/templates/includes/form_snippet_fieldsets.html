@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% for fieldset in form.fieldsets %}
+    {% if fieldset.legend %}
+        <fieldset>
+            <legend>{{ fieldset.legend|safe }}</legend>
+            {% for field in fieldset %}
+                {% include 'includes/form_field2.html' %}
+            {% endfor %}
+        </fieldset>
+    {% else %}
+        {% for field in fieldset %}
+            {% include 'includes/form_field2.html' %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+{% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}

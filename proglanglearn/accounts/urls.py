@@ -2,6 +2,8 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
 from .views import (
+    AccountView,
+    DeleteAccountView,
     CustomLoginView,
     RegistrationView,
     AccountActivationSentView,
@@ -18,6 +20,8 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name="login"),
     path('signup/', RegistrationView.as_view(), name='register'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('account/', AccountView.as_view(), name='account'),
+    path('delete-account/', DeleteAccountView.as_view(), name='delete-account'),
     path('account-activation-sent/',
          AccountActivationSentView.as_view(), name='account_activation_sent'),
     path('activate/<uidb64>/<token>/', ActivateView.as_view(), name='activate'),

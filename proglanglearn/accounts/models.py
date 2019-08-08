@@ -33,8 +33,6 @@ class Profile(models.Model):
                                  blank=True, null=True, verbose_name=_("biographie"))
     languages_learnt = models.ManyToManyField(Language, verbose_name=_(
         "langages maîtrisés"), blank=True)
-    tag_learnt = models.ManyToManyField(Tag, verbose_name=_(
-        "compétences apprises"), blank=True)
     strike = models.PositiveSmallIntegerField(
         default=0, verbose_name=_("signalement"))
     email_confirmed = models.BooleanField(

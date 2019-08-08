@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
@@ -12,12 +13,12 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.translation import gettext as _
 from django.views.generic import View
 
-from .forms import LoginForm, SignUpForm, PasswordResetForm
+from main.mixins import NavbarSearchMixin
+from main.utils import get_ip_address_client
+from .forms import PROG_TYPE, LoginForm, SignUpForm, PasswordResetForm, ChangeProfileImageForm, PersonalInformationForm, PasswordChangeForm, ProfileInformationForm, DangerZoneForm, DeleteAccountForm
 from .models import Profile
 from .utils import check_level
 from .tokens import AccountActivationTokenGenerator
-from main.mixins import NavbarSearchMixin
-from main.utils import get_ip_address_client
 
 
 User = get_user_model()
@@ -183,3 +184,80 @@ class CustomPasswordResetConfirmView(NavbarSearchMixin, PasswordResetConfirmView
 
 class CustomPasswordResetCompleteView(NavbarSearchMixin, PasswordResetCompleteView):
     pass
+
+
+class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
+    template_name = 'accounts/account.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data(**kwargs))
+
+    def post(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['activate'] = 'account'
+        context['image_form'] = ChangeProfileImageForm(
+            instance=self.request.user.profile)
+        context['personal_form'] = PersonalInformationForm(
+            self.get_personal_info(), request=self.request)
+        context['password_change_form'] = PasswordChangeForm(
+            user=self.request.user)
+        context['profile_form'] = ProfileInformationForm(
+            self.get_profile_info())
+        context['danger_zone_form'] = DangerZoneForm(
+            user=self.request.user)
+        return context
+
+    def get_personal_info(self):
+        user = self.request.user
+        if user.profile.is_dev:
+            prog_type = PROG_TYPE[-1]
+        elif user.profile.is_student:
+            prog_type = PROG_TYPE[1]
+        else:
+            prog_type = PROG_TYPE[0]
+        print(user.profile.image.url.split('/')[-1])
+        info_dict = {
+            'image': user.profile.image,
+            'username': user.username,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'prog_type': prog_type,
+        }
+        return info_dict
+
+    def get_profile_info(self):
+        user = self.request.user
+        links = user.profile.links.split(';')
+        # user.profile.links = f"{'website'};{'youtube'};{'twitter'};{'linkedin'};{'instagram'};{'facebook'}"
+        # user.profile.save()
+        info_dict = {
+            'skills': user.profile.languages_learnt.all(),
+            'github': user.profile.github_username,
+            'biography': user.profile.biography,
+            'website_url': links[0],
+            'twitter_url': links[1],
+            'youtube_url': links[2],
+            'facebook_url': links[3],
+            'linked_in_url': links[4],
+            'instagram_url': links[5],
+        }
+        return info_dict
+
+
+class DeleteAccountView(LoginRequiredMixin, NavbarSearchMixin, View):
+    template_name = 'accounts/delete_account.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data(**kwargs))
+
+    def post(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data(**kwargs))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['delete_form'] = DeleteAccountForm()
+        return context

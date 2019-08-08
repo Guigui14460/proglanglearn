@@ -69,7 +69,7 @@
                         <a {% if activate == 'profile' %}class="active" {% endif %} href="pages/profile.html"><i class="fas fa-user-tie"></i>&nbsp;{% trans 'Mon profil' %}</a>
                     </li>
                     <li class="navbar-dropdown-item">
-                        <a {% if activate == 'account' %}class="active" {% endif %} href="pages/account.html"><i class="fas fa-user-cog"></i>&nbsp;{% trans 'Mon compte' %}</a>
+                        <a {% if activate == 'account' %}class="active" {% endif %} href="{% url 'accounts:account' %}"><i class="fas fa-user-cog"></i>&nbsp;{% trans 'Mon compte' %}</a>
                     </li>
                     <li class="navbar-dropdown-item">
                         <a href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp;{% trans 'Se déconnecter' %}</a>
