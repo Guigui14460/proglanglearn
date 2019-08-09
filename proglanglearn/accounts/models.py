@@ -55,7 +55,7 @@ class Profile(models.Model):
     # Developer options
     github_username = models.CharField(max_length=100,
                                        blank=True, null=True, verbose_name=_("nom d'utilisateur/email Github"))
-    links = models.TextField(blank=True, null=True,
+    links = models.TextField(blank=True, null=True, default=";;;;;",
                              verbose_name=_("liens vers les médias sociaux"))
 
     objects = ProfileManager()
@@ -84,8 +84,13 @@ class Profile(models.Model):
 
 
 def submission_user_delete(sender, instance, **kwargs):
+    from analytics.models import UserExperienceJournal
     if instance.image.url != '/media/user_pictures/default.png':
         instance.image.delete(save=False)
+    qs = UserExperienceJournal.objects.filter(user=instance.user)
+    if qs.exists():
+        for q in qs:
+            q.delete()
 
 
 def create_user_profile(sender, instance, created, **kwargs):

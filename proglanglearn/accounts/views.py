@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, get_user_model, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
@@ -15,7 +15,7 @@ from django.views.generic import View
 
 from main.mixins import NavbarSearchMixin
 from main.utils import get_ip_address_client
-from .forms import PROG_TYPE, LoginForm, SignUpForm, PasswordResetForm, ChangeProfileImageForm, PersonalInformationForm, PasswordChangeForm, ProfileInformationForm, DangerZoneForm, DeleteAccountForm
+from .forms import PROG_TYPE, LoginForm, SignUpForm, PasswordResetForm, ChangeProfileImageForm, PersonalInformationForm, PasswordChangeForm, ProfileInformationForm, DangerZoneForm
 from .models import Profile
 from .utils import check_level
 from .tokens import AccountActivationTokenGenerator
@@ -192,9 +192,6 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.get_context_data(**kwargs))
 
-    def post(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.get_context_data())
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['activate'] = 'account'
@@ -206,8 +203,7 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
             user=self.request.user)
         context['profile_form'] = ProfileInformationForm(
             self.get_profile_info())
-        context['danger_zone_form'] = DangerZoneForm(
-            user=self.request.user)
+        context['danger_zone_form'] = DangerZoneForm(user=self.request.user)
         return context
 
     def get_personal_info(self):
@@ -218,46 +214,112 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
             prog_type = PROG_TYPE[1]
         else:
             prog_type = PROG_TYPE[0]
-        print(user.profile.image.url.split('/')[-1])
         info_dict = {
-            'image': user.profile.image,
             'username': user.username,
             'email': user.email,
             'first_name': user.first_name,
             'last_name': user.last_name,
             'prog_type': prog_type,
+            'country': user.profile.country
         }
         return info_dict
 
     def get_profile_info(self):
         user = self.request.user
         links = user.profile.links.split(';')
-        # user.profile.links = f"{'website'};{'youtube'};{'twitter'};{'linkedin'};{'instagram'};{'facebook'}"
-        # user.profile.save()
         info_dict = {
             'skills': user.profile.languages_learnt.all(),
             'github': user.profile.github_username,
             'biography': user.profile.biography,
             'website_url': links[0],
-            'twitter_url': links[1],
-            'youtube_url': links[2],
+            'youtube_url': links[1],
+            'linked_in_url': links[2],
             'facebook_url': links[3],
-            'linked_in_url': links[4],
+            'twitter_url': links[4],
             'instagram_url': links[5],
         }
         return info_dict
 
 
-class DeleteAccountView(LoginRequiredMixin, NavbarSearchMixin, View):
-    template_name = 'accounts/delete_account.html'
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.get_context_data(**kwargs))
-
+class PersonalInfo(View):
     def post(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.get_context_data(**kwargs))
+        user = request.user
+        image_form = ChangeProfileImageForm(
+            request.POST or None, request.FILES or None)
+        personal_form = PersonalInformationForm(
+            request.POST or None, request=request)
+        if image_form.is_valid() and personal_form.is_valid():
+            prog_type = personal_form.cleaned_data['prog_type']
+            if prog_type == 'D':
+                user.profile.is_dev = True
+                user.profile.is_student = False
+            elif prog_type == 'S':
+                user.profile.is_dev = False
+                user.profile.is_student = True
+            else:
+                user.profile.is_dev = False
+                user.profile.is_student = False
+            user.username = personal_form.cleaned_data['username']
+            user.email = personal_form.cleaned_data['email']
+            user.first_name = personal_form.cleaned_data['first_name']
+            user.last_name = personal_form.cleaned_data['last_name'].upper()
+            user.save()
+            if image_form.cleaned_data['image'] != 'user_pictures/default.png':
+                user.profile.image = image_form.cleaned_data['image']
+            user.profile.country = personal_form.cleaned_data['country']
+            user.profile.save()
+            messages.info(request, _(
+                "Vos informations personnelles ont été mises à jour"))
+        else:
+            messages.warning(request, _(
+                "Vos informations personnelles n'ont pas pu être modifiées. Rétablissement des anciennes informations"))
+        return redirect('accounts:account')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['delete_form'] = DeleteAccountForm()
-        return context
+
+class ChangePassword(View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        form = PasswordChangeForm(user, request.POST or None)
+        if form.is_valid():
+            user.set_password(form.clean_new_password2())
+            user.save()
+            messages.success(request, _(
+                "Votre mot de passe a été modifié avec succès"))
+        else:
+            messages.error(request, _(
+                "Votre mot de passe n'a pas pu être modifié. Utilisez l'aide sous chaque champs."))
+        return redirect('accounts:account')
+
+
+class ProfileInfo(View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        form = ProfileInformationForm(request.POST or None)
+        if form.is_valid():
+            user.profile.biography = form.cleaned_data['biography']
+            user.profile.languages_learnt.remove(
+                *user.profile.languages_learnt.all())
+            user.profile.languages_learnt.add(*form.cleaned_data['skills'])
+            user.profile.links = f"{form.cleaned_data['website_url']};{form.cleaned_data['youtube_url']};{form.cleaned_data['linked_in_url']};{form.cleaned_data['facebook_url']};{form.cleaned_data['twitter_url']};{form.cleaned_data['instagram_url']}"
+            user.profile.github_username = form.cleaned_data['github']
+            user.profile.save()
+            messages.info(request, _(
+                "Les informations sur votre profil ont été mises à jour"))
+        else:
+            messages.warning(request, _(
+                "Vos informations visibles de votre profil n'ont pas pu être modifiées. Rétablissement des anciennes informations"))
+        return redirect('accounts:account')
+
+
+class DangerZone(View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        form = DangerZoneForm(user, request.POST or None)
+        if form.is_valid():
+            user.is_active = False
+            user.save()
+            logout(request)
+            messages.success(request, _("Votre compte a été désactiver"))
+            return redirect('accounts:login')
+        messages.error(request, _("Votre compte n'a pas pu être désactiver"))
+        return redirect('accounts:account')

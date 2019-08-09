@@ -22,8 +22,9 @@
     <div class="col-75">
         <section id="personal-info">
             <h2>{% trans "Modifier mes informations personnelles" %}</h2>
-            <form method="POST" class="form" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'accounts:handle-personal-info' %}" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ image_form.non_field_errors }}
                 {{ personal_form.non_field_errors }}
                 <fieldset>
                     <legend><i class="fas fa-user"></i> {% trans "Informations générales" %}</legend>
@@ -39,7 +40,7 @@
                         </div>
                     </div>
                     {% include 'includes/form_field2.html' with field=personal_form.prog_type default_select=True %}
-                    {% include 'includes/form_field2.html' with field=image_form.country default_select=True %}
+                    {% include 'includes/form_field2.html' with field=personal_form.country default_select=True %}
                 </fieldset>
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span> {% trans "sont obligatoires." %}</small>
                 <div class="center-text">
@@ -50,46 +51,14 @@
         <hr class="dashed mx-1 my-2">
         <section id="change-password">
             <h2>{% trans "Changer mon mot de passe" %}</h2>
-            <form action="account.html" class="form">
+            <form method="POST" action="{% url 'accounts:handle-change-password' %}" class="form">
+                {% csrf_token %}
+                {{ password_change_form.non_field_errors }}
                 <fieldset>
                     <legend><i class="fas fa-user-lock"></i> {% trans "Mot de passe" %}</legend>
-                    <div class="form-group">
-                        <div class="password">
-                            <label>Mot de passe : <span class="required-input">*</span><br><input
-                                    type="password" id="showPWDInput"
-                                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                                    minlength="10" maxlength="32" name="user-password" required /></label>
-                            <input type="checkbox" id="showPWD">
-                            <label class="eye" for="showPWD"></label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="password">
-                            <label>Mot de passe : <span class="required-input">*</span><br><input
-                                    type="password" id="showNewPWDInput"
-                                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                                    minlength="10" maxlength="32" name="user-newpassword"
-                                    required /></label>
-                            <input type="checkbox" id="showNewPWD">
-                            <label class="eye" for="showNewPWD"></label>
-                        </div>
-                        <small class="form-text">
-                            Doit comporter entre 10 et 32 caractères (alphanumériques et symboles)
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <div class="password">
-                            <label>Mot de passe : <span class="required-input">*</span><br><input
-                                    type="password" id="showNewPWDConfirmInput"
-                                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                                    minlength="10" maxlength="32" name="user-password" required /></label>
-                            <input type="checkbox" id="showNewPWDConfirm">
-                            <label class="eye" for="showNewPWDConfirm"></label>
-                        </div>
-                        <small class="form-text">
-                            Doit être le même que le nouveau mot de passe renseigné
-                        </small>
-                    </div>
+                    {% include 'includes/form_field2.html' with field=password_change_form.old_password %}
+                    {% include 'includes/form_field2.html' with field=password_change_form.new_password1 %}
+                    {% include 'includes/form_field2.html' with field=password_change_form.new_password2 %}
                 </fieldset>
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
                     {% trans "sont obligatoires." %}</small>
@@ -101,86 +70,48 @@
         <hr class="dashed mx-1 my-2">
         <section id="profile">
             <h2>{% trans "Modifier les informations visibles sur mon profil" %}</h2>
-            <form action="account.html" class="form">
+            <form method="POST" action="{% url 'accounts:handle-profile-info' %}" class="form">
+                {% csrf_token %}
+                {{ profile_form.non_field_errors }}
                 <fieldset>
                     <legend><i class="fas fa-user-tie"></i> {% trans "Informations importantes" %}</legend>
-                    <div class="form-group">
-                        <label for="biography">Biographie :</label><br>
-                        <textarea name="user-biography" id="biography"
-                            placeholder="Une courte biographie ..."></textarea>
-                        <small class="form-text">
-                            Courte biographie ou phrase aimée pour vous décrire rapidement
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="skills">Choisissez des compétences (langage ou
-                            bibliothèque) :</label>
-                        <div class="custom-multiple-select select-multiple__light">
-                            <select id="skills" name="skills" multiple size="7">
-                                <option value="1">HTML / CSS</option>
-                                <option value="2">JavaScript</option>
-                                <option value="3">Python</option>
-                                <option value="4">C</option>
-                                <option value="5">C++</option>
-                                <option value="6">Java</option>
-                                <option value="7">Swift</option>
-                                <option value="8">Sass / Scss</option>
-                                <option value="9">TypeScript</option>
-                                <option value="10">JQuery</option>
-                                <option value="11">React JS</option>
-                                <option value="12">Electron JS</option>
-                            </select>
-                        </div>
-                        <small class="form-text">
-                            N.B. : multiple sélection possible <br>
-                            S'il manque une bibliothèque ou un langage, demandez à le <a
-                                href="contact.html#subject">rajouter</a>. Un mail vous sera envoyer pour
-                            vous mettre au courant du rajout ou du rejet de votre demande
-                        </small>
-                    </div>
+                    {% include 'includes/form_field2.html' with field=profile_form.biography %}
+                    {% include 'includes/form_field2.html' with field=profile_form.skills %}
                 </fieldset>
                 <fieldset>
                     <legend><i class="fas fa-external-link-alt"></i> Liens externes</legend>
                     <div class="form-group social-input">
                         <i class="fas fa-globe fa-2x"></i>
-                        <input type="url" placeholder="Website URL" name="user-website" />
-                    </div>
-                    <div class="form-group social-input">
-                        <i class="fab fa-twitter fa-2x"></i>
-                        <input type="url" placeholder="Twitter URL" name="user-website" />
-                    </div>
-                    <div class="form-group social-input">
-                        <i class="fab fa-facebook-square fa-2x"></i>
-                        <input type="url" placeholder="Facebook URL" name="user-website" />
+                        {{ profile_form.website_url }}
                     </div>
                     <div class="form-group social-input">
                         <i class="fab fa-youtube fa-2x"></i>
-                        <input type="url" placeholder="Youtube URL" name="user-website" />
+                        {{ profile_form.youtube_url }}
                     </div>
                     <div class="form-group social-input">
                         <i class="fab fa-linkedin fa-2x"></i>
-                        <input type="url" placeholder="LinkedIn URL" name="user-website" />
+                        {{ profile_form.linked_in_url }}
+                    </div>
+                    <div class="form-group social-input">
+                        <i class="fab fa-facebook-square fa-2x"></i>
+                        {{ profile_form.facebook_url }}
+                    </div>
+                    <div class="form-group social-input">
+                        <i class="fab fa-twitter fa-2x"></i>
+                        {{ profile_form.twitter_url }}
                     </div>
                     <div class="form-group social-input">
                         <i class="fab fa-instagram fa-2x"></i>
-                        <input type="url" placeholder="Instagram URL" name="user-website" />
+                        {{ profile_form.instagram_url }}
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend><i class="fab fa-github"></i> {% trans "Vos dépôts Github" %}</legend>
-                    <div class="form-group">
-                        <label>E-Mail ou nom d'utilisateur de votre compte Github :<br>
-                            <input type="text" name="user-github" /></label>
-                        <small class="form-text">
-                            <i class="fas fa-exclamation-triangle"></i> En renseignant ce champ, vous
-                            accepter de publier
-                            les liens vers vos dépôts
-                            ajoutés sur votre compte Github
-                        </small>
-                    </div>
+                    {% include 'includes/form_field2.html' with field=profile_form.github %}
                 </fieldset>
-                <!-- Si développeur ou étudiant -->
-                <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="edit_profile.html">{% trans "cette page" %}</a>.</p>
+                {% if request.user.profile.is_dev or request.user.profile.is_student %}
+                    <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="edit_profile.html">{% trans "cette page" %}</a>.</p>
+                {% endif %}
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
                     {% trans "sont obligatoires." %}</small>
                 <div class="center-text">
@@ -191,20 +122,12 @@
         <hr class="dashed mx-1 my-2">
         <section id="danger-zone">
             <h2>{% trans "Zone de danger" %}</h2>
-            <form action="delete_account.html" class="form">
+            <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
+                {% csrf_token %}
+                {{ danger_zone_form.non_field_errors }}
                 <fieldset>
                     <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
-                    <div class="form-group">
-                        <div class="password">
-                            <label>Mot de passe : <span class="required-input">*</span><br><input
-                                    type="password" id="showPWDDeleteConfirmInput"
-                                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                                    minlength="10" maxlength="32" name="user-password-danger"
-                                    required /></label>
-                            <input type="checkbox" id="showPWDDeleteConfirm">
-                            <label class="eye" for="showPWDDeleteConfirm"></label>
-                        </div>
-                    </div>
+                    {% include 'includes/form_field2.html' with field=danger_zone_form.password %}
                 </fieldset>
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
                     {% trans "sont obligatoires." %}</small>

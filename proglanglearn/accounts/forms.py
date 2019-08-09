@@ -20,7 +20,7 @@ User = get_user_model()
 
 PROG_TYPE = [
     ('A', _("Amateur")),
-    ('E', _("Étudiant")),
+    ('S', _("Étudiant")),
     ('D', _("Développeur professionel"))
 ]
 
@@ -109,41 +109,35 @@ class PasswordResetForm(SetPasswordForm):
 
 
 class PasswordChangeForm(BasePasswordChangeForm):
-    class Meta:
-        widgets = {
-            'old_password': forms.PasswordInput(attrs={
-                'placeholder': '••••••••••',
-                'id': 'showPWDInput'
-            }),
-            'new_password1': forms.PasswordInput(attrs={
-                'placeholder': '••••••••••',
-                'id': 'showNewPWDInput'
-            }),
-            'new_password2': forms.PasswordInput(attrs={
-                'placeholder': '••••••••••',
-                'id': 'showNewPWDConfirmInput'
-            }),
-        }
+    old_password = forms.CharField(label=_("Ancien mot de passe"), widget=forms.PasswordInput(attrs={
+        'placeholder': '••••••••••',
+        'id': 'showPWDInput'
+    }), help_text=_("Entrez votre mot de passe actuel"))
+    new_password1 = forms.CharField(label=_("Nouveau mot de passe"), widget=forms.PasswordInput(attrs={
+        'id': 'showNewPWDInput', 'placeholder': '••••••••••'
+    }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
+    Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.
+    Il doit aussi contenir %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
+    new_password2 = forms.CharField(label=_("Confirmation du nouveau mot de passe"), widget=forms.PasswordInput(attrs={
+        'placeholder': '••••••••••',
+        'id': 'showNewPWDConfirmInput'
+    }), help_text=_("Entrez le même mot de passe"))
+    captcha = ReCaptchaField()
 
 
 class ChangeProfileImageForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image', 'country']
+        fields = ['image']
         labels = {'image': _("Photo de profil")}
         widgets = {
             'image': forms.ClearableFileInput(attrs={'class': 'btn btn__block'}),
-            'country': CountrySelectWidget(attrs={'style': 'width: 100%; font-size: 1.1rem;'})
         }
-        help_text = {'country': _(
-            "Le renseignement de votre pays permet aux étudiants de développeurs d'être mis en avant. Cette donnée est utilisée pour statistiques")}
 
 
 class PersonalInformationForm(forms.Form):
-    image = forms.ImageField(label=_("Photo de profil"), required=False,
-                             widget=forms.ClearableFileInput(attrs={'class': 'btn btn__block'}))
     username = forms.CharField(label=_("Nom d'utilisateur"), widget=forms.TextInput(
-        attrs={'placeholder': 'johndoe'}))
+        attrs={'placeholder': 'johndoe', 'id': 'username_id_custom'}))
     email = forms.EmailField(label=_(
         "Addresse e-mail"), widget=forms.EmailInput(attrs={'placeholder': 'johndoe@gmail.com'}))
     first_name = forms.CharField(
@@ -152,6 +146,8 @@ class PersonalInformationForm(forms.Form):
         label=_("Nom"), widget=forms.TextInput(attrs={'placeholder': 'Doe'}))
     prog_type = forms.ChoiceField(label=_("Quel statut en programmation ou dans la vie avez-vous ?"), choices=PROG_TYPE, widget=forms.Select(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), help_text=_(
         "Les statuts de développeur et étudiant permet de vous mettre en avant. En choisissant un de ces deux choix, vous activerez la visibilité totale de votre profil (informations éducatives et professionnelles"))
+    country = CountryField(blank_label=_("Sélectionner un pays")).formfield(widget=CountrySelectWidget(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), label=_(
+        "Pays"), help_text=_("Le renseignement de votre pays permet aux étudiants de développeurs d'être mis en avant. Cette donnée est utilisée pour statistiques"))
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -179,7 +175,9 @@ class PersonalInformationForm(forms.Form):
 class ProfileInformationForm(forms.Form):
     biography = forms.CharField(max_length=1500, label=_("Biographie"), widget=forms.Textarea(attrs={'placeholder': _('Une courte biographie')}), required=False, help_text=_(
         "Courte biographie ou une phrase/expression que vous aimez pour vous décrire rapidement (1500 caractères)"))
-    skills = forms.ModelMultipleChoiceField(label=_("Choisissez des compétences (langages ou framework"), queryset=Language.objects.all(), widget=forms.SelectMultiple, help_text=_(
+    skills = forms.ModelMultipleChoiceField(label=_("Choisissez des compétences (langages ou frameworks)"), queryset=Language.objects.all(), widget=forms.SelectMultiple(attrs={
+        'class': 'custom-multiple-select select-multiple__light', 'size': 7,
+    }), help_text=_(
         "N.B. : multiple sélection possible<br>S'il manque une bibliothèque ou un langage, demandez à le rajouter dans la page contact."))
     website_url = forms.URLField(required=False, widget=forms.URLInput(
         attrs={'placeholder': _('URL de votre site web')}))
@@ -211,7 +209,7 @@ class DangerZoneForm(forms.Form):
         self.user = user
         super(DangerZoneForm, self).__init__(*args, **kwargs)
 
-    def clean_old_password(self):
+    def clean_password(self):
         password = self.cleaned_data["password"]
         if not self.user.check_password(password):
             raise forms.ValidationError(
@@ -219,15 +217,3 @@ class DangerZoneForm(forms.Form):
                 code='password_incorrect',
             )
         return password
-
-
-class DeleteAccountForm(forms.Form):
-    confirm = forms.CharField(min_length=len(_("CONFIRMER")), max_length=len(_("CONFIRMER")), label=_("Confirmer"), widget=forms.TextInput(
-        attrs={'placeholder': _("CONFIRMER")}), help_text=_("Écrire 'CONFIRMER' en majuscule pour confirmer la suppression"))
-
-    def clean_confirm(self):
-        confirm = self.cleaned_data.get('confirm')
-        if confirm == _("CONFIRMER"):
-            raise forms.ValidationError(
-                _("Écrivez 'CONFIRMER' dans la langue actuelle du site"))
-        return confirm

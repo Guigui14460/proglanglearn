@@ -69,7 +69,7 @@ class ArticleCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
         return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
-        context = {**kwargs}
+        context = super().get_context_data(**kwargs)
         context['type'] = 'add'
         context['form'] = ArticleModelForm()
         context['activate'] = 'article-create'
