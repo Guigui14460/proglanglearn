@@ -26,6 +26,6 @@ class CommentReportForm(forms.ModelForm):
         fields = ['type_alert', 'content_alert']
 
         widgets = {
-            'type_alert': forms.Select(),
+            'type_alert': forms.Select(attrs={'style': 'width: 100%; font-size: 1.1rem;'}),
             'content_alert': forms.Textarea(attrs={'placeholder': _("Description des faits")})
         }

@@ -219,6 +219,7 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
             'email': user.email,
             'first_name': user.first_name,
             'last_name': user.last_name,
+            'email_notification': user.profile.email_notification,
             'prog_type': prog_type,
             'country': user.profile.country
         }
@@ -266,6 +267,7 @@ class PersonalInfo(View):
             user.save()
             if image_form.cleaned_data['image'] != 'user_pictures/default.png':
                 user.profile.image = image_form.cleaned_data['image']
+            user.profile.email_notification = personal_form.cleaned_data['email_notification']
             user.profile.country = personal_form.cleaned_data['country']
             user.profile.save()
             messages.info(request, _(

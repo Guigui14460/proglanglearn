@@ -12,33 +12,17 @@
 <form method="POST" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.errors }}
+    {{ form.media }}
     {{ form.non_field_errors }}
     <fieldset>
         <legend>{% trans 'Information générales' %}</legend>
-        <div class="form-group">
-            {{ form.title.errors }}
-            <label>{{ form.title.label }} : <span class="required-input">*</span><br>
-            {{ form.title }}</label>
-        </div>
-        <div class="form-group">
-            {{ form.content.errors }}
-            {{ form.content.label_tag }}&nbsp;<span class="required-input">*</span>
-            {{ form.media }}
-            {{ form.content }}
-        </div>
+        {% include 'includes/form_field2.html' with field=form.title %}
+        {% include 'includes/form_field2.html' with field=form.content %}
     </fieldset>
     <fieldset>
         <legend>{% trans 'Information suplémentaires' %}</legend>
-        <div class="form-group">
-            {{ form.experience.errors }}
-            {{ form.experience.label_tag }}&nbsp;<span class="required-input">*</span>
-            {{ form.experience }}
-        </div>
-        <div class="form-group">
-            {{ form.resources.errors }}
-            {{ form.resources.label_tag }}
-            {{ form.resources }}
-        </div>
+        {% include 'includes/form_field2.html' with field=form.experience %}
+        {% include 'includes/form_field2.html' with field=form.resources %}
     </fieldset>
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">

@@ -45,7 +45,7 @@ class CourseCreateView(LoginRequiredMixin, UserCanAddCourse, NavbarSearchMixin, 
         return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
-        context = {**kwargs}
+        context = super().get_context_data(**kwargs)
         context['activate'] = 'create'
         context['type'] = 'add'
         return context
@@ -143,7 +143,7 @@ class TutorialCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
         return redirect('courses:update', slug=course.slug)
 
     def get_context_data(self, **kwargs):
-        context = {**kwargs}
+        context = super().get_context_data(**kwargs)
         context['type'] = 'add'
         context['course'] = Course.objects.get(
             slug=self.kwargs.get('course_slug'))

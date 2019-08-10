@@ -9,6 +9,8 @@
             <input type="checkbox" id="{{ field.field.widget.attrs.id|id_for_view_password }}">
             <label class="eye" for="{{ field.field.widget.attrs.id|id_for_view_password }}"></label>
         </div>
+    {% elif field.field.widget.input_type == 'checkbox' %}
+        {{ field }}&nbsp;&nbsp;{{ field.label }}{% if field.field.required %}&nbsp;<span class="required-input">*</span>{% endif %}
     {% else %}
         {{ field.label_tag }}{% if field.field.required %}&nbsp;<span class="required-input">*</span>{% endif %}<br>
         {% if field.field.widget.input_type == 'select' and not default_select %}

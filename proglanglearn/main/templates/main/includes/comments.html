@@ -7,10 +7,7 @@
                 {% csrf_token %}
                 <fieldset>
                     <legend>{% trans 'Rédiger un commentaire' %}</legend>
-                    <div class="form-group">
-                        {{ form.content.label_tag }}
-                        {{ form.content }}
-                    </div>
+                    {% include "includes/form_field2.html" with field=form.content %}
                 </fieldset>
                 <div class="center-text">
                     <button type="submit" class="btn btn__info btn__large btn__300">{% trans 'Commenter' %}</button>
@@ -62,11 +59,8 @@
                                     {% csrf_token %}
                                     <fieldset>
                                         <legend>{% trans 'Rédiger une réponse' %}</legend>
-                                        <div class="form-group">
-                                            <input type="hidden" name="parent_id" value="{{ parent_comment.id }}">
-                                            {{ form.content.label_tag }}
-                                            {{ form.content }}
-                                        </div>
+                                        <input type="hidden" name="parent_id" value="{{ parent_comment.id }}">
+                                        {% include "includes/form_field2.html" with field=form.content %}
                                     </fieldset>
                                     <div class="center-text">
                                         {% if request.user.is_authenticated %}

@@ -35,16 +35,24 @@ class SignUpForm(UserCreationForm):
         'type': 'email',
         'name': 'email'
     }), help_text=_("Informez une addresse e-mail valide"), required=True)
-    password1 = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
-        'placeholder': '••••••••••',
-        'id': 'showPWDInput'
-    }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
+    password1 = forms.CharField(
+        min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
+            1]['OPTIONS']['min_length'],
+        label=_("Mot de passe"),
+        widget=forms.PasswordInput(attrs={
+            'placeholder': '••••••••••',
+            'id': 'showPWDInput'
+        }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
     Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.
     Il doit aussi contenir %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
-    password2 = forms.CharField(label=_("Confirmation du mot de passe"), widget=forms.PasswordInput(attrs={
-        'placeholder': '••••••••••',
-        'id': 'showPWDConfirmInput'
-    }), help_text=_("Entrez le même mot de passe"))
+    password2 = forms.CharField(
+        min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
+            1]['OPTIONS']['min_length'],
+        label=_("Confirmation du mot de passe"),
+        widget=forms.PasswordInput(attrs={
+            'placeholder': '••••••••••',
+            'id': 'showPWDConfirmInput'
+        }), help_text=_("Entrez le même mot de passe"))
     captcha = ReCaptchaField()
 
     class Meta:
@@ -64,10 +72,14 @@ class LoginForm(AuthenticationForm):
         'placeholder': 'johndoe',
         'autofocus': 'autofocus'
     }))
-    password = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
-        'placeholder': '••••••••••',
-        'id': 'showPWDInput'
-    }))
+    password = forms.CharField(
+        min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
+            1]['OPTIONS']['min_length'],
+        label=_("Mot de passe"),
+        widget=forms.PasswordInput(attrs={
+            'placeholder': '••••••••••',
+            'id': 'showPWDInput'
+        }))
     captcha = ReCaptchaField()
 
     class Meta:
@@ -93,6 +105,8 @@ class LoginForm(AuthenticationForm):
 
 class PasswordResetForm(SetPasswordForm):
     new_password1 = forms.CharField(
+        min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
+            1]['OPTIONS']['min_length'],
         label=_("New password"),
         widget=forms.PasswordInput(
             attrs={'autocomplete': 'off', 'id': 'showPWDInput'}),
@@ -100,6 +114,8 @@ class PasswordResetForm(SetPasswordForm):
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
+        min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
+            1]['OPTIONS']['min_length'],
         label=_("New password confirmation"),
         strip=False,
         widget=forms.PasswordInput(
@@ -109,16 +125,16 @@ class PasswordResetForm(SetPasswordForm):
 
 
 class PasswordChangeForm(BasePasswordChangeForm):
-    old_password = forms.CharField(label=_("Ancien mot de passe"), widget=forms.PasswordInput(attrs={
+    old_password = forms.CharField(min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length'], label=_("Ancien mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
         'id': 'showPWDInput'
     }), help_text=_("Entrez votre mot de passe actuel"))
-    new_password1 = forms.CharField(label=_("Nouveau mot de passe"), widget=forms.PasswordInput(attrs={
+    new_password1 = forms.CharField(min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length'], label=_("Nouveau mot de passe"), widget=forms.PasswordInput(attrs={
         'id': 'showNewPWDInput', 'placeholder': '••••••••••'
     }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
     Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.
     Il doit aussi contenir %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
-    new_password2 = forms.CharField(label=_("Confirmation du nouveau mot de passe"), widget=forms.PasswordInput(attrs={
+    new_password2 = forms.CharField(min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length'], label=_("Confirmation du nouveau mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
         'id': 'showNewPWDConfirmInput'
     }), help_text=_("Entrez le même mot de passe"))
@@ -144,6 +160,8 @@ class PersonalInformationForm(forms.Form):
         label=_("Prénom"), widget=forms.TextInput(attrs={'placeholder': 'John'}))
     last_name = forms.CharField(
         label=_("Nom"), widget=forms.TextInput(attrs={'placeholder': 'Doe'}))
+    email_notification = forms.BooleanField(required=False, label=_(
+        "Recevoir des notifications par email"), widget=forms.CheckboxInput)
     prog_type = forms.ChoiceField(label=_("Quel statut en programmation ou dans la vie avez-vous ?"), choices=PROG_TYPE, widget=forms.Select(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), help_text=_(
         "Les statuts de développeur et étudiant permet de vous mettre en avant. En choisissant un de ces deux choix, vous activerez la visibilité totale de votre profil (informations éducatives et professionnelles"))
     country = CountryField(blank_label=_("Sélectionner un pays")).formfield(widget=CountrySelectWidget(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), label=_(

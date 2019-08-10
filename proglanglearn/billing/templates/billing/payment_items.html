@@ -32,9 +32,7 @@
         <div>
             <form action="{% url 'main:billing:add-coupon' %}" method="POST" class="form">
                 {% csrf_token %}
-                <div class="form-group">
-                    {{ coupon_form.code }}
-                </div>
+                {% include 'includes/form_field2.html' with field=coupon_form.coupon %}
                 <div class="center-text" style="justify-content: center;">
                     <button type="submit" class="btn btn__primary" style="margin: 0 auto;">{% trans 'Activer le code' %}</button>
                 </div>

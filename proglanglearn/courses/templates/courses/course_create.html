@@ -25,49 +25,13 @@
     {{ form.non_field_errors }}
     <fieldset>
         <legend>{% trans 'Information générales' %}</legend>
-        <div class="form-group">
-            {{ form.title.errors }}
-            <label>{{ form.title.label }} : <span class="required-input">*</span><br>
-            {{ form.title }}</label>
-        </div>
-        <div class="form-group">
-            {{ form.thumbnail.label_tag }}&nbsp;<span class="required-input">*</span><br>
-            {{ form.thumbnail }}
-        </div>
-        <div class="form-group">
-            <label for="apercu">{{ form.content_introduction.label }} : <span class="required-input">*</span></label><br>
-            <div>
-                {{ form.content_introduction }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label>{{ form.difficulty.label }} : <span class="required-input">*</span></label>
-            <div class="custom-select select__warning">
-                {{ form.difficulty }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="{{ form.languages.id_for_label }}">{{ form.languages.label }} : <span class="required-input">*</span></label>
-            <div class="custom-multiple-select select-multiple__light">
-                {{ form.languages }}
-            </div>
-            <small class="form-text">
-                {{ form.languages.help_text }}
-            </small>
-        </div>
-        <div class="form-group">
-            <label for="{{ form.tags.id_for_label }}">{{ form.tags.label }} : <span class="required-input">*</span></label>
-            <div class="custom-multiple-select select-multiple__light">
-                {{ form.tags }}
-            </div>
-            <small class="form-text">
-                {{ form.tags.help_text|safe }}
-            </small>
-        </div>
-        <div class="form-group">
-            {{ form.pdf.label_tag }}
-            {{ form.pdf }}
-        </div>
+        {% include 'includes/form_field2.html' with field=form.title %}
+        {% include 'includes/form_field2.html' with field=form.thumbnail %}
+        {% include 'includes/form_field2.html' with field=form.content_introduction %}
+        {% include 'includes/form_field2.html' with field=form.difficulty default_select=True %}
+        {% include 'includes/form_field2.html' with field=form.languages %}
+        {% include 'includes/form_field2.html' with field=form.tags %}
+        {% include 'includes/form_field2.html' with field=form.pdf %}
         {% if type == 'modify' %}
             <hr class="dashed">
             <div class="form-group">
@@ -93,20 +57,10 @@
     <fieldset>
         <legend>{% trans 'Informations complémentaires' %}</legend>
         {% if form.published_date %}
-            <div class="form-group">
-                {{ form.published_date.label_tag }}&nbsp;<span class="required-input">*</span>
-                {{ form.published_date }}
-                <small class="form-text">{{ form.published_date.help_text }}</small>
-            </div>
+            {% include 'includes/form_field2.html' with field=form.published_date %}
         {% endif %}
-        <div class="form-group">
-            <label>{{ form.old_price.label }} : <span class="required-input">*</span><br>
-            {{ form.old_price }}</label>
-        </div>
-        <div class="form-group">
-            <label>{{ form.new_price.label }} :<br>
-            {{ form.new_price }}</label>
-        </div>
+        {% include 'includes/form_field2.html' with field=form.old_price %}
+        {% include 'includes/form_field2.html' with field=form.new_price %}
     </fieldset>
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">

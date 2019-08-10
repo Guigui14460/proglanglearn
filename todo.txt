@@ -1,6 +1,4 @@
-﻿Profile and Account systems
-
-Review form template system
+﻿Profile system
 
 Forum app (+ exp when +1 for help answer and +100 for a best answer)
 Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
@@ -15,4 +13,4 @@ https://www.youtube.com/watch?v=Qj6XM3wVhTA
 
 (If possible)
 Remake ProgLangLearn app in proglanglearn directory (combine this project and test-allauth project) https://www.youtube.com/watch?v=dXZim_jgaiI
-Tag hover view
+At least, make PLL with Tow-Authenticator system
