@@ -7,8 +7,17 @@
     line-height: 1.8;
     margin-bottom: 1.2rem;
 
+    @include medium-device {
+        grid-template-columns: 1fr 1fr;
+    }
+    @include small-device {
+        grid-template-columns: 1fr;
+    }
+
     h2 {
         margin: 0;
+        overflow-wrap: break-word;
+        word-break: break-all;
     }
 
     p {
@@ -17,6 +26,15 @@
 
     ul {
         list-style: none;
+        @include medium-device {
+            grid-column: 1 / span 2;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        @include small-device {
+            display: none;
+        }
         
         li {
             margin-top: 5px;

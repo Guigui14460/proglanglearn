@@ -64,7 +64,7 @@ class CommentReportView(NavbarSearchMixin, TemplateView):
         return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = {**kwargs}
+        context = super().get_context_data(**kwargs)
         context['object'] = Comment.objects.get(
             id=self.kwargs.get('comment_id'))
         context['form'] = CommentReportForm()
@@ -94,7 +94,7 @@ class LanguagesTagsView(NavbarSearchMixin, TemplateView):
         return render(self.request, self.template_name, self.get_context_data(**kwargs))
 
     def get_context_data(self, **kwargs):
-        context = {**kwargs}
+        context = super().get_context_data(**kwargs)
         obj_lang = Language.objects.filter(slug=self.kwargs.get('slug'))
         obj_tag = Tag.objects.filter(slug=self.kwargs.get('slug'))
         obj_list = list(chain(obj_lang, obj_tag))

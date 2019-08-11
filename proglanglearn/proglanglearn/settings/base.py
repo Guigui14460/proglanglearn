@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # Third part apps
     'django_countries',
     'form_utils',
+    'github',
     'import_export',
     'rest_framework',
     'snowpenguin.django.recaptcha3',

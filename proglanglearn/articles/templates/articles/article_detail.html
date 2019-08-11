@@ -24,7 +24,7 @@
                 </div>
                 <div class="my-1 d-flex align">
                     <img src="{{ object.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
-                    <a class="d-block" style="margin-left: 10px;" href="profile.html">{{ object.author.username }}</a>
+                    <a class="d-block" style="margin-left: 10px;" href="{% url 'accounts:profile' user_id=object.author.id %}">{{ object.author.username }}</a>
                     <span class="d-inline-block mx-1">|</span>
                     <div class="d-inline-block">
                         <i class="far fa-clock"></i>&nbsp;{{ object.timestamp }}&nbsp;{% if object.last_modification != object.timestamp %}{% trans 'modifié le' %}&nbsp;{{ object.last_modification }}{% endif %}

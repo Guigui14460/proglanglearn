@@ -139,10 +139,7 @@ class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, Vi
         return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        try:
-            context = super().get_context_data(**kwargs)
-        except:
-            context = {**kwargs}
+        context = super().get_context_data(**kwargs)
         context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
         ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
         context['type'] = 'payment'

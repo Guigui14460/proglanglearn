@@ -1,40 +1,44 @@
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import redirect_to_login
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext as _
 
-from .models import Article
+from .models import Profile
 
 
-class ArticleObjectMixin(object):
-    model = Article
+User = get_user_model()
+
+
+class ProfileObjectMixin(object):
+    model = Profile
 
     def get_object(self):
-        article_slug = self.kwargs.get('article_slug')
+        user_id = self.kwargs.get('user_id')
         obj = None
         if id is not None:
-            obj = get_object_or_404(self.model, slug=article_slug)
-        return obj
+            obj = get_object_or_404(User, id=user_id)
+        return obj.profile
 
 
-class UserCanModifyArticle(UserPassesTestMixin):
+class UserCanModifyProfile(UserPassesTestMixin):
     permission_denied_message = _(
-        "Vous n'avez pas l'autorisation de modifier cet article")
+        "Vous n'avez pas l'autorisation de modifier ce profil")
 
     def handle_no_permission(self):
         if self.raise_exception or self.request.user.is_authenticated:
-            article = self.get_object()
-            if article is not None:
+            obj = self.get_object()
+            if obj is not None:
                 messages.error(self.request, self.permission_denied_message)
-                return redirect('articles:list')
+                return redirect('accounts:profile', user_id=obj.user.id)
             messages.info(self.request, _(
-                "L'article auquel vous essayez d'accéder n'existe pas ou plus ou est actuellement inaccessible"))
+                "Le profil auquel vous essayez d'accéder n'existe pas ou plus ou est actuellement inaccessible"))
             return Http404
         return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())
 
     def test_func(self):
         user = self.request.user
-        article = self.get_object()
-        return user.is_staff or article.author == user
+        obj = self.get_object()
+        return user == obj.user

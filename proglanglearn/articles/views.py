@@ -152,7 +152,7 @@ class ArticleDeleteView(LoginRequiredMixin, ArticleObjectMixin, SuccessMessageMi
     success_url = reverse_lazy('articles:list')
 
 
-class ArticleFavoriteToggleRedirectView(RedirectView):
+class ArticleFavoriteToggleRedirectView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         obj = get_object_or_404(Article, slug=kwargs.get('article_slug'))
         user = self.request.user

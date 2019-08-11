@@ -5,18 +5,21 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.translation import gettext as _
-from django.views.generic import View
+from django.views.generic import View, TemplateView, ListView
 
 from main.mixins import NavbarSearchMixin
 from main.utils import get_ip_address_client
-from .forms import PROG_TYPE, LoginForm, SignUpForm, PasswordResetForm, ChangeProfileImageForm, PersonalInformationForm, PasswordChangeForm, ProfileInformationForm, DangerZoneForm
-from .models import Profile
+from .forms import PROG_TYPE, LoginForm, SignUpForm, PasswordResetForm, ChangeProfileImageForm, PersonalInformationForm, PasswordChangeForm, ProfileInformationForm, DangerZoneForm, ExperienceForm, EducationForm
+from .github_backend import GithubRepo
+from .mixins import UserCanModifyProfile, ProfileObjectMixin
+from .models import Profile, Education, Experience
 from .utils import check_level
 from .tokens import AccountActivationTokenGenerator
 
@@ -325,3 +328,97 @@ class DangerZone(View):
             return redirect('accounts:login')
         messages.error(request, _("Votre compte n'a pas pu être désactiver"))
         return redirect('accounts:account')
+
+
+class ProfileView(ProfileObjectMixin, NavbarSearchMixin, TemplateView):
+    template_name = 'accounts/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['activate'] = 'profile'
+        context['object'] = self.get_object()
+        links = context['object'].links.split(';')
+        context['media_links'] = {
+            'website': links[0],
+            'youtube': links[1],
+            'linkedin': links[2],
+            'facebook': links[3],
+            'twitter': links[4],
+            'instagram': links[5],
+        }
+        try:
+            github_client = GithubRepo(context['object'].github_username)
+            context['repos'] = github_client.get_repos_informations()
+            for repo in context['repos']:
+                repo['description'] = ' '.join(repo['description'])
+        except:
+            context['repos'] = []
+        return context
+
+
+class ProfileListView(NavbarSearchMixin, ListView):
+    template_name = 'accounts/profiles.html'
+    queryset = Profile.objects.all()
+    paginate_by = 20
+
+
+class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfile, NavbarSearchMixin, TemplateView):
+    template_name = 'accounts/edit_profile.html'
+
+    def post(self, request, *args, **kwargs):
+        if 'education' in request.POST:
+            education_form = EducationForm(request.POST or None)
+            if education_form.is_valid():
+                instance = education_form.save(commit=False)
+                instance.profile = request.user.profile
+                instance.save()
+                messages.info(request, _(
+                    "École ajoutée à votre espace éducation"))
+                return self.get(request, *args, **kwargs)
+            context = self.get_context_data(**kwargs)
+            context['education_form'] = education_form
+            return render(request, self.template_name, context)
+        elif 'experience' in request.POST:
+            experience_form = ExperienceForm(request.POST or None)
+            if experience_form.is_valid():
+                instance = experience_form.save(commit=False)
+                instance.profile = request.user.profile
+                instance.save()
+                messages.info(request, _(
+                    "Expérience ajoutée à votre espace expérience"))
+                return self.get(request, *args, **kwargs)
+            context = self.get_context_data(**kwargs)
+            context['experience_form'] = experience_form
+            return render(request, self.template_name, context)
+        return self.get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = self.get_object()
+        context['education_form'] = EducationForm()
+        context['experience_form'] = ExperienceForm()
+        return context
+# ajax
+
+class ExperienceDelete(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        experience = get_object_or_404(Experience, id=kwargs.get('experience_id'))
+        if request.user.profile == experience.profile:
+            experience.delete()
+            messages.info(request, _("Expérience supprimée"))
+            return redirect('accounts:profile-edit', user_id=request.user.id)
+        else:
+            messages.error(request, _("Vous n'avez pas l'autorisation de le supprimer"))
+            return redirect('accounts:profile', user_id=experience.profile.user.id)
+
+
+class EducationDelete(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        education = get_object_or_404(Education, id=kwargs.get('education_id'))
+        if request.user.profile == education.profile:
+            education.delete()
+            messages.info(request, _("Éducation supprimée"))
+            return redirect('accounts:profile-edit', user_id=request.user.id)
+        else:
+            messages.error(request, _("Vous n'avez pas l'autorisation de le supprimer"))
+            return redirect('accounts:profile', user_id=education.profile.user.id)

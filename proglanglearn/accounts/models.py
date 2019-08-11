@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator
 from django.db import models
@@ -54,7 +56,7 @@ class Profile(models.Model):
         "tutoriels favoris"), blank=True, related_name='tutorial_favorite')
     # Developer options
     github_username = models.CharField(max_length=100,
-                                       blank=True, null=True, verbose_name=_("nom d'utilisateur/email Github"))
+                                       blank=True, null=True, verbose_name=_("nom d'utilisateur Github"))
     links = models.TextField(blank=True, null=True, default=";;;;;",
                              verbose_name=_("liens vers les médias sociaux"))
 
@@ -81,6 +83,18 @@ class Profile(models.Model):
 
     def get_user_profile_type(self):
         return get_user_type(self.level)
+
+    @property
+    def get_last_experience_or_education(self):
+        all_ = list(chain(self.educations.all(), self.experiences.all()))
+        all_.sort(key=lambda x: x.entry_date)
+        try:
+            try:
+                return f"{all_[0].degree} - {all_[0].school}"
+            except:
+                return f"{all_[0].employment} - {all_[0].entreprise}"
+        except IndexError:
+            return _("Aucune école ou expérience renseignée")
 
 
 def submission_user_delete(sender, instance, **kwargs):
@@ -110,13 +124,15 @@ post_save.connect(create_user_profile, sender=User)
 
 class Education(models.Model):
     profile = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, verbose_name=_("profile associé"))
+        Profile, on_delete=models.CASCADE, related_name='educations', verbose_name=_("profile associé"))
     school = models.CharField(max_length=50, verbose_name=_("nom de l'école"))
-    degree = models.CharField(max_length=50, verbose_name=_("diplôme"))
-    entry_date = models.DateField(verbose_name=_("date d'entrée"))
-    exit_date = models.DateField(verbose_name=_("date de sortie"))
+    degree = models.CharField(max_length=50, verbose_name=_("diplôme obtenu"))
+    entry_date = models.DateField(verbose_name=_("date d'entrée dans l'école"))
+    exit_date = models.DateField(verbose_name=_(
+        "date de sortie de l'école"), null=True, blank=True)
 
     class Meta:
+        ordering = ['entry_date']
         verbose_name = _("éducation")
         verbose_name_plural = _("éducations")
 
@@ -126,16 +142,18 @@ class Education(models.Model):
 
 class Experience(models.Model):
     profile = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, verbose_name=_("profile associé"))
+        Profile, on_delete=models.CASCADE, related_name='experiences', verbose_name=_("profile associé"))
     entreprise = models.CharField(
         max_length=50, verbose_name=_("nom de l'entreprise"))
     employment = models.CharField(
         max_length=250, verbose_name=_("type d'emploi"))
-    entry_date = models.DateField(verbose_name=_("date d'entrée"))
+    entry_date = models.DateField(
+        verbose_name=_("date d'arrivée dans l'entreprise"))
     exit_date = models.DateField(verbose_name=_(
-        "date de sortie"))
+        "date de sortie de l'entreprise"), null=True, blank=True)
 
     class Meta:
+        ordering = ['entry_date']
         verbose_name = _("expérience")
         verbose_name_plural = _("expériences")
 

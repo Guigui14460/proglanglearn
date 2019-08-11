@@ -9,7 +9,7 @@
 <h1 class="large">{% trans "Réglages de votre compte" %}</h1>
 <p class="lead"><i class="fas fa-user-cog"></i>&nbsp;{% trans "Modifier les paramètres et informations de votre compte !" %}
 </p>
-<p><a href="profile.html" class="btn btn__success btn__300 btn__block btn__large">{% trans "Voir mon profil" %}</a></p>
+<p><a href="{% url 'accounts:profile' user_id=request.user.id %}" class="btn btn__success btn__300 btn__block btn__large">{% trans "Voir mon profil" %}</a></p>
 <div class="row small-device">
     <div class="col-25 hide-small-device">
         <div class="sticky-box">
@@ -111,7 +111,7 @@
                     {% include 'includes/form_field2.html' with field=profile_form.github %}
                 </fieldset>
                 {% if request.user.profile.is_dev or request.user.profile.is_student %}
-                    <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="edit_profile.html">{% trans "cette page" %}</a>.</p>
+                    <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="{% url 'accounts:edit-profile' user_id=request.user.is %}">{% trans "cette page" %}</a>.</p>
                 {% endif %}
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
                     {% trans "sont obligatoires." %}</small>

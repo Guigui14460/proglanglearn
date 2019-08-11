@@ -15,6 +15,11 @@ from .views import (
     CustomPasswordResetDoneView,
     CustomPasswordResetConfirmView,
     CustomPasswordResetCompleteView,
+    ProfileView,
+    ProfileEditView,
+    ProfileListView,
+    ExperienceDelete,
+    EducationDelete,
 )
 
 app_name = 'accounts'
@@ -42,4 +47,12 @@ urlpatterns = [
          CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password-reset/complete/', CustomPasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
+
+    path('profile/list/', ProfileListView.as_view(), name='profile-list'),
+    path('profile/<user_id>/', ProfileView.as_view(), name='profile'),
+    path('profile/<user_id>/edit/', ProfileEditView.as_view(), name='profile-edit'),
+    path('profile/<user_id>/edit/experience/<experience_id>/',
+         ExperienceDelete.as_view(), name='experience-delete'),
+    path('profile/<user_id>/edit/education/<education_id>/',
+         EducationDelete.as_view(), name='education-delete'),
 ]

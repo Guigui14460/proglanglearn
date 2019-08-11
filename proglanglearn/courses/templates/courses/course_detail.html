@@ -18,7 +18,7 @@
         <img src="{{ object.thumbnail.url }}" alt="Vignette du cours">
     </figure>
     {{ object.content_introduction|safe }}
-    <p>{% trans "Cours rédigé par" %} <a href="profile.html">{{ object.author.username }}</a> {% trans 'et paru le' %} {{ object.published_date }}</p>
+    <p>{% trans "Cours rédigé par" %} <a href="{% url 'accounts:profile' user_id=object.author.id %}">{{ object.author.username }}</a> {% trans 'et paru le' %} {{ object.published_date }}</p>
     <div>
         {% if object.get_all_downloadable_resources != 0 %}
             <div class="lead">

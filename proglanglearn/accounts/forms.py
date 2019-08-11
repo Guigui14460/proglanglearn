@@ -12,7 +12,7 @@ from form_utils.forms import BetterForm
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 from main.models import Language
-from .models import Profile
+from .models import Profile, Education, Experience
 
 
 User = get_user_model()
@@ -209,7 +209,7 @@ class ProfileInformationForm(forms.Form):
         attrs={'placeholder': _('URL de votre profile LinkedIn')}))
     instagram_url = forms.URLField(required=False, widget=forms.URLInput(
         attrs={'placeholder': _('URL de votre profile Intagram')}))
-    github = forms.CharField(required=False, label=_("Email ou nom d'utilisateur de votre compte Github"), widget=forms.TextInput(attrs={'placeholder': 'johndoe93'}), help_text=_(
+    github = forms.CharField(required=False, label=_("Nom d'utilisateur de votre compte Github"), widget=forms.TextInput(attrs={'placeholder': 'johndoe93'}), help_text=_(
         "<i class='fas fa-exclamation-triangle'></i> En renseignant ce champ, vous accepter de publier les liens et les informations de vos dépôts publics de votre compte Github"))
 
 
@@ -235,3 +235,27 @@ class DangerZoneForm(forms.Form):
                 code='password_incorrect',
             )
         return password
+
+
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = ['school', 'degree', 'entry_date', 'exit_date']
+        widgets = {
+            'school': forms.TextInput(attrs={'placeholder': 'Epitech'}),
+            'degree': forms.TextInput(attrs={'placeholder': 'Master en sécurité informatique'}),
+            'entry_date': forms.DateInput(attrs={'type': 'date'}),
+            'exit_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+
+class ExperienceForm(forms.ModelForm):
+    class Meta:
+        model = Experience
+        fields = ['entreprise', 'employment', 'entry_date', 'exit_date']
+        widgets = {
+            'entreprise': forms.TextInput(attrs={'placeholder': 'Google'}),
+            'employment': forms.TextInput(attrs={'placeholder': 'Analyste de données'}),
+            'entry_date': forms.DateInput(attrs={'type': 'date'}),
+            'exit_date': forms.DateInput(attrs={'type': 'date'}),
+        }
