@@ -1,0 +1,48 @@
+{% load i18n %}
+
+<h2>{% trans "Gérer mon espace expérience" %}</h2>
+<div class="table table__dark">
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans "Entreprise" %}</th>
+                <th>{% trans "Poste" %}</th>
+                <th>{% trans "Années" %}</th>
+                <th></th>
+            </tr>
+            {% for experience in object.experiences.all %}
+                <tr>
+                    <td>{{ experience.entreprise }}</td>
+                    <td>{{ experience.employment }}</td>
+                    <td>{{ experience.entry_date|date:"F Y"|title }} - {% if experience.exit_date %}{{ experience.exit_date|date:"F Y"|title }}{% else %}{% trans "Maintenant" %}{% endif %}</td>
+                    <td class="table-btn"><a href="{% url 'accounts:experience-delete' user_id=object.user.id experience_id=experience.id %}" class="btn btn__danger">{% trans "Supprimer" %}</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan=4>{% trans "Vous n'avez aucune expérience enregistrée" %}</td>
+                </tr>
+            {% endfor %}
+        </thead>
+    </table>
+</div>
+<form class="form my-1" action="." method="POST">
+    {% csrf_token %}
+    {{ experience_form.non_field_errors }}
+    <fieldset>
+        <legend><i class="fas fa-user-tie"></i>&nbsp;{% trans "Ajouter une expérience" %}</legend>
+        {% include 'includes/form_field2.html' with field=experience_form.entreprise %}
+        {% include 'includes/form_field2.html' with field=experience_form.employment %}
+        <div class="row small-device">
+            <div class="col-50 small-device">
+                {% include 'includes/form_field2.html' with field=experience_form.entry_date %}
+            </div>
+            <div class="col-50 small-device">
+                {% include 'includes/form_field2.html' with field=experience_form.exit_date %}
+            </div>
+        </div>
+    </fieldset>
+    <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span> {% trans "sont obligatoires" %}.</small>
+    <div class="center-text">
+        <button type="submit" name="experience" class="btn btn__primary btn__large btn__300">{% trans "Ajouter" %}</button>
+    </div>
+</form>

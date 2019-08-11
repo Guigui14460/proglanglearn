@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -372,9 +372,14 @@ class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfi
                 instance = education_form.save(commit=False)
                 instance.profile = request.user.profile
                 instance.save()
-                messages.info(request, _(
-                    "École ajoutée à votre espace éducation"))
-                return self.get(request, *args, **kwargs)
+                education_form = EducationForm()
+            if request.is_ajax():
+                context = self.get_context_data(**kwargs)
+                context['education_form'] = education_form
+                html = render_to_string(
+                    'accounts/includes/education.html', context, request=request)
+                return JsonResponse({'html': html})
+            messages.info(request, _("École ajoutée à votre espace éducation"))
             context = self.get_context_data(**kwargs)
             context['education_form'] = education_form
             return render(request, self.template_name, context)
@@ -384,9 +389,14 @@ class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfi
                 instance = experience_form.save(commit=False)
                 instance.profile = request.user.profile
                 instance.save()
-                messages.info(request, _(
-                    "Expérience ajoutée à votre espace expérience"))
-                return self.get(request, *args, **kwargs)
+                experience_form = ExperienceForm()
+            if request.is_ajax():
+                context = self.get_context_data(**kwargs)
+                context['experience_form'] = experience_form
+                html = render_to_string(
+                    'accounts/includes/experience.html', context, request=request)
+                return JsonResponse({'html': html})
+            messages.info(request, _("Expérience ajoutée à votre espace expérience"))
             context = self.get_context_data(**kwargs)
             context['experience_form'] = experience_form
             return render(request, self.template_name, context)
@@ -398,7 +408,7 @@ class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfi
         context['education_form'] = EducationForm()
         context['experience_form'] = ExperienceForm()
         return context
-# ajax
+
 
 class ExperienceDelete(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
