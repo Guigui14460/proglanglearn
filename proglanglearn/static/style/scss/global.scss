@@ -560,7 +560,7 @@ pre {
         grid-template-columns: 1fr auto;
         grid-gap: 7px;
 
-        div {
+        div:not(.form-group) {
             display: flex;
             align-items: center;
 

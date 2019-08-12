@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% if order and order.courses.count > 0 %}
+    <div id="ajax-coupon">
+        {% include 'billing/payment_items.html' %}
+    </div>
+    <div class="d-flex space-between">
+        <a href="{% url 'courses:list' %}" class="btn btn__outline__dark btn__large">{% trans 'Continuer mes achats' %}</a>
+        <a href="{% url 'main:billing:checkout' %}" class="btn btn__outline__success btn__large"><i class="fas fa-money-check-alt"></i>&nbsp;{% trans 'Procéder au paiement' %}</a>
+    </div>
+{% else %}
+    <h3 class="center-text">{% trans "Vous n'avez aucune formation dans votre panier" %}</h3>
+{% endif %}

@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives
+from django.http import JsonResponse
 from django.shortcuts import reverse, redirect, render, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -16,6 +17,7 @@ import stripe
 
 from courses.models import Course
 from main.mixins import NavbarSearchMixin
+from .templatetags.cart_template_tags import cart_item_count
 from .forms import CheckoutForm, CouponForm, RefundForm
 from .mixins import UserCanViewCheckout
 from .models import Order, Coupon, Payment, Refund
@@ -173,6 +175,16 @@ class RemoveCourseFromCart(LoginRequiredMixin, View):
             order = order_qs.first()
             if course in order.courses.all():
                 order.courses.remove(course)
+                if request.is_ajax():
+                    if order.courses.all().count() == 0 and order.coupon is not None:
+                        if order.coupon.deactivate_date < timezone.now():
+                            order.coupon.limited += 1
+                            order.coupon.save()
+                        order.coupon = None
+                        order.save()
+                    context = self.get_context_data(**kwargs)
+                    html = render_to_string('billing/cart_element.html', context, request=request)
+                    return JsonResponse({'html': html, 'cart_item_count': cart_item_count(request.user)})
                 messages.success(request, _(
                     "Le cours a bien été enlevé de votre panier"))
             else:
@@ -188,6 +200,13 @@ class RemoveCourseFromCart(LoginRequiredMixin, View):
             messages.info(request, _("Votre panier est actuellement vide"))
         return redirect('courses:detail', slug=course.slug)
 
+    def get_context_data(self, **kwargs):
+        context = {**kwargs}
+        context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
+        ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
+        context['coupon_form'] = CouponForm()
+        return context
+
 
 class AddCouponToCart(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
@@ -197,32 +216,53 @@ class AddCouponToCart(LoginRequiredMixin, View):
                 code = form.cleaned_data.get('code')
                 order = Order.objects.get(user=request.user, ordered=False)
                 coupon = get_coupon(request, code)
-                if coupon is not None or coupon.limited == 0 or coupon.deactivate_date > timezone.now():
+                if coupon is not None:
                     if request.user not in coupon.used_by.all():
                         order.coupon = coupon
                         order.save()
                         coupon.limited -= 1
                         coupon.save()
-                        messages.success(request, _(
-                            "Coupon %(coupon_code)s ajouté") % {'coupon_code': order.coupon.code})
-                        return redirect('main:billing:checkout')
-                    messages.error(request, _(
-                        "Vous avez déjà utilisé ce coupon lors d'un précédent achat"))
+                        if request.is_ajax():
+                            context = self.get_context_data(**kwargs)
+                            html = render_to_string('billing/payment_items.html', context, request=request)
+                            return JsonResponse({'html': html})
+                        messages.info(request, _("Code promotionnel %(code)s ajouté") % {'code': coupon.code})
+                        return redirect('main:billing:cart')
+                    if request.is_ajax():
+                        context = self.get_context_data(**kwargs)
+                        context['error_msg'] = _("Vous avez déjà utilisé ce coupon lors d'un précédent achat")
+                        html = render_to_string('billing/payment_items.html', context, request=request)
+                        return JsonResponse({'html': html})
+                    messages.warning(request, _("Vous avez déjà utilisé ce coupon lors d'un précédent achat"))
                     return redirect('main:billing:cart')
-                messages.error(request, _(
-                    "Le coupon saisi n'existe pas ou n'est plus disponible"))
+                if request.is_ajax():
+                    context = self.get_context_data(**kwargs)
+                    context['error_msg'] =  _("Le coupon saisi n'existe pas ou n'est plus disponible")
+                    html = render_to_string('billing/payment_items.html', context, request=request)
+                    return JsonResponse({'html': html})
+                messages.warning(request, _("Le coupon saisi n'existe pas ou n'est plus disponible"))
                 return redirect('main:billing:cart')
             except ObjectDoesNotExist:
-                messages.warning(request, _(
-                    "Vous n'avez aucun cours dans votre panier"))
-                return redirect("course:list")
+                messages(request, _("Vous n'avez aucun cours dans votre panier"))
+                return redirect('courses:list')
+        if request.is_ajax():
+            context['error_msg'] =  _("Méthode d'ajout de coupon non acceptée")
+            html = render_to_string('billing/payment_items.html', context, request=request)
+            return JsonResponse({'html': html})
         messages.error(request, _("Méthode d'ajout de coupon non acceptée"))
         return redirect('main:billing:cart')
+    
+    def get_context_data(self, **kwargs):
+        context = {**kwargs}
+        context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
+        ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
+        context['coupon_form'] = CouponForm()
+        return context
 
 
 class RemoveCouponFromCart(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        coupon = get_object_or_404(Coupon, id=id)
+        coupon = get_object_or_404(Coupon, id=kwargs.get('id'))
         order_qs = Order.objects.filter(user=request.user, ordered=False)
         if order_qs.exists():
             order = order_qs.first()
@@ -232,14 +272,27 @@ class RemoveCouponFromCart(LoginRequiredMixin, View):
                 if coupon.deactivate_date < timezone.now():
                     coupon.limited += 1
                     coupon.save()
-                messages.success(request, _(
-                    "Le code promotionnel a bien été retiré de votre panier"))
+                if request.is_ajax():
+                    context = self.get_context_data(**kwargs)
+                    html = render_to_string('billing/payment_items.html', context, request=request)
+                    return JsonResponse({'html': html})
             else:
-                messages.warning(request, _(
-                    "Le code promotionnel n'est pas lié à votre panier et ne peut être retiré"))
+                if request.is_ajax():
+                    context = self.get_context_data(**kwargs)
+                    context['remove_coupon_error'] = _("Le code promotionnel n'est pas lié à votre panier et ne peut être retiré")
+                    html = render_to_string('billing/payment_items.html', context, request=request)
+                    return JsonResponse({'html': html})
+                messages.error(request, _("Le code promotionnel n'est pas lié à votre panier et ne peut être retiré"))
         else:
             messages.warning(request, _("Votre panier est vide"))
         return redirect('main:billing:cart')
+    
+    def get_context_data(self, **kwargs):
+        context = {**kwargs}
+        context['order'] = Order.objects.filter(user=self.request.user, ordered=False).first(
+        ) if Order.objects.filter(user=self.request.user, ordered=False).exists() else None
+        context['coupon_form'] = CouponForm()
+        return context
 
 
 class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):

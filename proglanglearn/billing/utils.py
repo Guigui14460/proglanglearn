@@ -22,10 +22,8 @@ def get_coupon(request, code):
     try:
         coupon = Coupon.objects.get(code=code)
         if coupon.limited == 0 or coupon.deactivate_date < timezone.now():
-            messages.error(request, _("Ce coupon n'est plus valide"))
             return None
     except ObjectDoesNotExist:
-        messages.warning(request, _("Ce coupon n'existe pas"))
         return None
     return coupon
 

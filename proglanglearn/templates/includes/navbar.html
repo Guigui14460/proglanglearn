@@ -21,7 +21,7 @@
         </li>
         {% if request.user.is_authenticated %}
             <li class="navbar-item">
-                <a href="{% url 'main:billing:cart' %}"><i class="fas fa-shopping-cart"></i>&nbsp;{% trans 'Panier' %}&nbsp;<span class="badge badge__danger">&nbsp;{{ request.user|cart_item_count }}&nbsp;</span></a>
+                <a href="{% url 'main:billing:cart' %}"><i class="fas fa-shopping-cart"></i>&nbsp;{% trans 'Panier' %}&nbsp;<span class="badge badge__danger" id="cart_item_count">&nbsp;{{ request.user|cart_item_count }}&nbsp;</span></a>
             </li>
         {% endif %}
     </ul>
