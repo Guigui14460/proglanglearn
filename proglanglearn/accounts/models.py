@@ -42,6 +42,7 @@ class Profile(models.Model):
     email_notification = models.BooleanField(
         default=True, verbose_name=_("notification par email"))
     # Advanced options
+    profile_reported = models.BooleanField(default=False)
     level = models.PositiveSmallIntegerField(
         default=1, verbose_name=_("niveau"))
     level_experience = models.PositiveIntegerField(
@@ -159,3 +160,19 @@ class Experience(models.Model):
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.entreprise}"
+
+
+class ProfileReport(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE,
+                                related_name='reports', verbose_name=_("profil reporté"))
+    timestamp = models.DateTimeField(auto_now_add=True)
+    verified = models.BooleanField(verbose_name=_("vérifié"), default=False)
+    to_strike = models.BooleanField(default=False, verbose_name=_("à striker"))
+    striked = models.BooleanField(verbose_name=_("striké"), default=False)
+
+    class Meta:
+        verbose_name = _("signalement de profil")
+        verbose_name_plural = _("signalements de profil")
+
+    def __str__(self):
+        return f"{self.profile.user.username}"

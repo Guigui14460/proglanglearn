@@ -15,8 +15,7 @@ class Coupon(models.Model):
     discount_price = models.FloatField(verbose_name=_("prix déduit"))
     limited = models.PositiveSmallIntegerField(default=100, verbose_name=_(
         "nombre de personnes qui peuvent utiliser le code"))
-    deactivate_date = models.DateTimeField(default=now(
-    ) + timedelta(days=30), verbose_name=_("date de désactivation du code"), null=True, blank=True)
+    deactivate_date = models.DateTimeField(auto_now_add=True, verbose_name=_("date de désactivation du code"), null=True, blank=True)
     used_by = models.ManyToManyField(
         User, related_name='codes', verbose_name=_("code utilisé par"), blank=True)
 
@@ -29,6 +28,13 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+
+    def save(self, *args, **kwargs):
+        d = timedelta(days=30)
+        if not self.id:
+            super(Coupon, self).save(*args, **kwargs)
+            self.deactivate_date += d
+            super(Coupon, self).save(*args, **kwargs)
 
 
 class Order(models.Model):

@@ -9,6 +9,7 @@
 <div class="d-flex space-between">
     <a href="{% url 'accounts:profile-list' %}" class="btn btn__dark mb-1">Voir tous les profils</a>
     {% if request.user == object.user %}<a href="{% url 'accounts:profile-edit' user_id=object.user.id %}" class="btn btn__warning mb-1">Éditer mon profil</a>{% endif %}
+    <a href="{% url 'accounts:profile-report' profile_id=object.id %}" class="btn btn__danger mb-1">Signaler le profil</a>
 </div>
 <div class="profile-grid my-1">
     <div class="profile-top bg-info p-2">

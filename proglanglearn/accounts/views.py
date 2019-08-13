@@ -19,7 +19,7 @@ from main.utils import get_ip_address_client
 from .forms import PROG_TYPE, LoginForm, SignUpForm, PasswordResetForm, ChangeProfileImageForm, PersonalInformationForm, PasswordChangeForm, ProfileInformationForm, DangerZoneForm, ExperienceForm, EducationForm
 from .github_backend import GithubRepo
 from .mixins import UserCanModifyProfile, ProfileObjectMixin
-from .models import Profile, Education, Experience
+from .models import Profile, Education, Experience, ProfileReport
 from .utils import check_level
 from .tokens import AccountActivationTokenGenerator
 
@@ -272,6 +272,7 @@ class PersonalInfo(View):
                 user.profile.image = image_form.cleaned_data['image']
             user.profile.email_notification = personal_form.cleaned_data['email_notification']
             user.profile.country = personal_form.cleaned_data['country']
+            user.profile.profile_reported = False
             user.profile.save()
             messages.info(request, _(
                 "Vos informations personnelles ont été mises à jour"))
@@ -301,6 +302,7 @@ class ProfileInfo(View):
         user = request.user
         form = ProfileInformationForm(request.POST or None)
         if form.is_valid():
+            user.profile.profile_reported = False
             user.profile.biography = form.cleaned_data['biography']
             user.profile.languages_learnt.remove(
                 *user.profile.languages_learnt.all())
@@ -372,6 +374,8 @@ class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfi
                 instance = education_form.save(commit=False)
                 instance.profile = request.user.profile
                 instance.save()
+                instance.profile.profile_reported = False
+                instance.profile.save()
                 education_form = EducationForm()
             if request.is_ajax():
                 context = self.get_context_data(**kwargs)
@@ -389,6 +393,8 @@ class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfi
                 instance = experience_form.save(commit=False)
                 instance.profile = request.user.profile
                 instance.save()
+                instance.profile.profile_reported = False
+                instance.profile.save()
                 experience_form = ExperienceForm()
             if request.is_ajax():
                 context = self.get_context_data(**kwargs)
@@ -409,6 +415,21 @@ class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfi
         context['experience_form'] = ExperienceForm()
         return context
 
+
+class ProfileReportView(ProfileObjectMixin, View):
+    def get(self, request, *args, **kwargs):
+        profile = get_object_or_404(Profile, id=kwargs.get('profile_id'))
+        if not profile.profile_reported:
+            if request.user != profile.user:
+                instance = ProfileReport.objects.create(profile=profile)
+                profile.profile_reported = True
+                profile.save()
+                messages.info(request, _("Profil signalé"))
+            else:
+                messages.error(request, _("Vous ne pouvez pas vous signalé vous-même"))
+        else:
+            messages.warning(request, _("Le profil a déjà été signalé et est en attente de modification par le gérant de ce profil"))
+        return redirect('accounts:profile', user_id=profile.user.id)
 
 class ExperienceDelete(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):

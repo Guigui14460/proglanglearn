@@ -1,6 +1,4 @@
-﻿Profile system
-
-Forum app (+ exp when +1 for help answer and +100 for a best answer)
+﻿Forum app (+ exp when +1 for help answer and +100 for a best answer)
 Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
 Poll/Quiz app (to add in course to add more experience)
 PayPal integration (see PrettyPrinted's Paypal integration in Flask video)
