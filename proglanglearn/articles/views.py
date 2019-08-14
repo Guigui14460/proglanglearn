@@ -33,10 +33,10 @@ class ArticleListView(NavbarSearchMixin, ListView):
 
     def get_most_used_tags(self):
         languages = [lang for lang in Language.objects.all()
-                     if lang.article.all().count() > 0]
-        tags = [tag for tag in Tag.objects.all() if tag.article.all().count() > 0]
+                     if lang.article.count() > 0]
+        tags = [tag for tag in Tag.objects.all() if tag.article.count() > 0]
         items = languages + tags
-        items.sort(key=lambda item: item.article.all().count(), reverse=True)
+        items.sort(key=lambda item: item.article.count(), reverse=True)
         return items[:5]
 
 
@@ -110,18 +110,9 @@ class ArticleDetailView(ArticleObjectMixin, NavbarSearchMixin, DetailView):
         c_type = ContentType.objects.get_for_model(instance)
         context['parent_comments'] = Comment.objects.filter(
             content_type=c_type, object_id=instance.id, reported=False).order_by('timestamp')
-        context['article_in_favorite'] = self.article_in_favorite()
         context['last_articles'] = Article.objects.get_last_articles(3)
         context['tags_used'] = self.get_most_used_tags()
         return context
-
-    def article_in_favorite(self):
-        user = self.request.user
-        tuto = self.object
-        if not user.is_authenticated:
-            return False
-        liste_article = user.profile.favorite_articles.all()
-        return tuto in liste_article
 
     def get_most_used_tags(self):
         languages = [lang for lang in Language.objects.all()

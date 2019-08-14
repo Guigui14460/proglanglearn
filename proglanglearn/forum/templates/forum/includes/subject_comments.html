@@ -1,0 +1,54 @@
+{% load i18n %}
+
+<div class="mt-1">
+    {% for answer in object.answers.all %}
+        <div class="mb-1 p-1 card {% if answer.best_answer %}card-hoverable{% endif %}">
+            <div class="mb-1 d-flex align">
+                {% if answer.best_answer %}<span class="success-color" style="font-size: 2em;"><i class="fas fa-check"></i></span><span class="d-inline-block mx-1">|</span>{% endif %}
+                <img src="{{ answer.user.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
+                <a title="{{ object.user.profile.get_user_profile_type|title }}" class="d-block" style="margin-left: 10px;" href="{% url 'accounts:profile' user_id=answer.user.id %}">{{ answer.user.username }}</a>
+                <span class="d-inline-block mx-1">|</span>
+                <div class="d-inline-block">
+                    <i class="far fa-clock"></i>&nbsp;{{ answer.timestamp }}
+                </div>
+                <span class="d-inline-block mx-1">|</span>
+                <div class="d-inline-block">
+                    {% if request.user == answer.user %}<i class="fas fa-thumbs-up"></i>&nbsp;{{ answer.likes.count }}{% else %}<a href="{{ answer.get_like_url }}" title="{% if request.user in answer.likes.all %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="like-span"><i class="{% if request.user in answer.likes.all %}fas{% else %}far{% endif %} fa-thumbs-up like"></i>&nbsp;<span class="like-count">{{ answer.likes.count }}</span></a>{% endif %}
+                </div>
+            </div>
+            <div class="mt-1">
+                {{ answer.content|safe }}
+            </div>
+            <div style="text-align: right;">
+                {% if answer.best_answer %}
+                    <a href="{% url 'forum:subject-best-answer' subject_id=object.id answer_id=answer.id %}" class="btn btn__danger">{% trans "Ce n'est plus la meilleure réponse" %}</a>
+                {% else %}
+                    <a href="{% url 'forum:subject-best-answer' subject_id=object.id answer_id=answer.id %}" class="btn btn__success">{% trans "C'est la meilleure réponse à mon problème" %}</a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <div class="center-text"><h4>{% trans "Aucune réponse pour le moment" %}</h4></div>
+    {% endfor %}
+</div>
+<hr class="dashed my-1">
+<div class="my-1">
+    {% if request.user.is_authenticated %}
+        {% if object.is_closed %}
+            <div class="note note__danger">
+                <p>{% trans "Ce sujet est actuellement résolu. Nous vous conseillons vivement d'ouvrir un nouveau sujet, qui plus est si ce sujet est ancien" %}</p>
+            </div>
+        {% endif %}
+        <form class="form" action="{{ object.get_absolute_url }}" method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.no_field_errors }}
+            {% include 'includes/form_snippet_fields.html' with form=form %}
+            <div class="center-text">
+                <button type="submit" class="btn btn__large btn__info">{% trans "Répondre" %}</button>
+            </div>
+        </form>
+    {% else %}
+        <div class="center-text"><h4>{% trans "Vous devez être connecté pour tenter de répondre au problème posé" %}</h4></div>
+    {% endif %}
+</div>

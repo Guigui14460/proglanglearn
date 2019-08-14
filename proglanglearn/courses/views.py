@@ -203,14 +203,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
         c_type = ContentType.objects.get_for_model(instance)
         context['parent_comments'] = Comment.objects.filter(
             content_type=c_type, object_id=instance.id, reported=False).order_by('timestamp')
-        context['tutorial_in_favorite'] = self.tuto_in_favorite()
         return context
-
-    def tuto_in_favorite(self):
-        user = self.request.user
-        tuto = self.object
-        liste_tuto = user.profile.favorite_tutorials.all()
-        return tuto in liste_tuto
 
 
 class TutorialFavoriteToggleRedirectView(LoginRequiredMixin, RedirectView):

@@ -7,33 +7,35 @@
 <h1 class="large">{% trans 'Articles du blog' %}</h1>
 <div class="row small-device">
     <div class="col-75 small-device mb-2 mt-1">
-        {% for article in object_list %}
-            <div class="mb-2">
-                <a href="{% url 'articles:detail' article_slug=article.slug %}"><img src="{{ article.thumbnail.url }}" alt="" /></a>
-                <h3 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article_in_favorite %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article in request.user.profile.favorite_articles.all %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
-                <div class="my-1">
-                    <div class="tags small-fs">
-                        {% include 'main/includes/tags.html' with object=article %}
-                    </div>
-                    <div class="my-1 d-flex align">
-                        <img src="{{ article.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
-                        <a class="d-block" style="margin-left: 10px;" href="{% url 'accounts:profile' user_id=article.author.id %}">{{ article.author.username }}</a>
-                        <span class="d-inline-block mx-1">|</span>
-                        <div class="d-inline-block">
-                            <i class="far fa-clock"></i>&nbsp;{{ article.timestamp }}
+        {% with favorite_articles=request.user.profile.favorite_articles.all %}
+            {% for article in object_list %}
+                <div class="mb-2">
+                    <a href="{% url 'articles:detail' article_slug=article.slug %}"><img src="{{ article.thumbnail.url }}" alt="" /></a>
+                    <h3 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article in favorite_articles %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article in favorite_articles %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
+                    <div class="my-1">
+                        <div class="tags small-fs">
+                            {% include 'main/includes/tags.html' with object=article %}
                         </div>
-                        <span class="d-inline-block mx-1">|</span>
-                        <div class="d-inline-block">
-                            <i class="far fa-eye"></i>&nbsp;{{ article.views }}
-                        </div>
-                        <span class="d-inline-block mx-1">|</span>
-                        <div class="d-inline-block">
-                            <i class="far fa-comments"></i>&nbsp;{{ article.get_comments_count }}
+                        <div class="my-1 d-flex align">
+                            <img src="{{ article.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
+                            <a class="d-block" style="margin-left: 10px;" href="{% url 'accounts:profile' user_id=article.author.id %}">{{ article.author.username }}</a>
+                            <span class="d-inline-block mx-1">|</span>
+                            <div class="d-inline-block">
+                                <i class="far fa-clock"></i>&nbsp;{{ article.timestamp }}
+                            </div>
+                            <span class="d-inline-block mx-1">|</span>
+                            <div class="d-inline-block">
+                                <i class="far fa-eye"></i>&nbsp;{{ article.views }}
+                            </div>
+                            <span class="d-inline-block mx-1">|</span>
+                            <div class="d-inline-block">
+                                <i class="far fa-comments"></i>&nbsp;{{ article.get_comments_count }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% endwith %}
         <div class="center-text mb-2">
             {% if is_paginated %}
                 {% include "includes/pagination.html" %}

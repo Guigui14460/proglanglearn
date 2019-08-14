@@ -1,0 +1,22 @@
+$('.like-span').hover(function(e){
+    $(this).css('cursor', 'pointer');
+});
+$('.like-span').click(function(e){
+    e.preventDefault();
+    let href = $(this).attr('href');
+    let likes = [];
+    $(".like-span").each(function(e){
+        if($(this).attr('href') == href){likes.push($(this).children('.fa-thumbs-up.like'))}
+    });
+    likes = $(likes);
+    $.ajax({
+        url: $(this).attr('href'),
+        method: "GET",
+        data: {favorite: 'ok'},
+        success: function(data){
+            likes.toggleClass('far fas');
+            likes.each(function(e){like_answer($(this));});
+        },
+        error: function(error){console.log(error);}
+    });
+});

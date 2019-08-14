@@ -80,6 +80,7 @@ class LoginForm(AuthenticationForm):
             'placeholder': '••••••••••',
             'id': 'showPWDInput'
         }))
+    remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
     captcha = ReCaptchaField()
 
     class Meta:

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{{ object.title }} - {% endblock title %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+{% endblock extra_head %}
+
+{% block main %}
+<div class="mt-2">
+    <div class="row small-device">
+        <div class="col-75 small-device mb-2">
+            {% with favorite_subjects=request.user.profile.favorite_subjects.all %}
+                <h2 class="article-title">{{ object.title }}{% if request.user.is_authenticated %}&nbsp;<a href="{{ object.get_favorite_url }}" title="{% if subject in favorite_subjects %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if subject in favorite_subjects %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h2>
+            {% endwith %}
+            <div class="my-1">
+                <div class="tags">
+                    {% include 'main/includes/tags.html' with object=object %}
+                </div>
+                <div class="my-1 d-flex align">
+                    <img src="{{ object.user.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
+                    <a class="d-block" style="margin-left: 10px;" href="{% url 'accounts:profile' user_id=object.user.id %}">{{ object.user.username }}</a>
+                    <span class="d-inline-block mx-1">|</span>
+                    <div class="d-inline-block">
+                        <i class="far fa-clock"></i>&nbsp;{{ object.timestamp }}
+                    </div>
+                    <span class="d-inline-block mx-1">|</span>
+                    <div class="d-inline-block">
+                        <i class="far fa-eye"></i>&nbsp;{{ object.views }}
+                    </div>
+                    <span class="d-inline-block mx-1">|</span>
+                    <div class="d-inline-block">
+                        {% if object.is_closed %}<span class="success-color" title="{% trans "Résolu" %}"><i class="fas fa-check-circle"></i></span>{% else %}<span class="red-color" title="Non résolu"><i class="fas fa-times-circle"></i></span>{% endif %}
+                    </div>
+                </div>
+            </div>
+            <div>{{ object.content|safe }}</div>
+            <hr class="my-1">
+            <div id="subject-answer-section">
+                {% include 'forum/includes/subject_comments.html' %}
+            </div>
+        </div>
+        <div class="col-25 small-device">
+            {% include 'forum/forum_aside.html' %}
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block javascript %}
+<script src="{% static 'js/highlight.pack.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+{% endblock javascript %}
+
+{% block jquery %}
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', "Remove favorites");$('body').append("<div class='toast'>Subject added to favorites</div>");} else {star.parent().attr('title', "Add to favorites");$('body').append("<div class='toast'>Subject removed from favorites</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+function like_answer(like) {if (like.hasClass('fas')) {like.parent().attr('title', "Remove your like");like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) + 1);$('body').append("<div class='toast'>Subject anwser liked</div>");} else {like.parent().attr('title', "Like answer");like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) - 1);$('body').append("<div class='toast'>Subject answer disliked</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+{% include 'main/includes/ajax_favorite.html' %}
+{% include 'forum/includes/ajax_like_answer.html' %}
+{% endblock jquery %}

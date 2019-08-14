@@ -17,7 +17,7 @@
             <a {% if activate == 'article-list' %}class="active"{% endif %} href="{% url 'articles:list' %}"><i class="fas fa-blog"></i>&nbsp;{% trans 'Blog' %}</a>
         </li>
         <li class="navbar-item">
-            <a href="pages/forum_list.html"><i class="far fa-question-circle"></i>&nbsp;{% trans 'Forum' %}</a>
+            <a {% if activate == 'subject-list' %}class="active"{% endif %} href="{% url 'forum:subject-list' %}"><i class="far fa-question-circle"></i>&nbsp;{% trans 'Forum' %}</a>
         </li>
         {% if request.user.is_authenticated %}
             <li class="navbar-item">

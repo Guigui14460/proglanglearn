@@ -43,12 +43,14 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     'billing.apps.BillingConfig',
     'courses.apps.CoursesConfig',
+    'forum.apps.ForumConfig',
     'main.apps.MainConfig',
     'polls.apps.PollsConfig',
 ]
 
 AUTH_USER_MODEL = 'main.User'
 RESET_LOGIN_AFTER_PASSWORD_RESET = False
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 MIDDLEWARE = [
     # HTML minifer

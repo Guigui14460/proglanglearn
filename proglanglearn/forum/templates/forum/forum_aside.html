@@ -1,0 +1,33 @@
+{% load static i18n %}
+
+<div class="sticky-box sticky-box-blog">
+    <section class="mb-3">
+        <h4>{% trans 'Derniers sujets' %}</h4>
+        <div class="article-overview">
+            {% with favorite_subjects=request.user.profile.favorite_subjects.all %}
+                {% for subject in last_subjects %}
+                    <div>
+                        <h5 class="article-title"><a href="{{ subject.get_absolute_url }}">{{ subject.title }}</a>{% if request.user.is_authenticated %}&nbsp;<a href="{{ subject.get_favorite_url }}" title="{% if subject in favorite_subjects %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if subject in favorite_subjects %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h5>
+                        <div class="d-flex align">
+                            <div class="d-inline-block">
+                                <i class="far fa-eye"></i>&nbsp;{{ subject.views }}
+                            </div>
+                            <span class="d-inline-block mx-1">|</span>
+                            <div class="d-inline-block">
+                                {% if subject.is_closed %}<span class="success-color" title="{% trans "Résolu" %}"><i class="fas fa-check-circle"></i></span>{% else %}<span class="red-color" title="Non résolu"><i class="fas fa-times-circle"></i></span>{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </section>
+    <section>
+        <h4>{% trans "Catégories" %}</h4>
+        <ul class="tutorial-list">
+            {% for item in tags_used %}
+                <li><a href="search.html?q={{ item.name|lower }}">{{ item }} <span class="badge badge__danger">{{ item.subject.count }}</span></a></li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>

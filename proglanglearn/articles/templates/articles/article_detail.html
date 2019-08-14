@@ -13,15 +13,19 @@
     <div class="row small-device">
         <div class="col-75 small-device mb-2">
             <img src="{{ object.thumbnail.url }}" alt="" />
-            <h2 class="article-title">{{ object.title }}{% if request.user.is_authenticated %}&nbsp;<a href="{{ object.get_favorite_url }}" title="{% if article_in_favorite %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h2>
+            {% with favorite_articles=request.user.profile.favorite_articles.all %}
+                <h2 class="article-title">{{ object.title }}{% if request.user.is_authenticated %}&nbsp;<a href="{{ object.get_favorite_url }}" title="{% if object in favorite_articles %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if object in favorite_articles %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h2>
+            {% endwith %}
             <div class="my-1">
                 <div class="tags">
                     {% include 'main/includes/tags.html' with object=object %}
                 </div>
-                <div class="mt-1 d-flex flex-end">
-                    <a href="{% url 'articles:update' article_slug=object.slug %}" class="btn">{% trans 'Mettre à jour' %}</a>
-                    <a href="{% url 'articles:delete' article_slug=object.slug %}" class="ml-1 btn">{% trans 'Supprimer' %}</a>
-                </div>
+                {% if request.user.is_staff or request.user == object.author %}
+                    <div class="mt-1 d-flex flex-end">
+                        <a href="{% url 'articles:update' article_slug=object.slug %}" class="btn">{% trans 'Mettre à jour' %}</a>
+                        <a href="{% url 'articles:delete' article_slug=object.slug %}" class="ml-1 btn">{% trans 'Supprimer' %}</a>
+                    </div>
+                {% endif %}
                 <div class="my-1 d-flex align">
                     <img src="{{ object.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
                     <a class="d-block" style="margin-left: 10px;" href="{% url 'accounts:profile' user_id=object.author.id %}">{{ object.author.username }}</a>

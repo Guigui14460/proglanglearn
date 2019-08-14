@@ -4,21 +4,23 @@
     <section class="mb-3">
         <h4>{% trans 'Derniers articles' %}</h4>
         <div class="article-overview">
-            {% for article in last_articles %}
-                <div>
-                    <a href="{% url 'articles:detail' article_slug=article.slug %}"><img src="{{ article.thumbnail.url }}" alt="" /></a>
-                    <h5 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>{% if request.user.is_authenticated %}&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article_in_favorite %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article_in_favorite %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h5>
+            {% with favorite_articles=request.user.profile.favorite_articles.all %}
+                {% for article in last_articles %}
                     <div>
-                        <div class="d-inline-block">
-                            <i class="far fa-eye"></i>&nbsp;{{ article.views }}
-                        </div>
-                        <span class="d-inline-block mx-1">|</span>
-                        <div class="d-inline-block">
-                            <i class="far fa-comments"></i>&nbsp;{% if article == object %}<span class="article-comments-count">{{ article.get_comments_count }}</span>{% else %}{{ article.get_comments_count }}{% endif %}
+                        <a href="{% url 'articles:detail' article_slug=article.slug %}"><img src="{{ article.thumbnail.url }}" alt="" /></a>
+                        <h5 class="article-title"><a href="{% url 'articles:detail' article_slug=article.slug %}">{{ article.title }}</a>{% if request.user.is_authenticated %}&nbsp;<a href="{{ article.get_favorite_url }}" title="{% if article in favorite_articles %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if article in favorite_articles %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}</h5>
+                        <div>
+                            <div class="d-inline-block">
+                                <i class="far fa-eye"></i>&nbsp;{{ article.views }}
+                            </div>
+                            <span class="d-inline-block mx-1">|</span>
+                            <div class="d-inline-block">
+                                <i class="far fa-comments"></i>&nbsp;{% if article == object %}<span class="article-comments-count">{{ article.get_comments_count }}</span>{% else %}{{ article.get_comments_count }}{% endif %}
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            {% endwith %}
         </div>
     </section>
     <section>

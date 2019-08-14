@@ -10,8 +10,8 @@ from django_countries.fields import CountryField
 
 from articles.models import Article
 from courses.models import Course, Tutorial
+from forum.models import Subject
 from main.models import Language, Tag
-from .fields import StringListField
 from .managers import ProfileManager
 from .utils import get_user_type
 
@@ -49,8 +49,8 @@ class Profile(models.Model):
         default=0, verbose_name=_("expérience acquise"))
     favorite_articles = models.ManyToManyField(Article,
                                                verbose_name=_("articles favoris"), blank=True, related_name='article_favorite')
-    favorite_subjects = StringListField(verbose_name=_(
-        "sujets marqués comme favoris"), default='', null=True, blank=True)
+    favorite_subjects = models.ManyToManyField(Subject, verbose_name=_(
+        "sujets marqués comme favoris"), blank=True)
     tutorial_finished = models.ManyToManyField(Tutorial, verbose_name=_(
         "tutoriels marqués comme terminé"), blank=True, related_name='tutorial_finished')
     favorite_tutorials = models.ManyToManyField(Tutorial, verbose_name=_(

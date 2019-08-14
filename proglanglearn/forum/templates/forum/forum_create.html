@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% url 'main:contact' as contact_url %}
+{% url 'main:contact' as contact %}
+
+{% block title %}{% if type == 'add' %}{% trans 'Ajouter un sujet' %}{% else %}{% trans 'Modifier un sujet' %}{% endif %} - {% endblock title %}
+
+{% block main %}
+<h1 class="large">{% if type == 'add' %}{% trans 'Ajouter un sujet' %}{% else %}{% trans 'Modifier un sujet' %}{% endif %}</h1>
+<form method="POST" class="form">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+    <fieldset>
+        <legend>{% trans 'Information générales' %}</legend>
+        {% include 'includes/form_field2.html' with field=form.title %}
+        {% include 'includes/form_field2.html' with field=form.content %}
+        {% include 'includes/form_field2.html' with field=form.languages %}
+        {% include 'includes/form_field2.html' with field=form.tags %}
+    </fieldset>
+    {% if form.timestamp %}
+        <fieldset>
+            <legend>{% trans 'Informations complémentaires' %}</legend>
+            <div class="form-group">
+                {% include 'includes/form_field2.html' with field=form.timestamp %}
+            </div>
+        </fieldset>
+    {% endif %}
+    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
+    <div class="center-text">
+        <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{% trans 'Ajouter un sujet' %}{% else %}{% trans 'Modifier un sujet' %}{% endif %}</button>
+    </div>
+</form>
+{% endblock main %}

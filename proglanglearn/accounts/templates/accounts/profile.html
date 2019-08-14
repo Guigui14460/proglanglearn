@@ -16,6 +16,7 @@
         <img src="{{ object.image.url }}" alt="{% trans "Image de profil" %}" class="round-img">
         <h1 class="large">{% if object.user.first_name and object.user.last_name %}{{ object.user.first_name }}&nbsp;{{ object.user.last_name }}&nbsp;({{ object.user.username }}){% else %}{{ object.user.username }}{% endif %}</h1>
         <p class="lead">{% if object.is_student %}{% trans "Étudiant" %}{% elif object.is_dev %}{% trans "Développeur professionnel" %}{% else %}{% trans "Amateur" %}{% endif %}</p>
+        <p class="lead">{% trans "Niveau" %} {{ object.level }} ({{ object.get_user_profile_type }})</p>
         {% if object.country %}<p>{{ object.get_country_display }}</p>{% endif %}
         <div class="icons my-1">
             {% if object.links == ";;;;;" %}
