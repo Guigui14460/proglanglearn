@@ -1,0 +1,32 @@
+{% extends 'analytics/base_analytic.html' %}
+{% load static i18n js %}
+
+{% block title %}{% trans "Classement des utilisateurs" %} - {% endblock title %}
+
+{% block extra_head %}
+<style>table tr td a{color: #000000 !important; text-decoration: underline !important;} table tr td a:hover, table tr td a:focus{font-weight: bold;} html[data-theme="dark"] table tr td a{color: #ffffff !important;}</style>
+{% endblock extra_head %}
+
+{% block main %}
+<h1 class="large">{% trans "Classement des utilisateurs" %}</h1>
+<div class="table table__dark my-2">
+    <table>
+        <tr>
+            <th>{% trans "Profil" %}</th>
+            <th>{% trans "Niveau" %}</th>
+            <th>{% trans "Expérience" %}</th>
+        </tr>
+        {% for profile in all_user %}
+            <tr>
+                <td><a href="{{ profile.get_absolute_url }}">{% if profile.user.first_name and profile.user.last_name %}{{ profile.user.first_name }}&nbsp;{{ profile.user.last_name }}&nbsp;({{ profile.user.username }}){% else %}{{ profile.user.username }}{% endif %}</a></td>
+                <td>{{ profile.level }} | {{ profile.get_user_profile_type|title }}</td>
+                <td>{{ profile.level_experience }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan=3>{% trans "Il n'y a personne d'inscrit sur le site" %}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock main %}

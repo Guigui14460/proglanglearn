@@ -1,7 +1,7 @@
 {% extends 'analytics/base_analytic.html' %}
 {% load static i18n js %}
 
-{% block title %}{% if type == 'my_favorite_tutorials' %}{% trans "Mes tutoriels favoris" %}{% else %}{% trans "Mes articles favoris" %}{% endif %} - {% endblock title %}
+{% block title %}{% if type == 'my_favorite_tutorials' %}{% trans "Mes tutoriels favoris" %}{% elif type == 'my_favorite_subjects' %}{% trans "Mes sujets favoris" %}{% else %}{% trans "Mes articles favoris" %}{% endif %} - {% endblock title %}
 
 {% block extra_head %}
 <style>
@@ -11,7 +11,7 @@
 {% endblock extra_head %}
 
 {% block main %}
-<h1 class="large">{% if type == 'my_favorite_tutorials' %}{% trans "Mes tutoriels favoris" %}{% else %}{% trans "Mes articles favoris" %}{% endif %}</h1>
+<h1 class="large">{% if type == 'my_favorite_tutorials' %}{% trans "Mes tutoriels favoris" %}{% elif type == 'my_favorite_subjects' %}{% trans "Mes sujets favoris" %}{% else %}{% trans "Mes articles favoris" %}{% endif %}</h1>
 {% if type == 'my_favorite_tutorials' %}
     {% for key, val in data.items %}
         <h3>{{ key }}</h3>
@@ -30,6 +30,22 @@
             {% endfor %}
         </div>
     {% endfor %}
+{% elif type == 'my_favorite_subjects' %}
+    <div class="dashboard-grid">
+        {% for subject in data %}
+            <div class="card card-hoverable">
+                <div class="card-container">
+                    <span class="{% if subject.is_closed %}success-color" title="{% trans "Résolu" %}"{% else %}red-color" title="{% trans "Non résolu" %}"{% endif %}><i class="fas fa-{% if subject.is_closed %}check{% else %}times{% endif %}-circle"></i>&nbsp;</span>
+                    <a href="{{ subject.get_absolute_url }}">
+                        <h3 class="card-title" style="display: inline;">{{ subject.title }}</h3>
+                    </a>
+                    <div class="card-content center-text">
+                        <a href="{{ subject.get_favorite_url }}" title="{% trans 'Enlever des favoris' %}" class="favorite-span"><i class="fas fa-star favorite"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% else %}
     <div class="dashboard-grid">
         {% for article in data %}

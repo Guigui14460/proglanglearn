@@ -86,15 +86,19 @@ class Course(models.Model):
     def get_student_percentage_finished(self, student):
         all_tutorials = self.get_tutorials()
         all_tutorials_count = all_tutorials.count()
-        all_tutorials_student_and_course = student.tutorial_finished.filter(
-            tutorials__in=all_tutorials)
-        all_tutorials_student_and_course_count = all_tutorials_student_and_course.count()
+        all_tutorials_student_and_course_count = 0
+        for tutorial in all_tutorials:
+            if tutorial in student.profile.tutorial_finished.all():
+                all_tutorials_student_and_course_count += 1
         try:
-            return int(round(all_tutorials_student_and_course_count / all_tutorials_count))
+            return int(all_tutorials_student_and_course_count / all_tutorials_count * 100)
         except:
             raise ImproperlyConfigured(
                 _("Aucun tutoriel n'est relié au cours ! Veuillez en relié au moins un pour obtenir un pourcentage"))
         return 0
+
+    def user_is_student_of_course(self, student):
+        return student in self.students.all() or student.is_staff or student == self.author
 
     def get_all_experience(self):
         exp = 0

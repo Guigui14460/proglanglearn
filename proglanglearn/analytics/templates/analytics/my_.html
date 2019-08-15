@@ -1,0 +1,115 @@
+{% extends 'analytics/base_analytic.html' %}
+{% load static i18n js course_extras %}
+
+{% block title %}{% if type == 'my_subjects' %}{% trans "Mes sujets" %}{% elif type == "my_articles" %}{% trans "Mes articles" %}{% else %}{% trans "Mes cours" %}{% endif %} - {% endblock title %}
+
+{% block extra_head %}
+<style>
+.dashboard-grid {display: grid; grid-gap: 10px; grid-template-columns: 1fr 1fr;}
+@media screen and (max-width: 1050px){.dashboard-grid{grid-template-columns: 1fr;}}
+</style>
+{% endblock extra_head %}
+
+{% block main %}
+<h1 class="large">{% if type == 'my_subjects' %}{% trans "Mes sujets" %}{% elif type == "my_articles" %}{% trans "Mes articles" %}{% else %}{% trans "Mes cours" %}{% endif %}</h1>
+<div class="center-text mb-1">
+    {% if type == 'my_subjects' %}
+        <a class="btn btn__warning" href="{% url 'forum:subject-create' %}">{% trans "Créer un sujet" %}</a>
+    {% elif type == "my_articles" %}
+        <a class="btn btn__warning" href="{% url 'articles:create' %}">{% trans "Créer un article" %}</a>
+    {% else %}
+        <a class="btn btn__warning" href="{% url 'courses:create' %}">{% trans "Créer un cours" %}</a>
+    {% endif %}
+</div>
+<div class="dashboard-grid">
+    {% if type == 'my_subjects' %}
+        {% for subject in data %}
+            <div class="card card-hoverable">
+                <div class="card-container">
+                <span class="{% if subject.is_closed %}success-color" title="{% trans "Résolu" %}"{% else %}red-color" title="{% trans "Non résolu" %}"{% endif %}><i class="fas fa-{% if subject.is_closed %}check{% else %}times{% endif %}-circle"></i>&nbsp;</span>
+                    <a href="{{ subject.get_absolute_url }}">
+                        <h3 class="card-title" style="display: inline;">{{ subject.title }} : {% blocktrans count counter=subject.views %}{{ counter }} vue{% plural %}{{ counter }} vues{% endblocktrans %}</h3>
+                    </a>
+                    <div class="card-tags">
+                        {% include 'main/includes/tags.html' with object=subject card=True %}
+                    </div>
+                    <a href="{{ subject.get_absolute_url }}">
+                        <div class="card-content">
+                            {{ subject.content|safe|truncatechars:200 }}
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% elif type == 'my_articles' %}
+        {% for article in data %}
+            <div class="card card-hoverable">
+                <div class="card-header">
+                    <a href="{{ article.get_absolute_url }}"><img class="card-image" src="{{ article.thumbnail.url }}"
+                            alt="{{ article.title }}"></a>
+                </div>
+                <div class="card-container">
+                    <a href="{{ article.get_absolute_url }}">
+                        <h3 class="card-title">{{ article.title }} : {% blocktrans count counter=article.views %}{{ counter }} vue{% plural %}{{ counter }} vues{% endblocktrans %}</h3>
+                    </a>
+                    <div class="card-tags">
+                        {% include 'main/includes/tags.html' with object=article card=True %}
+                    </div>
+                    <a href="{{ article.get_absolute_url }}">
+                        <div class="card-content">
+                            {{ article.content|safe|truncatechars:200 }}
+                        </div>
+                    </a>
+                    <div class="card-price">
+                        <a href="{% url 'articles:update' article_slug=article.slug %}" title="{% trans "Modifier" %}" class="btn btn__large btn__outline__info"><i class="fas fa-pen"></i></a>
+                        <a href="{% url 'articles:delete' article_slug=article.slug %}" title="{% trans "Supprimer" %}" class="btn btn__large btn__outline__danger"><i class="fas fa-times"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        {% for course in data %}
+            <div class="card card-hoverable">
+                <div class="card-header">
+                    <a href="{{ course.get_absolute_url }}"><img class="card-image" src="{{ course.thumbnail.url }}"
+                            alt="{{ course.title }}"></a>
+                </div>
+                <div class="card-container">
+                    {% with percent=data2|index:forloop.counter0 %}
+                        <div class="progress-bar my-1" title="{% blocktrans with percent=percent %}Complété à {{ percent }}%{% endblocktrans %}">
+                            <div class="progress-bar-line progress-bar__{% if percent <= 15 %}danger{% elif percent >= 70 %}success{% else %}warning{% endif %}" style="width: {{ percent }}%;">{{ percent }}%</div>
+                        </div>
+                    {% endwith %}
+                    <a href="{{ course.get_absolute_url }}">
+                        <h3 class="card-title">{{ course.title }}{% if course.author == request.user or request.user.is_staff %} : {% blocktrans count counter=course.students.count %}{{ counter }} étudiant enrollé{% plural %}{{ counter }} étudiants enrollés{% endblocktrans %}{% endif %}</h3>
+                    </a>
+                    <div class="card-tags">
+                        {% include 'main/includes/tags.html' with object=course card=True %}
+                    </div>
+                    <a href="{{ course.get_absolute_url }}">
+                        <div class="card-content">
+                            {{ course.content_introduction|safe|truncatechars:200 }}
+                        </div>
+                    </a>
+                    <div class="card-info">
+                        <div class="card-difficulty">{{ course.get_difficulty_display }}</div>
+                        <div class="card-experience">{{ course.get_all_experience }} EXP</div>
+                        <div class="card-date">{{ course.published_date }}</div>
+                    </div>
+                    {% if course.author == request.user %}
+                        <div class="card-price">
+                            <a href="{% url 'courses:update' slug=course.slug %}" title="{% trans "Modifier" %}" class="btn btn__large btn__outline__info"><i class="fas fa-pen"></i></a>
+                            <a href="{% url 'courses:delete' slug=course.slug %}" title="{% trans "Supprimer" %}" class="btn btn__large btn__outline__danger"><i class="fas fa-times"></i></a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock main %}
+
+{% block jquery %}
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', "Remove favorites");$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}Tutorial{% else %}Article{% endif %} added to favorites</div>");} else {star.parent().attr('title', "Add to favorites");$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}Tutorial{% else %}Article{% endif %} removed from favorites</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+{% include 'main/includes/ajax_favorite.html' %}
+{% endblock jquery %}

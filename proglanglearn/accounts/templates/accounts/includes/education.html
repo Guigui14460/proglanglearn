@@ -3,7 +3,7 @@
 <h2>{% trans "Gérer mon espace éducation" %}</h2>
 <div class="table table__dark">
     <table>
-        <thead>
+        {% comment %} <thead> {% endcomment %}
             <tr>
                 <th>{% trans "École" %}</th>
                 <th>{% trans "Diplôme" %}</th>
@@ -22,7 +22,7 @@
                     <td colspan=4>{% trans "Vous n'avez aucune école enregistrée" %}</td>
                 </tr>
             {% endfor %}
-        </thead>
+        {% comment %} </thead> {% endcomment %}
     </table>
 </div>
 <form class="form my-1" method="POST">

@@ -15,6 +15,9 @@
             <a {% if type == 'dashboard' %}class="active"{% endif %} href="{% url 'main:analytics:dashboard' %}">{% trans "Mon expérience" %}</a>
         </li>
         <li class="navbar-item">
+            <a {% if type == 'ranking' %}class="active"{% endif %} href="{% url 'main:analytics:ranking' %}">{% trans "Classement" %}</a>
+        </li>
+        <li class="navbar-item">
             <hr class="navbar-dropdown-divider" />
         </li>
         <li class="navbar-item">
@@ -29,19 +32,31 @@
         <li class="navbar-item">
             <hr class="navbar-dropdown-divider" />
         </li>
-        {% if request.user.profile.is_teacher or request.user.is_staff %}
-            <li class="navbar-item">
-                <a {% if type == 'my_courses' %}class="active"{% endif %} href="{% url 'main:analytics:my-courses' %}">{% trans "Mes cours" %}</a>
-            </li>
-        {% endif %}
+        <li class="navbar-item">
+            <a {% if type == 'my_courses' %}class="active"{% endif %} href="{% url 'main:analytics:my-courses' %}">{% trans "Mes cours" %}</a>
+        </li>
         <li class="navbar-item">
             <a {% if type == 'my_favorite_tutorials' %}class="active"{% endif %} href="{% url 'main:analytics:favorite-tutorials' %}">{% trans "Mes tutoriels favoris" %}</a>
         </li>
         <li class="navbar-item">
             <hr class="navbar-dropdown-divider" />
         </li>
+        {% if request.user.profile.is_teacher or request.user.is_staff %}
+            <li class="navbar-item">
+                <a {% if type == 'my_articles' %}class="active"{% endif %} href="{% url 'main:analytics:my-articles' %}">{% trans "Mes articles" %}</a>
+            </li>
+        {% endif %}
         <li class="navbar-item">
             <a {% if type == 'my_favorite_articles' %}class="active"{% endif %} href="{% url 'main:analytics:favorite-articles' %}">{% trans "Mes articles favoris" %}</a>
+        </li>
+        <li class="navbar-item">
+            <hr class="navbar-dropdown-divider" />
+        </li>
+        <li class="navbar-item">
+            <a {% if type == 'my_subjects' %}class="active"{% endif %} href="{% url 'main:analytics:my-subjects' %}">{% trans "Mes sujets" %}</a>
+        </li>
+        <li class="navbar-item">
+            <a {% if type == 'my_favorite_subjects' %}class="active"{% endif %} href="{% url 'main:analytics:favorite-subjects' %}">{% trans "Mes sujets favoris" %}</a>
         </li>
     </ul>
 </aside>

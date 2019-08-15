@@ -1,8 +1,4 @@
-﻿Add subject favorite to dahsboard
-Add my subjects to dashboard
-Add subject which i give an answer
-
-Test bokeh integration https://hackernoon.com/integrating-bokeh-visualisations-into-django-projects-a1c01a16b67a
+﻿Test bokeh integration https://hackernoon.com/integrating-bokeh-visualisations-into-django-projects-a1c01a16b67a
 
 Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
 Poll/Quiz app (to add in course to add more experience)

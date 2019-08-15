@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_delete, post_save
+from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
 
 from django_countries.fields import CountryField
@@ -81,6 +82,9 @@ class Profile(models.Model):
         except:
             pass
         super(Profile, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('accounts:profile', kwargs={'user_id': self.user.id})
 
     def get_user_profile_type(self):
         return get_user_type(self.level)

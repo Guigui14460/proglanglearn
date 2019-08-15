@@ -3,7 +3,7 @@
 <h2>{% trans "Gérer mon espace expérience" %}</h2>
 <div class="table table__dark">
     <table>
-        <thead>
+        {% comment %} <thead> {% endcomment %}
             <tr>
                 <th>{% trans "Entreprise" %}</th>
                 <th>{% trans "Poste" %}</th>
@@ -22,7 +22,7 @@
                     <td colspan=4>{% trans "Vous n'avez aucune expérience enregistrée" %}</td>
                 </tr>
             {% endfor %}
-        </thead>
+        {% comment %} </thead> {% endcomment %}
     </table>
 </div>
 <form class="form my-1" action="." method="POST">

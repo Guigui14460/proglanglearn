@@ -19,13 +19,15 @@
             <div class="mt-1">
                 {{ answer.content|safe }}
             </div>
-            <div style="text-align: right;">
-                {% if answer.best_answer %}
-                    <a href="{% url 'forum:subject-best-answer' subject_id=object.id answer_id=answer.id %}" class="btn btn__danger">{% trans "Ce n'est plus la meilleure réponse" %}</a>
-                {% else %}
-                    <a href="{% url 'forum:subject-best-answer' subject_id=object.id answer_id=answer.id %}" class="btn btn__success">{% trans "C'est la meilleure réponse à mon problème" %}</a>
-                {% endif %}
-            </div>
+            {% if request.user == object.user %}
+                <div style="text-align: right;">
+                    {% if answer.best_answer %}
+                        <a href="{% url 'forum:subject-best-answer' subject_id=object.id answer_id=answer.id %}" class="btn btn__danger">{% trans "Ce n'est plus la meilleure réponse" %}</a>
+                    {% else %}
+                        <a href="{% url 'forum:subject-best-answer' subject_id=object.id answer_id=answer.id %}" class="btn btn__success">{% trans "C'est la meilleure réponse à mon problème" %}</a>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     {% empty %}
         <div class="center-text"><h4>{% trans "Aucune réponse pour le moment" %}</h4></div>

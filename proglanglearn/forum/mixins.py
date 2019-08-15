@@ -39,4 +39,4 @@ class UserCanModifySubject(UserPassesTestMixin):
     def test_func(self):
         user = self.request.user
         subject = self.get_object()
-        return user.is_staff or subject.user == user
+        return subject.user == user

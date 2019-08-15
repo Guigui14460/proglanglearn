@@ -16,3 +16,8 @@ def time_estimate(words):
 @register.filter
 def safe_lazy(text):
     return mark_safe_lazy(_(text))
+
+
+@register.filter
+def index(liste, i):
+    return liste[int(i)]
