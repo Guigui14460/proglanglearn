@@ -1,6 +1,8 @@
-﻿Test bokeh integration https://hackernoon.com/integrating-bokeh-visualisations-into-django-projects-a1c01a16b67a
+﻿Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
 
-Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
+faire l'espace de recherche pour tout et l'autre pour le profil
+avec systeme à plusieur mot et seulement une expression
+
 Poll/Quiz app (to add in course to add more experience)
 PayPal integration (see PrettyPrinted's Paypal integration in Flask video)
 

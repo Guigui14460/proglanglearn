@@ -25,7 +25,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['email']
     ip_address = models.GenericIPAddressField(
         verbose_name=_("adresse IP"), null=True, blank=True)
-
+    natural_language = models.CharField(verbose_name=_("langage naturel de l'utilisateur"))
 
 class Language(models.Model):
     name = models.CharField(max_length=30, unique=True,
