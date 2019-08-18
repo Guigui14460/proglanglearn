@@ -12,7 +12,7 @@ User = get_user_model()
 class UserExperienceJournal(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name=_("utilisateur associé"))
-    experience = models.PositiveIntegerField(
+    experience = models.SmallIntegerField(
         default=0, verbose_name=_("expérience"))
     timestamp = models.DateTimeField(
         auto_now_add=True, verbose_name=_("date/heure"))

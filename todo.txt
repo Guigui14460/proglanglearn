@@ -1,8 +1,6 @@
-﻿Search engine https://www.youtube.com/watch?v=1wi0AHxjcn8 (+ search view and template) https://www.codingforentrepreneurs.com/blog/a-multiple-model-django-search-engine
+﻿Test thread for schedule task like send email for article and course published
 
-faire l'espace de recherche pour tout et l'autre pour le profil
-avec systeme à plusieur mot et seulement une expression
-+ ajouter pour recherche tag et dans les tags de cours, article et sujets
+Modeltranslation and readapt creation template for multiple languages (only on articles, courses and tutorials)
 
 Poll/Quiz app (to add in course to add more experience)
 PayPal integration (see PrettyPrinted's Paypal integration in Flask video)

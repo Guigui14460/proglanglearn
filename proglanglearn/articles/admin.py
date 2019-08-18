@@ -49,7 +49,7 @@ class ArticleAdmin(ImportExportModelAdmin):
     ordering = ('-timestamp', '-last_modification', 'published', 'email_send')
     search_fields = ['title', 'author__username']
     fields = ('author', 'title', 'thumbnail', get_thumbnail_preview, 'content',
-              'languages', 'tags', 'timestamp', 'last_modification')
+              'languages', 'tags', 'timestamp', 'published', 'email_send')
     list_filter = ['timestamp', 'last_modification',
                    'published', 'email_send', YearListFilter]
     empty_value_display = _("Inconnu")

@@ -33,10 +33,9 @@ class Article(models.Model):
     published = models.BooleanField(default=False, verbose_name=_("publié"))
     email_send = models.BooleanField(
         default=False, verbose_name=_("emails envoyés"))
-    timestamp = models.DateTimeField(
-        verbose_name=_("date de publication"))
-    last_modification = models.DateTimeField(
-        verbose_name=_("dernière modification"))
+    timestamp = models.DateTimeField(verbose_name=_("date de publication"))
+    last_modification = models.DateTimeField(auto_now=True,
+                                             verbose_name=_("dernière modification"))
     views = models.BigIntegerField(verbose_name=_(
         "nombre de vues"), blank=True, default=0)
 

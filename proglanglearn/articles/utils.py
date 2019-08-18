@@ -11,12 +11,12 @@ from accounts.models import Profile
 def send_email_new_article(request, article):
     actual = get_language()
     all_profile = Profile.objects.send_email()
-    french_profile, english_profile = [profile.user.email for profile in all_profile if profile.user.natural_language == 'fr'], [profile.user.email for profile in all_profile if profile.user.natural_language == 'en']
-
+    french_profile, english_profile = [profile.user.email for profile in all_profile if profile.user.natural_language == 'fr'], [
+        profile.user.email for profile in all_profile if profile.user.natural_language == 'en']
     current_site = get_current_site(request)
     protocol = settings.PROTOCOL
     domain = current_site.domain
-    
+
     activate('fr')
     subject1 = _("Nouvel article en ligne")
     message1 = render_to_string('articles/new_article_email.html', {

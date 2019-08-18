@@ -18,11 +18,20 @@ from main.signals import comment_signal
 from .forms import ArticleModelForm, ArticleUpdateModelForm
 from .mixins import ArticleObjectMixin, UserCanModifyArticle
 from .models import Article
+from .utils import send_email_new_article
 
 
 class ArticleListView(NavbarSearchMixin, ListView):
     queryset = Article.objects.get_published_articles()
     paginate_by = 8
+
+    def get(self, request, *args, **kwargs):
+        default = super().get(request, *args, **kwargs)
+        article_email_to_send = Article.objects.get_send_email_article()
+        for article in article_email_to_send:
+            send_email_new_article(request, article)
+        article_email_to_send.update(email_send=True)
+        return default
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -55,7 +64,6 @@ class ArticleCreateView(LoginRequiredMixin, NavbarSearchMixin, View):
         if form.is_valid():
             article = form.save(commit=False)
             article.author = self.request.user
-            article.last_modification = timezone.now()
             article.save()
             for language in form.cleaned_data['languages']:
                 article.languages.add(language)
