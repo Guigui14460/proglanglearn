@@ -259,3 +259,10 @@ class ExperienceForm(forms.ModelForm):
             'entry_date': forms.DateInput(attrs={'type': 'date'}),
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+
+class ProfileSearchForm(forms.Form):
+    q_profile = forms.CharField(label=_("Recherche de profil"), widget=forms.TextInput(attrs={
+        'id': 'profile_search',
+        'placeholder': _("Nom d'utilisateur, prénom ou nom de famille")
+    }), required=False, help_text=_("N.B. : séparez les mots clés par des espaces pour plus de résultats"))

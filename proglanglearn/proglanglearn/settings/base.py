@@ -11,6 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 ADMINS = [('Guillaume LETELLIER', 'proglanglearn@gmail.com')]
 SITE_ID = 1
 SECRET_KEY = config('SECRET_KEY')
+SEARCH_TYPE = 'multiple'  # 'simple' or 'multiple'
 
 # Application definition
 INSTALLED_APPS = [

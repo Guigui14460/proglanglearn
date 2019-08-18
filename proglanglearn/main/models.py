@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 from tinymce.models import HTMLField
 
+from .managers import LanguageManager, TagManager
 from .signals import comment_signal
 
 
@@ -25,7 +26,9 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['email']
     ip_address = models.GenericIPAddressField(
         verbose_name=_("adresse IP"), null=True, blank=True)
-    natural_language = models.CharField(verbose_name=_("langage naturel de l'utilisateur"))
+    natural_language = models.CharField(
+        max_length=5, verbose_name=_("langage naturel de l'utilisateur"))
+
 
 class Language(models.Model):
     name = models.CharField(max_length=30, unique=True,
@@ -37,6 +40,8 @@ class Language(models.Model):
     content = HTMLField(verbose_name=_(
         "description du langage"), null=True, blank=True)
 
+    objects = LanguageManager()
+
     class Meta:
         verbose_name = _("langage de programmation ou bibliothèque")
         verbose_name_plural = _("langages de programmation ou bibliothèques")
@@ -45,7 +50,7 @@ class Language(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('main:language_tag', slug=self.slug)
+        return reverse('main:language_tag', kwargs={'slug': self.slug})
 
 
 class Tag(models.Model):
@@ -58,6 +63,8 @@ class Tag(models.Model):
     content = HTMLField(verbose_name=_(
         "description de la catégorie"), null=True, blank=True)
 
+    objects = TagManager()
+
     class Meta:
         verbose_name = _("catégorie")
         verbose_name_plural = _("catégories")
@@ -66,7 +73,7 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('main:language_tag', slug=self.slug)
+        return reverse('main:language_tag', kwargs={'slug': self.slug})
 
 
 def pre_save_language_tag_receiver(sender, instance, *args, **kwargs):

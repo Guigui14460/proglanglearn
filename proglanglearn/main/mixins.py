@@ -12,10 +12,8 @@ class NavbarSearchMixin(object):
     model = None
 
     def form_navbar(self):
-        form = NavbarSearchForm()
-        if form.is_valid():
-            form = NavbarSearchForm(q=form.cleaned_data.get('q'))
-        return form
+        nav_form = NavbarSearchForm()
+        return nav_form
 
     def get_context_data(self, **kwargs):
         try:

@@ -158,6 +158,8 @@ class Tutorial(models.Model):
     views = models.BigIntegerField(verbose_name=_(
         "nombre de vues"), blank=True, default=0)
 
+    objects = TutorialManager()
+
     class Meta:
         ordering = ['-views', 'title', 'experience']
         verbose_name = _("tutoriel")

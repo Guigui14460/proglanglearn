@@ -2,6 +2,7 @@
 
 faire l'espace de recherche pour tout et l'autre pour le profil
 avec systeme à plusieur mot et seulement une expression
++ ajouter pour recherche tag et dans les tags de cours, article et sujets
 
 Poll/Quiz app (to add in course to add more experience)
 PayPal integration (see PrettyPrinted's Paypal integration in Flask video)

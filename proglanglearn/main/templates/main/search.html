@@ -1,126 +1,54 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n main_extras %}
 
-{% block title %}{% trans 'Recherche' %} - {% endblock title %}
+{% block title %}{% if query is not None and query != '' %}{{ query }} | {% endif %}{% trans 'Recherche' %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{% trans 'Recherche pour' %} "<span id="search-currently">yyjyj</span>"</h1>
-<form action="search.html" method="get" class="form">
+<h1 class="large">
+    {% if query is not None %}
+        {% blocktrans count counter=count with query=query %}{{ counter }} résultat pour "{{ query }}"{% plural %}{{ counter }} résultats pour "{{ query }}"{% endblocktrans %}
+    {% else %}
+        {% blocktrans count counter=count %}{{ counter }} résultat pour ""{% plural %}{{ counter }} résultats pour ""{% endblocktrans %}
+    {% endif %}
+</h1>
+<form method="GET" class="form" id="main_search_form">
     <div class="form-group">
-        <input type="text" id="search2" placeholder="Recherchez ici" name="q2" />
+        {{ form.q2 }}
+        <small class="form-text">{{ form.q2.help_text }}</small>
     </div>
-</form>
-<form class="form">
-    <label>{% trans 'Filtrer la recherche' %}</label>
-    <div class="custom-select select__info" id="filter-search">
-        <select name="filter-search">
-            <option value="0">{% trans 'Cliquez pour sélectionner votre choix :' %}</option>
-            <option selected="selected" value="1">{% trans 'Tout' %}</option>
-            <option value="2">{% trans 'Seulement les cours' %}</option>
-            <option value="3">{% trans 'Seulement les tutoriels' %}</option>
-            <option value="4">{% trans 'Seulement les sujets' %}</option>
-            <option value="5">{% trans 'Seulement les profils' %}</option>
-        </select>
-    </div>
+    {% include 'includes/form_field2.html' with field=form.q_type %}
 </form>
 <div id="search-result">
     <div class="courses">
-        <span>{% trans 'Tutoriels' %} :</span>
-        <a href="tutorial_detail.html">
-            <div class="course">
-                <h3><i class="fas fa-lock"></i> Mettre un site en ligne avec AWS</h3>
-            </div>
-        </a>
-        <a href="tutorial_detail.html">
-            <div class="course">
-                <h3>Créer votre CV en ligne (part 1)</h3>
-            </div>
-        </a>
-        <a href="tutorial_detail.html">
-            <div class="course">
-                <h3>Les classes en Go</h3>
-                <small>Full beginner course on Go</small>
-            </div>
-        </a>
-    </div>
-    <div class="articles">
-        <span>{% trans 'Articles du blog' %} :</span>
-        <a href="article_detail.html">
-            <div class="article">
-                <h3>Comment devenir Freelance ?</h3>
-            </div>
-        </a>
-        <a href="article_detail.html">
-            <div class="article">
-                <h3>Comment avoir un bon SEO d'après Google ?</h3>
-            </div>
-        </a>
-        <a href="article_detail.html">
-            <div class="article">
-                <h3>Les dernières actus (8 juin 2019)</h3>
-            </div>
-        </a>
-    </div>
-    <div class="subjects">
-        <span>{% trans 'Sujets du forum' %} :</span>
-        <a href="forum_detail.html">
-            <div class="subject">
-                <h3>Comment utiliser momentjs ?</h3>
-            </div>
-        </a>
-        <a href="forum_detail.html">
-            <div class="subject">
-                <h3>Afficher une bar de progression en pygame</h3>
-            </div>
-        </a>
-    </div>
-    <div class="profiles-search">
-        <span>{% trans "Profils d'étudiants en informatique ou développeur" %} :</span>
-        <div class="profile-grid">
-            <a href="profile.html">
-                <div class="profile">
-                    <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
-                    <div>
-                        <h3>johndoe</h3>
-                        <small>Developer</small>
+        {% for object in object_list %}
+            {% with object|class_name as klass %}
+                <a href="{{ object.get_absolute_url }}">
+                    <div class="course">
+                        {% if klass == 'Course' or klass == 'Article' %}
+                            <img src="{{ object.thumbnail.url }}" alt="{% trans "Vignette" %}">
+                        {% elif klass == 'Tag' or klass == 'Language' %}
+                            <img src="{{ object.image.url }}" alt="{% trans "Logo représentatif" %}" >
+                        {% endif %}
+                        <h3>{% if klass == 'Course' and not request.user.is_staff and not request.user in object.students.all and request.user != object.author %}
+                                <i class="fas fa-lock"></i>&nbsp;
+                            {% elif klass == 'Subject' %}
+                                {% if object.is_closed %}<span class="success-color" title="{% trans "Résolu" %}"><i class="fas fa-check-circle"></i></span>{% else %}<span class="red-color" title="{% trans "Non résolu" %}"><i class="fas fa-times-circle"></i></span>{% endif %}&nbsp;&nbsp;
+                        {% endif %}{% if klass == 'Tag' or klass == 'Language' %}{{ object.name }}{% else %}{{ object.title }}{% endif %}</h3>
+                        {% if klass == 'Tutorial' %}
+                            <small>{% if not request.user.is_staff and not request.user in object.course.students.all and request.user != object.course.author %}<i class="fas fa-lock"></i>&nbsp;{% endif %}{{ object.course.title }}</small>
+                        {% endif %}
                     </div>
-                </div>
-            </a><a href="profile.html">
-                <div class="profile">
-                    <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
-                    <h3>johndoe</h3>
-                </div>
-            </a><a href="profile.html">
-                <div class="profile">
-                    <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
-                    <h3>johndoe</h3>
-                </div>
-            </a><a href="profile.html">
-                <div class="profile">
-                    <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
-                    <h3>johndoeeeeeeeee-eeeeeeeeeeeeeeeeeeeeeeee ffffffffffffffff</h3>
-                </div>
-            </a><a href="profile.html">
-                <div class="profile">
-                    <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
-                    <h3>johndoe</h3>
-                </div>
-            </a><a href="profile.html">
-                <div class="profile">
-                    <img src="../images/blog_course_forum/3.jpg" alt="" class="round-image">
-                    <h3>johndoe</h3>
-                </div>
-            </a>
-        </div>
+                </a>
+            {% endwith %}
+        {% empty %}
+            <h3 class="center-text red-color">{% trans "Aucun résultat trouvé" %}</h3>
+        {% endfor %}
     </div>
 </div>
 {% endblock main %}
 
 {% block jquery %}
-$('#search2').keyup(function () {
-    $('#search-currently').text($(this).val());
-
-    // FAIRE LES DEMANDES API ICI
-    // Utiliser AJAX GET methode
+$('#main_search_form select').change(function(e){
+    $('#main_search_form').submit();
 });
 {% endblock jquery %}

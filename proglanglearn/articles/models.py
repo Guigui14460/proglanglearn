@@ -30,9 +30,12 @@ class Article(models.Model):
         Tag, verbose_name=_("catégories"), blank=True, related_name='article')
     content = HTMLField(
         verbose_name=_("contenu"))
-    timestamp = models.DateField(
+    published = models.BooleanField(default=False, verbose_name=_("publié"))
+    email_send = models.BooleanField(
+        default=False, verbose_name=_("emails envoyés"))
+    timestamp = models.DateTimeField(
         verbose_name=_("date de publication"))
-    last_modification = models.DateField(
+    last_modification = models.DateTimeField(
         verbose_name=_("dernière modification"))
     views = models.BigIntegerField(verbose_name=_(
         "nombre de vues"), blank=True, default=0)

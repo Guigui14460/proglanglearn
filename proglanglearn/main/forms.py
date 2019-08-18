@@ -4,12 +4,32 @@ from django.utils.translation import gettext_lazy as _
 from .models import Comment, CommentReport
 
 
+QUERY_SEARCH_TYPE = (
+    ('A', _("Tout")),
+    ('B', _("Seulement les cours")),
+    ('C', _("Seulement les tutoriels")),
+    ('D', _("Seulement les articles")),
+    ('E', _("Seulement les sujets")),
+    ('F', _("Seulement les langages, bibliothèques et catégories")),
+)
+
+
 class NavbarSearchForm(forms.Form):
     q = forms.CharField(label=_("Recherche"), widget=forms.TextInput(attrs={
         'id': 'search',
         'placeholder': _("Recherche"),
         'name': 'q'
     }), required=False)
+
+
+class SearchForm(forms.Form):
+    q2 = forms.CharField(label=_("Recherche"), widget=forms.TextInput(attrs={
+        'id': 'main_search',
+        'placeholder': _("Recherche"),
+        'name': 'q'
+    }), required=False, help_text=_("N.B. : séparez les mots clés par des espaces pour plus de résultats"))
+    q_type = forms.ChoiceField(label=_("Filtrer la recherche"), widget=forms.Select(
+        attrs={'style': 'font-size: 1.1rem; width: 100%;'}), required=False, choices=QUERY_SEARCH_TYPE)
 
 
 class CommentModelForm(forms.ModelForm):

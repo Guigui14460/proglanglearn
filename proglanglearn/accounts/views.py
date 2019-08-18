@@ -16,7 +16,14 @@ from django.views.generic import View, TemplateView, ListView
 
 from main.mixins import NavbarSearchMixin
 from main.utils import get_ip_address_client
-from .forms import PROG_TYPE, LoginForm, SignUpForm, PasswordResetForm, ChangeProfileImageForm, PersonalInformationForm, PasswordChangeForm, ProfileInformationForm, DangerZoneForm, ExperienceForm, EducationForm
+from .forms import (
+    PROG_TYPE, LoginForm, 
+    SignUpForm, PasswordResetForm, 
+    ChangeProfileImageForm, PersonalInformationForm, 
+    PasswordChangeForm, ProfileInformationForm, 
+    DangerZoneForm, ExperienceForm, 
+    EducationForm, ProfileSearchForm, 
+)
 from .github_backend import GithubRepo
 from .mixins import UserCanModifyProfile, ProfileObjectMixin
 from .models import Profile, Education, Experience, ProfileReport
@@ -360,8 +367,33 @@ class ProfileView(ProfileObjectMixin, NavbarSearchMixin, TemplateView):
 
 class ProfileListView(NavbarSearchMixin, ListView):
     template_name = 'accounts/profiles.html'
-    queryset = Profile.objects.all()
     paginate_by = 20
+    query = None
+    count = 0
+
+    def get(self, request, *args, **kwargs):
+        form = ProfileSearchForm(request.GET)
+        if form.is_valid():
+            self.query = form.cleaned_data['q_profile']
+        form = ProfileSearchForm({'q_profile': self.query})
+        context = self.get_context_data(**kwargs)
+        context['form'] = form
+        return render(request, self.template_name, context)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.query
+        context['object_list'] = self.get_queryset()
+        context['count'] = self.count
+        return context
+    
+    def get_queryset(self):
+        if self.query is not None and self.query != '':
+            qs = Profile.objects.search(self.query)
+        else:
+            qs = Profile.objects.all()
+        self.count = len(qs)
+        return qs
 
 
 class ProfileEditView(LoginRequiredMixin, ProfileObjectMixin, UserCanModifyProfile, NavbarSearchMixin, TemplateView):

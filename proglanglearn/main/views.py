@@ -4,9 +4,12 @@ from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import gettext as _
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, ListView
 
-from .forms import CommentReportForm
+from articles.models import Article
+from courses.models import Course, Tutorial
+from forum.models import Subject
+from .forms import CommentReportForm, SearchForm, NavbarSearchForm
 from .mixins import NavbarSearchMixin
 from .models import Comment, Language, Tag, CommentReport
 
@@ -31,8 +34,65 @@ class PrivacyView(NavbarSearchMixin, TemplateView):
     template_name = "main/privacy.html"
 
 
-class SearchView(NavbarSearchMixin, TemplateView):
+class SearchView(NavbarSearchMixin, ListView):
     template_name = "main/search.html"
+    paginate_by = 40
+    type_query = 'A'
+    main_query = None
+    navbar_query = None
+    query = None
+    count = 0
+
+    def get(self, request, *args, **kwargs):
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            self.type_query = form.cleaned_data['q_type'] if form.cleaned_data['q_type'] != '' else 'A'
+            self.main_query = form.cleaned_data['q2']
+        self.navbar_query = request.GET.get('q')
+        self.query = self.main_query or self.navbar_query
+        form = SearchForm({'q2': self.query, 'q_type': self.type_query})
+        context = self.get_context_data(**kwargs)
+        context['form'] = form
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.query
+        context['object_list'] = self.get_queryset()
+        context['count'] = self.count
+        return context
+
+    def get_queryset(self):
+        request = self.request
+        if self.query is not None:
+            if self.type_query == 'A':
+                article_results = Article.objects.search(self.query)
+                course_results = Course.objects.search(self.query)
+                tutorial_results = Tutorial.objects.search(self.query)
+                subject_results = Subject.objects.search(self.query)
+                language_results = Language.objects.search(self.query)
+                tag_results = Tag.objects.search(self.query)
+                qs = chain(article_results, course_results,
+                           tutorial_results, subject_results,
+                           language_results, tag_results)
+            elif self.type_query == 'B':
+                qs = Course.objects.search(self.query)
+            elif self.type_query == 'C':
+                qs = Tutorial.objects.search(self.query)
+            elif self.type_query == 'D':
+                qs = Article.objects.search(self.query)
+            elif self.type_query == 'E':
+                qs = Subject.objects.search(self.query)
+            elif self.type_query == 'F':
+                language_results = Language.objects.search(self.query)
+                tag_results = Tag.objects.search(self.query)
+                qs = chain(language_results, tag_results)
+            else:
+                qs = Article.objects.none()
+            qs = sorted(qs, key=lambda instance: instance.pk, reverse=True)
+            self.count = len(qs)
+            return qs
+        return Article.objects.none()
 
 
 class CommentReportView(NavbarSearchMixin, TemplateView):
