@@ -128,7 +128,7 @@ class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, Vi
                 'error': e
             })
             msg = EmailMultiAlternatives(
-                subject, message, "proglanglearn@gmail.com", to=[superuser.email for superuser in User.objects.filter(is_superuser=True)])
+                subject, message, to=[superuser.email for superuser in User.objects.filter(is_superuser=True)])
             msg.send()
             messages.error(request, _(
                 f"A serious error occurred. We have been notified"))

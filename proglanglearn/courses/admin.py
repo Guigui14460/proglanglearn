@@ -60,17 +60,17 @@ class TutorialInline(admin.StackedInline):
 
 
 class CourseAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'get_author_profile', get_thumbnail_preview, 'difficulty', 'published_date',
+    list_display = ('title', 'title_fr', 'title_en', 'get_author_profile', get_thumbnail_preview, 'difficulty', 'published_date',
                     'published', 'email_send', 'old_price', 'new_price')
     ordering = ('-published_date', 'published',
                 'email_send', 'old_price', 'new_price')
     search_fields = ['title', 'author__username']
-    fields = ('author', 'title', 'thumbnail', get_thumbnail_preview, 'content_introduction',
+    fields = ('author', 'title', 'title_fr', 'title_en', 'thumbnail', get_thumbnail_preview, 'content_introduction_fr', 'content_introduction_en',
               'difficulty', 'languages', 'tags', 'pdf', 'published_date', 'old_price', 'new_price')
     list_filter = ['published_date', 'published', 'email_send', YearListFilter]
     empty_value_display = _("Inconnu")
     readonly_fields = [get_thumbnail_preview]
-    inlines = [TutorialInline]
+    # inlines = [TutorialInline]
     list_editable = ['difficulty']
     actions = [send_email_course]
 
@@ -83,13 +83,15 @@ class CourseAdmin(ImportExportModelAdmin):
 
 
 class TutorialAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'course', 'published_date')
+    list_display = ('title', 'title_fr', 'title_en',
+                    'course', 'published_date')
     ordering = ('published_date',)
     search_fields = ['title']
 
     empty_value_display = _("Inconnu")
     fieldsets = (
-        (_("Info générales"), {'fields': ('course', 'title', 'content')}),
+        (_("Info générales"), {'fields': (
+            'course', 'title', 'title_fr', 'title_en', 'content_fr', 'content_en')}),
         (_("Info complémentaires"), {
          'fields': ('resources', 'experience', 'published_date')})
     )

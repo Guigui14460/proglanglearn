@@ -3,10 +3,14 @@
 
 {% block title %}{{ object.title }} - {% endblock title %}
 
+{% block extra_head %}
+<style>@media (max-width: 380px){#buttons, #buttons a{display: block} #buttons a{margin: 5px 0;}}</style>
+{% endblock extra_head %}
+
 {% block main %}
 <h1 class="large">{{ object.title }}</h1>
 {% if object.author == request.user or request.user.is_staff %}
-    <div class="my-2 d-flex space-between">
+    <div id="buttons" class="my-2 d-flex space-between">
         <a href="{% url 'courses:list' %}" class="btn btn__success btn__large">{% trans 'Retour' %}</a>
         <a href="{% url 'courses:update' slug=object.slug %}" class="btn btn__info btn__large">{% trans "Modifier l'aperçu du cours" %}</a>
         <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">{% trans 'Supprimer le cours' %}</a>

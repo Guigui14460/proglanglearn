@@ -55,11 +55,13 @@ class CommentReportAdmin(ImportExportModelAdmin):
 
 
 class LanguageAdmin(ImportExportModelAdmin):
-    pass
+    fields = ['name', 'name_fr', 'name_en',
+              'image', 'content_fr', 'content_en']
 
 
 class TagAdmin(ImportExportModelAdmin):
-    pass
+    fields = ['name', 'name_fr', 'name_en',
+              'image', 'content_fr', 'content_en']
 
 
 class UserAdmin(BaseUserAdmin, ImportExportModelAdmin):

@@ -44,11 +44,11 @@ class YearListFilter(admin.SimpleListFilter):
 
 
 class ArticleAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'get_author_profile', get_thumbnail_preview, 'timestamp', 'last_modification',
+    list_display = ('title', 'title_fr', 'title_en', 'get_author_profile', get_thumbnail_preview, 'timestamp', 'last_modification',
                     'published', 'email_send')
     ordering = ('-timestamp', '-last_modification', 'published', 'email_send')
     search_fields = ['title', 'author__username']
-    fields = ('author', 'title', 'thumbnail', get_thumbnail_preview, 'content',
+    fields = ('author', 'title', 'title_fr', 'title_en', 'thumbnail', get_thumbnail_preview, 'content_fr', 'content_en',
               'languages', 'tags', 'timestamp', 'published', 'email_send')
     list_filter = ['timestamp', 'last_modification',
                    'published', 'email_send', YearListFilter]

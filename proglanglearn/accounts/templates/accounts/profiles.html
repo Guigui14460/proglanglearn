@@ -17,7 +17,7 @@
 {% endif %}
 <div class="profiles">
     {% for object in object_list %}
-        <div class="profile bg-light">
+        <div class="profile bg-light-dark">
             <img class="bg-dark" src="{{ object.image.url }}" alt="{% trans "Image de profil" %}" />
             <div>
                 <h2>{% if object.user.first_name and object.user.last_name %}{{ object.user.first_name }}&nbsp;{{ object.user.last_name }}&nbsp;({{ object.user.username }}){% else %}{{ object.user.username }}{% endif %}</h2>

@@ -1,6 +1,4 @@
-﻿Test thread for schedule task like send email for article and course published
-
-Modeltranslation and readapt creation template for multiple languages (only on articles, courses and tutorials)
+﻿Use django with celery
 
 Poll/Quiz app (to add in course to add more experience)
 PayPal integration (see PrettyPrinted's Paypal integration in Flask video)

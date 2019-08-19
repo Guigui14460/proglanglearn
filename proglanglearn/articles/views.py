@@ -107,7 +107,7 @@ class ArticleDetailView(ArticleObjectMixin, NavbarSearchMixin, DetailView):
             context = self.get_context_data(**kwargs)
             context['form'] = form
             html = render_to_string(
-                'main/comments.html', context, request=request)
+                'main/includes/comments.html', context, request=request)
             return JsonResponse({'html': html, 'comments_count': context['parent_comments'].count()})
         return self.get(request, *args, **kwargs)
 

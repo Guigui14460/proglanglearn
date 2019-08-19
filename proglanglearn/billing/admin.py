@@ -99,7 +99,10 @@ class PaymentAdmin(ImportExportModelAdmin):
 
     def get_user_link(self, obj=None):
         if obj.pk:
-            return mark_safe(f"<a href='{reverse('admin:{}_{}_change'.format(obj.user._meta.app_label, obj.user._meta.model_name), args=(obj.user.pk,))}'>{obj.user.username}</a>")
+            try:
+                return mark_safe(f"<a href='{reverse('admin:{}_{}_change'.format(obj.user._meta.app_label, obj.user._meta.model_name), args=(obj.user.pk,))}'>{obj.user.username}</a>")
+            except:
+                return _("Utilisateur supprimé")
         return _("Enregistrez un paiement pour avoir le lien")
     get_user_link.allow_tags = True
     get_user_link.short_description = _("Lien de l'utilisateur")

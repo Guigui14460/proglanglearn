@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'form_utils',
     'github',
     'import_export',
+    'modeltranslation',
     'rest_framework',
     'snowpenguin.django.recaptcha3',
     'tinymce',
@@ -134,6 +135,7 @@ LOGIN_REDIRECT_URL = 'main:analytics:dashboard'
 LOGOUT_REDIRECT_URL = 'main:index'
 
 # Email config
+DEFAULT_FROM_EMAIL = 'ProgLangLearn <proglanglearn@gmail.com>'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

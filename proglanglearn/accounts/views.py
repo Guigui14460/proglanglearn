@@ -56,7 +56,7 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
                     'domain': current_site.domain,
                 })
                 msg = EmailMultiAlternatives(
-                    subject, message, "No reply <ProgLangLearn>", to=[user.email])
+                    subject, message, "No reply <proglanglearn@gmail.com>", to=[user.email])
                 msg.send()
             except:
                 pass
@@ -91,7 +91,7 @@ class RegistrationView(NavbarSearchMixin, View):
                     'token': generator.make_token(user),
                 })
                 msg = EmailMultiAlternatives(
-                    subject, message, "No reply <ProgLangLearn>", to=[user.email])
+                    subject, message, "No reply <proglanglearn@gmail.com>", to=[user.email])
                 msg.send()
                 messages.success(request, _(
                     "Envoi du mail d'activation du compte %(username)s effectué avec succès") % {'username': user.username})
@@ -122,7 +122,7 @@ class RegistrationView(NavbarSearchMixin, View):
                         'token': generator.make_token(user),
                     })
                     msg = EmailMultiAlternatives(
-                        subject, message, "No reply <ProgLangLearn>", to=[user.email])
+                        subject, message, "No reply <proglanglearn@gmail.com>", to=[user.email])
                     msg.send()
                     messages.warning(request, _(
                         "Votre compte existait déjà mais n'a pas été activé. Envoi du mail d'activation du compte %(username)s effectué avec succès") % {'username': user.username})
@@ -462,6 +462,7 @@ class ProfileReportView(ProfileObjectMixin, View):
         else:
             messages.warning(request, _("Le profil a déjà été signalé et est en attente de modification par le gérant de ce profil"))
         return redirect('accounts:profile', user_id=profile.user.id)
+
 
 class ExperienceDelete(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):

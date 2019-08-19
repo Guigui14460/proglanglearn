@@ -6,6 +6,7 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static '/style/css/vs2015.css' %}">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<style>@media (max-width: 380px){#buttons, #buttons2, #buttons a, #buttons2 a{display: block} #buttons a, #buttons2 a{margin: 5px 0;}}</style>
 {% endblock extra_head %}
 
 {% block main_attr %}class="aside"{% endblock main_attr %}
@@ -27,7 +28,7 @@
 
 {% block main %}
 <h1 class="large">{{ object.title }}</h1>
-<div class="my-2 d-flex space-between">
+<div id="buttons" class="my-2 d-flex space-between">
     <a href="{% url 'courses:detail' slug=object.course.slug %}" class="btn btn__light btn__large">{% trans 'Retour' %}</a>
     {% if request.user.is_staff or object.author == request.user %}
         <a href="{% url 'courses:tutorial-update' course_slug=object.course.slug tutorial_slug=object.slug %}" class="btn btn__info btn__large">{% trans 'Modifier le tutoriel' %}</a>
@@ -35,7 +36,7 @@
     {% endif %}
 </div>
 {% with favorite_tutorials=request.user.profile.favorite_tutorials.all %}
-    <div class="center-text">
+    <div id="infos" class="center-text">
         {{ object.experience }}&nbsp;EXP&nbsp;|&nbsp;<i class="far fa-clock"></i>&nbsp;{{ object.content|safe|time_estimate }}&nbsp;{% trans 'minutes' %}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}{% if request.user.is_authenticated %}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" title="{% if object in favorite_tutorials %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if object in favorite_tutorials %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}
     </div>
 {% endwith %}
@@ -43,7 +44,7 @@
     {{ object.content|safe }}
 </div>
 {% if prev_tutorial or next_tutorial %}
-    <div class="d-flex space-between">
+    <div id="buttons2" class="d-flex space-between">
         {% if prev_tutorial %}
             <a href="{{ prev_tutorial.get_absolute_url }}" title="{{ prev_tutorial.title }}" class="btn btn__outline__success btn__large">{% trans 'Précédent' %}</a>
         {% endif %}

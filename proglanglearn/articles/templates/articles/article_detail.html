@@ -6,6 +6,7 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<style>@media (max-width: 380px){.mx-1{margin: 0 10px;}}</style>
 {% endblock extra_head %}
 
 {% block main %}
@@ -18,7 +19,7 @@
             {% endwith %}
             <div class="my-1">
                 <div class="tags">
-                    {% include 'main/includes/tags.html' with object=object %}
+                    {% include "main/includes/tags.html" with object=object %}
                 </div>
                 {% if request.user.is_staff or request.user == object.author %}
                     <div class="mt-1 d-flex flex-end">

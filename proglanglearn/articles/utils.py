@@ -33,8 +33,8 @@ def send_email_new_article(request, article):
         'article': article
     })
     datatuple = (
-        (subject1, message1, "ProglangLearn <proglanglearn@gmail.com>", french_profile),
-        (subject2, message2, "ProglangLearn <proglanglearn@gmail.com>", english_profile),
+        (subject1, message1, settings.DEFAULT_FROM_EMAIL, french_profile),
+        (subject2, message2, settings.DEFAULT_FROM_EMAIL, english_profile),
     )
     send_mass_mail(datatuple, fail_silently=True)
 

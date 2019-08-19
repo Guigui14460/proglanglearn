@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
 
+from modeltranslation.forms import TranslationModelForm
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
 
@@ -9,7 +10,7 @@ from main.models import Language, Tag
 from .models import Course, Tutorial
 
 
-class CourseModelForm(forms.ModelForm):
+class CourseModelForm(TranslationModelForm):
     captcha = ReCaptchaField(score_threshold=0.5)
 
     class Meta:
@@ -38,7 +39,7 @@ class CourseModelForm(forms.ModelForm):
         }
 
 
-class CourseUpdateModelForm(forms.ModelForm):
+class CourseUpdateModelForm(TranslationModelForm):
     captcha = ReCaptchaField(score_threshold=0.5)
 
     class Meta:
@@ -65,7 +66,7 @@ class CourseUpdateModelForm(forms.ModelForm):
         }
 
 
-class TutorialModelForm(forms.ModelForm):
+class TutorialModelForm(TranslationModelForm):
     class Meta:
         model = Tutorial
         fields = ['title', 'content', 'resources', 'experience']
