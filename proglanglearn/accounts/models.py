@@ -8,6 +8,7 @@ from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
 
 from django_countries.fields import CountryField
+from tinymce.models import HTMLField
 
 from articles.models import Article
 from courses.models import Course, Tutorial
@@ -151,7 +152,8 @@ class Experience(models.Model):
     entreprise = models.CharField(
         max_length=50, verbose_name=_("nom de l'entreprise"))
     employment = models.CharField(
-        max_length=250, verbose_name=_("type d'emploi"))
+        max_length=100, verbose_name=_("type de l'emploi"))
+    description = HTMLField(verbose_name=_("description de l'emploi"))
     entry_date = models.DateField(
         verbose_name=_("date d'arrivée dans l'entreprise"))
     exit_date = models.DateField(verbose_name=_(

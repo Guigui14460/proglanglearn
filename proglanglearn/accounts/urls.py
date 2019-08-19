@@ -49,7 +49,7 @@ urlpatterns = [
     path('password-reset/complete/', CustomPasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
 
-    path('profile/list/', ProfileListView.as_view(), name='profile-list'),
+    path('profile/', ProfileListView.as_view(), name='profile-list'),
     path('profile/<int:user_id>/', ProfileView.as_view(), name='profile'),
     path('profile/<int:user_id>/edit/',
          ProfileEditView.as_view(), name='profile-edit'),

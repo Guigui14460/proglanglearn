@@ -252,12 +252,15 @@ class EducationForm(forms.ModelForm):
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
-        fields = ['entreprise', 'employment', 'entry_date', 'exit_date']
+        fields = ['entreprise', 'employment', 'description', 'entry_date', 'exit_date']
         widgets = {
             'entreprise': forms.TextInput(attrs={'placeholder': 'Google'}),
-            'employment': forms.TextInput(attrs={'placeholder': 'Analyste de données'}),
+            'employment': forms.TextInput(attrs={'placeholder': _("Analyste de données")}),
             'entry_date': forms.DateInput(attrs={'type': 'date'}),
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+        help_text = {
+            'description': _("Vous pouvez dire quelques explications sur le type d'emploi que vous êtes/étiez affecté, les compétences demandées, ce que vous faîtes/faisiez, etc")
         }
 
 
