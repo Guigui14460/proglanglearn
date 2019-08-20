@@ -75,7 +75,11 @@ class Order(models.Model):
                 total += float(course.old_price)
         if self.coupon is not None:
             total -= self.coupon.discount_price
-        return round(total, 2)
+        final_total = round(total, 2)
+        if total > 0:
+            return final_total
+        else:
+            return 0
 
     @property
     def get_old_total(self):
@@ -84,7 +88,11 @@ class Order(models.Model):
             total += float(course.old_price)
         if self.coupon is not None:
             total -= self.coupon.discount_price
-        return round(total, 2)
+        final_total = round(total, 2)
+        if total > 0:
+            return final_total
+        else:
+            return 0
 
     def get_refund(self):
         try:

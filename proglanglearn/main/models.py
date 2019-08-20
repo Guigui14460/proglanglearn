@@ -1,11 +1,13 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.mail import send_mass_mail
 from django.db import models
 from django.db.models.signals import pre_save
 from django.shortcuts import reverse
 from django.utils.text import slugify
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import activate, get_language, gettext_lazy as _
 
 from tinymce.models import HTMLField
 
@@ -28,6 +30,45 @@ class User(AbstractUser):
         verbose_name=_("adresse IP"), null=True, blank=True)
     natural_language = models.CharField(
         max_length=5, verbose_name=_("langage naturel de l'utilisateur"))
+
+
+class EmailAdminNotificationForUsers(models.Model):
+    subject = models.CharField(max_length=100, verbose_name=_("sujet"))
+    body = models.TextField(verbose_name=_("corps"))
+    timestamp = models.DateTimeField(
+        auto_now_add=True, verbose_name=_("date d'envoi"))
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = _("notification par email de l'administration")
+        verbose_name_plural = _("notifications par email de l'administration")
+
+    def __str__(self):
+        return self.subject
+
+    def save(self, **kwargs):
+        from accounts.models import Profile
+        super().save(**kwargs)
+        actual = get_language()
+        all_profile = Profile.objects.send_email()
+        french_profile, english_profile = [profile.user.email for profile in all_profile if profile.user.natural_language == 'fr'], [
+            profile.user.email for profile in all_profile if profile.user.natural_language == 'en']
+
+        activate('fr')
+        subject1 = self.subject
+        message1 = self.body
+
+        activate('en')
+        subject2 = self.subject
+        message2 = self.body
+
+        datatuple = (
+            (subject1, message1, settings.DEFAULT_FROM_EMAIL, french_profile),
+            (subject2, message2, settings.DEFAULT_FROM_EMAIL, english_profile),
+        )
+        send_mass_mail(datatuple, fail_silently=True)
+
+        activate(actual)
 
 
 class Language(models.Model):
