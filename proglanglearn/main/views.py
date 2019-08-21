@@ -22,8 +22,12 @@ class AboutView(NavbarSearchMixin, TemplateView):
     template_name = "main/about.html"
 
 
-class ContactView(NavbarSearchMixin, TemplateView):
+class ContactView(NavbarSearchMixin, View):
     template_name = "main/contact.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return render(request, self.template_name, context)
 
 
 class TermsView(NavbarSearchMixin, TemplateView):

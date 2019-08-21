@@ -37,6 +37,8 @@ class EmailAdminNotificationForUsers(models.Model):
     body = models.TextField(verbose_name=_("corps"))
     timestamp = models.DateTimeField(
         auto_now_add=True, verbose_name=_("date d'envoi"))
+    to_send = models.BooleanField(default=False, verbose_name=_("à envoyer"))
+    is_sent = models.BooleanField(default=False, verbose_name=_("envoyé"))
 
     class Meta:
         ordering = ['-timestamp']
@@ -49,26 +51,30 @@ class EmailAdminNotificationForUsers(models.Model):
     def save(self, **kwargs):
         from accounts.models import Profile
         super().save(**kwargs)
-        actual = get_language()
-        all_profile = Profile.objects.send_email()
-        french_profile, english_profile = [profile.user.email for profile in all_profile if profile.user.natural_language == 'fr'], [
-            profile.user.email for profile in all_profile if profile.user.natural_language == 'en']
+        if self.to_send and not self.is_sent:
+            actual = get_language()
+            all_profile = Profile.objects.send_email()
+            french_profile, english_profile = [profile.user.email for profile in all_profile if profile.user.natural_language == 'fr'], [
+                profile.user.email for profile in all_profile if profile.user.natural_language == 'en']
 
-        activate('fr')
-        subject1 = self.subject
-        message1 = self.body
+            activate('fr')
+            subject1 = self.subject
+            message1 = self.body
 
-        activate('en')
-        subject2 = self.subject
-        message2 = self.body
+            activate('en')
+            subject2 = self.subject
+            message2 = self.body
 
-        datatuple = (
-            (subject1, message1, settings.DEFAULT_FROM_EMAIL, french_profile),
-            (subject2, message2, settings.DEFAULT_FROM_EMAIL, english_profile),
-        )
-        send_mass_mail(datatuple, fail_silently=True)
+            datatuple = (
+                (subject1, message1, settings.DEFAULT_FROM_EMAIL, french_profile),
+                (subject2, message2, settings.DEFAULT_FROM_EMAIL, english_profile),
+            )
+            send_mass_mail(datatuple, fail_silently=True)
 
-        activate(actual)
+            activate(actual)
+            self.is_sent = True
+            self.to_send = False
+            super().save(**kwargs)
 
 
 class Language(models.Model):

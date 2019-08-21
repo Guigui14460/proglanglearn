@@ -17,7 +17,8 @@ SEARCH_TYPE = 'multiple'  # 'simple' or 'multiple'
 INSTALLED_APPS = [
     'filebrowser',
 
-    'django.contrib.admin',
+    # 'django.contrib.admin',
+    'proglanglearn.apps.MyAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

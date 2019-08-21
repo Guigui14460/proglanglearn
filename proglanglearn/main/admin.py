@@ -55,7 +55,9 @@ class CommentReportAdmin(ImportExportModelAdmin):
 
 
 class EmailAdminNotificationForUsersAdmin(ImportExportModelAdmin):
-    fields = ['subject_fr', 'subject_en', 'body_fr', 'body_en']
+    fields = ['subject_fr', 'subject_en',
+              'body_fr', 'body_en', 'to_send']
+    list_filter = ['to_send']
 
 
 class LanguageAdmin(ImportExportModelAdmin):

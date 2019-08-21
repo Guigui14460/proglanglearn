@@ -1,6 +1,5 @@
 from django.urls import path, include
 
-from polls import quiz_urls
 
 from .views import (
     CourseCreateView,
@@ -36,5 +35,4 @@ urlpatterns = [
          TutorialDeleteView.as_view(), name='tutorial-delete'),
     path('<str:course_slug>/<str:tutorial_slug>/favorite/',
          TutorialFavoriteToggleRedirectView.as_view(), name='tutorial-favorite'),
-    path('<str:course_slug>/quiz/', include(quiz_urls))
 ]
