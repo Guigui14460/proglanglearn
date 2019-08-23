@@ -18,6 +18,7 @@ from main.signals import comment_signal
 from .forms import ArticleModelForm, ArticleUpdateModelForm
 from .mixins import ArticleObjectMixin, UserCanModifyArticle
 from .models import Article
+from .thread_article_backend import SendEmailArticle
 from .utils import send_email_new_article
 
 
@@ -27,10 +28,8 @@ class ArticleListView(NavbarSearchMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         default = super().get(request, *args, **kwargs)
-        article_email_to_send = Article.objects.get_send_email_article()
-        for article in article_email_to_send:
-            send_email_new_article(request, article)
-        article_email_to_send.update(email_send=True)
+        thread = SendEmailArticle(request)
+        thread.start()
         return default
 
     def get_context_data(self, **kwargs):
@@ -90,6 +89,8 @@ class ArticleDetailView(ArticleObjectMixin, NavbarSearchMixin, DetailView):
         self.object = article
         article.views = F('views') + 1
         article.save()
+        thread = SendEmailArticle(request)
+        thread.start()
         return super(ArticleDetailView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):

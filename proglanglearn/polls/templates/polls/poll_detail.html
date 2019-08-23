@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Sondage" %} - {% endblock title %}
+
+{% block extra_head %}
+
+{% endblock extra_head %}
+
+{% block main %}
+<h1 class="large">{% trans "Sondage" %}</h1>
+<div id="buttons" class="my-2 d-flex space-between">
+    <a href="{% url 'polls:poll-list' %}" class="btn btn__light btn__large">{% trans 'Retour' %}</a>
+</div>
+<p>{{ poll.title }}</p>
+<div id="poll-container">
+    <form method="GET" action="{{ poll.get_vote_url }}" id="poll-form">
+        {% for item in items %}
+            <div class="form-group mb-1">
+                <input type="radio" name="item" id="item_{{ item.id }}" value="{{ item.id }}" />
+                <label for="item_{{ item.id }}">&nbsp;&nbsp;{{ item.value }}</label>
+            </div>
+        {% endfor %}
+        <div class="center-text">
+            <button id="poll_send" type="submit" class="btn btn__outline_info">{% trans "Voter" %}</button>
+        </div>
+    </form>
+</div>
+{% endblock main %}
+
+{% block jquery %}
+function ajaxPollVote(){
+    $('#poll-form').submit(function(e){
+        e.preventDefault();
+        var item = $('#poll-form input[name=item]:checked').val();
+        if (typeof item === 'undefined'){
+            alert('{% trans "Veuillez sélectionner une réponse" %}');
+            return false;
+        }
+        $.ajax({
+            method: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: {'item': item},
+            dataType: 'json',
+            success: function(response){
+                $('#poll-container').html(response.html);
+            },
+            error: function(rs, e){
+                console.log(rs.responseText);
+            },
+        });
+    });
+}
+ajaxPollVote();
+{% endblock jquery %}

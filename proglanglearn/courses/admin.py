@@ -66,7 +66,7 @@ class CourseAdmin(ImportExportModelAdmin):
                 'email_send', 'old_price', 'new_price')
     search_fields = ['title', 'author__username']
     fields = ('author', 'title', 'title_fr', 'title_en', 'thumbnail', get_thumbnail_preview, 'content_introduction_fr', 'content_introduction_en',
-              'difficulty', 'languages', 'tags', 'pdf', 'published_date', 'old_price', 'new_price')
+              'difficulty', 'languages', 'tags', 'pdf', 'published_date', 'old_price', 'new_price', 'published', 'email_send')
     list_filter = ['published_date', 'published', 'email_send', YearListFilter]
     empty_value_display = _("Inconnu")
     readonly_fields = [get_thumbnail_preview]

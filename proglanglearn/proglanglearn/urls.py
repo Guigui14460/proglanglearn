@@ -23,6 +23,7 @@ urlpatterns += [
     path('articles/', include('articles.urls')),
     path('courses/', include('courses.urls')),
     path('forum/', include('forum.urls')),
+    path('polls/', include('polls.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
     path('admin/filebrowser/', site.urls),

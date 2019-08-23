@@ -1,0 +1,12 @@
+{% load i18n poll_extras %}
+
+
+<ul>
+    {% for item in items %}
+        <li>
+            {{ item.value }}: <strong>{% percentage poll item %}%</strong><br>
+            <div style="background: #D1B692; border: 1px solid #AD8346; height: 8px; width: {% percentage poll item %}%;"></div>
+        </li>
+    {% endfor %}
+</ul>
+<h3 class="red-color center-text">{% trans "Nombre de votes" %} : {{ poll.get_vote_count }}</h3>

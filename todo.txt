@@ -1,6 +1,6 @@
-﻿Poll/Quiz app (to add in course to add more experience)
+﻿Quiz app (to add in course to add more experience)
 
-Make index, terms, policy and contact pages
+Make index (link to polls), terms, policy and contact pages
 
 Create a command to save each polls (question, items, results) and admin link to execute this command
 

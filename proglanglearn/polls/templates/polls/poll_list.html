@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n poll_extras %}
+
+{% block title %}{% trans 'Sondages' %} - {% endblock title %}
+
+{% block main %}
+<h1 class="large">{% trans 'Tous les sondages' %}</h1>
+<div class="grid-cards my-2">
+{% for poll in object_list %}
+    <div class="card card__round card-hoverable">
+        <div class="card-container">
+            <a href="{{ poll.get_absolute_url }}">
+                <h3 class="card-title">{{ poll.title }}</h3>
+            </a>
+            <a href="{{ poll.get_absolute_url }}">
+                <div class="card-content">
+                    {% include "polls/includes/ajax_result.html" with items=poll.items.all %}
+                </div>
+            </a>
+            {% if not poll|can_vote:request %}<div class="center-text"><a class="btn btn__info" href="{{ poll.get_absolute_url }}">{% trans "Répondre au sondage" %}</a></div>{% endif %}
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% if is_paginated %}
+    {% include "includes/pagination.html" %}
+{% endif %}
+{% endblock main %}
