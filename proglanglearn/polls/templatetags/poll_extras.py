@@ -1,3 +1,5 @@
+import datetime
+
 from django import template
 from django.template.loader import render_to_string
 from django.utils.html import format_html
@@ -31,14 +33,18 @@ def poll(context):
 
 @register.simple_tag
 def percentage(poll, item):
-    poll_vote_count = poll.get_vote_count()
-    if poll_vote_count > 0:
-        return round(float(item.get_vote_count()) / float(poll_vote_count) * 100, 2)
+    if poll.votes > 0:
+        return round(float(item.votes) / float(poll.votes) * 100, 2)
     return 0
 
 
 @register.filter
 def can_vote(poll, request):
-    if not Vote.objects.filter(poll=poll, ip=request.META['REMOTE_ADDR']).exists():
-        return False
+    today = datetime.date.today()
+    if poll.end_date is None:
+        if not Vote.objects.filter(poll=poll, ip=request.META['REMOTE_ADDR']).exists():
+            return False
+    else:
+        if not Vote.objects.filter(poll=poll, ip=request.META['REMOTE_ADDR']).exists() and poll.end_date < datetime.date.today():
+            return False
     return True

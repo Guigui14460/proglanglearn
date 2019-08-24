@@ -18,6 +18,8 @@ class Poll(models.Model):
         null=True, blank=True, verbose_name=_("date de fin"))
     is_published = models.BooleanField(
         default=True, blank=True, verbose_name=_("est publié"))
+    votes = models.PositiveIntegerField(
+        default=0, verbose_name=_("nombre de votes"))
 
     objects = models.Manager()
     published = PublishedManager()
@@ -39,10 +41,6 @@ class Poll(models.Model):
     def get_result_url(self):
         return reverse('polls:poll_result', kwargs={'poll_pk': self.pk})
 
-    def get_vote_count(self):
-        return Vote.objects.filter(poll=self).count()
-    get_vote_count.short_description = _("Total de vote")
-
     def get_cookie_name(self):
         return f"poll_{self.pk}"
 
@@ -52,6 +50,8 @@ class Item(models.Model):
         Poll, on_delete=models.CASCADE, related_name='items', verbose_name=_("sondage asscoié"))
     value = models.CharField(max_length=200, verbose_name=_("valeur"))
     position = models.SmallIntegerField(default=0, verbose_name=_("position"))
+    votes = models.PositiveIntegerField(
+        default=0, verbose_name=_("nombre de votes"))
 
     class Meta:
         ordering = ['poll', 'position']
@@ -61,13 +61,10 @@ class Item(models.Model):
     def __str__(self):
         return self.value
 
-    def get_vote_count(self):
-        return Vote.objects.filter(item=self).count()
-
 
 class Vote(models.Model):
     poll = models.ForeignKey(
-        Poll, on_delete=models.CASCADE, verbose_name=_("sondage associé"))
+        Poll, on_delete=models.CASCADE, related_name='user_votes', verbose_name=_("sondage associé"))
     item = models.ForeignKey(
         Item, on_delete=models.CASCADE, verbose_name=_("valeur votée"))
     ip = models.GenericIPAddressField(

@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .forms import NavbarSearchForm
 from .signals import comment_signal
+from .thread_remove_useless_info import DeleteUselessData
 
 
 class NavbarSearchMixin(object):
@@ -16,6 +17,8 @@ class NavbarSearchMixin(object):
         return nav_form
 
     def get_context_data(self, **kwargs):
+        thread = DeleteUselessData()
+        thread.start()
         try:
             context = super().get_context_data(**kwargs)
         except AttributeError:

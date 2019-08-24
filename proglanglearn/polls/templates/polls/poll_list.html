@@ -9,10 +9,10 @@
 {% for poll in object_list %}
     <div class="card card__round card-hoverable">
         <div class="card-container">
-            <a href="{{ poll.get_absolute_url }}">
+            <a href="{% if poll|can_vote:request %}{{ poll.get_result_url }}{% else %}{{ poll.get_absolute_url }}{% endif %}">
                 <h3 class="card-title">{{ poll.title }}</h3>
             </a>
-            <a href="{{ poll.get_absolute_url }}">
+            <a href="{% if poll|can_vote:request %}{{ poll.get_result_url }}{% else %}{{ poll.get_absolute_url }}{% endif %}">
                 <div class="card-content">
                     {% include "polls/includes/ajax_result.html" with items=poll.items.all %}
                 </div>

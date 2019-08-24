@@ -12,4 +12,5 @@
 <div class="poll_container">
     {% include "polls/includes/ajax_result.html" %}
 </div>
+{% if not poll|can_vote:request %}<div class="center-text"><a class="btn btn__info" href="{{ poll.get_absolute_url }}">{% trans "Répondre au sondage" %}</a></div>{% endif %}
 {% endblock main %}

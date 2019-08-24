@@ -16,8 +16,8 @@ class PollItemInline(admin.TabularInline):
 
 
 class PollAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'date', 'end_date', 'get_vote_count', 'is_published')
-    inlines = [PollItemInline,]
+    list_display = ('title', 'date', 'end_date', 'votes', 'is_published')
+    inlines = [PollItemInline, ]
     list_filter = ['is_published', 'date', 'end_date']
 
 
