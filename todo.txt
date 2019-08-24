@@ -1,4 +1,5 @@
-﻿Make index (link to poll list), terms, policy and contact pages
+﻿Make index (link to poll list), terms, policy pages
+
 
 Quiz app (to add in course to add more experience)
 

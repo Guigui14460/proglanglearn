@@ -1,6 +1,8 @@
 from itertools import chain
 
 from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import gettext as _
@@ -9,9 +11,12 @@ from django.views.generic import TemplateView, View, ListView
 from articles.models import Article
 from courses.models import Course, Tutorial
 from forum.models import Subject
-from .forms import CommentReportForm, SearchForm, NavbarSearchForm
+from .forms import CommentReportForm, SearchForm, NavbarSearchForm, ContactForm, BugForm
 from .mixins import NavbarSearchMixin
 from .models import Comment, Language, Tag, CommentReport
+
+
+User = get_user_model()
 
 
 class IndexView(NavbarSearchMixin, TemplateView):
@@ -27,6 +32,45 @@ class ContactView(NavbarSearchMixin, View):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
+        context['contact_form'] = ContactForm()
+        context['bug_form'] = BugForm()
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        contact_form = ContactForm(request.POST or None)
+        bug_form = BugForm(request.POST or None)
+        if contact_form.is_valid():
+            if not request.user.is_authenticated:
+                messages.error(request, _(
+                    "Vous devez être connecté pour envoyer votre message"))
+            else:
+                body = contact_form.cleaned_data['body'] + f"\n\n{request.user.username} ({request.user.id}) --- {request.user.email}"
+                send_mail(
+                    contact_form.cleaned_data['subject'],
+                    body,
+                    "Request Contact <proglanglearn@gmail.com>",
+                    [user.email for user in User.objects.filter(is_staff=True)]
+                )
+                messages.success(request, _("Votre message a été envoyé"))
+                contact_form = ContactForm()
+            context['contact_form'] = contact_form
+            context['bug_form'] = BugForm()
+            return render(request, self.template_name, context)
+        if bug_form.is_valid():
+            send_mail(
+                bug_form.cleaned_data['b_subject'],
+                bug_form.cleaned_data['b_body'],
+                "Bug Report <proglanglearn@gmail.com>",
+                [user.email for user in User.objects.filter(is_superuser=True)]
+            )
+            messages.info(request, _("Votre rapport d'erreur a été envoyé"))
+            bug_form = BugForm()
+            context['contact_form'] = ContactForm()
+            context['bug_form'] = bug_form
+            return render(request, self.template_name, context)
+        context['contact_form'] = contact_form
+        context['bug_form'] = bug_form
         return render(request, self.template_name, context)
 
 

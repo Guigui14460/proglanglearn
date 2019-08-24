@@ -22,6 +22,20 @@ class NavbarSearchForm(forms.Form):
     }), required=False)
 
 
+class ContactForm(forms.Form):
+    subject = forms.CharField(max_length=100, label=_("Sujet"), widget=forms.TextInput(
+        attrs={'placeholder': _("Ajout de langage ou de catégories, ...")}))
+    body = forms.CharField(max_length=2000, label=_("Corps du message"), widget=forms.Textarea(
+        attrs={'placeholder': _("Explications de la demande ...")}))
+
+
+class BugForm(forms.Form):
+    b_subject = forms.CharField(max_length=100, label=_(
+        "Sujet"), widget=forms.TextInput(attrs={'placeholder': _("Type du bug")}))
+    b_body = forms.CharField(max_length=2000, label=_("Corps du message"), widget=forms.Textarea(attrs={
+                           'placeholder': _("Description de ce que vous avez fait, ce qui a échouez, quelle page vous étiez ...")}))
+
+
 class SearchForm(forms.Form):
     q2 = forms.CharField(label=_("Recherche"), widget=forms.TextInput(attrs={
         'id': 'main_search',
