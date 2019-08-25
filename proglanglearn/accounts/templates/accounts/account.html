@@ -111,7 +111,7 @@
                     {% include 'includes/form_field2.html' with field=profile_form.github %}
                 </fieldset>
                 {% if request.user.profile.is_dev or request.user.profile.is_student %}
-                    <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="{% url 'accounts:edit-profile' user_id=request.user.is %}">{% trans "cette page" %}</a>.</p>
+                    <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="{% url 'accounts:profile-edit' user_id=request.user.id %}">{% trans "cette page" %}</a>.</p>
                 {% endif %}
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
                     {% trans "sont obligatoires." %}</small>
