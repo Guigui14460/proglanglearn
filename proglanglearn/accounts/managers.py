@@ -23,6 +23,9 @@ class ProfileManager(models.Manager):
 
     def send_email(self):
         return self.get_queryset().email()
+    
+    def all(self):
+        return self.get_queryset().filter((Q(is_dev=True) | Q(is_student=True)))
 
     def search(self, query):
         if settings.SEARCH_TYPE == 'multiple':
