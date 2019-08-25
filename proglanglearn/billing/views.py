@@ -45,6 +45,7 @@ class PaymentView(LoginRequiredMixin, UserCanViewCheckout, NavbarSearchMixin, Vi
     template_name = 'billing/payment.html'
 
     def get(self, request, *args, **kwargs):
+        messages.info(request, _("Ceci est une version test de ce site. Veuillez utiliser les informations suivantes pour la carte bancaire : 4242424242424242 07/20 000"))
         context = self.get_context_data(**kwargs)
         # context['form'] = CheckoutForm()
         # token = stripe.Token.create(

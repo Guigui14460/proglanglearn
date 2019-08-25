@@ -26,7 +26,7 @@
         <h4>{% trans "Catégories" %}</h4>
         <ul class="tutorial-list">
             {% for item in tags_used %}
-                <li><a href="search.html?q={{ item.name|lower }}">{{ item }} <span class="badge badge__danger">{{ item.subject.count }}</span></a></li>
+                <li><a href="{% url 'main:language_tag' slug=lang.slug %}">{{ item }} <span class="badge badge__danger">{{ item.subject.count }}</span></a></li>
             {% endfor %}
         </ul>
     </section>
