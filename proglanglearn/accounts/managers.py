@@ -36,7 +36,7 @@ class ProfileManager(models.Manager):
         if query is not None:
             or_lookup = (Q(user__username__icontains=query) | Q(
                 user__first_name__icontains=query) | Q(user__last_name__icontains=query))
-            qs = qs.filter(or_lookup)
+            qs = qs.filter((or_lookup & (Q(is_dev=True) | Q(is_student=True))))
         return qs
 
     def search_multiple(self, query):
@@ -45,6 +45,6 @@ class ProfileManager(models.Manager):
             for word in query.split():
                 or_lookup = (Q(user__username__icontains=word) | Q(
                     user__first_name__icontains=word) | Q(user__last_name__icontains=word))
-                qs = qs | self.get_queryset().filter(or_lookup)
+                qs = qs | self.get_queryset().filter((or_lookup & (Q(is_dev=True) | Q(is_student=True))))
             qs.distinct()
         return qs
