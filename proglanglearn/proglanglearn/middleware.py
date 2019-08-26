@@ -4,12 +4,6 @@ from django.utils.deprecation import MiddlewareMixin
 
 
 class LanguageMiddleware(MiddlewareMixin):
-    """
-    Detect the user's browser language settings and activate the language.
-    If the default language is not supported, try secondary options.  If none of the
-    user's languages are supported, then do nothing.
-    """
-
     def is_supported_language(self, language_code):
         supported_languages = dict(settings.LANGUAGES).keys()
         return language_code in supported_languages
@@ -52,3 +46,11 @@ class LanguageMiddleware(MiddlewareMixin):
         user.save()
         request.session[translation.LANGUAGE_SESSION_KEY] = current_language
         return response
+
+
+class XForwardedForMiddleware(MiddlewareMixin):
+    def process_request(self, request):
+        if 'HTTP_X_FORWARDED_FOR' in request.META:
+            request.META['REMOTE_ADDR'] = request.META['HTTP_X_FORWARDED_FOR'].split(",")[0].strip()
+        return None
+

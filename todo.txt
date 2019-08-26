@@ -1,5 +1,6 @@
 ﻿Make index (link to poll list), terms, policy pages
 
+Add share link to articles
 
 Quiz app (to add in course to add more experience)
 

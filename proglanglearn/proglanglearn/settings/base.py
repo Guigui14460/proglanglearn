@@ -11,7 +11,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 ADMINS = [('Guillaume LETELLIER', 'proglanglearn@gmail.com')]
 SITE_ID = 1
 SECRET_KEY = config('SECRET_KEY')
-SEARCH_TYPE = 'multiple'  # 'simple' or 'multiple'
 
 # Application definition
 INSTALLED_APPS = [
@@ -36,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'snowpenguin.django.recaptcha3',
     'tinymce',
+    'user_sessions',
     'xhtml2pdf',
     'django_plotly_dash',
 
@@ -51,17 +51,17 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
 ]
 
-AUTH_USER_MODEL = 'main.User'
-RESET_LOGIN_AFTER_PASSWORD_RESET = False
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
-
 MIDDLEWARE = [
     # HTML minifer
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
+    # For user sessions (admin)
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # For user sessions (no admin)
+    'user_sessions.middleware.SessionMiddleware',
+    'proglanglearn.middleware.XForwardedForMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'proglanglearn.middleware.LanguageMiddleware',
@@ -70,6 +70,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_ENGINE = 'user_sessions.backends.db'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -223,5 +225,12 @@ PATH_FILEBROWSER_MEDIA = STATIC_ROOT + 'filebrowser/'
 URL_TINYMCE = STATIC_URL + 'tinymce/'
 PATH_TINYMCE = STATIC_ROOT + 'tinymce/'
 
+# GeoIP2
+GEOIP_PATH = os.path.join(BASE_DIR, 'static/data_geoip2')
 
+# My settings
+AUTH_USER_MODEL = 'main.User'
 MAX_STRIKE = 3
+RESET_LOGIN_AFTER_PASSWORD_RESET = False
+SEARCH_TYPE = 'multiple'  # 'simple' or 'multiple'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30

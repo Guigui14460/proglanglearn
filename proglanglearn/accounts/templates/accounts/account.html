@@ -9,7 +9,12 @@
 <h1 class="large">{% trans "Réglages de votre compte" %}</h1>
 <p class="lead"><i class="fas fa-user-cog"></i>&nbsp;{% trans "Modifier les paramètres et informations de votre compte !" %}
 </p>
-<p><a href="{% url 'accounts:profile' user_id=request.user.id %}" class="btn btn__success btn__300 btn__block btn__large">{% trans "Voir mon profil" %}</a></p>
+<p>
+    <a href="{% url 'accounts:profile' user_id=request.user.id %}" class="btn btn__success btn__300 btn__block btn__large">{% trans "Voir mon profil" %}</a>
+</p>
+<p>
+    <a href="{% url 'accounts:session_list' %}" class="btn btn__warning btn__300 btn__block btn__large">{% trans "Voir mes sessions actives" %}</a>
+</p>
 <div class="row small-device">
     <div class="col-25 hide-small-device">
         <div class="sticky-box">

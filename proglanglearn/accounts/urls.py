@@ -1,6 +1,8 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
+from user_sessions.views import SessionListView, SessionDeleteView, SessionDeleteOtherView
+
 from .views import (
     AccountView,
     PersonalInfo,
@@ -29,7 +31,7 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name="login"),
     path('signup/', RegistrationView.as_view(), name='register'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('account/', AccountView.as_view(), name='account'),
+    path('', AccountView.as_view(), name='account'),
     path('account/handle-personal-info/',
          PersonalInfo.as_view(), name='handle-personal-info'),
     path('account/handle-change-password/',
@@ -48,6 +50,8 @@ urlpatterns = [
          CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password-reset/complete/', CustomPasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
+
+    path('sessions/', include('accounts.session_urls')),
 
     path('profile/', ProfileListView.as_view(), name='profile-list'),
     path('profile/<int:user_id>/', ProfileView.as_view(), name='profile'),
