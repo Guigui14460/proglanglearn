@@ -391,7 +391,7 @@ class ProfileListView(NavbarSearchMixin, ListView):
         if self.query is not None and self.query != '':
             qs = Profile.objects.search(self.query)
         else:
-            qs = Profile.objects.all()
+            qs = Profile.objects.all_dev_student()
         self.count = len(qs)
         return qs
 

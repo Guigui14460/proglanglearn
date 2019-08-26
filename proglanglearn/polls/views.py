@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import View, ListView
 
+from analytics.utils import save_user_exp
 from main.mixins import NavbarSearchMixin
 from .models import Poll, Item, Vote
 from .utils import set_cookie
@@ -27,6 +28,10 @@ class VoteView(View):
             poll.save()
             item.votes += 1
             item.save()
+            if request.user.is_authenticated:
+                request.user.profile.level_experience += 5
+                request.user.profile.save()
+                save_user_exp(request, 5)
             response = HttpResponse(status=200)
             set_cookie(response, poll.get_cookie_name(), kwargs.get('poll_pk'))
 
