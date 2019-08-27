@@ -76,6 +76,7 @@
                 <h3>{{ experience.entreprise }}</h3>
                 <p>{{ experience.entry_date|date:"F Y"|title }} - {% if experience.exit_date %}{{ experience.exit_date|date:"F Y"|title }}{% else %}{% trans "Maintenant" %}{% endif %}</p>
                 <p><strong>{% trans "Poste" %} :</strong>&nbsp;{{ experience.employment }}</p>
+                <p><strong>{% trans "Description" %} :</strong>&nbsp;{{ experience.description }}</p>
             </div>
         {% empty %}
             <div>{% trans "Aucune expérience renseignée" %}</div>
@@ -88,6 +89,7 @@
                 <h3>{{ education.school }}</h3>
                 <p>{{ education.entry_date|date:"F Y"|title }} - {% if education.exit_date %}{{ education.exit_date|date:"F Y"|title }}{% else %}{% trans "Maintenant" %}{% endif %}</p>
                 <p><strong>{% trans "Diplôme" %} :</strong>&nbsp;{{ education.degree }}</p>
+                <p><strong>{% trans "Description" %} :</strong>&nbsp;{{ education.description }}</p>
             </div>
         {% empty %}
             <div>{% trans "Aucune école renseignée" %}</div>

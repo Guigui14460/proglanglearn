@@ -10,6 +10,7 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from form_utils.forms import BetterForm
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
+from tinymce.widgets import TinyMCE
 
 from main.models import Language
 from .models import Profile, Education, Experience
@@ -240,12 +241,16 @@ class DangerZoneForm(forms.Form):
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
-        fields = ['school', 'degree', 'entry_date', 'exit_date']
+        fields = ['school', 'degree', 'description2', 'entry_date', 'exit_date']
         widgets = {
             'school': forms.TextInput(attrs={'placeholder': 'Epitech'}),
             'degree': forms.TextInput(attrs={'placeholder': 'Master en sécurité informatique'}),
+            'description2': TinyMCE(attrs={'placeholder': _("Explications ..."), 'rows': 5}),
             'entry_date': forms.DateInput(attrs={'type': 'date'}),
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+        help_text = {
+            'description2': _("Vous pouvez dire quelques explications sur les compétences acquises, vos résultats, etc")
         }
 
 
@@ -256,6 +261,7 @@ class ExperienceForm(forms.ModelForm):
         widgets = {
             'entreprise': forms.TextInput(attrs={'placeholder': 'Google'}),
             'employment': forms.TextInput(attrs={'placeholder': _("Analyste de données")}),
+            'description': forms.Textarea(attrs={'placeholder': _("Explications ...")}),
             'entry_date': forms.DateInput(attrs={'type': 'date'}),
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
         }

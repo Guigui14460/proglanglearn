@@ -133,6 +133,7 @@ class Education(models.Model):
         Profile, on_delete=models.CASCADE, related_name='educations', verbose_name=_("profile associé"))
     school = models.CharField(max_length=50, verbose_name=_("nom de l'école"))
     degree = models.CharField(max_length=50, verbose_name=_("diplôme obtenu"))
+    description2 = HTMLField(verbose_name=_("description"))
     entry_date = models.DateField(verbose_name=_("date d'entrée dans l'école"))
     exit_date = models.DateField(verbose_name=_(
         "date de sortie de l'école"), null=True, blank=True)
@@ -153,7 +154,7 @@ class Experience(models.Model):
         max_length=50, verbose_name=_("nom de l'entreprise"))
     employment = models.CharField(
         max_length=100, verbose_name=_("type de l'emploi"))
-    description = HTMLField(verbose_name=_("description de l'emploi"))
+    description = models.TextField(verbose_name=_("description de l'emploi"))
     entry_date = models.DateField(
         verbose_name=_("date d'arrivée dans l'entreprise"))
     exit_date = models.DateField(verbose_name=_(

@@ -3,45 +3,45 @@
 
 {% block title %}Mes sessions - {% endblock title %}
 
-{% block extra_head %}<style>table{width: 100%}</style>{% endblock extra_head %}
-
 {% block main %}
 {% trans "<em>unknown on unknown</em>" as unknown_on_unknown %}
 {% trans "<em>unknown</em>" as unknown %}
 
 <h1>{% trans "Sessions actives" %}</h1>
 
- <table class="table table__success">
-    <tr>
-        <th>{% trans "Lieu" %}</th>
-        <th>{% trans "Appareil" %}</th>
-        <th>{% trans "Dernière activité" %}</th>
-        <th>{% trans "Fin de session" %}</th>
-    </tr>
-    {% for object in object_list %}
-        <tr {% if object.session_key == session_key %}class="active"{% endif %}>
-            <td>{{ object.ip|location|default_if_none:unknown|safe }} <small>({{ object.ip }})</small></td>
-            <td>{{ object.user_agent|device|default_if_none:unknown_on_unknown|safe }}</td>
-            <td>
-                {% if object.session_key == session_key %}
-                    {% blocktrans with time=object.last_activity|timesince %}{{ time }} ago (this session){% endblocktrans %}
-                {% else %}
-                    {% blocktrans with time=object.last_activity|timesince %}{{ time }} ago{% endblocktrans %}
-                {% endif %}
-            </td>
-            <td>
-                <form method="post" action="{% url 'accounts:session_delete' pk=object.pk %}">
-                    {% csrf_token %}
-                    {% if object.session_key == session_key %}
-                        <button type="submit" class="btn btn__danger">{% trans "Fermer la session" %}</button>
-                    {% else %}
-                        <button type="submit" class="btn btn__warning">{% trans "Fermer la session" %}</button>
-                    {% endif %}
-                </form>
-            </td>
+<div class="table table__success mb-1">
+    <table>
+        <tr>
+            <th>{% trans "Lieu" %}</th>
+            <th>{% trans "Appareil" %}</th>
+            <th>{% trans "Dernière activité" %}</th>
+            <th>{% trans "Fin de session" %}</th>
         </tr>
-    {% endfor %}
-</table>
+        {% for object in object_list %}
+            <tr {% if object.session_key == session_key %}class="active"{% endif %}>
+                <td>{{ object.ip|location|default_if_none:unknown|safe }} <small>({{ object.ip }})</small></td>
+                <td>{{ object.user_agent|device|default_if_none:unknown_on_unknown|safe }}</td>
+                <td>
+                    {% if object.session_key == session_key %}
+                        {% blocktrans with time=object.last_activity|timesince %}{{ time }} ago (this session){% endblocktrans %}
+                    {% else %}
+                        {% blocktrans with time=object.last_activity|timesince %}{{ time }} ago{% endblocktrans %}
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="post" action="{% url 'accounts:session_delete' pk=object.pk %}">
+                        {% csrf_token %}
+                        {% if object.session_key == session_key %}
+                            <button type="submit" class="btn btn__danger">{% trans "Fermer la session" %}</button>
+                        {% else %}
+                            <button type="submit" class="btn btn__warning">{% trans "Fermer la session" %}</button>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
 {% if object_list.count > 1 %}
     <form method="post" action="{% url 'accounts:session_delete_other' %}">
         {% csrf_token %}
