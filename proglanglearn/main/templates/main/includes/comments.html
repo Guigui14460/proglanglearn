@@ -28,7 +28,7 @@
                 <div class="comment">
                     <div class="commentary">
                         <img src="{{ parent_comment.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
-                        <span><a href="{% url 'accounts:profile' user_id=parent_comment.author.id %}">{{ parent_comment.author.username }} ({{ parent_comment.author.profile.get_user_profile_type }})</a> {% trans "il y a" %} {{ parent_comment.timestamp|timesince }}</span>
+                        <span><a href="{% url 'accounts:profile' user_id=parent_comment.author.id %}">{{ parent_comment.author.username }} ({{ parent_comment.author.profile.get_user_profile_type }})</a>{% blocktrans with time=parent_comment.timestamp|timesince %} il y a {{ time }}{% endblocktrans %}</span>
                         <span class="ml-auto">{% if request.user == parent_comment.author %}<a title="{% trans "Supprimer le commentaire" %}" href="{{ parent_comment.get_delete_url }}">{% trans "Supprimer" %}</a>{% endif %}{% if not request.user == parent_comment.author %}&nbsp;<a href="{{ parent_comment.get_report_url }}" title="{% trans 'Signaler le commentaire' %}">{% trans 'Signaler' %}</a>{% endif %}</span>
                     </div>
                     <p>{{ parent_comment.content }}</p>
@@ -38,7 +38,7 @@
                                 <div class="comment">
                                     <div class="commentary">
                                         <img src="{{ reply.author.profile.image.url }}" alt="{% trans 'Photo de profil' %}" class="profile-image round-image" />
-                                        <span><a href="{% url 'accounts:profile' user_id=reply.author.id %}">{{ reply.author.username }} ({{ reply.author.profile.get_user_profile_type }})</a> {% trans "il y a" %} {{ reply.timestamp|timesince }}</span>
+                                        <span><a href="{% url 'accounts:profile' user_id=reply.author.id %}">{{ reply.author.username }} ({{ reply.author.profile.get_user_profile_type }})</a> {% blocktrans with time=reply.timestamp|timesince %} il y a {{ time }}{% endblocktrans %}</span>
                                         <span class="ml-auto">{% if request.user == reply.author %}<a title="{% trans "Supprimer le commentaire" %}" href="{{ reply.get_delete_url }}">{% trans "Supprimer" %}</a>{% endif %}{% if not request.user == reply.author %}&nbsp;<a href="{{ reply.get_report_url }}" title="{% trans 'Signaler le commentaire' %}">{% trans 'Signaler' %}</a>{% endif %}</span>
                                     </div>
                                     <p>{{ reply.content }}</p>

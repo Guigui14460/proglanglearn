@@ -65,6 +65,6 @@
 
 {% block jquery %}
 {% include 'main/includes/ajax_comments.html' %}
-function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', "Remove favorites");$('body').append("<div class='toast'>Article added to favorites</div>");} else {star.parent().attr('title', "Add to favorites");$('body').append("<div class='toast'>Article removed from favorites</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', '{% trans "Enlever des favoris" %}');$('body').append("<div class='toast'>{% trans "Article ajouté aux favoris" %}</div>");} else {star.parent().attr('title', '{% trans "Ajouter aux favoris" %}');$('body').append("<div class='toast'>{% trans "Article retiré des favoris" %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
 {% include 'main/includes/ajax_favorite.html' %}
 {% endblock jquery %}

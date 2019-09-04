@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% url 'main:contact' as contact %}
 
 {% block title %}{% trans 'Accès interdit' %} - {% endblock title %}
 
 {% block main %}
+{% url 'main:contact' as contact %}
 <h1 class="large">{% trans 'Page à accès restreint !' %}</h1>
 <p class="lead mb-1">{% trans "La page à laquelle vous essayez d'accéder est sous accès restreint. Vous n'avez donc pas l'autorisation de voir le contenu qu'elle propose." %}</p>
-{% blocktrans %}<a href="{{ contact }}">Faire une demande auprès de l'administration</a> ou <a href="{{ contact }}">Faire un rapport d'erreur auprès de l'administration</a>{% endblocktrans %}
+{% blocktrans %}<a href="{{ contact }}">Faire une demande auprès de l'administration</a> ou <a href="{{ contact }}">faire un rapport d'erreur auprès de l'administration</a>{% endblocktrans %}
 <div class="center-image">
     <svg class="my-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         width="952.65" height="712.16" viewBox="0 0 952.65 712.16">

@@ -23,7 +23,7 @@ class Article(models.Model):
     slug = models.SlugField(verbose_name=_(
         "URL d'accès"), blank=True, null=True)
     thumbnail = models.ImageField(
-        upload_to='blog_thumbnail/', verbose_name=_("vignette/vidéo d'article"))
+        upload_to='blog_thumbnail/', verbose_name=_("vignette"))
     languages = models.ManyToManyField(
         Language, verbose_name=_("langages utilisés"), blank=True, related_name='article')
     tags = models.ManyToManyField(

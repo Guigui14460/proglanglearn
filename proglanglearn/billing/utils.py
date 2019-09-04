@@ -42,4 +42,4 @@ class RenderPDF:
             response['Content-Disposition'] = f'inline; filename="{file_name}.pdf"'
             return response
         else:
-            return HttpResponse("Error Rendering PDF", status=400)
+            return HttpResponse(_("Error Rendering PDF"), status=400)

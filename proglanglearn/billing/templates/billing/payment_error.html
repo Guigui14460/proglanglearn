@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% autoescape off %}
-{% blocktrans %}Vous recevez ce mail car une erreur est survenue lors d'un paiement sur ProgLangLearn.
+{% blocktrans with error=error %}Vous recevez ce mail car une erreur est survenue lors d'un paiement sur ProgLangLearn.
 
 Voici l'erreur générée :
 {{ error }}

@@ -110,6 +110,6 @@
 {% endblock main %}
 
 {% block jquery %}
-function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', "Remove favorites");$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}Tutorial{% else %}Article{% endif %} added to favorites</div>");} else {star.parent().attr('title', "Add to favorites");$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}Tutorial{% else %}Article{% endif %} removed from favorites</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', '{% trans "Retirer des favoris" %}');$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}{% trans "Tutoriel" %}{% else %}{% trans "Article" %}{% endif %}{% trans " ajouté aux favoris" %}</div>");} else {star.parent().attr('title', '{% trans "Ajouter aux favoris" %}');$('body').append("<div class='toast'>{% if type == 'my_favorite_tutorials' %}{% trans "Tutoriel" %}{% else %}{% trans "Article" %}{% endif %}{% trans " enlevé de vos favoris" %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
 {% include 'main/includes/ajax_favorite.html' %}
 {% endblock jquery %}

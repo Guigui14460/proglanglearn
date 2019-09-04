@@ -40,7 +40,7 @@ class SubjectAdmin(ImportExportModelAdmin):
     def get_author_link(self, obj=None):
         if obj.pk:
             return mark_safe(f"<a href='{reverse('admin:{}_{}_change'.format(obj.user._meta.app_label, obj.user._meta.model_name), args=(obj.user.pk,))}'>{obj.user.username}</a>")
-        return _("Enregistrez pour avoir le lien de l'auteur du cours")
+        return _("Enregistrez pour avoir le lien de l'auteur du sujet")
     get_author_link.allow_tags = True
     get_author_link.short_description = _("Auteur")
 
@@ -56,7 +56,7 @@ class SubjectAnswerAdmin(ImportExportModelAdmin):
     def get_author_link(self, obj=None):
         if obj.pk:
             return mark_safe(f"<a href='{reverse('admin:{}_{}_change'.format(obj.user._meta.app_label, obj.user._meta.model_name), args=(obj.user.pk,))}'>{obj.user.username}</a>")
-        return _("Enregistrez pour avoir le lien de l'auteur du cours")
+        return _("Enregistrez pour avoir le lien de l'auteur de la réponse du sujet")
     get_author_link.allow_tags = True
     get_author_link.short_description = _("Auteur")
 

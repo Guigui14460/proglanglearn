@@ -28,13 +28,13 @@ def strike_comment(modeladmin, request, queryset):
         if int(report.comment.author.profile.strike) >= settings.MAX_STRIKE:
             strike_msg = _("Vous êtes définitivement banni de ProgLangLearn, c'est-à-dire que l'accès à votre compte n'est plus possible. Aucun recours sera possible comme stipulé dans nos conditions générales d'utilisation.")
         else:
-            strike_msg = _("Il ne vous reste que %(nb)d signalements pour être définitivement banni et perdre votre compte ProgLangLearn") % {
+            strike_msg = _("Vous n'avez droit qu'à %(nb)d signalements pour être définitivement banni et perdre votre compte ProgLangLearn") % {
                 'nb': settings.MAX_STRIKE - report.comment.author.profile.strike}
-        subject = _("Un de vos commentaire a été signalé")
+        subject = _("Un de vos commentaires a été signalé")
         message = _("Votre commentaire datant du %(date)s a été signalé.\nLe type de signalement est : %(type)s."
                     "\nVotre commentaire ne sera plus visible. %(strike_msg)s") % {'date': report.comment.timestamp, 'type': report.get_type_alert_display(), 'strike_msg': strike_msg}
         msg = EmailMultiAlternatives(
-            subject, message, "ProgLangLearn", to=[report.comment.author.email])
+            subject, message, settings.DEFAULT_FROM_EMAIL, to=[report.comment.author.email])
         msg.send()
 
 

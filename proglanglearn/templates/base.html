@@ -3,7 +3,8 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %} data-theme="light" class="transition">
+<html lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl" {% endif %} data-theme="light" class="transition">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="language" content="fr" />
@@ -13,7 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="copyright" content="ProgLangLearn Inc." />
     <meta name="category" content="web, programming, languages" />
-    <meta name="keywords" content="{% block keyword %}{% endblock keyword %}, web, pll, proglanglearn, programming, language" />
+    <meta name="keywords"
+        content="{% block keyword %}{% endblock keyword %}, web, pll, proglanglearn, programming, language" />
     <meta name="publisher" content="LETELLIER Guillaume" />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#c5a31b" />
@@ -29,9 +31,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     {% recaptcha_init %}
     {% recaptcha_ready action_name='/' %}
-    <style>select:not(.custom-multiple-select), select:not(.custom-select){padding: 3px 5px; border-radius: 5px;}select[name="language"]{font-size: 1rem; background-color: #c5a31b; font-weight: 600;}</style>
+    <style>
+        select:not(.custom-multiple-select),
+        select:not(.custom-select) {
+            padding: 3px 5px;
+            border-radius: 5px;
+        }
+
+        select[name="language"] {
+            font-size: 1rem;
+            background-color: #c5a31b;
+            font-weight: 600;
+        }
+    </style>
     {% block extra_head %}{% endblock extra_head %}
 </head>
+
 <body>
     {% include 'includes/loading.html' %}
     {% include 'includes/scrollTop.html' %}
@@ -45,9 +60,10 @@
         {% block aside_left %}{% endblock aside_left %}
         <div class="container">
             {% for message in messages %}
-                <div type="alert" class="alert {% if messages.level %}{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert__danger{% else %}alert__{{ message.tags }}{% endif %}{% endif %} alert__dismissable">
-                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
-                </div>
+            <div type="alert"
+                class="alert {% if messages.level %}{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert__danger{% else %}alert__{{ message.tags }}{% endif %}{% endif %} alert__dismissable">
+                {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+            </div>
             {% endfor %}
             {% block main %}{% endblock main %}
         </div>
@@ -61,6 +77,7 @@
     </footer>
     <script src="{% static 'js/main.jquery.js' %}"></script>
     {% block javascript %}{% endblock javascript %}
-    <script>$(function(){$("#langForm select").change(function() { $(this).closest('form').submit() }); {% block jquery %}{% endblock jquery %} });</script>
+    <script>$(function () { $("#langForm select").change(function () { $(this).closest('form').submit() }); {% block jquery %} {% endblock jquery %} });</script>
 </body>
+
 </html>

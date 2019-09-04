@@ -57,8 +57,8 @@
 {% endblock javascript %}
 
 {% block jquery %}
-function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', "Remove favorites");$('body').append("<div class='toast'>Subject added to favorites</div>");} else {star.parent().attr('title', "Add to favorites");$('body').append("<div class='toast'>Subject removed from favorites</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
-function like_answer(like) {if (like.hasClass('fas')) {like.parent().attr('title', "Remove your like");like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) + 1);$('body').append("<div class='toast'>Subject anwser liked</div>");} else {like.parent().attr('title', "Like answer");like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) - 1);$('body').append("<div class='toast'>Subject answer disliked</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', '{% trans "Retirer des favoris" %}');$('body').append("<div class='toast'>{% trans "Sujet ajouté aux favoris" %}</div>");} else {star.parent().attr('title', "{% trans "Ajouter aux favoris" %}");$('body').append("<div class='toast'>{% trans "Sujet enlevé de vos favoris" %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+function like_answer(like) {if (like.hasClass('fas')) {like.parent().attr('title', '{% trans "Enlever votre like" %}');like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) + 1);$('body').append("<div class='toast'>{% trans "Réponse liker" %}</div>");} else {like.parent().attr('title', '{% trans "Liker la réponse" %}');like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) - 1);$('body').append("<div class='toast'>{% trans 'Réponse dislikée' %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
 {% include 'main/includes/ajax_favorite.html' %}
 {% include 'forum/includes/ajax_like_answer.html' %}
 {% endblock jquery %}

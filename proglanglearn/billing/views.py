@@ -158,7 +158,7 @@ class AddCourseToCart(LoginRequiredMixin, View):
             order = order_qs.first()
             if course in order.courses.all():
                 messages.info(request, _(
-                    "Le cours que vous essayé d'ajouter se trouve déjà dans le panier"))
+                    "Le cours que vous essayez d'ajouter se trouve déjà dans le panier"))
             else:
                 order.courses.add(course)
                 messages.success(request, _("Cours ajouté au panier"))
@@ -324,7 +324,7 @@ class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
                     messages.error(request, _(
                         "La demande de remboursement a été rejetée"))
                 messages.error(request, _(
-                    "La période de remboursement a expirée ou vous avez déjà envoyé une demande"))
+                    "La période de remboursement a expiré ou vous avez déjà envoyé une demande"))
                 return redirect('main:analytics:orders')
             except ObjectDoesNotExist:
                 messages.warning(request, _(

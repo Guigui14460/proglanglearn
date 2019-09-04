@@ -34,7 +34,7 @@ class CourseModelForm(TranslationModelForm):
             'new_price': forms.NumberInput(attrs={'step': 'any', 'min': 0})
         }
         help_text = {
-            'tags': _("S'il manque une catégorie, demandez à le <a href='%(contact_url)s'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
+            'tags': _("S'il manque une catégorie, demandez à le rajouter sur la page contact rubrique 'Demande'. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
             'published_date': _("Conseil : mettre une période de deux semaines en plus en attente de vérification de la part de l'administration")
         }
 
@@ -62,7 +62,7 @@ class CourseUpdateModelForm(TranslationModelForm):
             'new_price': forms.NumberInput(attrs={'step': 'any', 'min': 0})
         }
         help_text = {
-            'tags': _("S'il manque une catégorie, demandez à le <a href='%(contact)s'>rajouter</a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
+            'tags': _("S'il manque une catégorie, demandez à le rajouter à la page contact rubrique 'Demande'. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet de votre demande"),
         }
 
 

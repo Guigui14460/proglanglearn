@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n main_extras %}
 
 <div class="container pt-4 pb-3">
     <div class="important-links">
@@ -16,7 +16,7 @@
     </div>
     <div class="copyright">
         <h3>
-            &copy; <a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn</a>
+            &copy; {% current_year %}&nbsp;<a href="{% url 'main:index' %}" class="primary-color">ProgLangLearn</a>
         </h3>
         <p class="mt-0">{% trans 'Tous droits réservés' %}</p>
     </div>

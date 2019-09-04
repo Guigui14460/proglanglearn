@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n main_extras %}
 
 {% block title %}{% trans 'À propos' %} - {% endblock title %}
 
 {% block main %}
+{% admin_url as admin_url_profile %}
 <h1 class="large">{% trans 'À propos' %}</h1>
 <div class="lead">
-    {% blocktrans %}<div class="my-1">
-        Fondé en 2019 par <a href="profile.html">Guillaume Letellier</a>, étudiant en informatique,
+    {% blocktrans with admin_url=admin_url_profile %}<div class="my-1">
+        Créé en 2020 par <a href="{{ admin_url }}">Guillaume Letellier</a>, étudiant en informatique,
         ProgLangLearn est un ensemble d'outil
         spécialisé dans le domaine de la programmation informatique. Il s'adresse à tout public désirant se
         former et maîtriser ces outils numériques.

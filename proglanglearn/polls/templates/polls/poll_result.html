@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n poll_extras %}
 
-{% block title %}{% trans "Résultat du sondage" %} - {% endblock title %}
+{% block title %}{% trans "Résultats du sondage" %} - {% endblock title %}
 
 {% block main %}
-<h1 class="large">{% trans "Résultat du sondage" %}</h1>
+<h1 class="large">{% trans "Résultats du sondage" %}</h1>
 <div id="buttons" class="my-2 d-flex space-between">
     <a href="{% url 'polls:poll-list' %}" class="btn btn__light btn__large">{% trans 'Retour' %}</a>
 </div>

@@ -29,7 +29,7 @@ class NavbarSearchMixin(object):
 
 class IsStaff(UserPassesTestMixin):
     permission_denied_message = _(
-        "La page auquel vous essayez d'accéder n'est accessible que par les administrateurs du site")
+        "La page que vous essayez d'accéder n'est accessible que par les administrateurs du site")
 
     def test_func(self):
         user = self.request.user

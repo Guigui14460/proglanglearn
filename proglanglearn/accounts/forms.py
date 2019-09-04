@@ -216,7 +216,7 @@ class ProfileInformationForm(forms.Form):
 
 class DangerZoneForm(forms.Form):
     error_messages = {
-        'password_incorrect': _("Le mot de passe que vous avez entrez est incorrect. Veuillez réessayer."),
+        'password_incorrect': _("Le mot de passe que vous avez entré est incorrect. Veuillez réessayer."),
     }
 
     password = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
@@ -244,7 +244,7 @@ class EducationForm(forms.ModelForm):
         fields = ['school', 'degree', 'description2', 'entry_date', 'exit_date']
         widgets = {
             'school': forms.TextInput(attrs={'placeholder': 'Epitech'}),
-            'degree': forms.TextInput(attrs={'placeholder': 'Master en sécurité informatique'}),
+            'degree': forms.TextInput(attrs={'placeholder': _('Master en sécurité informatique')}),
             'description2': TinyMCE(attrs={'placeholder': _("Explications ..."), 'rows': 5}),
             'entry_date': forms.DateInput(attrs={'type': 'date'}),
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
@@ -266,7 +266,7 @@ class ExperienceForm(forms.ModelForm):
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
         }
         help_text = {
-            'description': _("Vous pouvez dire quelques explications sur le type d'emploi que vous êtes/étiez affecté, les compétences demandées, ce que vous faîtes/faisiez, etc")
+            'description': _("Vous pouvez donner quelques explications sur le type d'emploi que vous êtes/étiez affecté, les compétences demandées/requises, ce que vous faîtes/faisiez, etc")
         }
 
 

@@ -47,8 +47,4 @@
 </div>
 {% endblock main %}
 
-{% block jquery %}
-$('#main_search_form select').change(function(e){
-    $('#main_search_form').submit();
-});
-{% endblock jquery %}
+{% block jquery %}$('#main_search_form select').change(function(e){$('#main_search_form').submit();});{% endblock jquery %}

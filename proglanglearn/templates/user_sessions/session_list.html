@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load user_sessions i18n %}
 
-{% block title %}Mes sessions - {% endblock title %}
+{% block title %}{% trans "Mes sessions" %} - {% endblock title %}
 
 {% block main %}
 {% trans "<em>unknown on unknown</em>" as unknown_on_unknown %}
@@ -23,9 +23,9 @@
                 <td>{{ object.user_agent|device|default_if_none:unknown_on_unknown|safe }}</td>
                 <td>
                     {% if object.session_key == session_key %}
-                        {% blocktrans with time=object.last_activity|timesince %}{{ time }} ago (this session){% endblocktrans %}
+                        {% blocktrans with time=object.last_activity|timesince %}Il y a {{ time }} (cette session){% endblocktrans %}
                     {% else %}
-                        {% blocktrans with time=object.last_activity|timesince %}{{ time }} ago{% endblocktrans %}
+                        {% blocktrans with time=object.last_activity|timesince %}Il y a {{ time }}{% endblocktrans %}
                     {% endif %}
                 </td>
                 <td>

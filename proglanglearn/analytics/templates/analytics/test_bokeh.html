@@ -54,15 +54,4 @@
 <script src="{% static 'js/jquery.easypiechart.min.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %}
-$('.chart').easyPieChart({
-    easing: 'easeOutBounce',
-    barColor: "#1780e8",
-    lineWidth: 12,
-    size: 160,
-    scaleColor: false,
-    trackColor: '#a0a0a0',
-    lineCap: 'circle',
-    animate: 1150,
-});
-{% endblock jquery %}
+{% block jquery %}$('.chart').easyPieChart({easing: 'easeOutBounce',barColor: "#1780e8",lineWidth: 12,size: 160,scaleColor: false,trackColor: '#a0a0a0',lineCap: 'circle',animate: 1150,});{% endblock jquery %}

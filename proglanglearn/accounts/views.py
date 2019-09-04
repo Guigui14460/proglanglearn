@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, activate, get_language
 from django.views.generic import View, TemplateView, ListView
 
 from main.mixins import NavbarSearchMixin
@@ -48,6 +48,8 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
         user = request.user
         if user.is_authenticated and user.ip_address != None and get_ip_address_client(request) != user.ip_address:
             try:
+                actual = get_language()
+                activate(user.natural_language)
                 current_site = get_current_site(request)
                 subject = _(
                     "Suspicion de compromission de votre compte ProgLangLearn")
@@ -58,6 +60,7 @@ class CustomLoginView(NavbarSearchMixin, LoginView):
                 msg = EmailMultiAlternatives(
                     subject, message, "No reply <proglanglearn@gmail.com>", to=[user.email])
                 msg.send()
+                activate(actual)
             except:
                 pass
         return self.get(request, *args, **kwargs)
@@ -300,7 +303,7 @@ class ChangePassword(View):
                 "Votre mot de passe a été modifié avec succès"))
         else:
             messages.error(request, _(
-                "Votre mot de passe n'a pas pu être modifié. Utilisez l'aide sous chaque champs."))
+                "Votre mot de passe n'a pas pu être modifié. Utilisez l'aide sous chaque champs"))
         return redirect('accounts:account')
 
 
@@ -333,7 +336,7 @@ class DangerZone(View):
             user.is_active = False
             user.save()
             logout(request)
-            messages.success(request, _("Votre compte a été désactiver"))
+            messages.success(request, _("Votre compte a été désactivé"))
             return redirect('accounts:login')
         messages.error(request, _("Votre compte n'a pas pu être désactiver"))
         return redirect('accounts:account')

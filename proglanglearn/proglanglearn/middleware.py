@@ -18,11 +18,6 @@ class LanguageMiddleware(MiddlewareMixin):
                 if self.is_supported_language(language_code):
                     return language_code
 
-    # def process_request(self, request):
-    #     language_code = self.get_browser_language(request)
-    #     if language_code:
-    #         translation.activate(language_code)
-
     def process_response(self, request, response):
         user = getattr(request, 'user', None)
         if user is None:
@@ -53,4 +48,3 @@ class XForwardedForMiddleware(MiddlewareMixin):
         if 'HTTP_X_FORWARDED_FOR' in request.META:
             request.META['REMOTE_ADDR'] = request.META['HTTP_X_FORWARDED_FOR'].split(",")[0].strip()
         return None
-

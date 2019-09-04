@@ -1,9 +1,9 @@
 {% load i18n %}
 
 {% autoescape off %}
-{% blocktrans %}Salut, cher utilisateur de ProgLangLearn,
+{% blocktrans with title=course.title %}Salut, cher utilisateur de ProgLangLearn,
 
-Une toute nouvelle formation vient d'être publiée intitulée : "{{ course.title }}"
+Une toute nouvelle formation vient d'être publiée et est intitulée : "{{ title }}"
 
 
 Tu peux venir regarder les détails de celle-ci par ce lien :{% endblocktrans %}

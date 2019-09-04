@@ -30,7 +30,7 @@ class Course(models.Model):
     slug = models.SlugField(verbose_name=_(
         "URL d'accès"), blank=True, null=True)
     thumbnail = models.ImageField(
-        upload_to='course_thumbnail/', verbose_name=_("vignette/vidéo d'introduction"))
+        upload_to='course_thumbnail/', verbose_name=_("vignette"))
     languages = models.ManyToManyField(
         Language, verbose_name=_("langages utilisés"))
     tags = models.ManyToManyField(
@@ -59,6 +59,7 @@ class Course(models.Model):
     class Meta:
         ordering = ['-published_date', 'title']
         verbose_name = _("cours")
+        # Translators : pluriel de cours
         verbose_name_plural = _("cours")
 
     def __str__(self):

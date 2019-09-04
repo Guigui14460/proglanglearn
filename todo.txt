@@ -1,15 +1,15 @@
 ﻿Make index (link to poll list), terms, policy pages
-
+Improve performance speed (remove useless css/js like jquery.modal.js, ...)
 Add share link to articles
 
 Quiz app (to add in course to add more experience)
 
+Make page for ip_address to follow instructions
 
 (If possible)
 Remake ProgLangLearn app in proglanglearn directory (combine this project and test-allauth project) https://www.youtube.com/watch?v=dXZim_jgaiI
 At least, make PLL with Two-Authenticator system
 
 Verify each html and py files for translations (errors, forget, etc)
-
 
 look at the documantation of psycopg2 and nginx and gunicorn

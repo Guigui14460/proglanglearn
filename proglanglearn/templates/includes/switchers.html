@@ -17,35 +17,3 @@
         </select>
     </form>
 </div>
-
-{% comment %} {% load i18n %}
-
-{% get_available_languages as LANGUAGES %}
-
-<div id="version-switcher">
-    <input type="checkbox" id="switch" class="switch" name="theme" />
-    <label class="switch-label" for="switch">Light/Dark toggle</label>
-    <ul class="languages-switcher">
-        {% get_current_language as CURRENT_LANGUAGE %}
-        <li class="current" title="{% trans 'Cliquez sur les liens pour changer de langue' %}">
-            <span>{% trans 'Langue' %} : <strong>{{ CURRENT_LANGUAGE|title }}</strong></span>
-        </li>
-        {% for lang_code, lang_name in LANGUAGES %}
-            {% language lang_code %}
-            <li class="other">
-                <a href="/{{ lang_code }}{{ request.get_full_path|slice:'3:' }}" title="{{ lang_name }}">{{ lang_code|title }}</a>
-            </li>
-            {% endlanguage %}
-        {% endfor %}
-    </ul>
-</div> {% endcomment %}
-
-
-
-
-{% comment %} {% trans "View this category in:" %}
-{% for lang_code, lang_name in languages %}
-    {% language lang_code %}
-    <a href="{% url 'category' slug=category.slug %}">{{ lang_name }}</a>
-    {% endlanguage %}
-{% endfor %} {% endcomment %}
