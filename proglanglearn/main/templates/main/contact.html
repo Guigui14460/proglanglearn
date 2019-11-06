@@ -4,8 +4,8 @@
 {% block title %}{% trans 'Contact' %} - {% endblock title %}
 
 {% block main %}
-{% url "accounts:login" as login_url %}
-{% url "accounts:register" as register_url %}
+{% url "account_login" as login_url %}
+{% url "account_signup" as register_url %}
 <h1 class="large">{% trans 'Contacter' %}</h1>
 <p class="lead"><i class="fas fa-pen-alt"></i>&nbsp;{% trans "Contactez-nous dans l'espace approprié à chaque demande !" %}</p>
 <form id="subject" method='POST' class="form mb-3">

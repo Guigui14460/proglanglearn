@@ -1,27 +1,10 @@
 from .base import *
 
 
-DEBUG = config('DEBUG', cast=bool)
-
 PROTOCOL = 'http'
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
-INTERNAL_IPS = [
-    # debug_toolbar
-    '127.0.0.1'
-]
 
-INSTALLED_APPS += [
-    # debug_toolbar
-    'debug_toolbar'
-]
 
-MIDDLEWARE += [
-    # debug_toolbar
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-]
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+# Database settings
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -29,44 +12,27 @@ DATABASES = {
     }
 }
 
+
+# Staticfiles settings
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
-
-# debug_toolbar config
-DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
 
-def show_toolbar(request):
-    return True
+# Allauth settings
+SITE_ID = 3
 
 
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-    'SHOW_TOOLBAR_CALLBACK': show_toolbar
-}
-
-# Stripe config
+# Stripe settings
 STRIPE_PUBLIC_KEY = 'pk_test_buF4FsDmstqHzKr4Nc5TKxbH00rXE4mpbI'
 STRIPE_SECRET_KEY = 'sk_test_bokSwLp3jIVrQ0WYZP4ff8tx009fk1ZPGJ'
 
-# HTML minifier
+
+# HTML minifier settings
 HTML_MINIFY = True
 
-# ReCaptcha V3 config
+
+# ReCaptcha V3 settings
 os.environ['RECAPTCHA_DISABLE'] = 'True'

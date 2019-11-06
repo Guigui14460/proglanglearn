@@ -82,4 +82,4 @@ admin.site.register(EmailAdminNotificationForUsers,
 admin.site.register(Language, LanguageAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.unregister(Group)
+# admin.site.unregister(Group)

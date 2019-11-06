@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-03 21:15+0200\n"
+"POT-Creation-Date: 2019-11-05 22:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,45 +17,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\accounts\admin.py:26 .\courses\admin.py:71 .\courses\admin.py:90
-#: .\main\admin.py:33 .\polls\admin.py:50 .\polls\admin.py:76
-#: .\polls\admin.py:110
+#: .\accounts\admin.py:17 .\main\admin.py:29
+msgid ""
+"Vous êtes définitivement banni de ProgLangLearn, c'est-à-dire que l'accès à "
+"votre compte n'est plus possible. Aucun recours sera possible comme stipulé "
+"dans nos conditions générales d'utilisation."
+msgstr ""
+
+#: .\accounts\admin.py:19
+#, python-format
+msgid ""
+"Il ne vous reste que %(nb)d signalements pour être définitivement banni et "
+"perdre votre compte ProgLangLearn"
+msgstr ""
+
+#: .\accounts\admin.py:21
+msgid "Votre profil a été signalé"
+msgstr ""
+
+#: .\accounts\admin.py:22
+#, python-format
+msgid ""
+"Votre profil a été signalé le %(date)s car il comporte des irrégularités. "
+"Veuillez les corriger au plus vite. %(strike_msg)s"
+msgstr ""
+
+#: .\accounts\admin.py:29
+msgid "Striker le profil"
+msgstr ""
+
+#: .\accounts\admin.py:48 .\articles\admin.py:55 .\courses\admin.py:71
+#: .\courses\admin.py:91 .\forum\admin.py:38 .\forum\admin.py:54
+#: .\main\admin.py:52
 msgid "Inconnu"
-msgstr "Unknown"
+msgstr ""
 
-#: .\accounts\admin.py:28
+#: .\accounts\admin.py:50
 msgid "Espace critique"
-msgstr "Critical space"
+msgstr ""
 
-#: .\accounts\admin.py:30 .\courses\templates\courses\course_detail.html:16
+#: .\accounts\admin.py:52 .\accounts\templates\accounts\account.html:37
+#: .\articles\templates\articles\article_create.html:17
+#: .\courses\templates\courses\course_create.html:27
+#: .\courses\templates\courses\course_detail.html:20
+#: .\forum\templates\forum\forum_create.html:17
 msgid "Informations générales"
-msgstr "General informations"
+msgstr ""
 
-#: .\accounts\admin.py:32
+#: .\accounts\admin.py:54
 msgid "Options avancées"
-msgstr "Advanced options"
+msgstr ""
 
-#: .\accounts\fields.py:7
-msgid "Un champ pour enregistrer une liste en tant que chaîne de caractères"
-msgstr "A field to save a list as a string"
-
-#: .\accounts\forms.py:15 .\accounts\forms.py:49
-msgid "Nom d'utilisateur"
-msgstr "Username"
-
-#: .\accounts\forms.py:19
-msgid "Courriel"
-msgstr "E-mail address"
-
-#: .\accounts\forms.py:23
-msgid "Informez une addresse e-mail valide"
-msgstr "Inform a valid email address"
-
-#: .\accounts\forms.py:24 .\accounts\forms.py:53
+#: .\accounts\allauth_forms.py:20 .\accounts\allauth_forms.py:34
+#: .\accounts\allauth_forms.py:82 .\accounts\forms.py:41
+#: .\accounts\forms.py:78 .\accounts\forms.py:226
+#: .\accounts\templates\accounts\account.html:69
 msgid "Mot de passe"
-msgstr "Password"
+msgstr ""
 
-#: .\accounts\forms.py:27
+#: .\accounts\allauth_forms.py:42 .\accounts\allauth_forms.py:90
+#: .\accounts\forms.py:51
+msgid "Confirmation du mot de passe"
+msgstr ""
+
+#: .\accounts\allauth_forms.py:54
+msgid "Mot de passe actuel"
+msgstr ""
+
+#: .\accounts\allauth_forms.py:62 .\accounts\allauth_forms.py:102
+#: .\accounts\forms.py:132
+msgid "Nouveau mot de passe"
+msgstr ""
+
+#: .\accounts\allauth_forms.py:70 .\accounts\allauth_forms.py:110
+#: .\accounts\forms.py:137
+msgid "Confirmation du nouveau mot de passe"
+msgstr ""
+
+#: .\accounts\apps.py:7
+msgid "Comptes"
+msgstr ""
+
+#: .\accounts\forms.py:22 .\accounts\templates\accounts\profile.html:18
+msgid "Amateur"
+msgstr ""
+
+#: .\accounts\forms.py:23 .\accounts\templates\accounts\profile.html:18
+msgid "Étudiant"
+msgstr ""
+
+#: .\accounts\forms.py:24
+msgid "Développeur professionel"
+msgstr ""
+
+#: .\accounts\forms.py:29 .\accounts\forms.py:71 .\accounts\forms.py:155
+msgid "Nom d'utilisateur"
+msgstr ""
+
+#: .\accounts\forms.py:33
+msgid "Courriel"
+msgstr ""
+
+#: .\accounts\forms.py:37
+msgid "Informez une addresse e-mail valide"
+msgstr ""
+
+#: .\accounts\forms.py:45 .\accounts\forms.py:134
 #, python-format
 msgid ""
 "Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et "
@@ -64,172 +131,580 @@ msgid ""
 "d'utilisateur.\n"
 "    Il doit aussi contenir %(password_length)d caractères."
 msgstr ""
-"Enter a strong password (with lowercase, uppercase, numbers and special "
-"characters)\n"
-"    Your password should not contain or look like your first name, lastname "
-"or username.\n"
-"    It must also contain %(password_length)d characters."
 
-#: .\accounts\forms.py:30
-msgid "Confirmation du mot de passe"
-msgstr "Password confirmation"
-
-#: .\accounts\forms.py:33
+#: .\accounts\forms.py:55 .\accounts\forms.py:140
 msgid "Entrez le même mot de passe"
-msgstr "Enter the same password"
+msgstr ""
 
-#: .\accounts\forms.py:44
+#: .\accounts\forms.py:66
 msgid "Cette addresse email a déjà été utilisée. Il faut en choisir une autre"
-msgstr "This email address is already used. You have to choose another one"
+msgstr ""
 
-#: .\accounts\forms.py:67
+#: .\accounts\forms.py:93
 msgid "Le nom d'utilisateur mentionné n'existe pas"
-msgstr "The mentionned username does not exist"
+msgstr ""
 
-#: .\accounts\forms.py:73
+#: .\accounts\forms.py:99
 msgid ""
 "Votre compte n'a pas été activé. Vérifiez vos emails et votre dossier spam "
 "et si vous ne trouvez pas le mail, réinscrivez-vous avec les identifiants "
 "renseignés"
 msgstr ""
-"Your account has not been activated yet. Check your emails and spamfolder "
-"and if you can't find the email, re-subscribe with the login detailsprovided"
 
-#: .\accounts\forms.py:79
+#: .\accounts\forms.py:103
+msgid "Votre compte est banni. Vous n'y avez plus accès"
+msgstr ""
+
+#: .\accounts\forms.py:110
 msgid "New password"
-msgstr "New password"
+msgstr ""
 
-#: .\accounts\forms.py:86
+#: .\accounts\forms.py:119
 msgid "New password confirmation"
-msgstr "New password confirmation"
+msgstr ""
 
-#: .\accounts\models.py:21
+#: .\accounts\forms.py:128
+msgid "Ancien mot de passe"
+msgstr ""
+
+#: .\accounts\forms.py:131
+msgid "Entrez votre mot de passe actuel"
+msgstr ""
+
+#: .\accounts\forms.py:148
+#: .\articles\templates\articles\article_detail.html:31
+#: .\articles\templates\articles\article_list.html:20
+#: .\forum\templates\forum\forum_detail.html:24
+#: .\forum\templates\forum\includes\subject_comments.html:8
+#: .\main\templates\main\includes\comments.html:30
+#: .\main\templates\main\includes\comments.html:40
+#: .\templates\includes\navbar.html:42
+msgid "Photo de profil"
+msgstr ""
+
+#: .\accounts\forms.py:158
+msgid "Addresse e-mail"
+msgstr ""
+
+#: .\accounts\forms.py:160
+msgid "Prénom"
+msgstr ""
+
+#: .\accounts\forms.py:162
+msgid "Nom"
+msgstr ""
+
+#: .\accounts\forms.py:164
+msgid "Recevoir des notifications par email"
+msgstr ""
+
+#: .\accounts\forms.py:165
+msgid "Quel statut en programmation ou dans la vie avez-vous ?"
+msgstr ""
+
+#: .\accounts\forms.py:166
+msgid ""
+"Les statuts de développeur et étudiant permet de vous mettre en avant. En "
+"choisissant un de ces deux choix, vous activerez la visibilité totale de "
+"votre profil (informations éducatives et professionnelles"
+msgstr ""
+
+#: .\accounts\forms.py:167
+msgid "Sélectionner un pays"
+msgstr ""
+
+#: .\accounts\forms.py:168
+msgid "Pays"
+msgstr ""
+
+#: .\accounts\forms.py:168
+msgid ""
+"Le renseignement de votre pays permet aux étudiants de développeurs d'être "
+"mis en avant. Cette donnée est utilisée pour statistiques"
+msgstr ""
+
+#: .\accounts\forms.py:185
+msgid ""
+"Cette addresse email a déjà été utilisée. Il faut en choisir une autre ou "
+"garder votre ancienne addresse si possible"
+msgstr ""
+
+#: .\accounts\forms.py:194
+msgid ""
+"Ce nom d'utilisateur a déjà été utilisée. Il faut en choisir un autre ou "
+"garder votre ancien nom d'utilisateur si possible"
+msgstr ""
+
+#: .\accounts\forms.py:199
+msgid "Biographie"
+msgstr ""
+
+#: .\accounts\forms.py:199
+msgid "Une courte biographie"
+msgstr ""
+
+#: .\accounts\forms.py:200
+msgid ""
+"Courte biographie ou une phrase/expression que vous aimez pour vous décrire "
+"rapidement (1500 caractères)"
+msgstr ""
+
+#: .\accounts\forms.py:201
+msgid "Choisissez des compétences (langages ou frameworks)"
+msgstr ""
+
+#: .\accounts\forms.py:204
+msgid ""
+"N.B. : multiple sélection possible<br>S'il manque une bibliothèque ou un "
+"langage, demandez à le rajouter dans la page contact."
+msgstr ""
+
+#: .\accounts\forms.py:206
+msgid "URL de votre site web"
+msgstr ""
+
+#: .\accounts\forms.py:208
+msgid "URL de votre profile Twitter"
+msgstr ""
+
+#: .\accounts\forms.py:210
+msgid "URL de votre chaîne Youtube"
+msgstr ""
+
+#: .\accounts\forms.py:212
+msgid "URL de votre profile Facebook"
+msgstr ""
+
+#: .\accounts\forms.py:214
+msgid "URL de votre profile LinkedIn"
+msgstr ""
+
+#: .\accounts\forms.py:216
+msgid "URL de votre profile Intagram"
+msgstr ""
+
+#: .\accounts\forms.py:217
+msgid "Nom d'utilisateur de votre compte Github"
+msgstr ""
+
+#: .\accounts\forms.py:218
+msgid ""
+"<i class='fas fa-exclamation-triangle'></i> En renseignant ce champ, vous "
+"accepter de publier les liens et les informations de vos dépôts publics de "
+"votre compte Github"
+msgstr ""
+
+#: .\accounts\forms.py:223
+msgid "Le mot de passe que vous avez entré est incorrect. Veuillez réessayer."
+msgstr ""
+
+#: .\accounts\forms.py:252
+msgid "Master en sécurité informatique"
+msgstr ""
+
+#: .\accounts\forms.py:253 .\accounts\forms.py:270
+msgid "Explications ..."
+msgstr ""
+
+#: .\accounts\forms.py:258
+msgid ""
+"Vous pouvez dire quelques explications sur les compétences acquises, vos "
+"résultats, etc"
+msgstr ""
+
+#: .\accounts\forms.py:269
+msgid "Analyste de données"
+msgstr ""
+
+#: .\accounts\forms.py:275
+msgid ""
+"Vous pouvez donner quelques explications sur le type d'emploi que vous êtes/"
+"étiez affecté, les compétences demandées/requises, ce que vous faîtes/"
+"faisiez, etc"
+msgstr ""
+
+#: .\accounts\forms.py:280
+msgid "Recherche de profil"
+msgstr ""
+
+#: .\accounts\forms.py:282
+msgid "Nom d'utilisateur, prénom ou nom de famille"
+msgstr ""
+
+#: .\accounts\forms.py:283 .\main\forms.py:44
+msgid "N.B. : séparez les mots clés par des espaces pour plus de résultats"
+msgstr ""
+
+#: .\accounts\github_backend.py:35 .\accounts\github_backend.py:62
+msgid "Aucun fichier nommé 'README.md' n'a été trouvé à la racine de ce dépôt"
+msgstr ""
+
+#: .\accounts\mixins.py:28
+msgid "Vous n'avez pas l'autorisation de modifier ce profil"
+msgstr ""
+
+#: .\accounts\mixins.py:37
+msgid ""
+"Le profil auquel vous essayez d'accéder n'existe pas ou plus ou est "
+"actuellement inaccessible"
+msgstr ""
+
+#: .\accounts\models.py:26 .\analytics\models.py:14 .\forum\models.py:17
+#: .\forum\models.py:57 .\polls\models.py:73
 msgid "utilisateur associé"
-msgstr "associated user"
+msgstr ""
 
-#: .\accounts\models.py:23
+#: .\accounts\models.py:28
 msgid "est un développeur"
-msgstr "is a developer"
-
-#: .\accounts\models.py:25
-msgid "est un étudiant en informatique"
-msgstr "is a computer science student"
-
-#: .\accounts\models.py:27
-msgid "est un formateur"
-msgstr "is a teacher"
-
-#: .\accounts\models.py:29
-msgid "image de profil"
-msgstr "profile image"
+msgstr ""
 
 #: .\accounts\models.py:30
-msgid "pays"
-msgstr "country"
+msgid "est un étudiant en informatique"
+msgstr ""
 
 #: .\accounts\models.py:32
-msgid "biographie"
-msgstr "biography"
+msgid "est un formateur"
+msgstr ""
 
 #: .\accounts\models.py:34
+msgid "image de profil"
+msgstr ""
+
+#: .\accounts\models.py:35
+msgid "pays"
+msgstr ""
+
+#: .\accounts\models.py:37
+msgid "biographie"
+msgstr ""
+
+#: .\accounts\models.py:39
 msgid "langages maîtrisés"
-msgstr "mastered languages"
+msgstr ""
 
-#: .\accounts\models.py:36
-msgid "compétences apprises"
-msgstr "skills learned"
-
-#: .\accounts\models.py:38
+#: .\accounts\models.py:41
 msgid "signalement"
-msgstr "reporting"
+msgstr ""
 
-#: .\accounts\models.py:40
+#: .\accounts\models.py:43
 msgid "addresse e-mail confirmée"
-msgstr "confirmed e-mail address"
-
-#: .\accounts\models.py:42
-msgid "notification par email"
-msgstr "email notification"
+msgstr ""
 
 #: .\accounts\models.py:45
-msgid "niveau"
-msgstr "level"
-
-#: .\accounts\models.py:47
-msgid "expérience acquise"
-msgstr "acquired experience"
+msgid "notification par email"
+msgstr ""
 
 #: .\accounts\models.py:49
-msgid "articles favoris"
-msgstr "favorite articles"
+msgid "niveau"
+msgstr ""
 
 #: .\accounts\models.py:51
-msgid "sujets marqués comme favoris"
-msgstr "subjects marked as favorites"
+msgid "expérience acquise"
+msgstr ""
 
 #: .\accounts\models.py:53
-msgid "tutoriels marqués comme terminé"
-msgstr "tutorials marked as finished"
+msgid "articles favoris"
+msgstr ""
 
 #: .\accounts\models.py:55
+msgid "sujets marqués comme favoris"
+msgstr ""
+
+#: .\accounts\models.py:57
+msgid "tutoriels marqués comme terminé"
+msgstr ""
+
+#: .\accounts\models.py:59
 msgid "tutoriels favoris"
-msgstr "favorite tutorials"
+msgstr ""
 
-#: .\accounts\models.py:58
-msgid "nom d'utilisateur/email Github"
-msgstr "Github username/email"
+#: .\accounts\models.py:62
+msgid "nom d'utilisateur Github"
+msgstr ""
 
-#: .\accounts\models.py:60
+#: .\accounts\models.py:64
 msgid "liens vers les médias sociaux"
-msgstr "social media links"
+msgstr ""
 
-#: .\accounts\models.py:66
+#: .\accounts\models.py:70
 msgid "profil"
-msgstr "profile"
+msgstr ""
 
-#: .\accounts\models.py:100 .\accounts\models.py:116
+#: .\accounts\models.py:103
+msgid "Aucune école ou expérience renseignée"
+msgstr ""
+
+#: .\accounts\models.py:133 .\accounts\models.py:152
 msgid "profile associé"
-msgstr "associated profile"
+msgstr ""
 
-#: .\accounts\models.py:101
+#: .\accounts\models.py:134
 msgid "nom de l'école"
-msgstr "name of the school"
+msgstr ""
 
-#: .\accounts\models.py:102
-msgid "diplôme"
-msgstr "degree/certificate"
+#: .\accounts\models.py:135
+msgid "diplôme obtenu"
+msgstr ""
 
-#: .\accounts\models.py:103 .\accounts\models.py:121
-msgid "date d'entrée"
-msgstr "entry date"
+#: .\accounts\models.py:136
+msgid "description"
+msgstr ""
 
-#: .\accounts\models.py:104 .\accounts\models.py:123
-msgid "date de sortie"
-msgstr "exit date"
+#: .\accounts\models.py:137
+msgid "date d'entrée dans l'école"
+msgstr ""
 
-#: .\accounts\models.py:107
+#: .\accounts\models.py:139
+msgid "date de sortie de l'école"
+msgstr ""
+
+#: .\accounts\models.py:143
 msgid "éducation"
-msgstr "education"
+msgstr ""
 
-#: .\accounts\models.py:108
+#: .\accounts\models.py:144
 msgid "éducations"
-msgstr "educations"
+msgstr ""
 
-#: .\accounts\models.py:118
+#: .\accounts\models.py:154
 msgid "nom de l'entreprise"
-msgstr "compagny name"
+msgstr ""
 
-#: .\accounts\models.py:120
-msgid "type d'emploi"
-msgstr "type of employment"
+#: .\accounts\models.py:156
+msgid "type de l'emploi"
+msgstr ""
 
-#: .\accounts\models.py:126 .\polls\models.py:71
+#: .\accounts\models.py:157
+msgid "description de l'emploi"
+msgstr ""
+
+#: .\accounts\models.py:159
+msgid "date d'arrivée dans l'entreprise"
+msgstr ""
+
+#: .\accounts\models.py:161
+msgid "date de sortie de l'entreprise"
+msgstr ""
+
+#: .\accounts\models.py:165 .\analytics\models.py:16
 msgid "expérience"
-msgstr "experience"
+msgstr ""
 
-#: .\accounts\models.py:127
+#: .\accounts\models.py:166
 msgid "expériences"
-msgstr "experiences"
+msgstr ""
+
+#: .\accounts\models.py:174
+msgid "profil reporté"
+msgstr ""
+
+#: .\accounts\models.py:176 .\main\models.py:205
+msgid "vérifié"
+msgstr ""
+
+#: .\accounts\models.py:177 .\main\models.py:206
+msgid "à striker"
+msgstr ""
+
+#: .\accounts\models.py:178 .\main\models.py:207
+msgid "striké"
+msgstr ""
+
+#: .\accounts\models.py:181
+msgid "signalement de profil"
+msgstr ""
+
+#: .\accounts\models.py:182
+msgid "signalements de profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:4
+#: .\templates\includes\navbar.html:77
+msgid "Mon compte"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:10
+msgid "Réglages de votre compte"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:11
+msgid "Modifier les paramètres et informations de votre compte !"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:14
+#: .\accounts\templates\accounts\edit_profile.html:9
+msgid "Voir mon profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:19
+#: .\accounts\templates\accounts\account.html:31
+msgid "Modifier mes informations personnelles"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:21
+#: .\accounts\templates\accounts\account.html:64
+#: .\templates\account\login.html:36
+#: .\templates\registration\account_activation_invalid.html:11
+#: .\templates\registration\login.html:17
+msgid "Changer mon mot de passe"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:23
+#: .\accounts\templates\accounts\account.html:84
+msgid "Modifier les informations visibles sur mon profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:25
+#: .\accounts\templates\accounts\account.html:137
+msgid "Zone de danger"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:55
+#: .\accounts\templates\accounts\account.html:74
+#: .\accounts\templates\accounts\account.html:127
+#: .\accounts\templates\accounts\account.html:145
+#: .\accounts\templates\accounts\includes\education.html:44
+#: .\accounts\templates\accounts\includes\experience.html:43
+msgid "Tous les champs avec un"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:55
+#: .\accounts\templates\accounts\account.html:75
+#: .\accounts\templates\accounts\account.html:128
+#: .\accounts\templates\accounts\account.html:146
+msgid "sont obligatoires."
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:57
+#: .\accounts\templates\accounts\account.html:77
+msgid "Changer"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:89
+msgid "Informations importantes"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:94
+msgid "Liens externes"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:121
+msgid "Vos dépôts Github"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:125
+msgid ""
+"Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez "
+"vous rendre sur"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:125
+msgid "cette page"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:130
+msgid "Mettre à jour mon profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:142
+msgid "Supprimer mon compte"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:148
+#: .\accounts\templates\accounts\includes\education.html:17
+#: .\accounts\templates\accounts\includes\experience.html:17
+#: .\analytics\templates\analytics\my_.html:65
+#: .\analytics\templates\analytics\my_.html:102
+#: .\articles\templates\articles\article_detail.html:27
+#: .\courses\templates\courses\course_create.html:45
+#: .\main\templates\main\includes\comments.html:32
+#: .\main\templates\main\includes\comments.html:42
+msgid "Supprimer"
+msgstr ""
+
+#: .\accounts\templates\accounts\edit_profile.html:4
+msgid "Édition du profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\edit_profile.html:8
+msgid "Voir tous les profils"
+msgstr ""
+
+#: .\accounts\templates\accounts\edit_profile.html:11
+msgid "Éditer mon profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\edit_profile.html:12
+msgid ""
+"Modifiez les informations professionnelles sur votre profil pour vous "
+"permettre d'être plus visible auprès de recruteurs"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:3
+msgid "Gérer mon espace éducation"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:7
+msgid "École"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:8
+#: .\accounts\templates\accounts\profile.html:91
+msgid "Diplôme"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:9
+#: .\accounts\templates\accounts\includes\experience.html:9
+msgid "Années"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:16
+#: .\accounts\templates\accounts\includes\experience.html:16
+#: .\accounts\templates\accounts\profile.html:77
+#: .\accounts\templates\accounts\profile.html:90
+msgid "Maintenant"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:21
+msgid "Vous n'avez aucune école enregistrée"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:31
+msgid "Ajouter une école"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:44
+#: .\accounts\templates\accounts\includes\experience.html:43
+msgid "sont obligatoires"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:46
+#: .\accounts\templates\accounts\includes\experience.html:45
+#: .\courses\templates\courses\course_create.html:67
+#: .\courses\templates\courses\tutorial_create.html:34
+msgid "Ajouter"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\experience.html:3
+msgid "Gérer mon espace expérience"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\experience.html:7
+msgid "Entreprise"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\experience.html:8
+#: .\accounts\templates\accounts\profile.html:78
+msgid "Poste"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\experience.html:21
+msgid "Vous n'avez aucune expérience enregistrée"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\experience.html:30
+msgid "Ajouter une expérience"
+msgstr ""
 
 #: .\accounts\templates\accounts\ip_address_email.html:4
 msgid ""
@@ -242,192 +717,776 @@ msgid ""
 "Sinon, changez votre mot de passe car votre compte a été certainement "
 "compromis. Nous vous conseillons de changer votre mot de passe à cet url"
 msgstr ""
-"Hello, dear ProgLangLearn user,\n"
-"\n"
-"Someone has just logged into your account from another location :(\n"
-"If it's you, don't worry!\n"
-"Otherwise, change your password because your account has certainly been "
-"compromised. We advise you to change your password at this url"
 
 #: .\accounts\templates\accounts\ip_address_email.html:13
 msgid ""
 "Si vous ne parvenez pas à changer votre mot de passe, cliquez sur le lien ci-"
 "dessous et suivez les instructions."
 msgstr ""
-"If you are unable to change your password, click on the link below and "
-"follow the instructions."
 
-#: .\accounts\utils.py:43
+#: .\accounts\templates\accounts\profile.html:4
+msgid "Profil de"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:16
+#: .\accounts\templates\accounts\profiles.html:21
+msgid "Image de profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:18
+msgid "Développeur professionnel"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:19
+#: .\analytics\templates\analytics\dashboard.html:24
+#: .\analytics\templates\analytics\ranking.html:16
+msgid "Niveau"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:23
+msgid "Aucun réseau social n'est relié a ce compte"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:28
+msgid "Site web"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:58
+msgid "Votre biographie"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:58
+msgid "Biographie de"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:59
+msgid "Biographie vide"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:61
+msgid "Mes conpétences"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:61
+msgid "Ses compétences"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:68
+msgid "Aucune compétence renseignée"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:73
+msgid "Espace expériences"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:79
+#: .\accounts\templates\accounts\profile.html:92
+msgid "Description"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:82
+msgid "Aucune expérience renseignée"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:86
+msgid "Espace éducations"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:95
+msgid "Aucune école renseignée"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:100
+msgid "Dépôts Github"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:110
+msgid "Étoiles"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:111
+msgid "Vues"
+msgstr ""
+
+#: .\accounts\templates\accounts\profile.html:116
+msgid "Son compte Github n'est pas relié. Aucun dépôt ne peut être trouvé"
+msgstr ""
+
+#: .\accounts\templates\accounts\profiles.html:4
+msgid "Profils publics"
+msgstr ""
+
+#: .\accounts\templates\accounts\profiles.html:7
+msgid "Profils de développeurs et étudiants"
+msgstr ""
+
+#: .\accounts\templates\accounts\profiles.html:8
+msgid "Découvrez-en plus sur eux !"
+msgstr ""
+
+#: .\accounts\templates\accounts\profiles.html:16
+#, python-format
+msgid "%(counter)s profil trouvé"
+msgid_plural "%(counter)s profils trouvés"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\accounts\templates\accounts\profiles.html:26
+msgid "Voir le profil"
+msgstr ""
+
+#: .\accounts\templates\accounts\profiles.html:37
+msgid "Aucun profile trouvé"
+msgstr ""
+
+#: .\accounts\utils.py:9
+msgid "apprenti"
+msgstr ""
+
+#: .\accounts\utils.py:10
+msgid "avancé"
+msgstr ""
+
+#: .\accounts\utils.py:10
+msgid "expert"
+msgstr ""
+
+#: .\accounts\utils.py:10
+msgid "maître"
+msgstr ""
+
+#: .\accounts\utils.py:56
 msgid ""
 "Vous êtes déjà au niveau maximum ! Continuez de vous formez et d'apprendre "
 "car de nouveaux niveaux seront rajoutés ;)"
 msgstr ""
-"You're already at the maximum level ! Keep training and learning as new "
-"levels will be added;)"
 
-#: .\accounts\utils.py:46
+#: .\accounts\utils.py:59
 #, python-format
 msgid ""
 "Bravo ! Vous venez de gagner un niveau ! Vous êtes désormais niveau %"
 "(actual_user_level)s"
 msgstr ""
-"Congratulations! You have just gained a level! You are now at the level of %"
-"(actual_user_level)s"
 
-#: .\accounts\views.py:42
+#: .\accounts\views.py:60
 msgid "Suspicion de compromission de votre compte ProgLangLearn"
-msgstr "Suspicion of compromising your ProgLangLearn account"
+msgstr ""
 
-#: .\accounts\views.py:79 .\accounts\views.py:110
+#: .\accounts\views.py:93 .\accounts\views.py:124
 msgid "Activez votre compte ProgLangLearn"
-msgstr "Activate your ProgLangLearn account"
+msgstr ""
 
-#: .\accounts\views.py:91
+#: .\accounts\views.py:105
 #, python-format
 msgid "Envoi du mail d'activation du compte %(username)s effectué avec succès"
 msgstr ""
-"Sending the email of activation of the account %(username)s successfully "
-"completed"
 
-#: .\accounts\views.py:94 .\accounts\views.py:125
+#: .\accounts\views.py:108 .\accounts\views.py:139
 msgid "Échec de l'envoi de l'email d'activation"
-msgstr "Failure to send the activation email"
+msgstr ""
 
-#: .\accounts\views.py:122
+#: .\accounts\views.py:136
 #, python-format
 msgid ""
 "Votre compte existait déjà mais n'a pas été activé. Envoi du mail "
 "d'activation du compte %(username)s effectué avec succès"
 msgstr ""
-"Your account already existed but has not been activated. Sending the email "
-"of activation of the account %(username)s successfully completed"
 
-#: .\accounts\views.py:133
+#: .\accounts\views.py:147
 msgid ""
 "Votre compte a déjà été activé. Connectez-vous ou demandez à changer de mot "
 "de passe"
 msgstr ""
-"Your account has already been activated. Login or ask to change your password"
 
-#: .\accounts\views.py:136
+#: .\accounts\views.py:150
 msgid ""
 "Veuillez respecter et remplir correctement <strong>TOUS</strong> les champs "
 "obligatoires"
 msgstr ""
-"Please respect and correctly fill in <strong>ALL</strong> the mandatory "
-"fields"
 
-#: .\accounts\views.py:170
+#: .\accounts\views.py:184
 msgid "Activation de votre compte effectuée avec succès"
-msgstr "Successful activation of your account"
+msgstr ""
 
-#: .\articles\forms.py:21 .\articles\forms.py:42
-msgid "Une IA fait son propre code !! OMG it's so amaziinngg !!"
-msgstr "An AI makes its own code! OMG it's so amaziinngg!!!"
+#: .\accounts\views.py:294
+msgid "Vos informations personnelles ont été mises à jour"
+msgstr ""
 
-#: .\articles\forms.py:23 .\articles\forms.py:44
-msgid "Corps de l'article"
-msgstr "Body of the rticle"
+#: .\accounts\views.py:297
+msgid ""
+"Vos informations personnelles n'ont pas pu être modifiées. Rétablissement "
+"des anciennes informations"
+msgstr ""
 
-#: .\articles\forms.py:29 .\articles\forms.py:49 .\courses\forms.py:35
+#: .\accounts\views.py:334
+msgid "Les informations sur votre profil ont été mises à jour"
+msgstr ""
+
+#: .\accounts\views.py:337
+msgid ""
+"Vos informations visibles de votre profil n'ont pas pu être modifiées. "
+"Rétablissement des anciennes informations"
+msgstr ""
+
+#: .\accounts\views.py:349
+msgid "Votre compte a été désactivé"
+msgstr ""
+
+#: .\accounts\views.py:351
+msgid "Votre compte n'a pas pu être désactiver"
+msgstr ""
+
+#: .\accounts\views.py:431
+msgid "École ajoutée à votre espace éducation"
+msgstr ""
+
+#: .\accounts\views.py:450
+msgid "Expérience ajoutée à votre espace expérience"
+msgstr ""
+
+#: .\accounts\views.py:472
+msgid "Profil signalé"
+msgstr ""
+
+#: .\accounts\views.py:474
+msgid "Vous ne pouvez pas vous signalé vous-même"
+msgstr ""
+
+#: .\accounts\views.py:476
+msgid ""
+"Le profil a déjà été signalé et est en attente de modification par le gérant "
+"de ce profil"
+msgstr ""
+
+#: .\accounts\views.py:485
+msgid "Expérience supprimée"
+msgstr ""
+
+#: .\accounts\views.py:488 .\accounts\views.py:500
+msgid "Vous n'avez pas l'autorisation de le supprimer"
+msgstr ""
+
+#: .\accounts\views.py:497
+msgid "Éducation supprimée"
+msgstr ""
+
+#: .\analytics\apps.py:7
+msgid "Analyse"
+msgstr ""
+
+#: .\analytics\models.py:18
+msgid "date/heure"
+msgstr ""
+
+#: .\analytics\models.py:21
+msgid "journal d'expérience utilisateur"
+msgstr ""
+
+#: .\analytics\models.py:22
+msgid "journaux d'expérience utilisateur"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:15
+msgid "Mon expérience"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:18
+msgid "Classement"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:24
+#: .\analytics\templates\analytics\my_orders.html:4
+#: .\analytics\templates\analytics\my_orders.html:14
+msgid "Mes commandes"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:30
+#: .\analytics\templates\analytics\my_comment_reports.html:7
+msgid "Mes signalements de commentaire"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:36
+#: .\analytics\templates\analytics\my_.html:4
+#: .\analytics\templates\analytics\my_.html:14
+msgid "Mes cours"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:39
+#: .\analytics\templates\analytics\my_favorite.html:4
+#: .\analytics\templates\analytics\my_favorite.html:14
+msgid "Mes tutoriels favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:46
+#: .\analytics\templates\analytics\my_.html:4
+#: .\analytics\templates\analytics\my_.html:14
+msgid "Mes articles"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:50
+#: .\analytics\templates\analytics\my_favorite.html:4
+#: .\analytics\templates\analytics\my_favorite.html:14
+msgid "Mes articles favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:56
+#: .\analytics\templates\analytics\my_.html:4
+#: .\analytics\templates\analytics\my_.html:14
+msgid "Mes sujets"
+msgstr ""
+
+#: .\analytics\templates\analytics\base_analytic.html:59
+#: .\analytics\templates\analytics\my_favorite.html:4
+#: .\analytics\templates\analytics\my_favorite.html:14
+msgid "Mes sujets favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\dashboard.html:4
+#: .\analytics\templates\analytics\dashboard.html:15
+#: .\templates\includes\navbar.html:71
+msgid "Tableau de bord"
+msgstr ""
+
+#: .\analytics\templates\analytics\dashboard.html:19
+msgid "Progression"
+msgstr ""
+
+#: .\analytics\templates\analytics\dashboard.html:32
+msgid "Signalements"
+msgstr ""
+
+#: .\analytics\templates\analytics\dashboard.html:41
+msgid "Expérience gagnée cette dernière semaine"
+msgstr ""
+
+#: .\analytics\templates\analytics\dashboard.html:57
+#: .\analytics\templates\analytics\ranking.html:17
+msgid "Expérience"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:17
+msgid "Créer un sujet"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:19
+#: .\templates\includes\navbar.html:56
+msgid "Créer un article"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:21
+#: .\templates\includes\navbar.html:64
+msgid "Créer un cours"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:29
+#: .\analytics\templates\analytics\my_favorite.html:38
+#: .\forum\templates\forum\forum_aside.html:17
+#: .\forum\templates\forum\forum_detail.html:36
+#: .\forum\templates\forum\forum_list.html:31
+#: .\main\templates\main\search.html:35
+msgid "Résolu"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:29
+#: .\analytics\templates\analytics\my_favorite.html:38
+#: .\forum\templates\forum\forum_aside.html:17
+#: .\main\templates\main\search.html:35
+msgid "Non résolu"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:31
+#: .\analytics\templates\analytics\my_.html:53
+#, python-format
+msgid "%(counter)s vue"
+msgid_plural "%(counter)s vues"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\analytics\templates\analytics\my_.html:64
+#: .\analytics\templates\analytics\my_.html:101
+#: .\courses\templates\courses\course_create.html:44
+#: .\courses\templates\courses\course_create.html:67
+#: .\courses\templates\courses\tutorial_create.html:34
+msgid "Modifier"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:79
+#, python-format
+msgid "Complété à %(percent)s%%"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:84
+#, python-format
+msgid "%(counter)s étudiant enrollé"
+msgid_plural "%(counter)s étudiants enrollés"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\analytics\templates\analytics\my_.html:113
+#: .\analytics\templates\analytics\my_favorite.html:72
+#: .\courses\templates\courses\tutorial_detail.html:76
+#: .\forum\templates\forum\forum_detail.html:60
+#: .\forum\templates\forum\forum_list.html:51
+msgid "Retirer des favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:113
+#: .\analytics\templates\analytics\my_favorite.html:72
+msgid "Tutoriel"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:113
+#: .\analytics\templates\analytics\my_favorite.html:72
+msgid "Article"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:113
+#: .\analytics\templates\analytics\my_favorite.html:72
+msgid " ajouté aux favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:113
+#: .\analytics\templates\analytics\my_favorite.html:72
+#: .\articles\templates\articles\article_aside.html:11
+#: .\articles\templates\articles\article_detail.html:18
+#: .\articles\templates\articles\article_detail.html:68
+#: .\articles\templates\articles\article_list.html:14
+#: .\articles\templates\articles\article_list.html:52
+#: .\courses\templates\courses\tutorial_detail.html:40
+#: .\courses\templates\courses\tutorial_detail.html:76
+#: .\forum\templates\forum\forum_aside.html:10
+#: .\forum\templates\forum\forum_detail.html:17
+#: .\forum\templates\forum\forum_detail.html:60
+#: .\forum\templates\forum\forum_list.html:16
+#: .\forum\templates\forum\forum_list.html:51
+#: .\forum\templates\forum\includes\subject_comments.html:16
+msgid "Ajouter aux favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_.html:113
+#: .\analytics\templates\analytics\my_favorite.html:72
+msgid " enlevé de vos favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:4
+msgid "Mes signalement"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:9
+#: .\main\templates\main\report.html:10
+msgid ""
+"Le signalement d'une personne peut avoir de sérieuses conséquences, comme ce "
+"qui est écrit dans les"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:10
+#: .\main\templates\main\report.html:11
+msgid "termes et conditions d'utilisation"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:10
+#: .\main\templates\main\report.html:11
+msgid "donc ne faîtes pas de signalement abusif."
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:13
+msgid "État de cette demande :"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:13
+msgid "commentaire sanctionné"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:13
+msgid "commentaire vérifié mais non sanctionné"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:13
+msgid "en cours de traitement"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:14
+msgid "Votre signalement :"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:17
+#, python-format
+msgid "<h3 class=\"card-title\">Type : %(object.get_type_alert_display)s</h3>"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:21
+msgid "Le commentaire signalé :"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:25
+msgid "Commentaire de"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_comment_reports.html:25
+msgid "posté le"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_favorite.html:26
+#: .\analytics\templates\analytics\my_favorite.html:43
+#: .\analytics\templates\analytics\my_favorite.html:62
+#: .\articles\templates\articles\article_aside.html:11
+#: .\articles\templates\articles\article_detail.html:18
+#: .\articles\templates\articles\article_detail.html:68
+#: .\articles\templates\articles\article_list.html:14
+#: .\articles\templates\articles\article_list.html:52
+#: .\courses\templates\courses\tutorial_detail.html:40
+#: .\forum\templates\forum\forum_aside.html:10
+#: .\forum\templates\forum\forum_detail.html:17
+#: .\forum\templates\forum\forum_list.html:16
+#: .\forum\templates\forum\includes\subject_comments.html:16
+msgid "Enlever des favoris"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:20
+msgid "Commande du"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:20 .\billing\models.py:44
+msgid "code de référence"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:23
+msgid "Demande de remboursement :"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:23
+#: .\billing\templates\billing\refund_detail.html:9
+msgid "Acceptée"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:23
+#: .\billing\templates\billing\refund_detail.html:9
+msgid "Rejetée"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:23
+#: .\billing\templates\billing\refund_detail.html:9
+msgid "En cours de traitement"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:23
+msgid "Aucune demande formulée"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:24
+msgid "Formuler une demande"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:28
+msgid "Voir les détails"
+msgstr ""
+
+#: .\analytics\templates\analytics\my_orders.html:35
+msgid "Vous n'avez encore acheté aucun cours"
+msgstr ""
+
+#: .\analytics\templates\analytics\ranking.html:4
+#: .\analytics\templates\analytics\ranking.html:11
+msgid "Classement des utilisateurs"
+msgstr ""
+
+#: .\analytics\templates\analytics\ranking.html:15
+msgid "Profil"
+msgstr ""
+
+#: .\analytics\templates\analytics\ranking.html:27
+msgid "Il n'y a personne d'inscrit sur le site"
+msgstr ""
+
+#: .\analytics\utils.py:10
+msgid "Janvier"
+msgstr ""
+
+#: .\analytics\utils.py:10
+msgid "Février"
+msgstr ""
+
+#: .\analytics\utils.py:10
+msgid "Mars"
+msgstr ""
+
+#: .\analytics\utils.py:11
+msgid "Avril"
+msgstr ""
+
+#: .\analytics\utils.py:11
+msgid "Mai"
+msgstr ""
+
+#: .\analytics\utils.py:11
+msgid "Juin"
+msgstr ""
+
+#: .\analytics\utils.py:12
+msgid "Juillet"
+msgstr ""
+
+#: .\analytics\utils.py:12
+msgid "Août"
+msgstr ""
+
+#: .\analytics\utils.py:12
+msgid "Septembre"
+msgstr ""
+
+#: .\analytics\utils.py:13
+msgid "Octobre"
+msgstr ""
+
+#: .\analytics\utils.py:13
+msgid "Novembre"
+msgstr ""
+
+#: .\analytics\utils.py:13
+msgid "Décembre"
+msgstr ""
+
+#: .\analytics\views.py:37
 #, python-format
 msgid ""
-"S'il manque une catégorie, demandez à le <a href='%(contact_url)s'>rajouter</"
-"a>. Un mail vous sera envoyer pour vous mettre au courant du rajout ou du "
-"rejet de votre demande"
+"Vous avez %(count)d signalement. Cliquez <a href=\"%(url)s\" title=\"Les "
+"signalements\">ici</a> pour en savoir plus sur nos conditions liés aux "
+"signalements."
+msgid_plural ""
+"Vous avez %(count)d signalements. Cliquez <a href=\"%(url)s\" title=\"Les "
+"signalements\">ici</a> pour en savoir plus sur nos conditions liés aux "
+"signalements."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\articles\admin.py:22
+msgid "Article publiés avec succès"
 msgstr ""
-"If a category is missing, ask the <a href='%(contact_url)s'>add</a>. An "
-"email will be sent to you to inform you of the addition or rejection of your "
-"request"
+
+#: .\articles\admin.py:26
+msgid ""
+"Publication des articles (les rendre visibles si la date est dépassée + "
+"autorisation d'envoi d'email notificatif)"
+msgstr ""
+
+#: .\articles\admin.py:30 .\courses\admin.py:30 .\forum\admin.py:17
+msgid "année de publication"
+msgstr ""
+
+#: .\articles\admin.py:63
+msgid "Enregistrez pour avoir le lien de l'auteur de l'article"
+msgstr ""
+
+#: .\articles\admin.py:65 .\courses\admin.py:82 .\forum\admin.py:45
+#: .\forum\admin.py:61
+msgid "Auteur"
+msgstr ""
+
+#: .\articles\apps.py:7 .\articles\templates\articles\article_list.html:4
+#: .\templates\includes\navbar.html:20
+msgid "Blog"
+msgstr ""
+
+#: .\articles\forms.py:22
+msgid "Parution de l'article"
+msgstr ""
+
+#: .\articles\forms.py:25 .\articles\forms.py:46
+msgid "Une IA fait son propre code !! OMG it's so amaziinngg !!"
+msgstr ""
+
+#: .\articles\forms.py:27 .\articles\forms.py:48
+msgid "Corps de l'article"
+msgstr ""
+
+#: .\articles\forms.py:33 .\articles\forms.py:53 .\courses\forms.py:65
+msgid ""
+"S'il manque une catégorie, demandez à le rajouter à la page contact rubrique "
+"'Demande'. Un mail vous sera envoyer pour vous mettre au courant du rajout "
+"ou du rejet de votre demande"
+msgstr ""
 
 #: .\articles\mixins.py:24
 msgid "Vous n'avez pas l'autorisation de modifier cet article"
-msgstr "You do not have the authorization to modify this article"
+msgstr ""
 
 #: .\articles\mixins.py:33
 msgid ""
 "L'article auquel vous essayez d'accéder n'existe pas ou plus ou est "
 "actuellement inaccessible"
 msgstr ""
-"The article you are trying to access does not exist or no longer exists or "
-"is currently inaccessible"
 
-#: .\articles\models.py:20 .\courses\models.py:28 .\main\models.py:83
+#: .\articles\models.py:20 .\courses\models.py:28 .\main\models.py:137
 msgid "auteur"
-msgstr "author"
+msgstr ""
 
 #: .\articles\models.py:22
 msgid "titre de l'article"
-msgstr "Title of the article"
+msgstr ""
 
-#: .\articles\models.py:24 .\courses\models.py:31 .\courses\models.py:144
-#: .\main\models.py:34 .\main\models.py:55
+#: .\articles\models.py:24 .\courses\models.py:31 .\courses\models.py:149
+#: .\main\models.py:84 .\main\models.py:107
 msgid "URL d'accès"
-msgstr "Access URL"
+msgstr ""
 
-#: .\articles\models.py:26
-msgid "vignette/vidéo d'article"
-msgstr "thumbnail/video article"
+#: .\articles\models.py:26 .\courses\models.py:33
+msgid "vignette"
+msgstr ""
 
-#: .\articles\models.py:28 .\courses\models.py:35
+#: .\articles\models.py:28 .\courses\models.py:35 .\forum\models.py:21
 msgid "langages utilisés"
-msgstr "languages used"
+msgstr ""
 
-#: .\articles\models.py:30 .\courses\models.py:37 .\main\models.py:63
+#: .\articles\models.py:30 .\courses\models.py:37 .\main\models.py:117
 msgid "catégories"
-msgstr "tags"
+msgstr ""
 
-#: .\articles\models.py:32 .\polls\models.py:97
+#: .\articles\models.py:32 .\forum\models.py:19
 msgid "contenu"
-msgstr "content"
+msgstr ""
 
-#: .\articles\models.py:34 .\courses\models.py:45 .\courses\models.py:153
-#: .\main\models.py:91
+#: .\articles\models.py:33
+msgid "publié"
+msgstr ""
+
+#: .\articles\models.py:35
+msgid "emails envoyés"
+msgstr ""
+
+#: .\articles\models.py:36 .\courses\models.py:45 .\courses\models.py:158
+#: .\forum\models.py:60 .\main\models.py:145
 msgid "date de publication"
-msgstr "publication date"
+msgstr ""
 
-#: .\articles\models.py:36
+#: .\articles\models.py:38
 msgid "dernière modification"
-msgstr "last modification"
+msgstr ""
 
-#: .\articles\models.py:38 .\courses\models.py:155
+#: .\articles\models.py:40 .\courses\models.py:160
 msgid "nombre de vues"
-msgstr "number of views"
+msgstr ""
 
-#: .\articles\models.py:44
+#: .\articles\models.py:46
 msgid "article"
-msgstr "article"
+msgstr ""
 
 #: .\articles\templates\articles\article_aside.html:5
 msgid "Derniers articles"
-msgstr "Latest articles"
+msgstr ""
 
-#: .\articles\templates\articles\article_aside.html:10
-#: .\articles\templates\articles\article_detail.html:16
-#: .\articles\templates\articles\article_list.html:13
-#: .\courses\templates\courses\tutorial_detail.html:38
-msgid "Enlever des favoris"
-msgstr "Remove favorites"
-
-#: .\articles\templates\articles\article_aside.html:10
-#: .\articles\templates\articles\article_detail.html:16
-#: .\articles\templates\articles\article_list.html:13
-#: .\courses\templates\courses\tutorial_detail.html:38
-msgid "Ajouter aux favoris"
-msgstr "Add to favorites"
-
-#: .\articles\templates\articles\article_aside.html:25
+#: .\articles\templates\articles\article_aside.html:27
+#: .\forum\templates\forum\forum_aside.html:26
 #: .\main\templates\main\includes\tags.html:4
 msgid "Catégories"
-msgstr "Tags"
+msgstr ""
 
 #: .\articles\templates\articles\article_confirm_delete.html:4
 msgid "Suppression"
-msgstr "Deletion"
+msgstr ""
 
 #: .\articles\templates\articles\article_confirm_delete.html:7
 msgid "Suppression de l'article"
-msgstr "Deletion of the article"
+msgstr ""
 
 #: .\articles\templates\articles\article_confirm_delete.html:11
 msgid ""
@@ -435,377 +1494,372 @@ msgid ""
 "commentaires seront <strong>également supprimés</strong> ainsi que les "
 "<strong>ressources associées</strong>.</p>"
 msgstr ""
-"<p>The deletion of the article is <strong>irreversible</strong>. "
-"Commentswill <strong>also be deleted</strong> and <strong>associated "
-"resources</strong> will also be deleted"
 
 #: .\articles\templates\articles\article_confirm_delete.html:14
 #: .\courses\templates\courses\course_confirm_delete.html:14
 #: .\courses\templates\courses\tutorial_confirm_delete.html:14
 msgid "Retour en arrière"
-msgstr "A step backwards"
+msgstr ""
 
 #: .\articles\templates\articles\article_confirm_delete.html:15
 #: .\courses\templates\courses\course_confirm_delete.html:15
 #: .\courses\templates\courses\tutorial_confirm_delete.html:15
 msgid "Supprimer définitivement"
-msgstr "Delete permanently"
-
-#: .\articles\templates\articles\article_create.html:7
-#: .\articles\templates\articles\article_create.html:10
-#: .\articles\templates\articles\article_create.html:56
-msgid "Ajouter un article"
-msgstr "Add an article"
-
-#: .\articles\templates\articles\article_create.html:7
-#: .\articles\templates\articles\article_create.html:10
-#: .\articles\templates\articles\article_create.html:56
-msgid "Modifier un article"
-msgstr "Modify an article"
-
-#: .\articles\templates\articles\article_create.html:17
-#: .\courses\templates\courses\course_create.html:27
-#: .\courses\templates\courses\tutorial_create.html:17
-msgid "Information générales"
-msgstr "General information"
-
-#: .\articles\templates\articles\article_create.html:48
-#: .\courses\templates\courses\course_create.html:94
-msgid "Informations complémentaires"
-msgstr "Further information"
-
-#: .\articles\templates\articles\article_create.html:50
-msgid "Parution de l'article"
-msgstr "Publication of the article"
-
-#: .\articles\templates\articles\article_create.html:54
-#: .\billing\templates\billing\refund_request.html:19
-#: .\courses\templates\courses\course_create.html:111
-#: .\courses\templates\courses\tutorial_create.html:43
-#: .\main\templates\main\report.html:32
-#: .\templates\registration\password_reset_form.html:21
-#: .\templates\registration\register.html:57
-msgid ""
-"<small class=\"d-block mb-1\">Tous les champs avec d'un <span class="
-"\"required-input\">*</span> sont obligatoires.</small>"
 msgstr ""
-"<small class=\"d-block mb-1\">All fields with an <span class=\"required-input"
-"\">*</span> are required.</small>"
 
-#: .\articles\templates\articles\article_detail.html:22
-msgid "Mettre à jour"
-msgstr "Update"
+#: .\articles\templates\articles\article_create.html:7
+#: .\articles\templates\articles\article_create.html:10
+#: .\articles\templates\articles\article_create.html:34
+msgid "Ajouter un article"
+msgstr ""
 
-#: .\articles\templates\articles\article_detail.html:23
-#: .\courses\templates\courses\course_create.html:81
-msgid "Supprimer"
-msgstr "Delete"
+#: .\articles\templates\articles\article_create.html:7
+#: .\articles\templates\articles\article_create.html:10
+#: .\articles\templates\articles\article_create.html:34
+msgid "Modifier un article"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:26
+#: .\courses\templates\courses\course_create.html:58
+#: .\forum\templates\forum\forum_create.html:25
+msgid "Informations complémentaires"
+msgstr ""
+
+#: .\articles\templates\articles\article_create.html:32
+#: .\courses\templates\courses\course_create.html:65
+#: .\courses\templates\courses\tutorial_create.html:27
+#: .\forum\templates\forum\forum_create.html:31
+#: .\main\templates\main\contact.html:25 .\main\templates\main\contact.html:45
+#: .\templates\includes\form_snippet_fields.html:7
+#: .\templates\includes\form_snippet_fieldsets.html:17
+msgid ""
+"<small class=\"d-block mb-1\">Tous les champs avec un <span class=\"required-"
+"input\">*</span> sont obligatoires.</small>"
+msgstr ""
 
 #: .\articles\templates\articles\article_detail.html:26
-#: .\articles\templates\articles\article_list.html:19
-#: .\main\templates\main\includes\comments.html:33
-#: .\main\templates\main\includes\comments.html:43
-#: .\templates\includes\navbar.html:39
-msgid "Photo de profil"
-msgstr "Profile image"
+msgid "Mettre à jour"
+msgstr ""
 
-#: .\articles\templates\articles\article_detail.html:30
+#: .\articles\templates\articles\article_detail.html:35
 msgid "modifié le"
-msgstr "modified on"
+msgstr ""
 
-#: .\articles\templates\articles\article_list.html:4
-#: .\templates\includes\navbar.html:17
-msgid "Blog"
-msgstr "Blog"
+#: .\articles\templates\articles\article_detail.html:68
+#: .\articles\templates\articles\article_list.html:52
+msgid "Article ajouté aux favoris"
+msgstr ""
+
+#: .\articles\templates\articles\article_detail.html:68
+#: .\articles\templates\articles\article_list.html:52
+msgid "Article retiré des favoris"
+msgstr ""
 
 #: .\articles\templates\articles\article_list.html:7
-#: .\main\templates\main\search.html:47
 msgid "Articles du blog"
-msgstr "Blog articles"
+msgstr ""
 
-#: .\articles\views.py:46
+#: .\articles\templates\articles\new_article_email.html:4
+#, python-format
+msgid ""
+"Salut, cher utilisateur de ProgLangLearn,\n"
+"\n"
+"Un tout nouvel article vient d'être publié intitulé : \"%(article.title)s\"\n"
+"\n"
+"\n"
+"Tu peux désormais venir le lire si t'es intéressé :"
+msgstr ""
+
+#: .\articles\templates\articles\new_article_email.html:12
+#: .\courses\templates\courses\new_course_email.html:12
+msgid "De la part de toute l'équipe de ProgLangLearn,"
+msgstr ""
+
+#: .\articles\utils.py:21 .\articles\utils.py:29
+msgid "Nouvel article en ligne"
+msgstr ""
+
+#: .\articles\views.py:53
 msgid "Article ajouté avec succès"
-msgstr "Article successfully added"
+msgstr ""
 
-#: .\articles\views.py:48
+#: .\articles\views.py:55 .\forum\views.py:92
 msgid ""
 "Un problème est survenu ! Réessayez plus tard et si le problème persiste, "
 "contactez l'administration"
 msgstr ""
-"A problem has occurred! Try again later and if the problem persists, contact "
-"the administration"
 
-#: .\articles\views.py:141
+#: .\articles\views.py:138
 msgid "Article modifié avec succès"
-msgstr "Article successfully modified"
+msgstr ""
 
-#: .\articles\views.py:155
+#: .\articles\views.py:151
 msgid "Article supprimé avec succès"
-msgstr "Article successfully deleted"
+msgstr ""
 
 #: .\billing\admin.py:33
 msgid "Remboursements effectués"
-msgstr "Refunds made"
+msgstr ""
 
 #: .\billing\admin.py:37
 #, python-format
 msgid "%(error)s"
-msgstr "%(error)s"
+msgstr ""
 
-#: .\billing\admin.py:39 .\billing\views.py:104
+#: .\billing\admin.py:39 .\billing\views.py:106
 msgid "Rate limit error"
-msgstr "Rate limit error"
+msgstr ""
 
-#: .\billing\admin.py:41 .\billing\views.py:107
+#: .\billing\admin.py:41 .\billing\views.py:109
 msgid "Invalid parameters"
-msgstr "Invalid parameters"
+msgstr ""
 
-#: .\billing\admin.py:43 .\billing\views.py:111
+#: .\billing\admin.py:43 .\billing\views.py:113
 msgid "Not authenticated"
-msgstr "Not authenticated"
+msgstr ""
 
-#: .\billing\admin.py:45 .\billing\views.py:114
+#: .\billing\admin.py:45 .\billing\views.py:116
 msgid "Network error"
-msgstr "Network error"
+msgstr ""
 
-#: .\billing\admin.py:48 .\billing\views.py:119
+#: .\billing\admin.py:48 .\billing\views.py:121
 msgid "Something went wrong. You were not charged. Please try again"
-msgstr "Something went wrong. You were not charged. Please try again"
+msgstr ""
 
 #: .\billing\admin.py:54
 msgid "Mise des commandes vers l'acceptation du remboursement"
-msgstr "Placing orders towards the acceptance of the refund"
+msgstr ""
 
 #: .\billing\admin.py:65
 msgid "Remboursements rejetés avec succès"
-msgstr "Refunds successfully rejected"
+msgstr ""
 
 #: .\billing\admin.py:69
 msgid "Rejet de la demande de remboursement"
-msgstr "Rejection of the refund request"
+msgstr ""
 
 #: .\billing\admin.py:83 .\billing\admin.py:88
 msgid "Pas encore commandé"
-msgstr "Not yet ordered"
+msgstr ""
 
-#: .\billing\admin.py:90 .\billing\admin.py:103
+#: .\billing\admin.py:90 .\billing\admin.py:106
 msgid "Enregistrez un paiement pour avoir le lien"
-msgstr "Register a payment to get the link"
+msgstr ""
 
 #: .\billing\admin.py:92
 msgid "Lien du paiement"
-msgstr "Payment link"
+msgstr ""
 
 #: .\billing\admin.py:105
-msgid "Lien de l'utilisateur"
-msgstr "User link"
+msgid "Utilisateur supprimé"
+msgstr ""
 
-#: .\billing\admin.py:110
+#: .\billing\admin.py:108
+msgid "Lien de l'utilisateur"
+msgstr ""
+
+#: .\billing\admin.py:113
 msgid "Remboursement non acceptée"
-msgstr "Refund not accepted"
+msgstr ""
+
+#: .\billing\apps.py:7
+msgid "Facturation"
+msgstr ""
 
 #: .\billing\forms.py:9
 msgid "Nom sur la carte"
-msgstr "Name on the card"
+msgstr ""
 
 #: .\billing\forms.py:10
 msgid "Numéro de carte bancaire"
-msgstr "Credit card number"
+msgstr ""
 
 #: .\billing\forms.py:12
 msgid "Date d'expiration"
-msgstr "Expiry date"
+msgstr ""
 
 #: .\billing\forms.py:14
-msgid "CVC"
-msgstr "CVC"
+msgid "CCV / CVC"
+msgstr ""
 
 #: .\billing\forms.py:17
 msgid "Sauvegarder la carte pour une prochaine fois"
-msgstr "Save the credit card for a next time"
+msgstr ""
 
 #: .\billing\forms.py:30
 msgid "Entrez un code promotionnel"
-msgstr "Enter a promotional code"
+msgstr ""
 
 #: .\billing\forms.py:35
 msgid "Code de référence"
-msgstr "Reference code"
+msgstr ""
 
 #: .\billing\forms.py:38
 msgid "Entrez votre message"
-msgstr "Enter your message"
+msgstr ""
 
 #: .\billing\mixins.py:14
 msgid ""
 "Vous ne pouvez pas accéder à la page de paiement. Il vous impérativement "
 "mettre un cours dans votre panier"
 msgstr ""
-"You cannot access the payment page. It is imperative that you put a course "
-"in your cart"
 
 #: .\billing\models.py:14
 msgid "nom"
-msgstr "name"
+msgstr ""
 
 #: .\billing\models.py:15
 msgid "prix déduit"
-msgstr "price deducted"
+msgstr ""
 
 #: .\billing\models.py:17
 msgid "nombre de personnes qui peuvent utiliser le code"
-msgstr "number of people who can use the code"
+msgstr ""
 
-#: .\billing\models.py:19
+#: .\billing\models.py:18
 msgid "date de désactivation du code"
-msgstr "code deactivation date"
+msgstr ""
 
-#: .\billing\models.py:21
+#: .\billing\models.py:20
 msgid "code utilisé par"
-msgstr "code used by"
+msgstr ""
+
+#: .\billing\models.py:26
+msgid "coupon promotionnel"
+msgstr ""
 
 #: .\billing\models.py:27
-msgid "coupon promotionnel"
-msgstr "promotional coupon"
-
-#: .\billing\models.py:28
 msgid "coupons promotionnels"
-msgstr "promotional coupons"
+msgstr ""
 
-#: .\billing\models.py:36 .\billing\models.py:91 .\polls\models.py:111
+#: .\billing\models.py:42 .\billing\models.py:111
 msgid "utilisateur"
-msgstr "user"
-
-#: .\billing\models.py:38
-msgid "code de référence"
-msgstr "reference code"
-
-#: .\billing\models.py:39
-msgid "cours choisis"
-msgstr "selected courses"
-
-#: .\billing\models.py:41
-msgid "code de promotion attaché"
-msgstr "attached promotion code"
-
-#: .\billing\models.py:43
-msgid "date de création de l'ordre d'achat"
-msgstr "date of creation of the purchase order"
+msgstr ""
 
 #: .\billing\models.py:45
+msgid "cours choisis"
+msgstr ""
+
+#: .\billing\models.py:47
+msgid "code de promotion attaché"
+msgstr ""
+
+#: .\billing\models.py:49
+msgid "date de création de l'ordre d'achat"
+msgstr ""
+
+#: .\billing\models.py:51
 msgid "date de la transaction"
-msgstr "transaction date"
-
-#: .\billing\models.py:46
-msgid "commandé"
-msgstr "ordered"
-
-#: .\billing\models.py:48
-msgid "paiement associé"
-msgstr "associated payment"
-
-#: .\billing\models.py:50
-msgid "demande de remboursement"
-msgstr "refund request"
+msgstr ""
 
 #: .\billing\models.py:52
-msgid "demande de remboursement acceptée"
-msgstr "refund request accepted"
+msgid "commandé"
+msgstr ""
 
-#: .\billing\models.py:55 .\billing\models.py:106
-msgid "commande"
-msgstr "order"
+#: .\billing\models.py:54
+msgid "paiement associé"
+msgstr ""
 
 #: .\billing\models.py:56
+msgid "demande de remboursement"
+msgstr ""
+
+#: .\billing\models.py:58
+msgid "demande de remboursement acceptée"
+msgstr ""
+
+#: .\billing\models.py:61 .\billing\models.py:126
+msgid "commande"
+msgstr ""
+
+#: .\billing\models.py:62
 msgid "commandes"
-msgstr "orders"
-
-#: .\billing\models.py:89
-msgid "identifiant de paiement Stripe"
-msgstr "Stripe payment ID"
-
-#: .\billing\models.py:92
-msgid "montant"
-msgstr "amount"
-
-#: .\billing\models.py:94
-msgid "date du paiement"
-msgstr "payment date"
-
-#: .\billing\models.py:97
-msgid "paiement"
-msgstr "payment"
-
-#: .\billing\models.py:98
-msgid "paiements"
-msgstr "payments"
-
-#: .\billing\models.py:107
-msgid "raison"
-msgstr "reason"
+msgstr ""
 
 #: .\billing\models.py:109
-msgid "identifiant de remboursement Stripe"
-msgstr "Stripe refund ID"
+msgid "identifiant de paiement Stripe"
+msgstr ""
 
-#: .\billing\models.py:110
-msgid "accepté"
-msgstr "accepted"
-
-#: .\billing\models.py:111
-msgid "rejeté"
-msgstr "rejected"
+#: .\billing\models.py:112
+msgid "montant"
+msgstr ""
 
 #: .\billing\models.py:114
+msgid "date du paiement"
+msgstr ""
+
+#: .\billing\models.py:117
+msgid "paiement"
+msgstr ""
+
+#: .\billing\models.py:118
+msgid "paiements"
+msgstr ""
+
+#: .\billing\models.py:127
+msgid "raison"
+msgstr ""
+
+#: .\billing\models.py:129
+msgid "identifiant de remboursement Stripe"
+msgstr ""
+
+#: .\billing\models.py:130
+msgid "accepté"
+msgstr ""
+
+#: .\billing\models.py:131
+msgid "rejeté"
+msgstr ""
+
+#: .\billing\models.py:134
 msgid "remboursement"
-msgstr "refund"
+msgstr ""
 
-#: .\billing\models.py:115
+#: .\billing\models.py:135
 msgid "remboursements"
-msgstr "refunds"
+msgstr ""
 
-#: .\billing\templates\billing\cart.html:4 .\templates\includes\navbar.html:24
+#: .\billing\templates\billing\cart.html:4 .\templates\includes\navbar.html:27
 msgid "Panier"
-msgstr "Cart"
+msgstr ""
 
 #: .\billing\templates\billing\cart.html:7
 msgid "Votre panier"
-msgstr "Your cart"
+msgstr ""
 
-#: .\billing\templates\billing\cart.html:12
+#: .\billing\templates\billing\cart_element.html:8
 msgid "Continuer mes achats"
-msgstr "Continue shopping"
+msgstr ""
 
-#: .\billing\templates\billing\cart.html:13
+#: .\billing\templates\billing\cart_element.html:9
 #: .\billing\templates\billing\payment.html:9
 msgid "Procéder au paiement"
-msgstr "Proceed to payment"
+msgstr ""
 
-#: .\billing\templates\billing\cart.html:16
-#, fuzzy
-#| msgid "Vous n'avez pas l'autorisation de modifier cet article"
+#: .\billing\templates\billing\cart_element.html:12
 msgid "Vous n'avez aucune formation dans votre panier"
-msgstr "You do not have the authorization to modify this article"
+msgstr ""
 
 #: .\billing\templates\billing\payment.html:4
 msgid "Paiement"
-msgstr "Payment"
+msgstr ""
 
 #: .\billing\templates\billing\payment.html:10
 msgid "Payez en toute sécurité !"
-msgstr "Pay safely!"
+msgstr ""
 
 #: .\billing\templates\billing\payment.html:21
 msgid "Cartes bancaires acceptées"
-msgstr "Credit cards accepted"
+msgstr ""
 
 #: .\billing\templates\billing\payment.html:31
 msgid "Carte de crédit ou de débit"
-msgstr "Credit or debit card"
+msgstr ""
 
 #: .\billing\templates\billing\payment.html:36
 msgid "Soumettre le paiement"
-msgstr "Submit the payment"
+msgstr ""
 
 #: .\billing\templates\billing\payment_error.html:4
 #, python-format
@@ -818,428 +1872,391 @@ msgid ""
 "\n"
 "Cliquez sur ce lien pour aller directement sur notre site :"
 msgstr ""
-"You receive this email because an error occurred during a payment on "
-"ProgLangLearn\n"
-"\n"
-"Here is the error generated :\n"
-"%(error)s\n"
-"\n"
-"Click on this link to go directly to our website :"
 
 #: .\billing\templates\billing\payment_items.html:18
-#, fuzzy
-#| msgid "Supprimer le coupon"
 msgid "Supprimer la formation"
-msgstr "Delete the coupon"
+msgstr ""
 
 #: .\billing\templates\billing\payment_items.html:28
 msgid "Supprimer le coupon"
-msgstr "Delete the coupon"
+msgstr ""
 
-#: .\billing\templates\billing\payment_items.html:39
+#: .\billing\templates\billing\payment_items.html:42
 msgid "Activer le code"
-msgstr "Activate the coupon"
+msgstr ""
 
 #. Translators: Amount of money
-#: .\billing\templates\billing\payment_items.html:46
+#: .\billing\templates\billing\payment_items.html:52
 #: .\billing\templates\billing\pdf\confirmation_payment.html:119
-#: .\billing\templates\billing\pdf\original_pdf_file.html:145
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:9
-#: .\billing\templates\billing\pdf\original_pdf_file.html:9
-#: .\templates\base.html:8 .\templates\maintenance.html:9
+#: .\templates\base.html:12 .\templates\maintenance.html:12
 msgid ""
 "Apprenez les bases de la programmation en les manipulant dans des exemples "
 "simples et des projets plus complexes."
 msgstr ""
-"Learn the basics of programming by manipulating them in simple examples and "
-"more complex projects."
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:93
-#: .\billing\templates\billing\pdf\original_pdf_file.html:118
 msgid "Confirmation du paiement"
-msgstr "Confirmation of payment"
+msgstr ""
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:97
-#, python-format
-msgid ""
-"<p>Paiement par carte de crédit ou de débit : %(stripe_charge.source.brand|"
-"upper)s %(stripe_charge.source.country|upper)s **** **** **** <strong>%"
-"(stripe_charge.source.last4)s</strong><br>\n"
-"                Date d'expiration : <strong>%(stripe_charge.source.exp_month|"
-"zfill:'2')s / %(stripe_charge.source.exp_year)s</strong><br><br>\n"
-"                Code de référence de votre commande : <strong>%(order."
-"ref_code)s</strong> datant du %(order.ordered_date|date:\"d/m/Y\")s<br>\n"
-"                Votre identifiant unique : %(order.user.id)s</p>"
+msgid "Paiement par carte de crédit ou de débit :"
 msgstr ""
-"<p>Payment by credit or debit card :%(stripe_charge.source.brand|upper)s %"
-"(stripe_charge.source.country|upper)s **** **** **** <strong>%(stripe_charge."
-"source.last4)s</strong><br>\n"
-"                Expery date : <strong>%(stripe_charge.source.exp_month|"
-"zfill:'2')s / %(stripe_charge.source.exp_year)s</strong><br><br>\n"
-"                Reference code of your order : <strong>%(order.ref_code)s</"
-"strong> dating from %(order.ordered_date|date:\"d/m/Y\")s<br>\n"
-"                Your unique identifier : %(order.user.id)s</p>"
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:98
+msgid "Date d'expiration :"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:99
+msgid "Code de référence de votre commande :"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:99
+msgid "datant du"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:100
+msgid "Votre identifiant unique :"
+msgstr ""
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:102
-#: .\billing\templates\billing\pdf\original_pdf_file.html:127
 msgid "Récapitulatif"
-msgstr "Summary"
+msgstr ""
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:128
 msgid ""
 "Ce document fait office de confirmation officielle de paiement. Il vous sera "
 "demander de le délivrer en cas de problèmes liés à votre compte (perte et "
-"remplacement par un autre compte) ou lors d'une demande de remboursement "
+"remplacement par un autre compte) ou lors"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:128
+msgid "d'une demande de remboursement"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:128
+msgid ""
 "(possible sous 14 jours à compter de la date de la transaction <strong>et</"
 "strong> avec un motif valable)."
 msgstr ""
-"This document serves as the official confirmation of payment. You will be "
-"asked to issue it in the event of problems with your account (loss and "
-"replacement by another account) or upon a refund request (possible within 14 "
-"days of the transaction date <strong>and</strong> with valid reason)."
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:130
-#: .\billing\templates\billing\pdf\original_pdf_file.html:158
 msgid "Aller sur le site"
-msgstr "Go to the site"
+msgstr ""
 
-#: .\billing\templates\billing\pdf\original_pdf_file.html:122
+#: .\billing\templates\billing\refund_detail.html:4
+#: .\billing\templates\billing\refund_detail.html:7
+msgid "Votre demande de reboursement"
+msgstr ""
+
+#: .\billing\templates\billing\refund_detail.html:9
+msgid "Vous avez formulé une demande de remboursement. État de votre demande :"
+msgstr ""
+
+#: .\billing\templates\billing\refund_detail.html:10
 #, python-format
 msgid ""
-"<p>Paiement par carte de crédit ou de débit : **** **** **** <strong>4242</"
-"strong><br>\n"
-"                Date d'expiration : <strong>04 / 2020</strong><br><br>\n"
-"                Code de référence de votre commande : <strong>%(order."
-"ref_code)s</strong> datant du %(order.ordered_date)s<br>\n"
-"                Votre identifiant unique : %(order.user.id)s</p>"
+"Le <a href=\"%(url)s\">détail</a> de votre paiement est toujours disponible."
 msgstr ""
-"<p>Payment by credit or debit card : **** **** **** <strong>4242</"
-"strong><br>\n"
-"                Expery date : <strong>04 / 2020</strong><br><br>\n"
-"                Reference code of your order : <strong>%(order.ref_code)s</"
-"strong> dating from %(order.ordered_date)s<br>\n"
-"                Your unique identifier : %(order.user.id)s</p>"
+
+#: .\billing\templates\billing\refund_detail.html:11
+msgid "Pour rappel, voici le détail de votre demande ci-dessous :"
+msgstr ""
 
 #: .\billing\templates\billing\refund_request.html:4
 #: .\billing\templates\billing\refund_request.html:7
 msgid "Demande de reboursement"
-msgstr "Request for refund"
+msgstr ""
 
-#: .\billing\templates\billing\refund_request.html:21
+#: .\billing\templates\billing\refund_request.html:13
 msgid "Demander"
-msgstr "Request"
+msgstr ""
 
-#: .\billing\utils.py:25
-msgid "Ce coupon n'est plus valide"
-msgstr "This coupon is no longer valid"
+#: .\billing\utils.py:45
+msgid "Error Rendering PDF"
+msgstr ""
 
-#: .\billing\utils.py:28
-msgid "Ce coupon n'existe pas"
-msgstr "This coupon does not exist"
+#: .\billing\views.py:48
+msgid ""
+"Ceci est une version test de ce site. Veuillez utiliser les informations "
+"suivantes pour la carte bancaire : 4242424242424242 07/20 000"
+msgstr ""
 
-#: .\billing\views.py:91 .\courses\views.py:122
+#: .\billing\views.py:93 .\courses\views.py:119
 #, python-format
 msgid "Bienvenue au cours : %(course_title)s"
-msgstr "Welcome to the course : %(course_title)s"
+msgstr ""
 
-#: .\billing\views.py:94
-#, fuzzy
+#: .\billing\views.py:96
 msgid "Votre commande a été effectuée avec succès"
-msgstr "Your order has been successfully placed"
+msgstr ""
 
-#: .\billing\views.py:100
+#: .\billing\views.py:102
 #, python-format
 msgid "%(message_error)s"
-msgstr "%(message_error)s"
+msgstr ""
 
-#: .\billing\views.py:123
+#: .\billing\views.py:125
 msgid "Stripe error"
-msgstr "Erreur de Stripe"
+msgstr ""
 
-#: .\billing\views.py:133
+#: .\billing\views.py:135
 msgid "A serious error occurred. We have been notified"
-msgstr "Une erreur grave s'est produite. Nous avons été informés"
+msgstr ""
 
-#: .\billing\views.py:163
-msgid "Le cours que vous essayé d'ajouter se trouve déjà dans le panier"
-msgstr "The course you are trying to add is already in the cart"
+#: .\billing\views.py:161
+msgid "Le cours que vous essayez d'ajouter se trouve déjà dans le panier"
+msgstr ""
 
-#: .\billing\views.py:166
+#: .\billing\views.py:164
 msgid "Cours ajouté au panier"
-msgstr "Course added to the cart"
+msgstr ""
 
-#: .\billing\views.py:182
+#: .\billing\views.py:190
 msgid "Le cours a bien été enlevé de votre panier"
-msgstr "The course has been removed from your cart"
-
-#: .\billing\views.py:185
-msgid "Le cours ne se trouve pas dans votre panier"
-msgstr "The course is not in your cart"
+msgstr ""
 
 #: .\billing\views.py:193
+msgid "Le cours ne se trouve pas dans votre panier"
+msgstr ""
+
+#: .\billing\views.py:201
 msgid "Votre panier est actuellement vide"
-msgstr "Your cart is currently empty"
+msgstr ""
 
-#: .\billing\views.py:212
+#: .\billing\views.py:230
 #, python-format
-msgid "Coupon %(coupon_code)s ajouté"
-msgstr "Coupon %(coupon_code)s added"
+msgid "Code promotionnel %(code)s ajouté"
+msgstr ""
 
-#: .\billing\views.py:215
+#: .\billing\views.py:234 .\billing\views.py:237
 msgid "Vous avez déjà utilisé ce coupon lors d'un précédent achat"
-msgstr "You have already used this coupon for a previous purchase"
+msgstr ""
 
-#: .\billing\views.py:218
+#: .\billing\views.py:241 .\billing\views.py:244
 msgid "Le coupon saisi n'existe pas ou n'est plus disponible"
-msgstr "The coupon entered does not exist or is no longer available"
+msgstr ""
 
-#: .\billing\views.py:222
+#: .\billing\views.py:247
 msgid "Vous n'avez aucun cours dans votre panier"
-msgstr "You have no courses in your cart"
+msgstr ""
 
-#: .\billing\views.py:224
+#: .\billing\views.py:250 .\billing\views.py:253
 msgid "Méthode d'ajout de coupon non acceptée"
-msgstr "Method of adding a coupon not allowed"
+msgstr ""
 
-#: .\billing\views.py:241
-msgid "Le code promotionnel a bien été retiré de votre panier"
-msgstr "The promotional code has been removed from your cart"
-
-#: .\billing\views.py:244
+#: .\billing\views.py:283 .\billing\views.py:286
 msgid ""
 "Le code promotionnel n'est pas lié à votre panier et ne peut être retiré"
 msgstr ""
-"The promotional code is not linked to your shopping cart and cannot be "
-"removed"
 
-#: .\billing\views.py:246
+#: .\billing\views.py:288
 msgid "Votre panier est vide"
-msgstr "Your cart is empty"
+msgstr ""
 
-#: .\billing\views.py:272
+#: .\billing\views.py:321
 msgid "Votre demande a été envoyée"
-msgstr "Your request has been sent"
+msgstr ""
 
-#: .\billing\views.py:276
+#: .\billing\views.py:325
 msgid "La demande de remboursement a été rejetée"
-msgstr "The request for reimbursement was rejected"
+msgstr ""
 
-#: .\billing\views.py:278
+#: .\billing\views.py:327
 msgid ""
-"La période de remboursement a expirée ou vous avez déjà envoyé une demande"
-msgstr "The refund period has expired or you have already sent a request"
+"La période de remboursement a expiré ou vous avez déjà envoyé une demande"
+msgstr ""
 
-#: .\billing\views.py:282
+#: .\billing\views.py:331
 msgid "Le code de référence mentionné n'existe pas"
-msgstr "The reference code mentioned does not exist"
+msgstr ""
 
 #: .\courses\admin.py:22
 msgid "Formations publiées avec succès"
-msgstr "Successfully published courses"
+msgstr ""
 
 #: .\courses\admin.py:26
 msgid ""
 "Publication des formations (les rendre visibles si la date est dépassée + "
 "autorisation d'envoi d'email notificatif)"
 msgstr ""
-"Publication of courses (make them visible if the date has passed + "
-"authorization to send email notifications)"
-
-#: .\courses\admin.py:30
-msgid "année de publication"
-msgstr "year of publication"
 
 #: .\courses\admin.py:56
 #, python-format
 msgid "Éditer le %s séparement"
-msgstr "Edit the %s separately"
+msgstr ""
 
 #: .\courses\admin.py:57
 msgid "Enregistrez et continuez à éditer pour créer un lien"
-msgstr "Save and continue editing to create a link"
+msgstr ""
 
 #: .\courses\admin.py:58
 msgid "Édit le lien"
-msgstr "Edit the link"
+msgstr ""
 
 #: .\courses\admin.py:80
 msgid "Enregistrez pour avoir le lien de l'auteur du cours"
-msgstr "Register to get the link to the author of the course"
+msgstr ""
 
-#: .\courses\admin.py:82
-msgid "Auteur"
-msgstr "Author"
-
-#: .\courses\admin.py:92 .\polls\admin.py:53 .\polls\admin.py:79
-#: .\polls\admin.py:112
+#: .\courses\admin.py:93
 msgid "Info générales"
-msgstr "General info"
+msgstr ""
 
-#: .\courses\admin.py:93 .\polls\admin.py:81 .\polls\admin.py:114
+#: .\courses\admin.py:95
 msgid "Info complémentaires"
-msgstr "Further info"
+msgstr ""
 
-#: .\courses\forms.py:24 .\courses\forms.py:52
+#: .\courses\apps.py:7 .\courses\templates\courses\course_list.html:4
+#: .\templates\includes\navbar.html:17
+msgid "Cours"
+msgstr ""
+
+#: .\courses\forms.py:25 .\courses\forms.py:54
 msgid "Gestionnaire de ..."
-msgstr "Manager of ..."
+msgstr ""
 
-#: .\courses\forms.py:26 .\courses\forms.py:54
+#: .\courses\forms.py:27 .\courses\forms.py:56
 msgid "Introduction au cours"
-msgstr "Course introduction"
+msgstr ""
 
-#: .\courses\forms.py:36
+#: .\courses\forms.py:37
+msgid ""
+"S'il manque une catégorie, demandez à le rajouter sur la page contact "
+"rubrique 'Demande'. Un mail vous sera envoyer pour vous mettre au courant du "
+"rajout ou du rejet de votre demande"
+msgstr ""
+
+#: .\courses\forms.py:38
 msgid ""
 "Conseil : mettre une période de deux semaines en plus en attente de "
 "vérification de la part de l'administration"
 msgstr ""
-"Tip: Put an additional two-week period on hold pending verification by the "
-"administration"
 
-#: .\courses\forms.py:62
-#, python-format
-msgid ""
-"S'il manque une catégorie, demandez à le <a href='%(contact)s'>rajouter</a>. "
-"Un mail vous sera envoyer pour vous mettre au courant du rajout ou du rejet "
-"de votre demande"
-msgstr ""
-"If a category is missing, ask the <a href='%(contact)s'>add</a>. An email "
-"will be sent to you to inform you of the addition or rejection of your "
-"request"
-
-#: .\courses\forms.py:71
+#: .\courses\forms.py:74
 msgid "Installation ..."
-msgstr "Installation ..."
+msgstr ""
 
-#: .\courses\forms.py:72 .\main\forms.py:20 .\polls\admin.py:69
+#: .\courses\forms.py:75 .\main\forms.py:54
 msgid "Contenu"
-msgstr "Content"
+msgstr ""
 
 #: .\courses\mixins.py:13
 msgid ""
 "Vous n'avez pas accès à ce tutoriel. Veuillez vous enroller dans le cours"
-msgstr "You do not have access to this tutorial. Please enroll in the course"
+msgstr ""
 
-#: .\courses\mixins.py:23 .\polls\mixins.py:24
+#: .\courses\mixins.py:23
 msgid ""
 "Le tutoriel ou le cours auquel vous essayez d'accéder n'existe pas ou plus "
 "ou est inaccessible"
 msgstr ""
-"The tutorial or course you are trying to access does not exist or is no "
-"longer available or is inaccessible"
 
 #: .\courses\mixins.py:50
 msgid "Vous n'avez pas l'autorisation de modifier ce cours"
-msgstr "You are not authorized to modify this course"
+msgstr ""
 
 #: .\courses\mixins.py:59
 msgid ""
 "Le cours auquel vous essayez d'accéder n'existe pas ou plus ou est "
 "inaccessible"
 msgstr ""
-"The course you are trying to access does not exist or no longer exists or is "
-"inaccessible"
 
 #: .\courses\models.py:20
 msgid "Débutant"
-msgstr "Beginner"
+msgstr ""
 
 #: .\courses\models.py:21
 msgid "Intermédiaire"
-msgstr "Intermediate"
+msgstr ""
 
 #: .\courses\models.py:22
 msgid "Expert"
-msgstr "Expert"
+msgstr ""
 
 #: .\courses\models.py:29
 msgid "titre du cours"
-msgstr "title of the course"
-
-#: .\courses\models.py:33
-msgid "vignette/vidéo d'introduction"
-msgstr "intriduction thumbnail/video"
+msgstr ""
 
 #: .\courses\models.py:39
 msgid "difficulté"
-msgstr "difficulty"
+msgstr ""
 
 #: .\courses\models.py:41
 msgid "contenu d'introduction"
-msgstr "introduction content"
+msgstr ""
 
 #: .\courses\models.py:43
 msgid "version PDF du cours"
-msgstr "PDF version of the course"
+msgstr ""
 
 #: .\courses\models.py:47
 msgid "formation publiée"
-msgstr "published course"
+msgstr ""
 
 #: .\courses\models.py:49
 msgid "email envoyé"
-msgstr "email sent"
+msgstr ""
 
 #: .\courses\models.py:51
 msgid "prix (ou ancien prix si nouveau)"
-msgstr "price (or old price if new exists)"
+msgstr ""
 
 #: .\courses\models.py:53
 msgid "nouveau prix"
-msgstr "new price"
+msgstr ""
 
 #: .\courses\models.py:55
 msgid "étudiants enrollés"
-msgstr "enrolled students"
+msgstr ""
 
-#: .\courses\models.py:61 .\courses\models.py:62
+#. Translators : pluriel de cours
+#: .\courses\models.py:61 .\courses\models.py:63
 msgid "cours"
-msgstr "course"
+msgstr ""
 
-#: .\courses\models.py:96
+#: .\courses\models.py:98
 msgid ""
 "Aucun tutoriel n'est relié au cours ! Veuillez en relié au moins un pour "
 "obtenir un pourcentage"
 msgstr ""
-"No tutorials are related to the course! Please link at least one to obtain a "
-"percentage"
-
-#: .\courses\models.py:142
-msgid "cours rattaché"
-msgstr "course attached"
-
-#: .\courses\models.py:146
-msgid "titre du tutoriel"
-msgstr "title of the tutorial"
 
 #: .\courses\models.py:147
-msgid "contenu du tutoriel"
-msgstr "tutorial content"
-
-#: .\courses\models.py:149
-msgid "ressources à déposer"
-msgstr "resources to be deposited"
+msgid "cours rattaché"
+msgstr ""
 
 #: .\courses\models.py:151
+msgid "titre du tutoriel"
+msgstr ""
+
+#: .\courses\models.py:152
+msgid "contenu du tutoriel"
+msgstr ""
+
+#: .\courses\models.py:154
+msgid "ressources à déposer"
+msgstr ""
+
+#: .\courses\models.py:156
 msgid "points d'expérience fournis"
-msgstr "experience points provided"
+msgstr ""
 
-#: .\courses\models.py:159
+#: .\courses\models.py:166
 msgid "tutoriel"
-msgstr "tutorial"
+msgstr ""
 
-#: .\courses\models.py:160
+#: .\courses\models.py:167
 msgid "tutoriels"
-msgstr "tutorials"
+msgstr ""
 
 #: .\courses\templates\courses\course_confirm_delete.html:4
 #: .\courses\templates\courses\course_confirm_delete.html:7
 #: .\courses\templates\courses\tutorial_confirm_delete.html:4
 #: .\courses\templates\courses\tutorial_confirm_delete.html:7
 msgid "Suppression de"
-msgstr "Deletion of"
+msgstr ""
 
 #: .\courses\templates\courses\course_confirm_delete.html:11
 msgid ""
@@ -1247,62 +2264,50 @@ msgid ""
 "seront <strong>également supprimés</strong> ainsi que les <strong>ressources "
 "associées</strong>.</p>"
 msgstr ""
-"<p>The deletion of the course is <strong>irreversible</strong>. Attached "
-"tutorials <strong>also be deleted</strong> and <strong>associated resources</"
-"strong> also be deleted"
 
 #: .\courses\templates\courses\course_create.html:7
 #: .\courses\templates\courses\course_create.html:14
 msgid "Ajouter un cours"
-msgstr "Add a course"
+msgstr ""
 
 #: .\courses\templates\courses\course_create.html:7
 #: .\courses\templates\courses\course_create.html:14
 msgid "Modifier un cours"
-msgstr "Modify a course"
+msgstr ""
 
 #: .\courses\templates\courses\course_create.html:17
-#: .\courses\templates\courses\course_detail.html:10
-#: .\courses\templates\courses\tutorial_create.html:46
-#: .\courses\templates\courses\tutorial_create.html:48
-#: .\courses\templates\courses\tutorial_detail.html:31
+#: .\courses\templates\courses\course_detail.html:14
+#: .\courses\templates\courses\tutorial_create.html:30
+#: .\courses\templates\courses\tutorial_create.html:32
+#: .\courses\templates\courses\tutorial_detail.html:32
+#: .\polls\templates\polls\poll_detail.html:13
+#: .\polls\templates\polls\poll_result.html:9
 msgid "Retour"
-msgstr "Back"
+msgstr ""
 
 #: .\courses\templates\courses\course_create.html:18
-#: .\courses\templates\courses\course_detail.html:12
+#: .\courses\templates\courses\course_detail.html:16
 msgid "Supprimer le cours"
-msgstr "Delete the course"
+msgstr ""
 
-#: .\courses\templates\courses\course_create.html:80
-#: .\courses\templates\courses\course_create.html:113
-#: .\courses\templates\courses\tutorial_create.html:50
-msgid "Modifier"
-msgstr "Modify"
-
-#: .\courses\templates\courses\course_create.html:89
+#: .\courses\templates\courses\course_create.html:53
 #: .\courses\templates\courses\tutorial_create.html:4
 msgid "Ajouter un tutoriel"
-msgstr "Add a tutorial"
+msgstr ""
 
-#: .\courses\templates\courses\course_create.html:113
-#: .\courses\templates\courses\tutorial_create.html:50
-msgid "Ajouter"
-msgstr "Add"
-
-#: .\courses\templates\courses\course_detail.html:11
+#: .\courses\templates\courses\course_detail.html:15
 msgid "Modifier l'aperçu du cours"
-msgstr "Modify the course preview"
-
-#: .\courses\templates\courses\course_detail.html:21
-msgid "Cours rédigé par"
-msgstr "Course written by"
-
-#: .\courses\templates\courses\course_detail.html:21
-msgid "et paru le"
-msgstr "and published on"
+msgstr ""
 
 #: .\courses\templates\courses\course_detail.html:25
+msgid "Cours rédigé par"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:25
+msgid "et paru le"
+msgstr ""
+
+#: .\courses\templates\courses\course_detail.html:29
 #, python-format
 msgid ""
 "\n"
@@ -1315,86 +2320,62 @@ msgid_plural ""
 "ressources téléchargables\n"
 "                "
 msgstr[0] ""
-"\n"
-"                    <i class=\"fas fa-file-code\"></i> %(counter)s "
-"downloadable resource\n"
-"                "
 msgstr[1] ""
-"\n"
-"                    <i class=\"fas fa-file-code\"></i> %(counter)s "
-"downloadable resources\n"
-"                "
 
-#: .\courses\templates\courses\course_detail.html:34
+#: .\courses\templates\courses\course_detail.html:38
 msgid "PDF disponible"
-msgstr "PDF available"
+msgstr ""
 
-#: .\courses\templates\courses\course_detail.html:44
+#: .\courses\templates\courses\course_detail.html:48
 msgid "Tutoriels appartenant au cours"
-msgstr "Tutorials belonging to the course"
+msgstr ""
 
-#: .\courses\templates\courses\course_detail.html:53
+#: .\courses\templates\courses\course_detail.html:57
 msgid "Quiz appartenant au cours"
-msgstr "Quizzes belonging to the course"
+msgstr ""
 
-#: .\courses\templates\courses\course_detail.html:64
+#: .\courses\templates\courses\course_detail.html:68
 msgid "Enrollez-vous dès maintenant pour accéder à ce cours"
-msgstr "Enroll yourself now to access this course"
+msgstr ""
 
-#: .\courses\templates\courses\course_detail.html:66
+#: .\courses\templates\courses\course_detail.html:70
 msgid "S'enroller"
-msgstr "Enroll yourself"
+msgstr ""
 
-#: .\courses\templates\courses\course_detail.html:69
-#: .\courses\templates\courses\course_detail.html:75
+#: .\courses\templates\courses\course_detail.html:73
+#: .\courses\templates\courses\course_detail.html:79
 msgid "gratuitement"
-msgstr "freely"
+msgstr ""
 
-#: .\courses\templates\courses\course_detail.html:71
-#: .\courses\templates\courses\course_detail.html:77
-msgid "pour"
-msgstr "for"
-
+#: .\courses\templates\courses\course_detail.html:75
 #: .\courses\templates\courses\course_detail.html:81
-msgid "Enlever du panier"
-msgstr "Remove from the cart"
+msgid "pour"
+msgstr ""
 
-#: .\courses\templates\courses\course_list.html:4 .\polls\admin.py:124
-#: .\templates\includes\navbar.html:14
-msgid "Cours"
-msgstr "Courses"
+#: .\courses\templates\courses\course_detail.html:85
+msgid "Enlever du panier"
+msgstr ""
 
 #: .\courses\templates\courses\course_list.html:7
 msgid "Tous les cours"
-msgstr "All courses"
+msgstr ""
 
 #: .\courses\templates\courses\course_list.html:36
 #: .\courses\templates\courses\course_list.html:38
 msgid "Gratuit"
-msgstr "Free"
+msgstr ""
 
 #: .\courses\templates\courses\new_course_email.html:4
 #, python-format
 msgid ""
 "Salut, cher utilisateur de ProgLangLearn,\n"
 "\n"
-"Une toute nouvelle formation vient d'être publiée intitulée : \"%(course."
-"title)s\"\n"
+"Une toute nouvelle formation vient d'être publiée et est intitulée : \"%"
+"(title)s\"\n"
 "\n"
 "\n"
 "Tu peux venir regarder les détails de celle-ci par ce lien :"
 msgstr ""
-"Hello, dear ProgLangLearn user,\n"
-"\n"
-"A brand new training course has just been published entitled : \"%(course."
-"title)s\"\n"
-"\n"
-"\n"
-"You can come and have a look at the details of this one through this link :"
-
-#: .\courses\templates\courses\new_course_email.html:12
-msgid "De la part de toute l'équipe de ProgLangLearn,"
-msgstr "On behalf of the entire ProgLangLearn team,"
 
 #: .\courses\templates\courses\tutorial_confirm_delete.html:11
 msgid ""
@@ -1402,230 +2383,487 @@ msgid ""
 "commentaires seront <strong>également supprimés</strong> ainsi que les "
 "<strong>ressources associées</strong>.</p>"
 msgstr ""
-"<p>The deletion of the tutorial is <strong>irreversible</strong>. Comments "
-"are <strong>also be deleted</strong> and associated ressources <strong>also "
-"be deleted</strong>.</p>"
 
 #: .\courses\templates\courses\tutorial_create.html:4
 msgid "Modifier un tutoriel"
-msgstr "Modify a tutorial"
+msgstr ""
 
 #: .\courses\templates\courses\tutorial_create.html:11
 msgid "Ajouter un tutoriel au cours"
-msgstr "Add a course tutorial"
+msgstr ""
 
 #: .\courses\templates\courses\tutorial_create.html:11
 msgid "Modifier un tutoriel du cours"
-msgstr "Modify a course tutorial"
+msgstr ""
 
-#: .\courses\templates\courses\tutorial_create.html:31
+#: .\courses\templates\courses\tutorial_create.html:18
+msgid "Information générales"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_create.html:23
 msgid "Information suplémentaires"
-msgstr "Additional information"
-
-#: .\courses\templates\courses\tutorial_detail.html:33
-msgid "Modifier le tutoriel"
-msgstr "Modify the tutorial"
+msgstr ""
 
 #: .\courses\templates\courses\tutorial_detail.html:34
+msgid "Modifier le tutoriel"
+msgstr ""
+
+#: .\courses\templates\courses\tutorial_detail.html:35
 msgid "Supprimer le tutoriel"
-msgstr "Delete the tutorial"
+msgstr ""
 
-#: .\courses\templates\courses\tutorial_detail.html:38
+#: .\courses\templates\courses\tutorial_detail.html:40
 msgid "minutes"
-msgstr "minutes"
+msgstr ""
 
-#: .\courses\templates\courses\tutorial_detail.html:46
+#: .\courses\templates\courses\tutorial_detail.html:49
 #: .\templates\includes\pagination.html:7
 msgid "Précédent"
-msgstr "Previous"
+msgstr ""
 
-#: .\courses\templates\courses\tutorial_detail.html:52
+#: .\courses\templates\courses\tutorial_detail.html:55
 #: .\templates\includes\pagination.html:17
 msgid "Suivant"
-msgstr "Next"
+msgstr ""
 
-#: .\courses\utils.py:15
+#: .\courses\templates\courses\tutorial_detail.html:76
+msgid "Tutoriel ajouté à vos favoris"
+msgstr ""
+
+#: .\courses\utils.py:23 .\courses\utils.py:31
 msgid "Nouvelle formation en ligne"
-msgstr "New online course"
+msgstr ""
 
-#: .\courses\views.py:41
+#: .\courses\views.py:43
 #, python-format
 msgid "Cours \"%(course_title)s\" ajouté avec succès"
-msgstr "Course \"%(course_title)s\" successfully added"
+msgstr ""
 
-#: .\courses\views.py:89
+#: .\courses\views.py:92
 msgid "Cours modifié avec succès"
-msgstr "Successfully modified course"
+msgstr ""
 
-#: .\courses\views.py:103 .\courses\views.py:255
+#: .\courses\views.py:105 .\courses\views.py:243
 msgid "Cours supprimé avec succès"
-msgstr "Course successfully deleted"
+msgstr ""
 
-#: .\courses\views.py:117
+#: .\courses\views.py:114
 msgid "Vous êtes déjà inscrit au cours"
-msgstr "You are already registered for the course"
+msgstr ""
 
-#: .\courses\views.py:130
+#: .\courses\views.py:127
 msgid "Tutoriel ajouté avec succès"
-msgstr "Tutorial successfully added"
+msgstr ""
 
-#: .\courses\views.py:136
+#: .\courses\views.py:133
 msgid ""
 "Vous ne pouvez pas créer un tutoriel car vous ne faîtes pas partie de "
 "l'administration de ProgLangLearn ou vous n'êtes pas l'auteur du cours"
 msgstr ""
-"You cannot create a tutorial because you are not part of the ProgLangLearn "
-"administration or you are not the author of the course"
 
-#: .\courses\views.py:240
+#: .\courses\views.py:229
 msgid "Tutoriel modifié avec succès"
-msgstr "Tutorial successfully modified"
+msgstr ""
 
-#: .\main\admin.py:16
-msgid "Donner le statut d'administrateur"
-msgstr "Grant administrator status"
+#: .\forum\admin.py:43
+msgid "Enregistrez pour avoir le lien de l'auteur du sujet"
+msgstr ""
 
-#: .\main\admin.py:23
-msgid "Striker le commentaire"
-msgstr "Strike the commentary"
+#: .\forum\admin.py:59
+msgid "Enregistrez pour avoir le lien de l'auteur de la réponse du sujet"
+msgstr ""
 
-#: .\main\forms.py:8 .\main\forms.py:10 .\main\templates\main\search.html:4
-msgid "Recherche"
-msgstr "Search"
+#: .\forum\forms.py:12
+msgid "Comment faire ... ?"
+msgstr ""
 
-#: .\main\forms.py:30
-msgid "Description des faits"
-msgstr "Description of the facts"
+#: .\forum\mixins.py:26
+msgid "Vous n'avez pas l'autorisation de modifier ce sujet"
+msgstr ""
 
-#: .\main\mixins.py:23
+#: .\forum\mixins.py:35
 msgid ""
-"La page auquel vous essayez d'accéder n'est accessible que par les "
+"Le sujet auquel vous essayez d'accéder n'existe pas ou plus ou est "
+"actuellement inaccessible"
+msgstr ""
+
+#: .\forum\models.py:18
+msgid "titre du sujet"
+msgstr ""
+
+#: .\forum\models.py:23
+msgid "date de création"
+msgstr ""
+
+#: .\forum\models.py:24
+msgid "fermé"
+msgstr ""
+
+#: .\forum\models.py:25
+msgid "vues"
+msgstr ""
+
+#: .\forum\models.py:31 .\main\models.py:36
+msgid "sujet"
+msgstr ""
+
+#: .\forum\models.py:32
+msgid "sujets"
+msgstr ""
+
+#: .\forum\models.py:55
+msgid "sujet associé"
+msgstr ""
+
+#: .\forum\models.py:58
+msgid "réponse"
+msgstr ""
+
+#: .\forum\models.py:61
+msgid "j'aimes"
+msgstr ""
+
+#: .\forum\models.py:63
+msgid "meilleure réponse"
+msgstr ""
+
+#: .\forum\models.py:67
+msgid "réponse de sujet"
+msgstr ""
+
+#: .\forum\models.py:68
+msgid "réponses de sujet"
+msgstr ""
+
+#: .\forum\templates\forum\forum_aside.html:5
+msgid "Derniers sujets"
+msgstr ""
+
+#: .\forum\templates\forum\forum_create.html:7
+#: .\forum\templates\forum\forum_create.html:10
+#: .\forum\templates\forum\forum_create.html:33
+msgid "Ajouter un sujet"
+msgstr ""
+
+#: .\forum\templates\forum\forum_create.html:7
+#: .\forum\templates\forum\forum_create.html:10
+#: .\forum\templates\forum\forum_create.html:33
+msgid "Modifier un sujet"
+msgstr ""
+
+#: .\forum\templates\forum\forum_detail.html:60
+#: .\forum\templates\forum\forum_list.html:51
+msgid "Sujet ajouté aux favoris"
+msgstr ""
+
+#: .\forum\templates\forum\forum_detail.html:60
+#: .\forum\templates\forum\forum_list.html:51
+msgid "Sujet enlevé de vos favoris"
+msgstr ""
+
+#: .\forum\templates\forum\forum_detail.html:61
+msgid "Enlever votre like"
+msgstr ""
+
+#: .\forum\templates\forum\forum_detail.html:61
+msgid "Réponse liker"
+msgstr ""
+
+#: .\forum\templates\forum\forum_detail.html:61
+msgid "Liker la réponse"
+msgstr ""
+
+#: .\forum\templates\forum\forum_detail.html:61
+msgid "Réponse dislikée"
+msgstr ""
+
+#: .\forum\templates\forum\forum_list.html:4
+#: .\templates\includes\navbar.html:23
+msgid "Forum"
+msgstr ""
+
+#: .\forum\templates\forum\forum_list.html:7
+msgid "Sujets du forum"
+msgstr ""
+
+#: .\forum\templates\forum\forum_list.html:11
+msgid "Créez un sujet"
+msgstr ""
+
+#: .\forum\templates\forum\includes\subject_comments.html:25
+msgid "Ce n'est plus la meilleure réponse"
+msgstr ""
+
+#: .\forum\templates\forum\includes\subject_comments.html:27
+msgid "C'est la meilleure réponse à mon problème"
+msgstr ""
+
+#: .\forum\templates\forum\includes\subject_comments.html:33
+msgid "Aucune réponse pour le moment"
+msgstr ""
+
+#: .\forum\templates\forum\includes\subject_comments.html:41
+msgid ""
+"Ce sujet est actuellement résolu. Nous vous conseillons vivement d'ouvrir un "
+"nouveau sujet, qui plus est si ce sujet est ancien"
+msgstr ""
+
+#: .\forum\templates\forum\includes\subject_comments.html:50
+#: .\main\templates\main\includes\comments.html:51
+#: .\main\templates\main\includes\comments.html:53
+msgid "Répondre"
+msgstr ""
+
+#: .\forum\templates\forum\includes\subject_comments.html:54
+msgid "Vous devez être connecté pour tenter de répondre au problème posé"
+msgstr ""
+
+#: .\forum\views.py:90
+msgid "Sujet ajouté avec succès au forum"
+msgstr ""
+
+#: .\main\admin.py:18
+msgid "Donner le statut d'administrateur"
+msgstr ""
+
+#: .\main\admin.py:31
+#, python-format
+msgid ""
+"Vous n'avez droit qu'à %(nb)d signalements pour être définitivement banni et "
+"perdre votre compte ProgLangLearn"
+msgstr ""
+
+#: .\main\admin.py:33
+msgid "Un de vos commentaires a été signalé"
+msgstr ""
+
+#: .\main\admin.py:34
+#, python-format
+msgid ""
+"Votre commentaire datant du %(date)s a été signalé.\n"
+"Le type de signalement est : %(type)s.\n"
+"Votre commentaire ne sera plus visible. %(strike_msg)s"
+msgstr ""
+
+#: .\main\admin.py:41
+msgid "Striker le commentaire"
+msgstr ""
+
+#: .\main\forms.py:8
+msgid "Tout"
+msgstr ""
+
+#: .\main\forms.py:9
+msgid "Seulement les cours"
+msgstr ""
+
+#: .\main\forms.py:10
+msgid "Seulement les tutoriels"
+msgstr ""
+
+#: .\main\forms.py:11
+msgid "Seulement les articles"
+msgstr ""
+
+#: .\main\forms.py:12
+msgid "Seulement les sujets"
+msgstr ""
+
+#: .\main\forms.py:13
+msgid "Seulement les langages, bibliothèques et catégories"
+msgstr ""
+
+#: .\main\forms.py:18 .\main\forms.py:20 .\main\forms.py:40 .\main\forms.py:42
+#: .\main\templates\main\search.html:4
+msgid "Recherche"
+msgstr ""
+
+#: .\main\forms.py:26 .\main\forms.py:34
+msgid "Sujet"
+msgstr ""
+
+#: .\main\forms.py:27
+msgid "Ajout de langage ou de catégories, ..."
+msgstr ""
+
+#: .\main\forms.py:28 .\main\forms.py:35
+msgid "Corps du message"
+msgstr ""
+
+#: .\main\forms.py:29
+msgid "Explications de la demande ..."
+msgstr ""
+
+#: .\main\forms.py:34
+msgid "Type du bug"
+msgstr ""
+
+#: .\main\forms.py:36
+msgid ""
+"Description de ce que vous avez fait, ce qui a échouez, quelle page vous "
+"étiez ..."
+msgstr ""
+
+#: .\main\forms.py:45
+msgid "Filtrer la recherche"
+msgstr ""
+
+#: .\main\forms.py:64
+msgid "Description des faits"
+msgstr ""
+
+#: .\main\mixins.py:32
+msgid ""
+"La page que vous essayez d'accéder n'est accessible que par les "
 "administrateurs du site"
 msgstr ""
-"The page you are trying to access is only accessible by the site "
-"administrators"
-
-#: .\main\models.py:16
-msgid "Harcèlement"
-msgstr "Harassment"
-
-#: .\main\models.py:17
-msgid "Discriminations physiques, racistes, sexistes"
-msgstr "Physical, racist, and sexist discrimination"
-
-#: .\main\models.py:18
-msgid "Incitations ou apologie du terrorisme"
-msgstr "Incitement or justification of terrorism"
 
 #: .\main\models.py:19
-msgid "Incitations à la violence et à la haine"
-msgstr "Incitement to violence and hatred"
+msgid "Harcèlement"
+msgstr ""
 
 #: .\main\models.py:20
-msgid "Autre (explications demandées)"
-msgstr "Other (explanations requested)"
+msgid "Discriminations physiques, racistes, sexistes"
+msgstr ""
 
-#: .\main\models.py:27
+#: .\main\models.py:21
+msgid "Incitations ou apologie du terrorisme"
+msgstr ""
+
+#: .\main\models.py:22
+msgid "Incitations à la violence et à la haine"
+msgstr ""
+
+#: .\main\models.py:23
+msgid "Autre (explications demandées)"
+msgstr ""
+
+#: .\main\models.py:30
 msgid "adresse IP"
-msgstr "IP address"
+msgstr ""
 
 #: .\main\models.py:32
-msgid "nom du langage de programmation"
-msgstr "name of the programming language"
+msgid "langage naturel de l'utilisateur"
+msgstr ""
 
-#: .\main\models.py:36
-msgid "logo"
-msgstr "logo"
+#: .\main\models.py:37
+msgid "corps"
+msgstr ""
 
-#: .\main\models.py:38
-msgid "description du langage"
-msgstr "language description"
+#: .\main\models.py:39
+msgid "date d'envoi"
+msgstr ""
+
+#: .\main\models.py:40
+msgid "à envoyer"
+msgstr ""
 
 #: .\main\models.py:41
-msgid "langage de programmation"
-msgstr "programming language"
+msgid "envoyé"
+msgstr ""
 
-#: .\main\models.py:42
-msgid "langages de programmation"
-msgstr "programming languages"
+#: .\main\models.py:45
+msgid "notification par email de l'administration"
+msgstr ""
 
-#: .\main\models.py:53
+#: .\main\models.py:46
+msgid "notifications par email de l'administration"
+msgstr ""
+
+#: .\main\models.py:82
+msgid "nom du langage de programmation/bibliothèque"
+msgstr ""
+
+#: .\main\models.py:86
+msgid "logo"
+msgstr ""
+
+#: .\main\models.py:88
+msgid "description du langage"
+msgstr ""
+
+#: .\main\models.py:93
+msgid "langage de programmation ou bibliothèque"
+msgstr ""
+
+#: .\main\models.py:94
+msgid "langages de programmation ou bibliothèques"
+msgstr ""
+
+#: .\main\models.py:105
 msgid "nom de la catégorie"
-msgstr "tag name"
+msgstr ""
 
-#: .\main\models.py:57
+#: .\main\models.py:109
 msgid "illustration"
-msgstr "illustration"
+msgstr ""
 
-#: .\main\models.py:59
+#: .\main\models.py:111
 msgid "description de la catégorie"
-msgstr "tag description"
+msgstr ""
 
-#: .\main\models.py:62
+#: .\main\models.py:116
 msgid "catégorie"
-msgstr "tag"
-
-#: .\main\models.py:85
-msgid "modèle de l'objet"
-msgstr "object model"
-
-#: .\main\models.py:87
-msgid "identifiant de l'objet"
-msgstr "object ID"
-
-#: .\main\models.py:89
-msgid "commentaire ou réponse"
-msgstr "comment or reply"
-
-#: .\main\models.py:95
-msgid "commentaire"
-msgstr "comment"
-
-#: .\main\models.py:96
-msgid "commentaires"
-msgstr "comments"
+msgstr ""
 
 #: .\main\models.py:139
-msgid "commentaire reporté"
-msgstr "reported comment"
+msgid "modèle de l'objet"
+msgstr ""
 
 #: .\main\models.py:141
-msgid "signaleur"
-msgstr "alerter"
+msgid "identifiant de l'objet"
+msgstr ""
 
 #: .\main\models.py:143
-msgid "type de signalement"
-msgstr "report type"
-
-#: .\main\models.py:145
-msgid "contenu du signalement"
-msgstr "report content"
+msgid "commentaire ou réponse"
+msgstr ""
 
 #: .\main\models.py:146
-msgid "vérifié"
-msgstr "verified"
-
-#: .\main\models.py:147
-msgid "striké"
-msgstr "striked"
+msgid "reporté"
+msgstr ""
 
 #: .\main\models.py:150
-msgid "signalement de commentaire"
-msgstr "comment report"
+msgid "commentaire"
+msgstr ""
 
 #: .\main\models.py:151
-msgid "signalements de commentaire"
-msgstr "comment reports"
+msgid "commentaires"
+msgstr ""
 
-#: .\main\templates\main\about.html:4 .\main\templates\main\about.html:7
+#: .\main\models.py:198
+msgid "commentaire reporté"
+msgstr ""
+
+#: .\main\models.py:200
+msgid "signaleur"
+msgstr ""
+
+#: .\main\models.py:202
+msgid "type de signalement"
+msgstr ""
+
+#: .\main\models.py:204
+msgid "contenu du signalement"
+msgstr ""
+
+#: .\main\models.py:210
+msgid "signalement de commentaire"
+msgstr ""
+
+#: .\main\models.py:211
+msgid "signalements de commentaire"
+msgstr ""
+
+#: .\main\templates\main\about.html:4 .\main\templates\main\about.html:8
 #: .\templates\includes\footer.html:7
 msgid "À propos"
-msgstr "About"
+msgstr ""
 
-#: .\main\templates\main\about.html:9
+#: .\main\templates\main\about.html:10
+#, python-format
 msgid ""
 "<div class=\"my-1\">\n"
-"        Fondé en 2019 par <a href=\"profile.html\">Guillaume Letellier</a>, "
+"        Créé en 2020 par <a href=\"%(admin_url)s\">Guillaume Letellier</a>, "
 "étudiant en informatique,\n"
 "        ProgLangLearn est un ensemble d'outil\n"
 "        spécialisé dans le domaine de la programmation informatique. Il "
@@ -1633,16 +2871,8 @@ msgid ""
 "        former et maîtriser ces outils numériques.\n"
 "    </div>"
 msgstr ""
-"<div class=\"my-1\">\n"
-"        Founded in 2019 by <a href=\"profile.html\">Guillaume Letellier</a>, "
-"computer science student,\n"
-"        ProgLangLearn is a set of tools\n"
-"        specialized in the field of computer programming. It is intended for "
-"any public wishing to be trained \n"
-"        and master these digital tools.\n"
-"    </div>"
 
-#: .\main\templates\main\about.html:16
+#: .\main\templates\main\about.html:17
 msgid ""
 "<h2>1. Qu'apprendrez-vous sur ProgLangLearn ?</h2>\n"
 "        <p>Les informations publiées sont accessible pour :</p>\n"
@@ -1653,16 +2883,8 @@ msgid ""
 "domaine de la programmation</li>\n"
 "        </ul>"
 msgstr ""
-"<h2>1. What will you learn on ProgLangLearn ?</h2>\n"
-"        <p>The published information is accessible to :</p>\n"
-"        <ul>\n"
-"            <li>Develop your knowledge</li>\n"
-"            <li>Increase your notoriety</li>\n"
-"            <li>Discuss with professionals or people in the field of "
-"programming</li>\n"
-"        </ul>"
 
-#: .\main\templates\main\about.html:25
+#: .\main\templates\main\about.html:26
 msgid ""
 "<h2>2. Quelles ressources sont accessibles ?</h2>\n"
 "        <p>Les ressources suivantes sont à votre disposition :</p>\n"
@@ -1694,30 +2916,8 @@ msgid ""
 "            </ul>\n"
 "        </div>"
 msgstr ""
-"<h2>2. What resources are available ?</h2>\n"
-"        <p>The following resources are at your disposal :</p>\n"
-"        <div class=\"mb-2\">\n"
-"            <h3 class=\"fw-normal\">2.1 Free educational resources</h3>\n"
-"            <ul>\n"
-"                <li><strong>Articles</strong> giving information, tips on "
-"different languages\n"
-"                    about important updates, or newly found featuress</li>\n"
-"                <li><strong>Subjects</strong> suggested by people for help</"
-"li>\n"
-"                <li>Free <strong>courses</strong>, generally introductions "
-"to a language</li>\n"
-"            </ul>\n"
-"        </div>\n"
-"        <div>\n"
-"            <h3 class=\"fw-normal\">2.2 Complete training courses "
-"(chargeable)</h3>\n"
-"            <ul>\n"
-"                <li><strong>Complete projects</strong> intended to perform a "
-"real task such as software or a website</li>\n"
-"            </ul>\n"
-"        </div>"
 
-#: .\main\templates\main\about.html:49
+#: .\main\templates\main\about.html:50
 msgid ""
 "<h2>3. Pourquoi utiliser ProgLangLearn ?</h2>\n"
 "        <p>ProgLangLearn permet de centraliser de nombreuses ressources "
@@ -1728,17 +2928,12 @@ msgid ""
 "entre développeur, programmeur et\n"
 "            apprentis.</p>"
 msgstr ""
-"<h2>3. Why use ProgLangLearn ?</h2>\n"
-"        <p>ProgLangLearn allows you to centralize many important programming "
-"resources. We have a department that provides standard programming courses "
-"and training. We also have a service that allows developers, programmers and "
-"apprentices to help each other.</p>"
 
-#: .\main\templates\main\about.html:56
+#: .\main\templates\main\about.html:57
 msgid "Au sujet de"
-msgstr "About of"
+msgstr ""
 
-#: .\main\templates\main\about.html:58
+#: .\main\templates\main\about.html:59
 msgid ""
 "<p>Guillaume Letellier est actuellement étudiant en informatique à l'<a href="
 "\"https://www.unicaen.fr\"\n"
@@ -1756,42 +2951,59 @@ msgid ""
 "            programmation, c'est comprendre l'avenir et agir sur celui-ci !\n"
 "        </blockquote>"
 msgstr ""
-"<p>Guillaume Letellier is currently a computer science student at the <a "
-"href=\"https://www.unicaen.fr\"\n"
-"                target=\"_blank\">University of Caen</a>, France.</p>\n"
-"        <p>He therefore made ProgLangLearn in order to spread his knowledge "
-"that he was able to collect and give his advice to program more quickly, "
-"easily and with better optimization. This sentence defines his vision of "
-"thinking about the future :</p>\n"
-"        <blockquote>Let us not grow up in a world without understanding it. "
-"Learning programming means understanding the future and acting on it !</"
-"blockquote>"
 
 #: .\main\templates\main\contact.html:4 .\templates\includes\footer.html:8
 msgid "Contact"
-msgstr "Contact"
+msgstr ""
 
-#: .\main\templates\main\contact.html:7
+#: .\main\templates\main\contact.html:9
 msgid "Contacter"
-msgstr "Contact us"
+msgstr ""
 
-#: .\main\templates\main\contact.html:8
+#: .\main\templates\main\contact.html:10
 msgid "Contactez-nous dans l'espace approprié à chaque demande !"
-msgstr "Contact us in the appropriate space for each request !"
+msgstr ""
+
+#: .\main\templates\main\contact.html:15
+msgid "Demandes ou autre motif"
+msgstr ""
+
+#: .\main\templates\main\contact.html:18
+#, python-format
+msgid ""
+"Votre <strong>authentification</strong> est <strong>requise</strong> pour "
+"pouvoir vous envoyer une réponse. <strong><a href=\"%(login_url)s"
+"\">Connectez-vous</a></strong> ou <strong><a href=\"%(register_url)s"
+"\">inscrivez-vous</a></strong> tout de suite."
+msgstr ""
+
+#: .\main\templates\main\contact.html:28 .\main\templates\main\contact.html:48
+#: .\main\templates\main\includes\comments.html:67
+#: .\main\templates\main\includes\comments.html:69
+msgid "Envoyer"
+msgstr ""
+
+#: .\main\templates\main\contact.html:36
+msgid "Rapporter un bug"
+msgstr ""
+
+#: .\main\templates\main\contact.html:39
+msgid "Votre authentification n'est pas requise."
+msgstr ""
 
 #: .\main\templates\main\includes\comments.html:9
 msgid "Rédiger un commentaire"
-msgstr "Write a comment"
+msgstr ""
 
-#: .\main\templates\main\includes\comments.html:16
+#: .\main\templates\main\includes\comments.html:13
 msgid "Commenter"
-msgstr "Publish a comment"
+msgstr ""
 
-#: .\main\templates\main\includes\comments.html:20
+#: .\main\templates\main\includes\comments.html:17
 msgid "Vous devez être connecter pour commenter"
-msgstr "You must be logged in to comment"
+msgstr ""
 
-#: .\main\templates\main\includes\comments.html:24
+#: .\main\templates\main\includes\comments.html:21
 #, python-format
 msgid ""
 "\n"
@@ -1802,478 +3014,685 @@ msgid_plural ""
 "                    %(counter)s commentaires\n"
 "                "
 msgstr[0] ""
-"\n"
-"                    %(counter)s comment\n"
-"                "
 msgstr[1] ""
-"\n"
-"                    %(counter)s comments\n"
-"                "
 
-#: .\main\templates\main\includes\comments.html:35
-#: .\main\templates\main\includes\comments.html:45
+#: .\main\templates\main\includes\comments.html:31
+#: .\main\templates\main\includes\comments.html:41
+#, python-format
+msgid " il y a %(time)s"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:32
+#: .\main\templates\main\includes\comments.html:42
+msgid "Supprimer le commentaire"
+msgstr ""
+
+#: .\main\templates\main\includes\comments.html:32
+#: .\main\templates\main\includes\comments.html:42
 msgid "Signaler le commentaire"
-msgstr "Report the comment"
+msgstr ""
 
-#: .\main\templates\main\includes\comments.html:35
-#: .\main\templates\main\includes\comments.html:45
+#: .\main\templates\main\includes\comments.html:32
+#: .\main\templates\main\includes\comments.html:42
 msgid "Signaler"
-msgstr "Report"
+msgstr ""
 
-#: .\main\templates\main\includes\comments.html:54
-#: .\main\templates\main\includes\comments.html:56
-msgid "Répondre"
-msgstr "Answer"
-
-#: .\main\templates\main\includes\comments.html:64
+#: .\main\templates\main\includes\comments.html:61
 msgid "Rédiger une réponse"
-msgstr "Write a response"
+msgstr ""
 
-#: .\main\templates\main\includes\comments.html:73
-#: .\main\templates\main\includes\comments.html:75
-msgid "Envoyer"
-msgstr "Send"
-
-#: .\main\templates\main\includes\comments.html:84
-#, fuzzy
+#: .\main\templates\main\includes\comments.html:78
 msgid "Il n'y a pas encore de commentaire."
-msgstr "There are no comments yet."
+msgstr ""
 
-#: .\main\templates\main\index.html:13
+#: .\main\templates\main\index.html:14
 msgid "Apprenez la programmation informatique"
-msgstr "Learn computer programming"
+msgstr ""
 
-#: .\main\templates\main\index.html:16 .\main\views.py:18
+#: .\main\templates\main\index.html:17
 msgid "Ne grandissons pas dans un monde sans le comprendre."
-msgstr "Let us not grow up in a world without understanding it."
+msgstr ""
 
-#: .\main\templates\main\index.html:17 .\main\views.py:18
+#: .\main\templates\main\index.html:18
 msgid ""
 "Apprendre la programmation, c'est comprendre l'avenir et agir sur celui-ci !"
-msgstr "Learning programming means understanding the future and acting on it !"
+msgstr ""
 
 #: .\main\templates\main\privacy.html:4 .\main\templates\main\privacy.html:7
 msgid "Politique de confidentialité et de cookies"
-msgstr "Privacy and Cookie Policy"
+msgstr ""
 
 #: .\main\templates\main\report.html:4
 msgid "Signalement"
-msgstr "Reporting"
+msgstr ""
 
 #: .\main\templates\main\report.html:7
 msgid "Signaler un commentaire"
-msgstr "Report a comment"
+msgstr ""
 
 #: .\main\templates\main\report.html:8
 msgid "Signaler un commentaire rapidement"
-msgstr "Report a comment quickly"
-
-#: .\main\templates\main\report.html:10
-msgid ""
-"Le signalement d'une personne peut avoir de sérieuses conséquences, comme ce "
-"qui est écrit dans les"
 msgstr ""
-"Reporting a person can have serious consequences, such as what is written in "
-"the"
-
-#: .\main\templates\main\report.html:11
-msgid "termes et conditions d'utilisation"
-msgstr "general terms and conditions of use"
-
-#: .\main\templates\main\report.html:11
-msgid "donc ne faîtes pas de signalement abusif."
-msgstr "so don't make any abusive reports."
 
 #: .\main\templates\main\report.html:15
 #, python-format
-msgid ""
-"<h3 class=\"card-title\">Commentaire de %(object.author.username)s posté le %"
-"(object.timestamp)s</h3>"
+msgid "Commentaire de %(username)s posté le %(time)s "
 msgstr ""
-"<h3 class=\"card-title\">Comment by %(object.author.username)s posted on %"
-"(object.timestamp)s</h3>"
 
-#: .\main\templates\main\report.html:35
+#: .\main\templates\main\report.html:25
 msgid "Envoyer le signalement"
-msgstr "Send the report"
+msgstr ""
 
-#: .\main\templates\main\search.html:7
-msgid "Recherche pour"
-msgstr "Search for"
+#: .\main\templates\main\search.html:9
+#, python-format
+msgid "%(counter)s résultat pour \"%(query)s\""
+msgid_plural "%(counter)s résultats pour \"%(query)s\""
+msgstr[0] ""
+msgstr[1] ""
 
-#: .\main\templates\main\search.html:14
-msgid "Filtrer la recherche"
-msgstr "Filter the search"
-
-#: .\main\templates\main\search.html:17
-msgid "Cliquez pour sélectionner votre choix :"
-msgstr "Click to select your choice :"
-
-#: .\main\templates\main\search.html:18
-msgid "Tout"
-msgstr "All"
-
-#: .\main\templates\main\search.html:19
-msgid "Seulement les cours"
-msgstr "Courses only"
-
-#: .\main\templates\main\search.html:20
-msgid "Seulement les tutoriels"
-msgstr "Tutorials only"
-
-#: .\main\templates\main\search.html:21
-msgid "Seulement les sujets"
-msgstr "Subjects only"
-
-#: .\main\templates\main\search.html:22
-msgid "Seulement les profils"
-msgstr "Profiles only"
+#: .\main\templates\main\search.html:11
+#, python-format
+msgid "%(counter)s résultat pour \"\""
+msgid_plural "%(counter)s résultats pour \"\""
+msgstr[0] ""
+msgstr[1] ""
 
 #: .\main\templates\main\search.html:28
-msgid "Tutoriels"
-msgstr "Tutorials"
+msgid "Vignette"
+msgstr ""
 
-#: .\main\templates\main\search.html:65
-msgid "Sujets du forum"
-msgstr "Subjects from forum"
+#: .\main\templates\main\search.html:30
+msgid "Logo représentatif"
+msgstr ""
 
-#: .\main\templates\main\search.html:78
-msgid "Profils d'étudiants en informatique ou développeur"
-msgstr "Profiles of computer science students or developers"
+#: .\main\templates\main\search.html:44
+msgid "Aucun résultat trouvé"
+msgstr ""
 
 #: .\main\templates\main\tag.html:10
 msgid "Image d'illustration"
-msgstr "Illustrative image"
+msgstr ""
 
-#: .\main\templates\main\terms.html:4 .\main\templates\main\terms.html:7
-#: .\templates\includes\footer.html:5
+#: .\main\templates\main\terms.html:4 .\templates\includes\footer.html:5
 msgid "Termes et conditions"
-msgstr "General terms and conditions"
+msgstr ""
+
+#: .\main\templates\main\terms.html:7
+msgid "Termes et conditions d'utilisation et de vente"
+msgstr ""
 
 #: .\main\utils.py:44
 msgid ""
 "Choisissez une image et continuez d'éditer pour voir la prévisualisation de "
 "l'image"
-msgstr "Choose an image and continue editing to see the preview of the image"
+msgstr ""
 
 #: .\main\utils.py:48
 msgid "Visualisation de la vignette"
-msgstr "Viewing the thumbnail"
-
-#: .\main\views.py:75
-msgid "Le commentaire a été signalé"
-msgstr "The comment was reported"
-
-#: .\main\views.py:79
-msgid "Le commentaire n'a pas pu être signalé"
-msgstr "The comment could not be reported"
-
-#: .\polls\admin.py:15
-msgid "Réinitialiser les valeurs booléennes"
-msgstr "Reset Boolean values"
-
-#: .\polls\admin.py:22
-msgid "Afficher les questions aléatoirement"
-msgstr "Display questions randomly"
-
-#: .\polls\admin.py:29
-msgid "Droit qu'à un seul essai"
-msgstr "Right to only one trial"
-
-#: .\polls\admin.py:37
-msgid "Afficher les réponses aléatoirement"
-msgstr "Display answers randomly"
-
-#: .\polls\admin.py:60
-msgid "Enregistrez pour avoir le lien de la question"
-msgstr "Register to get the link to the question"
-
-#: .\polls\admin.py:62 .\polls\admin.py:102
-msgid "Question"
-msgstr "Question"
-
-#: .\polls\admin.py:67 .\polls\admin.py:100
-msgid "Enregistrez pour avoir le lien de l'objet"
-msgstr "Register to get the link of the object"
-
-#: .\polls\admin.py:93
-msgid "Enregistrez pour avoir le lien du quiz"
-msgstr "Register to get the link to the quiz"
-
-#: .\polls\admin.py:95 .\polls\models.py:64
-msgid "Quiz"
-msgstr "Quiz"
-
-#: .\polls\admin.py:122
-msgid "Enregistrez pour avoir le lien du cours"
-msgstr "Register to get the course link "
-
-#: .\polls\mixins.py:14
-msgid "Vous n'avez pas accès à ce quiz. Veuillez vous enroller dans le cours"
-msgstr "You do not have access to this quiz. Please enroll in the course"
-
-#: .\polls\mixins.py:58
-msgid "Le quiz que vous essayez d'accéder n'appartient pas ou plus au cours"
 msgstr ""
-"The quiz you are trying to access does not belong to the course or no longer "
-"does."
 
-#: .\polls\models.py:24
-msgid "titre"
-msgstr "title"
+#: .\main\views.py:46
+msgid "Vous devez être connecté pour envoyer votre message"
+msgstr ""
 
-#: .\polls\models.py:26
-msgid "description"
-msgstr "description"
+#: .\main\views.py:55
+msgid "Votre message a été envoyé"
+msgstr ""
 
-#: .\polls\models.py:28 .\polls\models.py:70
-msgid "ordre aléatoire ?"
-msgstr "random order ?"
+#: .\main\views.py:67
+msgid "Votre rapport d'erreur a été envoyé"
+msgstr ""
 
-#: .\polls\models.py:28
-msgid "Afficher aléatoirement les questions ?"
-msgstr "Randomly display questions ?"
+#: .\main\views.py:167
+msgid "Le commentaire a été signalé"
+msgstr ""
+
+#: .\main\views.py:171
+msgid "Le commentaire n'a pas pu être signalé"
+msgstr ""
+
+#: .\main\views.py:191
+msgid "Votre commentaire et les réponses sont supprimés"
+msgstr ""
+
+#: .\main\views.py:194
+msgid "Vous ne pouvez pas supprimer ou modifier ce commentaire"
+msgstr ""
+
+#: .\polls\apps.py:6 .\polls\templates\polls\poll_list.html:4
+msgid "Sondages"
+msgstr ""
+
+#: .\polls\models.py:15
+msgid "question"
+msgstr ""
+
+#: .\polls\models.py:16
+msgid "date"
+msgstr ""
+
+#: .\polls\models.py:18
+msgid "date de fin"
+msgstr ""
+
+#: .\polls\models.py:20
+msgid "est publié"
+msgstr ""
+
+#: .\polls\models.py:22 .\polls\models.py:54
+msgid "nombre de votes"
+msgstr ""
+
+#: .\polls\models.py:29
+msgid "sondage"
+msgstr ""
 
 #: .\polls\models.py:30
-msgid "un seul essai"
-msgstr "only one test"
+msgid "sondages"
+msgstr ""
 
-#: .\polls\models.py:33 .\polls\models.py:34 .\polls\models.py:113
-msgid "quiz"
-msgstr "quiz"
+#: .\polls\models.py:50
+msgid "sondage asscoié"
+msgstr ""
 
-#: .\polls\models.py:66 .\polls\models.py:74 .\polls\models.py:95
-msgid "question"
-msgstr "question"
+#: .\polls\models.py:51
+msgid "valeur"
+msgstr ""
 
-#: .\polls\models.py:68
-msgid "explication"
-msgstr "explanation"
+#: .\polls\models.py:52
+msgid "position"
+msgstr ""
 
-#: .\polls\models.py:70
-msgid "Afficher les réponses dans le désordre ?"
-msgstr "Display answers in any order ?"
+#: .\polls\models.py:58
+msgid "réponse de sondage"
+msgstr ""
 
-#: .\polls\models.py:75
-msgid "questions"
-msgstr "questions"
+#: .\polls\models.py:59
+msgid "réponses de sondage"
+msgstr ""
 
-#: .\polls\models.py:97
-msgid "Entrez la réponse que vous voulez afficher"
-msgstr "Enter the answer you want to display"
+#: .\polls\models.py:67
+msgid "sondage associé"
+msgstr ""
 
-#: .\polls\models.py:99
-msgid "correct"
-msgstr "correct"
+#: .\polls\models.py:69
+msgid "valeur votée"
+msgstr ""
 
-#: .\polls\models.py:99
-msgid "Est-ce la bonne réponse ?"
-msgstr "Is that the right answer ?"
+#: .\polls\models.py:71
+msgid "adresse IP de l'utilisateur"
+msgstr ""
 
-#: .\polls\models.py:105
-msgid "réponse"
-msgstr "answer"
+#: .\polls\models.py:78
+msgid "vote de sondage"
+msgstr ""
 
-#: .\polls\models.py:106
-msgid "réponses"
-msgstr "answers"
+#: .\polls\models.py:79
+msgid "votes de sondage"
+msgstr ""
 
-#: .\polls\models.py:115
-msgid "ordre des questions"
-msgstr "order of questions"
+#: .\polls\templates\polls\includes\ajax_result.html:11
+msgid "Nombre de votes"
+msgstr ""
 
-#: .\polls\models.py:117
-msgid "liste des questions"
-msgstr "list of questions"
+#: .\polls\templates\polls\poll_detail.html:4
+#: .\polls\templates\polls\poll_detail.html:11
+msgid "Sondage"
+msgstr ""
 
-#: .\polls\models.py:119
-msgid "questions incorrectes"
-msgstr "incorrect questions"
+#: .\polls\templates\polls\poll_detail.html:25
+msgid "Voter"
+msgstr ""
 
-#: .\polls\models.py:120
-msgid "score actuel"
-msgstr "current score"
+#: .\polls\templates\polls\poll_detail.html:32
+msgid "Veuillez sélectionner une réponse"
+msgstr ""
 
-#: .\polls\models.py:122
-msgid "terminé"
-msgstr "finished"
+#: .\polls\templates\polls\poll_list.html:7
+msgid "Tous les sondages"
+msgstr ""
 
-#: .\polls\models.py:124
-msgid "réponses de l'utilisateur"
-msgstr "user responses"
+#: .\polls\templates\polls\poll_list.html:20
+#: .\polls\templates\polls\poll_result.html:15
+msgid "Répondre au sondage"
+msgstr ""
 
-#: .\polls\models.py:126
-msgid "commencement"
-msgstr "beginning"
+#: .\polls\templates\polls\poll_result.html:4
+#: .\polls\templates\polls\poll_result.html:7
+msgid "Résultats du sondage"
+msgstr ""
 
-#: .\polls\models.py:127
-msgid "fin"
-msgstr "end"
+#: .\polls\views.py:22 .\polls\views.py:52
+msgid "Ce sondage n'est plus actif. Vous ne pouvez plus y répondre"
+msgstr ""
 
-#: .\polls\models.py:132
-msgid "séance"
-msgstr "sitting"
+#: .\polls\views.py:55
+msgid "Vous avez déjà répondu à ce sondage"
+msgstr ""
 
-#: .\polls\models.py:133
-msgid "séances"
-msgstr "sittings"
+#: .\proglanglearn\adminsite.py:6
+msgid "Administration de ProgLangLearn"
+msgstr ""
 
-#: .\polls\templates\polls\quiz_detail.html:15
-msgid "Modifier le quiz"
-msgstr "Modify the quiz"
+#: .\proglanglearn\adminsite.py:7
+msgid "Site d'administration de ProgLangLearn"
+msgstr ""
 
-#: .\polls\templates\polls\quiz_detail.html:16
-msgid "Supprimer le quiz"
-msgstr "Delete the quiz"
+#: .\proglanglearn\adminsite.py:8
+msgid "---"
+msgstr ""
 
-#: .\polls\templates\polls\quiz_detail.html:27
-msgid "Attention ! Vous n'avez droit qu'à un seul essai"
-msgstr "Attention ! You are only allowed one try"
-
-#: .\proglanglearn\settings\base.py:105
+#: .\proglanglearn\settings\base.py:126
 msgid "Français"
-msgstr "French"
+msgstr ""
 
-#: .\proglanglearn\settings\base.py:106
+#: .\proglanglearn\settings\base.py:127
 msgid "Anglais"
-msgstr "English"
+msgstr ""
 
-#: .\templates\403.html:6
+#: .\templates\403.html:5
 msgid "Accès interdit"
-msgstr "Access denied"
+msgstr ""
 
 #: .\templates\403.html:9
 msgid "Page à accès restreint !"
-msgstr "Restricted access page !"
+msgstr ""
 
 #: .\templates\403.html:10
 msgid ""
 "La page à laquelle vous essayez d'accéder est sous accès restreint. Vous "
 "n'avez donc pas l'autorisation de voir le contenu qu'elle propose."
 msgstr ""
-"The page you are trying to access is under restricted access. You so you "
-"don't have permission to see the content it offers."
 
 #: .\templates\403.html:11
 #, python-format
 msgid ""
 "<a href=\"%(contact)s\">Faire une demande auprès de l'administration</a> ou "
-"<a href=\"%(contact)s\">Faire un rapport d'erreur auprès de "
+"<a href=\"%(contact)s\">faire un rapport d'erreur auprès de "
 "l'administration</a>"
 msgstr ""
-"<a href=\"%(contact)s\">Make a request to the administration</a> or <a href="
-"\"%(contact)s\">Make an error report to the administration</a>"
 
 #: .\templates\403.html:213 .\templates\404.html:72 .\templates\500.html:140
 msgid "Code erreur"
-msgstr "Error code"
+msgstr ""
 
 #: .\templates\404.html:4 .\templates\404.html:7
 msgid "Page non trouvée"
-msgstr "Page not found"
+msgstr ""
 
 #: .\templates\404.html:8
 msgid ""
 "La page que vous essayez d'accéder n'existe pas, plus ou a été déplacée à "
 "une autre URL."
 msgstr ""
-"The page you are trying to access does not exist, no longer exists or has "
-"been moved to another URL."
 
 #: .\templates\500.html:4
 msgid "Problème interne serveur"
-msgstr "Internal server problem"
+msgstr ""
 
 #: .\templates\500.html:7
 msgid "Problème de serveur !"
-msgstr "Server problem !"
+msgstr ""
 
 #: .\templates\500.html:8
 msgid ""
 "Un problème est survenu lors de la requête au serveur. Veuillez réitérer "
 "votre réquête."
 msgstr ""
-"A problem occurred during the server request. Please repeat your request."
+
+#: .\templates\account\account_inactive.html:4
+#: .\templates\account\account_inactive.html:7
+msgid "Account Inactive"
+msgstr ""
+
+#: .\templates\account\account_inactive.html:8
+msgid "This account is inactive."
+msgstr ""
+
+#: .\templates\account\email.html:4
+msgid "Account"
+msgstr ""
+
+#: .\templates\account\email.html:7
+msgid "E-mail Addresses"
+msgstr ""
+
+#: .\templates\account\email.html:9
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: .\templates\account\email.html:19
+msgid "Verified"
+msgstr ""
+
+#: .\templates\account\email.html:21
+msgid "Unverified"
+msgstr ""
+
+#: .\templates\account\email.html:23
+msgid "Primary"
+msgstr ""
+
+#: .\templates\account\email.html:28
+msgid "Make Primary"
+msgstr ""
+
+#: .\templates\account\email.html:29
+msgid "Re-send Verification"
+msgstr ""
+
+#: .\templates\account\email.html:30
+#: .\templates\socialaccount\connections.html:28
+msgid "Remove"
+msgstr ""
+
+#: .\templates\account\email.html:35
+msgid "Warning:"
+msgstr ""
+
+#: .\templates\account\email.html:35
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: .\templates\account\email.html:37
+msgid "Add E-mail Address"
+msgstr ""
+
+#: .\templates\account\email.html:42
+msgid "Add E-mail"
+msgstr ""
+
+#: .\templates\account\email.html:47
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: .\templates\account\email_confirm.html:5
+#: .\templates\account\email_confirm.html:9
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: .\templates\account\email_confirm.html:12
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: .\templates\account\email_confirm.html:16
+msgid "Confirm"
+msgstr ""
+
+#: .\templates\account\email_confirm.html:21
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href=\"%"
+"(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: .\templates\account\login.html:5 .\templates\account\login.html:8
+#: .\templates\account\login.html:34
+msgid "Sign In"
+msgstr ""
+
+#: .\templates\account\login.html:9 .\templates\registration\login.html:8
+msgid "Connectez-vous à votre compte !"
+msgstr ""
+
+#: .\templates\account\login.html:14
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"    of your existing third party accounts. Or, <a href=\"%(signup_url)s"
+"\">sign up</a>\n"
+"    for a %(site_name)s account and sign in below:"
+msgstr ""
+
+#: .\templates\account\login.html:22 .\templates\account\signup.html:17
+#, python-format
+msgid ""
+"If you have not created an account yet, then please\n"
+"    <a href=\"%(signup_url)s\">sign up</a> first."
+msgstr ""
+
+#: .\templates\account\login.html:36 .\templates\registration\login.html:17
+msgid "Vous avez oublié votre mot de passe ?"
+msgstr ""
+
+#: .\templates\account\logout.html:4 .\templates\account\logout.html:7
+#: .\templates\account\logout.html:14
+msgid "Sign Out"
+msgstr ""
+
+#: .\templates\account\logout.html:8
+msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: .\templates\account\password_change.html:4
+#: .\templates\account\password_change.html:7
+#: .\templates\account\password_change.html:12
+#: .\templates\account\password_reset_from_key.html:4
+#: .\templates\account\password_reset_from_key.html:7
+#: .\templates\account\password_reset_from_key_done.html:4
+#: .\templates\account\password_reset_from_key_done.html:7
+msgid "Change Password"
+msgstr ""
+
+#: .\templates\account\password_reset.html:5
+#: .\templates\account\password_reset.html:8
+#: .\templates\account\password_reset_done.html:5
+#: .\templates\account\password_reset_done.html:8
+msgid "Password Reset"
+msgstr ""
+
+#: .\templates\account\password_reset.html:12
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: .\templates\account\password_reset.html:17
+#: .\templates\registration\password_reset_confirm.html:7
+#: .\templates\registration\password_reset_form.html:14
+msgid "Réinitialiser mon mot de passe"
+msgstr ""
+
+#: .\templates\account\password_reset.html:20
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: .\templates\account\password_reset_done.html:12
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: .\templates\account\password_reset_from_key.html:7
+msgid "Bad Token"
+msgstr ""
+
+#: .\templates\account\password_reset_from_key.html:10
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: .\templates\account\password_reset_from_key.html:17
+msgid "Change password"
+msgstr ""
+
+#: .\templates\account\password_reset_from_key.html:21
+#: .\templates\account\password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr ""
+
+#: .\templates\account\password_set.html:4
+#: .\templates\account\password_set.html:7
+#: .\templates\account\password_set.html:12
+msgid "Set Password"
+msgstr ""
+
+#: .\templates\account\signup.html:5 .\templates\socialaccount\signup.html:4
+msgid "Signup"
+msgstr ""
+
+#: .\templates\account\signup.html:8 .\templates\socialaccount\signup.html:7
+msgid "Sign Up"
+msgstr ""
+
+#: .\templates\account\signup.html:9 .\templates\registration\register.html:8
+msgid "Créez votre compte dès maintenant !"
+msgstr ""
+
+#: .\templates\account\signup.html:38
+#: .\templates\registration\register.html:27
+msgid "Accepter les"
+msgstr ""
+
+#: .\templates\account\signup.html:38
+#: .\templates\registration\register.html:27
+msgid ""
+"termes et conditions d'utilisation</a> de Proglanglearn <span class="
+"\"required-input\">*</span></label>"
+msgstr ""
+
+#: .\templates\account\signup.html:43
+#: .\templates\registration\register.html:29
+msgid ""
+"<small class=\"d-block mb-1\">Tous les champs avec d'un <span class="
+"\"required-input\">*</span> sont obligatoires.</small>"
+msgstr ""
+
+#: .\templates\account\signup.html:45
+#: .\templates\registration\account_activation_invalid.html:12
+#: .\templates\registration\account_activation_sent.html:11
+#: .\templates\registration\register.html:4
+#: .\templates\registration\register.html:7
+#: .\templates\registration\register.html:31
+#: .\templates\socialaccount\signup.html:17
+msgid "S'enregistrer"
+msgstr ""
+
+#: .\templates\account\signup.html:48
+#: .\templates\registration\register.html:34
+msgid "Vous avez déjà un compte ?"
+msgstr ""
+
+#: .\templates\account\signup.html:48
+#: .\templates\registration\register.html:34
+msgid "Connectez-vous"
+msgstr ""
+
+#: .\templates\account\signup_closed.html:4
+#: .\templates\account\signup_closed.html:7
+msgid "Sign Up Closed"
+msgstr ""
+
+#: .\templates\account\signup_closed.html:8
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: .\templates\account\verification_sent.html:4
+#: .\templates\account\verification_sent.html:7
+#: .\templates\account\verified_email_required.html:4
+#: .\templates\account\verified_email_required.html:7
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: .\templates\account\verification_sent.html:8
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: .\templates\account\verified_email_required.html:9
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+
+#: .\templates\account\verified_email_required.html:12
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside this e-mail. Please\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: .\templates\account\verified_email_required.html:15
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
 
 #: .\templates\includes\footer.html:6
 msgid "Politique de confidentialité"
-msgstr "Privacy policy"
+msgstr ""
 
 #: .\templates\includes\footer.html:21
 msgid "Tous droits réservés"
-msgstr "All rights reserved"
+msgstr ""
 
-#: .\templates\includes\navbar.html:10
+#: .\templates\includes\loading.html:4
+msgid "Chargement ..."
+msgstr ""
+
+#: .\templates\includes\navbar.html:13
 msgid "Retour à l'accueil"
-msgstr "Back to home page"
+msgstr ""
 
-#: .\templates\includes\navbar.html:20
-msgid "Forum"
-msgstr "Forum"
-
-#: .\templates\includes\navbar.html:36
+#: .\templates\includes\navbar.html:39
 msgid "Se connecter à mon compte"
-msgstr "Login to my account"
+msgstr ""
 
-#: .\templates\includes\navbar.html:36 .\templates\registration\login.html:4
+#: .\templates\includes\navbar.html:39 .\templates\registration\login.html:4
 msgid "Connexion"
-msgstr "Sign in"
+msgstr ""
 
-#: .\templates\includes\navbar.html:40
+#: .\templates\includes\navbar.html:43
 msgid "Votre photo de profil actuelle"
-msgstr "Your current profile photo"
+msgstr ""
 
-#: .\templates\includes\navbar.html:45
+#: .\templates\includes\navbar.html:48
 msgid "Administration"
-msgstr "Administration"
+msgstr ""
 
-#: .\templates\includes\navbar.html:51
-msgid "Créer un article"
-msgstr "Create an article"
-
-#: .\templates\includes\navbar.html:59
-msgid "Créer un cours"
-msgstr "Create a course"
-
-#: .\templates\includes\navbar.html:66
-msgid "Tableau de bord"
-msgstr "Dashboard"
-
-#: .\templates\includes\navbar.html:69
+#: .\templates\includes\navbar.html:74
 msgid "Mon profil"
-msgstr "My profle"
+msgstr ""
 
-#: .\templates\includes\navbar.html:72
-msgid "Mon compte"
-msgstr "My account"
-
-#: .\templates\includes\navbar.html:75
+#: .\templates\includes\navbar.html:80
 msgid "Se déconnecter"
-msgstr "Log out"
+msgstr ""
 
 #: .\templates\includes\pagination.html:6
 msgid "Aller à la première page"
-msgstr "Go to the first page"
+msgstr ""
 
 #: .\templates\includes\pagination.html:18
 msgid "Aller à la dernière page"
-msgstr "Go to the last page"
+msgstr ""
 
 #: .\templates\includes\scrollTop.html:3
 msgid "Retourner en haut de la page"
-msgstr "Return to the top of the page"
+msgstr ""
 
 #: .\templates\includes\switchers.html:8
 msgid "Cliquez sur les liens pour changer de langue"
-msgstr "Click on the links to change language"
+msgstr ""
 
-#: .\templates\maintenance.html:21
+#: .\templates\maintenance.html:24
 msgid "Maintenance"
-msgstr "Maintenance"
+msgstr ""
 
-#: .\templates\maintenance.html:34
+#: .\templates\maintenance.html:37
 msgid "Maintenance du site !"
-msgstr "Site maintenance !"
+msgstr ""
 
 #: .\templates\registration\account_activation_email.html:4
 #, python-format
@@ -2282,135 +3701,90 @@ msgid ""
 "\n"
 "Pour activer ton compte, clique sur le lien ci-dessous :"
 msgstr ""
-"Hello %(user.username)s,\n"
-"\n"
-"To activate your account, click on the link below :"
 
 #: .\templates\registration\account_activation_invalid.html:4
 msgid "Email d'activation invalide"
-msgstr "Invalid activation email"
+msgstr ""
 
 #: .\templates\registration\account_activation_invalid.html:8
 msgid ""
 "Le lien de confirmation d'activation est invalide, sûrement car il a déjà "
 "été utilisé ou le lien a expiré"
 msgstr ""
-"The activation confirmation link is invalid, probably because it has already "
-"been used or the link has expired"
 
 #: .\templates\registration\account_activation_invalid.html:10
 #: .\templates\registration\account_activation_sent.html:10
 #: .\templates\registration\password_reset_complete.html:10
 msgid "Se connecter"
-msgstr "Log in"
-
-#: .\templates\registration\account_activation_invalid.html:11
-#: .\templates\registration\login.html:35
-msgid "Changer mon mot de passe"
-msgstr "Change my password"
-
-#: .\templates\registration\account_activation_invalid.html:12
-#: .\templates\registration\account_activation_sent.html:11
-#: .\templates\registration\register.html:4
-#: .\templates\registration\register.html:7
-#: .\templates\registration\register.html:59
-msgid "S'enregistrer"
-msgstr "Sign up"
+msgstr ""
 
 #: .\templates\registration\account_activation_sent.html:4
 msgid "Email d'activation envoyé"
-msgstr "Activation email sent"
+msgstr ""
 
 #: .\templates\registration\account_activation_sent.html:8
 msgid ""
 "Pour continuer votre inscription, veuillez compléter et suivre les "
 "inscriptions données dans le courriel qui vous a été envoyé."
 msgstr ""
-"To continue your registration, please complete and follow the registrations "
-"given in the email that was sent to you."
 
 #: .\templates\registration\login.html:7
-#: .\templates\registration\login.html:32
+#: .\templates\registration\login.html:14
 msgid "S'identifier"
-msgstr "Sign in"
-
-#: .\templates\registration\login.html:8
-msgid "Connectez-vous à votre compte !"
-msgstr "Log in to your account !"
-
-#: .\templates\registration\login.html:30
-#: .\templates\registration\password_reset_confirm.html:34
-msgid ""
-"<small class=\"d-block mb-1\">Tous les champs avec un <span class=\"required-"
-"input\">*</span> sont obligatoires.</small>"
 msgstr ""
-"<small class=\"d-block mb-1\">All fields with an <span class=\"required-input"
-"\">*</span> are mandatory.</small>"
 
-#: .\templates\registration\login.html:35
+#: .\templates\registration\login.html:17
 msgid "Vous n'avez pas encore de compte ?"
-msgstr "You do not have an account yet ?"
+msgstr ""
 
-#: .\templates\registration\login.html:35
+#: .\templates\registration\login.html:17
 msgid "Inscrivez-vous"
-msgstr "Sign up now"
-
-#: .\templates\registration\login.html:35
-msgid "Vous avez oublié votre mot de passe ?"
-msgstr "You have forgotten your password ?"
+msgstr ""
 
 #: .\templates\registration\password_reset_complete.html:4
 #: .\templates\registration\password_reset_complete.html:7
 msgid "Réinitialisation complétée"
-msgstr "Reset completed"
+msgstr ""
 
 #: .\templates\registration\password_reset_complete.html:8
 msgid ""
 "Votre mot de passe a été changé. Vous pouvez vous connectez avec vos "
 "identifiants ;)"
 msgstr ""
-"Your password has been changed. You can connect with your login details ;)"
 
 #: .\templates\registration\password_reset_confirm.html:4
 msgid "Réinitialisation"
-msgstr "Reset"
-
-#: .\templates\registration\password_reset_confirm.html:7
-#: .\templates\registration\password_reset_form.html:23
-msgid "Réinitialiser mon mot de passe"
-msgstr "Reset my password"
+msgstr ""
 
 #: .\templates\registration\password_reset_confirm.html:9
 msgid ""
 "Saisissez deux fois votre nouveau mot de passe afin de vérifier qu'il a "
 "correctement été saisi."
 msgstr ""
-"Enter your new password twice to verify that it has been entered correctly."
 
-#: .\templates\registration\password_reset_confirm.html:36
+#: .\templates\registration\password_reset_confirm.html:14
 msgid "Réinitialiser"
-msgstr "Reset"
+msgstr ""
 
-#: .\templates\registration\password_reset_confirm.html:40
+#: .\templates\registration\password_reset_confirm.html:18
 msgid ""
 "Le lien de réinitialisation est invalide, peut-être car il a déjà été "
 "utilisé. Faîtes plutôt une nouvelle demande avec le lien ci-dessus."
 msgstr ""
-"The reset link is invalid, perhaps because it has already been used. "
-"Instead, make a new request with the link above."
 
-#: .\templates\registration\password_reset_confirm.html:42
+#: .\templates\registration\password_reset_confirm.html:20
 msgid "Faire une autre demande"
-msgstr "Make another request"
+msgstr ""
 
 #: .\templates\registration\password_reset_done.html:4
 msgid "Email envoyé"
-msgstr "Email sent"
+msgstr ""
 
 #: .\templates\registration\password_reset_done.html:7
 #: .\templates\registration\password_reset_form.html:4
+#: .\templates\registration\password_reset_form.html:7
 msgid "Demande de réinitialisation de mot de passe"
-msgstr "Request for password reset"
+msgstr ""
 
 #: .\templates\registration\password_reset_done.html:9
 msgid ""
@@ -2418,9 +3792,6 @@ msgid ""
 "mot de passe. Si un compte existe avec l'addresse email transmise, vous "
 "devriez recevoir un mail très rapidement !"
 msgstr ""
-"We sent you an email with instructions to create a new password. If an "
-"account exists with the email address sent, you should receive an email very "
-"quickly!"
 
 #: .\templates\registration\password_reset_done.html:10
 msgid ""
@@ -2428,8 +3799,6 @@ msgid ""
 "email avec laquelle vous vous êtes inscrit, et regarder dans votre dossier "
 "spam."
 msgstr ""
-"If you have not received an email, check that you have entered the email "
-"address with which you registered, and look in your spam folder."
 
 #: .\templates\registration\password_reset_email.html:4
 msgid ""
@@ -2437,17 +3806,12 @@ msgid ""
 "Vous recevez cet email car vous avez demandé une réinitialisation de mot de "
 "passe sur ProgLangLearn.\n"
 msgstr ""
-"\n"
-"You are receiving this email because you have requested a password reset on "
-"ProgLangLearn.\n"
 
 #: .\templates\registration\password_reset_email.html:8
 msgid ""
 "S'il vous plaît, cliquez sur le lien ci-dessous et suivez les instructions "
 "nécessaires à la réinitialisation :"
 msgstr ""
-"Please click on the link below and follow the necessary instructions to "
-"reset :"
 
 #: .\templates\registration\password_reset_email.html:11
 #, python-format
@@ -2460,44 +3824,59 @@ msgid ""
 "\n"
 "De la part de toute l'équipe de ProgLangLearn,\n"
 msgstr ""
-"Here is your username, if you have forgotten it : %(user.get_username)s\n"
-"\n"
-"Thank you for trusting us and using our site :)\n"
-"\n"
-"\n"
-"On behalf of the entire ProgLangLearn team,\n"
 
-#: .\templates\registration\password_reset_form.html:11
+#: .\templates\registration\password_reset_form.html:9
 msgid ""
 "Vous avez perdu votre mot de passe ? Entrez votre addresse email, et suivez "
 "les instructions pour avoir un nouveau mot de passe encore plus fort :)"
 msgstr ""
-"Forgot your password? Enter your email address, and follow the instructions "
-"to get an even stronger new password :)"
 
-#: .\templates\registration\register.html:8
-msgid "Créez votre compte dès maintenant !"
-msgstr "Create your account now !"
-
-#: .\templates\registration\register.html:55
-msgid "Accepter les"
-msgstr "Accept the"
-
-#: .\templates\registration\register.html:55
-msgid ""
-"termes et conditions d'utilisation</a> de Proglanglearn <span class="
-"\"required-input\">*</span></label>"
+#: .\templates\socialaccount\authentification_error.html:4
+#: .\templates\socialaccount\authentification_error.html:7
+msgid "Social Network Login Failure"
 msgstr ""
-"terms and conditions of use</a> of Proglanglearn <span class=\"required-input"
-"\">*</span></label>"
 
-#: .\templates\registration\register.html:62
-msgid "Vous avez déjà un compte ?"
-msgstr "Already have an account ?"
+#: .\templates\socialaccount\authentification_error.html:8
+msgid ""
+"An error occurred while attempting to login via your social network account."
+msgstr ""
 
-#: .\templates\registration\register.html:62
-msgid "Connectez-vous"
-msgstr "Sign in"
+#: .\templates\socialaccount\connections.html:4
+#: .\templates\socialaccount\connections.html:7
+msgid "Account Connections"
+msgstr ""
 
-#~ msgid "S'inscrire"
-#~ msgstr "Sign up"
+#: .\templates\socialaccount\connections.html:9
+msgid ""
+"You can sign in to your account using any of the following third party "
+"accounts:"
+msgstr ""
+
+#: .\templates\socialaccount\connections.html:33
+msgid ""
+"You currently have no social network accounts connected to this account."
+msgstr ""
+
+#: .\templates\socialaccount\connections.html:35
+msgid "Add a 3rd Party Account"
+msgstr ""
+
+#: .\templates\socialaccount\login_cancelled.html:4
+#: .\templates\socialaccount\login_cancelled.html:7
+msgid "Login Cancelled"
+msgstr ""
+
+#: .\templates\socialaccount\login_cancelled.html:9
+#, python-format
+msgid ""
+"You decided to cancel logging in to our site using one of your existing "
+"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
+"\">sign in</a>."
+msgstr ""
+
+#: .\templates\socialaccount\signup.html:8
+#, python-format
+msgid ""
+"You are about to use your %(provider_name)s account to login to\n"
+"%(site_name)s. As a final step, please complete the following form:"
+msgstr ""

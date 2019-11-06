@@ -8,59 +8,65 @@ from decouple import config
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
-ADMINS = [('Guillaume LETELLIER', 'proglanglearn@gmail.com')]
-SITE_ID = 1
 SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', cast=bool)
+ADMINS = [
+    ('Guillaume LETELLIER', 'proglanglearn@gmail.com'),
+]
 
-# Application definition
+ALLOWED_HOSTS = ['guillaumeletellier.pythonanywhere.com',
+                 'proglanglearn.com',
+                 '127.0.0.1',
+                 ]
+INTERNAL_IPS = ('127.0.0.1',)
+
+
 INSTALLED_APPS = [
-    'filebrowser',
-
     # 'django.contrib.admin',
     'proglanglearn.apps.MyAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.sitemaps',
-    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
-    # Third part apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.twitter',
     'django_countries',
-    'form_utils',
-    'github',
+    'filebrowser',
+    # 'github',
     'import_export',
     'modeltranslation',
+    'rest_auth',
+    'rest_auth.registration',
     'rest_framework',
+    'rest_framework.authtoken',
     'snowpenguin.django.recaptcha3',
     'tinymce',
-    'user_sessions',
     'xhtml2pdf',
-    'django_plotly_dash',
 
-    # My apps
     'proglanglearn',
-    'accounts.apps.AccountsConfig',
-    'analytics.apps.AnalyticsConfig',
-    'articles.apps.ArticlesConfig',
-    'billing.apps.BillingConfig',
-    'courses.apps.CoursesConfig',
-    'forum.apps.ForumConfig',
-    'main.apps.MainConfig',
-    'polls.apps.PollsConfig',
+    'accounts',
+    'analytics',
+    'articles',
+    'billing',
+    'courses',
+    'forum',
+    'main',
+    'polls',
 ]
 
 MIDDLEWARE = [
-    # HTML minifer
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
-
     'django.middleware.security.SecurityMiddleware',
-    # For user sessions (admin)
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # For user sessions (no admin)
-    'user_sessions.middleware.SessionMiddleware',
     'proglanglearn.middleware.XForwardedForMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -70,8 +76,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-SESSION_ENGINE = 'user_sessions.backends.db'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -105,10 +109,15 @@ CONN_MAX_AGE = 30
 
 WSGI_APPLICATION = 'proglanglearn.wsgi.application'
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+# Intertionalisation and regionalisation settings
 LANGUAGE_CODE = 'fr-Fr'
-TIME_ZONE = 'Europe/Paris'  # 'UTC'
+TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -122,19 +131,12 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-# Static files (CSS, JavaScript, Images, ...)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-VENV_PATH = os.path.dirname(BASE_DIR)
+
+# Static settings
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
-
-
-# Redirect configs
-LOGIN__URL = 'accounts:login'
-LOGIN_REDIRECT_URL = 'main:analytics:dashboard'
-LOGOUT_REDIRECT_URL = 'main:index'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
 # Email config
 DEFAULT_FROM_EMAIL = 'ProgLangLearn <proglanglearn@gmail.com>'
@@ -146,7 +148,67 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASS')
 
-# TinyMCE editor config
+
+# Account settings
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+        ],
+    }
+}
+
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'main:analytics:dashboard'
+LOGOUT_REDIRECT_URL = 'main:index'
+
+ACCOUNT_LOGIN_REDIRECT_URL = LOGIN_REDIRECT_URL
+ACCOUNT_LOGOUT_REDIRECT_URL = LOGOUT_REDIRECT_URL
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_FORMS = {
+    'login': 'accounts.allauth_forms.LoginForm',
+    'signup': 'accounts.allauth_forms.SignupForm',
+    'change_password': 'accounts.allauth_forms.ChangePasswordForm',
+    'set_password': 'accounts.allauth_forms.SetPasswordForm',
+    'reset_password_from_key': 'accounts.allauth_forms.ResetPasswordKeyForm',
+}
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_LOGOUT_ON_GET = True
+
+
+# Rest-framework settings (API)
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+
+# TinyMCE settings
 TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
     'width': 'auto',
@@ -203,13 +265,8 @@ TINYMCE_FILEBROWSER = True
 FILEBROWSER_DIRECTORY = 'uploads/'  # tiny_uploads/
 DIRECTORY = ''
 
-# ReCaptcha V3 config
-RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
-RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
-RECAPTCHA_DEFAULT_ACTION = 'generic'
-RECAPTCHA_SCORE_THRESHOLD = 0.35
 
-# Filebrowser
+# Filebrowser settings
 FILEBROWSER_URL_FILEBROWSER_MEDIA = '/media_root/filebrowser/'
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = BASE_DIR + FILEBROWSER_URL_FILEBROWSER_MEDIA
 FILEBROWSER_SHOW_IN_DASHBOARD = False
@@ -224,8 +281,13 @@ PATH_FILEBROWSER_MEDIA = STATIC_ROOT + 'filebrowser/'
 URL_TINYMCE = STATIC_URL + 'tinymce/'
 PATH_TINYMCE = STATIC_ROOT + 'tinymce/'
 
-# GeoIP2
-GEOIP_PATH = os.path.join(BASE_DIR, 'static/data_geoip2')
+
+# ReCaptcha V3 settings
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.35
+
 
 # My settings
 AUTH_USER_MODEL = 'main.User'

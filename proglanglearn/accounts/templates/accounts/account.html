@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n socialaccount %}
 
 {% block title %}{% trans "Mon compte" %} - {% endblock title %}
 
 {% block extra_head %}<style>.country-select-flag{width: 16px;}</style>{% endblock extra_head %}
 
 {% block main %}
+{% get_social_accounts user as accounts %}
 <h1 class="large">{% trans "Réglages de votre compte" %}</h1>
 <p class="lead"><i class="fas fa-user-cog"></i>&nbsp;{% trans "Modifier les paramètres et informations de votre compte !" %}
 </p>
 <p>
     <a href="{% url 'accounts:profile' user_id=request.user.id %}" class="btn btn__success btn__300 btn__block btn__large">{% trans "Voir mon profil" %}</a>
 </p>
-<p>
-    <a href="{% url 'accounts:session_list' %}" class="btn btn__warning btn__300 btn__block btn__large">{% trans "Voir mes sessions actives" %}</a>
-</p>
 <div class="row small-device">
     <div class="col-25 hide-small-device">
         <div class="sticky-box">
             <div><a href="#personal-info">{% trans "Modifier mes informations personnelles" %}</a></div>
-            <div><a href="#change-password">{% trans "Changer mon mot de passe" %}</a></div>
+            {% if password_change_form %}
+                <div><a href="#change-password">{% trans "Changer mon mot de passe" %}</a></div>
+            {% endif %}
             <div><a href="#profile">{% trans "Modifier les informations visibles sur mon profil" %}</a></div>
-            <div><a href="#danger-zone">{% trans "Zone de danger" %}</a></div>
+            {% if danger_zone_form %}
+                <div><a href="#danger-zone">{% trans "Zone de danger" %}</a></div>
+            {% endif %}
         </div>
     </div>
     <div class="col-75">
@@ -33,18 +35,20 @@
                 {{ personal_form.non_field_errors }}
                 <fieldset>
                     <legend><i class="fas fa-user"></i> {% trans "Informations générales" %}</legend>
-                    {% include 'includes/form_field2.html' with field=image_form.image %}
+                    {% if not accounts %}{% include 'includes/form_field2.html' with field=image_form.image %}{% endif %}
                     {% include 'includes/form_field2.html' with field=personal_form.username %}
-                    {% include 'includes/form_field2.html' with field=personal_form.email %}
+                    {% if not accounts %}{% include 'includes/form_field2.html' with field=personal_form.email %}{% endif %}
                     {% include 'includes/form_field2.html' with field=personal_form.email_notification %}
-                    <div class="row small-device">
-                        <div class="col-50 small-device">
-                            {% include 'includes/form_field2.html' with field=personal_form.first_name %}
+                    {% if not accounts %}
+                        <div class="row small-device">
+                            <div class="col-50 small-device">
+                                {% include 'includes/form_field2.html' with field=personal_form.first_name %}
+                            </div>
+                            <div class="col-50 small-device">
+                                {% include 'includes/form_field2.html' with field=personal_form.last_name %}
+                            </div>
                         </div>
-                        <div class="col-50 small-device">
-                            {% include 'includes/form_field2.html' with field=personal_form.last_name %}
-                        </div>
-                    </div>
+                    {% endif %}
                     {% include 'includes/form_field2.html' with field=personal_form.prog_type default_select=True %}
                     {% include 'includes/form_field2.html' with field=personal_form.country default_select=True %}
                 </fieldset>
@@ -54,25 +58,27 @@
                 </div>
             </form>
         </section>
-        <hr class="dashed mx-1 my-2">
-        <section id="change-password">
-            <h2>{% trans "Changer mon mot de passe" %}</h2>
-            <form method="POST" action="{% url 'accounts:handle-change-password' %}" class="form">
-                {% csrf_token %}
-                {{ password_change_form.non_field_errors }}
-                <fieldset>
-                    <legend><i class="fas fa-user-lock"></i> {% trans "Mot de passe" %}</legend>
-                    {% include 'includes/form_field2.html' with field=password_change_form.old_password %}
-                    {% include 'includes/form_field2.html' with field=password_change_form.new_password1 %}
-                    {% include 'includes/form_field2.html' with field=password_change_form.new_password2 %}
-                </fieldset>
-                <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
-                    {% trans "sont obligatoires." %}</small>
-                <div class="center-text">
-                    <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "Changer" %}</button>
-                </div>
-            </form>
-        </section>
+        {% if password_change_form %}
+            <hr class="dashed mx-1 my-2">
+            <section id="change-password">
+                <h2>{% trans "Changer mon mot de passe" %}</h2>
+                <form method="POST" action="{% url 'accounts:handle-change-password' %}" class="form">
+                    {% csrf_token %}
+                    {{ password_change_form.non_field_errors }}
+                    <fieldset>
+                        <legend><i class="fas fa-user-lock"></i> {% trans "Mot de passe" %}</legend>
+                        {% include 'includes/form_field2.html' with field=password_change_form.oldpassword %}
+                        {% include 'includes/form_field2.html' with field=password_change_form.password1 %}
+                        {% include 'includes/form_field2.html' with field=password_change_form.password2 %}
+                    </fieldset>
+                    <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
+                        {% trans "sont obligatoires." %}</small>
+                    <div class="center-text">
+                        <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "Changer" %}</button>
+                    </div>
+                </form>
+            </section>
+        {% endif %}
         <hr class="dashed mx-1 my-2">
         <section id="profile">
             <h2>{% trans "Modifier les informations visibles sur mon profil" %}</h2>
@@ -125,23 +131,25 @@
                 </div>
             </form>
         </section>
-        <hr class="dashed mx-1 my-2">
-        <section id="danger-zone">
-            <h2>{% trans "Zone de danger" %}</h2>
-            <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
-                {% csrf_token %}
-                {{ danger_zone_form.non_field_errors }}
-                <fieldset>
-                    <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
-                    {% include 'includes/form_field2.html' with field=danger_zone_form.password %}
-                </fieldset>
-                <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
-                    {% trans "sont obligatoires." %}</small>
-                <div class="center-text">
-                    <button type="submit" class="btn btn__danger btn__large btn__300">{% trans "Supprimer" %}</button>
-                </div>
-            </form>
-        </section>
+        {% if danger_zone_form %}
+            <hr class="dashed mx-1 my-2">
+            <section id="danger-zone">
+                <h2>{% trans "Zone de danger" %}</h2>
+                <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
+                    {% csrf_token %}
+                    {{ danger_zone_form.non_field_errors }}
+                    <fieldset>
+                        <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
+                        {% include 'includes/form_field2.html' with field=danger_zone_form.password %}
+                    </fieldset>
+                    <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
+                        {% trans "sont obligatoires." %}</small>
+                    <div class="center-text">
+                        <button type="submit" class="btn btn__danger btn__large btn__300">{% trans "Supprimer" %}</button>
+                    </div>
+                </form>
+            </section>
+        {% endif %}
     </div>
 </div>
 {% endblock main %}

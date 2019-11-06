@@ -38,10 +38,18 @@
             border-radius: 5px;
         }
 
-        select[name="language"] {
+        html[data-theme="dark"] select:not(.custom-multiple-select),
+        html[data-theme="dark"] select:not(.custom-select){
+            color: #ffffff;
+            background: #666666;
+        }
+
+        select[name="language"],
+        html[data-theme="dark"] select[name="language"] {
             font-size: 1rem;
             background-color: #c5a31b;
             font-weight: 600;
+            color: #000000;
         }
     </style>
     {% block extra_head %}{% endblock extra_head %}

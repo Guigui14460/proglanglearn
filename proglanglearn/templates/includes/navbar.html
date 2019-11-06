@@ -1,5 +1,8 @@
-{% load static cart_template_tags i18n %}
+{% load static cart_template_tags i18n socialaccount %}
 
+{% if user.is_authenticated %}
+    {% get_social_accounts user as accounts %}
+{% endif %}
 <nav id="main-navbar" class="navbar navbar__primary navbar__fixed">
     <div class="burger">
         <div class="line1"></div>
@@ -33,10 +36,10 @@
     </div>
     <div class="navbar-changeable">
         {% if not user.is_authenticated %}
-            <a href="{% url 'accounts:login' %}" title="{% trans 'Se connecter à mon compte' %}" class="btn btn__outline__light mr-1">{% trans 'Connexion' %}</a>
+            <a href="{% url 'account_login' %}" title="{% trans 'Se connecter à mon compte' %}" class="btn btn__outline__light mr-1">{% trans 'Connexion' %}</a>
         {% else %}
             <div class="dropdown-toggle">
-                <img src="{{ user.profile.image.url }}" alt="{% trans 'Photo de profil' %}"
+                <img src="{% if accounts %}{{ request.user.socialaccount_set.all.0.get_avatar_url }}{% else %}{{ user.profile.image.url }}{% endif %}" alt="{% trans 'Photo de profil' %}"
                     class="navbar-profile-image profile-image round-image" title="{% trans 'Votre photo de profil actuelle' %}" />
                 <span>{{ user.username }}</span>
                 <ul class="navbar-dropdown-menu navbar-dropdown-right">
@@ -47,6 +50,8 @@
                         <li class="navbar-dropdown-item">
                             <hr class="navbar-dropdown-divider" />
                         </li>
+                    {% endif %}
+                    {% if user.profile.is_teacher %}
                         <li class="navbar-dropdown-item">
                             <a {% if activate == 'article-create' %}class="active" {% endif %} href="{% url 'articles:create' %}"><i class="fas fa-newspaper"></i>&nbsp;{% trans 'Créer un article' %}</a>
                         </li>
@@ -72,7 +77,7 @@
                         <a {% if activate == 'account' %}class="active" {% endif %} href="{% url 'accounts:account' %}"><i class="fas fa-user-cog"></i>&nbsp;{% trans 'Mon compte' %}</a>
                     </li>
                     <li class="navbar-dropdown-item">
-                        <a href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp;{% trans 'Se déconnecter' %}</a>
+                        <a href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp;{% trans 'Se déconnecter' %}</a>
                     </li>
                 </ul>
             </div>

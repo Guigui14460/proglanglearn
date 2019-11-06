@@ -11,6 +11,14 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proglanglearn.settings')
+from decouple import config
+
+
+if config('DEBUG', cast=bool):
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                          'proglanglearn.settings.development')
+else:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                          'proglanglearn.settings.production')
 
 application = get_wsgi_application()

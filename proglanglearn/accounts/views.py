@@ -14,13 +14,18 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.translation import gettext as _, activate, get_language
 from django.views.generic import View, TemplateView, ListView
 
+from allauth.account.views import PasswordChangeView
+
 from main.mixins import NavbarSearchMixin
 from main.utils import get_ip_address_client
+from .allauth_forms import (
+    ChangePasswordForm as PasswordChangeForm
+)
 from .forms import (
     PROG_TYPE, LoginForm, 
     SignUpForm, PasswordResetForm, 
     ChangeProfileImageForm, PersonalInformationForm, 
-    PasswordChangeForm, ProfileInformationForm, 
+    ProfileInformationForm, 
     DangerZoneForm, ExperienceForm, 
     EducationForm, ProfileSearchForm, 
 )
@@ -140,7 +145,7 @@ class RegistrationView(NavbarSearchMixin, View):
             else:
                 messages.info(request, _(
                     "Votre compte a déjà été activé. Connectez-vous ou demandez à changer de mot de passe"))
-                return redirect('accounts:login')
+                return redirect('account_login')
         messages.error(request, _(
             "Veuillez respecter et remplir correctement <strong>TOUS</strong> les champs obligatoires"))
         context = {
@@ -155,7 +160,7 @@ class AccountActivationSentView(NavbarSearchMixin, View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('accounts:login')
+            return redirect('account_login')
         return render(request, self.template_name, {'navbar_search_form': self.form_navbar()})
 
 
@@ -212,11 +217,12 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
             instance=self.request.user.profile)
         context['personal_form'] = PersonalInformationForm(
             self.get_personal_info(), request=self.request)
-        context['password_change_form'] = PasswordChangeForm(
-            user=self.request.user)
         context['profile_form'] = ProfileInformationForm(
             self.get_profile_info())
-        context['danger_zone_form'] = DangerZoneForm(user=self.request.user)
+        if len(self.request.user.socialaccount_set.all()) == 0:
+            context['password_change_form'] = PasswordChangeForm(
+                user=self.request.user)
+            context['danger_zone_form'] = DangerZoneForm(user=self.request.user)
         return context
 
     def get_personal_info(self):
@@ -292,19 +298,23 @@ class PersonalInfo(View):
         return redirect('accounts:account')
 
 
-class ChangePassword(View):
+class ChangePassword(PasswordChangeView):
     def post(self, request, *args, **kwargs):
-        user = request.user
-        form = PasswordChangeForm(user, request.POST or None)
-        if form.is_valid():
-            user.set_password(form.clean_new_password2())
-            user.save()
-            messages.success(request, _(
-                "Votre mot de passe a été modifié avec succès"))
-        else:
-            messages.error(request, _(
-                "Votre mot de passe n'a pas pu être modifié. Utilisez l'aide sous chaque champs"))
+        change_post = super().post(request, *args, **kwargs)
+        # user = request.user
+        # form = PasswordChangeForm(user, request.POST or None)
+        # if form.is_valid():
+        #     user.set_password(form.clean_new_password2())
+        #     user.save()
+        #     messages.success(request, _(
+        #         "Votre mot de passe a été modifié avec succès"))
+        # else:
+        #     messages.error(request, _(
+        #         "Votre mot de passe n'a pas pu être modifié. Utilisez l'aide sous chaque champs"))
         return redirect('accounts:account')
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 
 class ProfileInfo(View):
@@ -337,7 +347,7 @@ class DangerZone(View):
             user.save()
             logout(request)
             messages.success(request, _("Votre compte a été désactivé"))
-            return redirect('accounts:login')
+            return redirect('account_login')
         messages.error(request, _("Votre compte n'a pas pu être désactiver"))
         return redirect('accounts:account')
 

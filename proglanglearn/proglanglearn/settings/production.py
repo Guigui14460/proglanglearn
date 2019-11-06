@@ -1,12 +1,10 @@
 from .base import *
 
 
-DEBUG = config('DEBUG', cast=bool)
 PROTOCOL = 'https'
-ALLOWED_HOSTS = ['127.0.0.1',
-                 'guillaumeletellier.pythonanywhere.com',
-                 'proglanglearn.com']
 
+
+# Database settings
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -24,14 +22,13 @@ DATABASES = {
     }
 }
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+# Staticfiles settings
+# STATIC_ROOT = '/home/guillaumeletellier/proglanglearn/static_cdn'
+# MEDIA_ROOT = '/home/guillaumeletellier/proglanglearn/media_cdn'
+
+
+# Password validation settings
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -50,6 +47,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Stripe config
-STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+
+# Allauth settings
+SITE_ID = 4
+
+
+# Stripe settings
+# STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+# STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+STRIPE_PUBLIC_KEY = 'pk_test_buF4FsDmstqHzKr4Nc5TKxbH00rXE4mpbI'
+STRIPE_SECRET_KEY = 'sk_test_bokSwLp3jIVrQ0WYZP4ff8tx009fk1ZPGJ'

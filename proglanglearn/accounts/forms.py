@@ -8,7 +8,6 @@ from django.utils.translation import gettext_lazy as _
 
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-from form_utils.forms import BetterForm
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
 
@@ -171,6 +170,11 @@ class PersonalInformationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
+        if len(self.request.user.socialaccount_set.all()) > 0:
+            social_account = self.request.user.socialaccount_set.all()[0]
+            del self.fields['email']
+            del self.fields['last_name']
+            del self.fields['first_name']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -241,7 +245,8 @@ class DangerZoneForm(forms.Form):
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
-        fields = ['school', 'degree', 'description2', 'entry_date', 'exit_date']
+        fields = ['school', 'degree', 'description2',
+                  'entry_date', 'exit_date']
         widgets = {
             'school': forms.TextInput(attrs={'placeholder': 'Epitech'}),
             'degree': forms.TextInput(attrs={'placeholder': _('Master en sécurité informatique')}),
@@ -257,7 +262,8 @@ class EducationForm(forms.ModelForm):
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
-        fields = ['entreprise', 'employment', 'description', 'entry_date', 'exit_date']
+        fields = ['entreprise', 'employment',
+                  'description', 'entry_date', 'exit_date']
         widgets = {
             'entreprise': forms.TextInput(attrs={'placeholder': 'Google'}),
             'employment': forms.TextInput(attrs={'placeholder': _("Analyste de données")}),

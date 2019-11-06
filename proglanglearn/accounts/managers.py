@@ -23,7 +23,7 @@ class ProfileManager(models.Manager):
 
     def send_email(self):
         return self.get_queryset().email()
-    
+
     def all_dev_student(self):
         return self.get_queryset().filter((Q(is_dev=True) | Q(is_student=True)))
 
@@ -48,6 +48,7 @@ class ProfileManager(models.Manager):
             for word in query.split():
                 or_lookup = (Q(user__username__icontains=word) | Q(
                     user__first_name__icontains=word) | Q(user__last_name__icontains=word))
-                qs = qs | self.get_queryset().filter((or_lookup & (Q(is_dev=True) | Q(is_student=True))))
+                qs = qs | self.get_queryset().filter(
+                    (or_lookup & (Q(is_dev=True) | Q(is_student=True))))
             qs.distinct()
         return qs

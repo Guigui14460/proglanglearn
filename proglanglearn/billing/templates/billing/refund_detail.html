@@ -7,7 +7,7 @@
 <h1 class="large">{% trans 'Votre demande de reboursement' %}</h1>
 <div>
     <p>{% trans "Vous avez formulé une demande de remboursement. État de votre demande :" %} {% if object.accepted %}<span class="success-color">{% trans "Acceptée" %}</span>{% elif object.rejected %}<span class="red-color">{% trans "Rejetée" %}</span>{% else %}{% trans "En cours de traitement" %}{% endif %}.
-    <br>{% blocktrans with url=object.order.render_pdf %}Le <a href="{{ url }}">détail</a> de votre paiement est toujours disponible.
+    <br>{% blocktrans with url=object.order.render_pdf %}Le <a href="{{ url }}">détail</a> de votre paiement est toujours disponible.{% endblocktrans %}
     <br>{% trans "Pour rappel, voici le détail de votre demande ci-dessous :" %}
     </p>
     <div class="my-2">

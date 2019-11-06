@@ -1,0 +1,16 @@
+python v_env/Scripts/django-admin.py startproject proglanglearn
+
+git add .
+git commit -m "Message"
+git remote add origin https://github.com/Guigui14460/proglanglearn.git
+git push -u origin master
+
+letgui2@gmail.com/Guigui14/admin
+93guigui14460
+
+python manage.py runserver
+python manage.py makemigrations/migrate
+python manage.py check --deploy
+django-admin makemessages -l fr -e html,txt,py
+django-admin makemessages -a
+django-admin compilemessages
