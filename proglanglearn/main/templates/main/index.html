@@ -3,7 +3,7 @@
 
 {% block extra_head %}
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-<style>iframe{width: 100%;}</style>
+<style>iframe{width: 100%;} .card .card-header .card-image{height: 300px; object-fit: cover;} .card .card-container .card-content p{margin: 10px !important;} .my-5{margin: 150px 0 150px 0;}</style>
 {% endblock extra_head %}
 
 {% block header_attr %}class="index"{% endblock header_attr %}
@@ -24,52 +24,96 @@
 {% endblock header %}
 
 {% block main %}
-{% for item in objects %}
-  <div>
-    <h2>{{ item.user.username }}</h2>
-    <p>{{ item.strike }}</p>
+<div class="mt-3 mb-5">
+  <h2 class="center-text">{% trans "Vous apprendrez tous ces langages et frameworks ..." %}</h2>
+  <div class="small-vertical-carousel">
+    <ul>
+      <li><img src="{% static 'images/languages_logo/html-css-logo.png' %}" alt="HTML/CSS" title="HTML/CSS"></li>
+      <li><img src="{% static 'images/languages_logo/javascript-logo.png' %}" alt="JavaScript" title="JavaScript"></li>
+      <li><img src="{% static 'images/languages_logo/python-logo.png' %}" alt="Python" title="Python"></li>
+      <li><img src="{% static 'images/languages_logo/php-logo.png' %}" alt="PHP" title="PHP"></li>
+      <li><img src="{% static 'images/languages_logo/java-logo.png' %}" alt="Java" title="Java"></li>
+      <li><img src="{% static 'images/languages_logo/cpp-logo.png' %}" alt="C++" title="C++"></li>
+      <li><img src="{% static 'images/languages_logo/jquery-logo.png' %}" alt="JQuery" title="JQuery"></li>
+      <li><img src="{% static 'images/languages_logo/swift-logo.png' %}" alt="Swift" title="Swift"></li>
+    </ul>
   </div>
-{% endfor %}
-An inline tex : $f(a) = \frac{1}{2\pi i} \oint\frac{f(z)}{z-a}dz$
-        a block tex : $$f(a) = \frac{1}{2\pi i} \oint\frac{f(z)}{z-a}dz$$
-    
-        <div class="my-5">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mi>a</mi><mo>&#x2260;</mo><mn>0</mn>
-</math>,
-there are two solutions to 
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mi>a</mi><msup><mi>x</mi><mn>2</mn></msup>
-  <mo>+</mo> <mi>b</mi><mi>x</mi>
-  <mo>+</mo> <mi>c</mi> <mo>=</mo> <mn>0</mn>
-</math>
-and they are
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>x</mi> <mo>=</mo>
-  <mrow>
-    <mfrac>
-      <mrow>
-        <mo>&#x2212;</mo>
-        <mi>b</mi>
-        <mo>&#x00B1;</mo>
-        <msqrt>
-          <msup><mi>b</mi><mn>2</mn></msup>
-          <mo>&#x2212;</mo>
-          <mn>4</mn><mi>a</mi><mi>c</mi>
-        </msqrt>
-      </mrow>
-      <mrow> <mn>2</mn><mi>a</mi> </mrow>
-    </mfrac>
-  </mrow>
-  <mtext>.</mtext>
-</math>
+  <h4 class="center-text">{% trans "... et même plus !" %}</h4>
 </div>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfEk0H5MzdM-GuYXco1z5VLJWI3qC8j40Z8kUAhfj7kz_T2Ag/viewform?embedded=true" width="640" height="500" frameborder="0" marginheight="0" marginwidth="0">Chargement…</iframe>
+<div class="my-5 grid-cards">
+  <div class="card card__round" style="border: none;">
+    <div class="card-header">
+      <img class="card-image" style="height: 33vh; max-height: 33vh;" src="{% static 'images/download.png' %}" />
+    </div>
+    <div class="card-container">
+      <div class="card-title">
+        <h3 class="center-text">{% trans "Documents téléchargeables !" %}</h3>
+      </div>
+      <div class="card-content">
+        <p class="center-text">{% blocktrans %}Vous pourrez télécharger des versions PDF des introductions aux langages pour pouvoir le lire partout et même notre application mobile qui arrivera prochainement !{% endblocktrans %}</p>
+      </div>
+    </div>
+  </div>
+  <div class="card card__round" style="border: none;">
+    <div class="card-header">
+      <img class="card-image" style="height: 33vh; max-height: 33vh;" src="{% static 'images/gdpr.png' %}" />
+    </div>
+    <div class="card-container">
+      <div class="card-title">
+        <h3 class="center-text">{% trans "Sécurité de vos données personnelles !" %}</h3>
+      </div>
+      <div class="card-content">
+        {% url 'main:privacy' as privacy_url %}
+        <p class="center-text">{% blocktrans %}La manière d'utiliser vos données est très importante pour nous et sont en règle avec les <a href="https://ec.europa.eu/info/law/law-topic/data-protection_en" target="_blank">réglementations RGPD</a>. Pour avoir plus d'explications, vous pouvez vous rendre sur <a href="{{ privacy_url }}" title="Politique de confidentialité">cette page</a>.{% endblocktrans %}</p>
+      </div>
+    </div>
+  </div>
+  <div class="card card__round" style="border: none;">
+    <div class="card-header">
+      <img class="card-image" style="height: 33vh; max-height: 33vh;" src="{% static 'images/security_on.png' %}" />
+    </div>
+    <div class="card-container">
+      <div class="card-title">
+        <h3 class="center-text">{% trans "Paiements sécurisés !" %}</h3>
+      </div>
+      <div class="card-content">
+        <p class="center-text">{% blocktrans %}La sécurisation des transactions que vous effectuerez est essentielle. Les formations achetées sont satisfaites ou remboursées sous 14 jours.{% endblocktrans %}
+        <br><em>Transactions powered by <a href="https://stripe.com/" target="_blank">Stripe</a></em></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mt-5 mb-3">
+  <h2 class="center-text">{% trans "Les derniers cours publiés" %}</h2>
+  <div class="grid-cards mt-1">
+    {% for course in last_courses %}
+        <div class="card card__round card-hoverable">
+            <div class="card-header">
+                <a href="{{ course.get_absolute_url }}"><img class="card-image" src="{{ course.thumbnail.url }}"
+                        alt="{{ course.title }}"></a>
+            </div>
+            <div class="card-container">
+                <a href="{{ course.get_absolute_url }}">
+                    <h3 class="card-title">{{ course.title }}</h3>
+                </a>
+                <div class="card-tags">
+                    {% include 'main/includes/tags.html' with object=course card=True %}
+                </div>
+                <a href="{{ course.get_absolute_url }}">
+                    <div class="card-content">
+                        {{ course.content_introduction|safe|truncatechars:200 }}
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock main %}
 
 {% block javascript %}
 <script src="{% static 'js/typed.min.js' %}"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+<script src="{% static 'js/infinite-scroller.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %} let typed = new Typed('#lead-type', { strings: [$('.phrase1').text(), $('.phrase2').text()], typeSpeed: 35, backSpeed: 15, loop: true, }); $('span.typed-cursor').hide(); {% endblock jquery %}
+{% block jquery %} let typed = new Typed('#lead-type', { strings: [$('.phrase1').text(), $('.phrase2').text()], typeSpeed: 35, backSpeed: 15, loop: true, }); $('span.typed-cursor').hide(); $('.small-vertical-carousel').infiniteScroller({speed: 2,maxSpeed: 10,});{% endblock jquery %}

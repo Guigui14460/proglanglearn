@@ -3,6 +3,8 @@
 
 {% block title %}{% trans 'Panier' %} - {% endblock title %}
 
+{% block extra_head %}<style>html[data-theme="dark"] #paymentItems {background-color: #262626; color: #ffffff;}</style>{% endblock extra_head %}
+
 {% block main %}
 <h1 class="large">{% trans 'Votre panier' %}</h1>
 <div id="cart-div">

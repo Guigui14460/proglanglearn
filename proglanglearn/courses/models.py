@@ -111,7 +111,7 @@ class Course(models.Model):
     def get_all_downloadable_resources(self):
         count = 0
         for tut in self.get_tutorials():
-            if tut.resources.is_exists():
+            if tut.resources:
                 count += 1
         return count
 

@@ -172,33 +172,36 @@ class RemoveCourseFromCart(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         course = get_object_or_404(Course, slug=self.kwargs.get('course_slug'))
         order_qs = Order.objects.filter(user=request.user, ordered=False)
-        if order_qs.exists():
-            order = order_qs.first()
-            if course in order.courses.all():
-                order.courses.remove(course)
-                if request.is_ajax():
-                    if order.courses.all().count() == 0 and order.coupon is not None:
-                        if order.coupon.deactivate_date < timezone.now():
-                            order.coupon.limited += 1
-                            order.coupon.save()
-                        order.coupon = None
-                        order.save()
-                    context = self.get_context_data(**kwargs)
-                    html = render_to_string('billing/cart_element.html', context, request=request)
-                    return JsonResponse({'html': html, 'cart_item_count': cart_item_count(request.user)})
-                messages.success(request, _(
-                    "Le cours a bien été enlevé de votre panier"))
+        if request.user.is_authenticated:
+            if order_qs.exists():
+                order = order_qs.first()
+                if course in order.courses.all():
+                    order.courses.remove(course)
+                    if request.is_ajax():
+                        if order.courses.all().count() == 0 and order.coupon is not None:
+                            if order.coupon.deactivate_date < timezone.now():
+                                order.coupon.limited += 1
+                                order.coupon.save()
+                            order.coupon = None
+                            order.save()
+                        context = self.get_context_data(**kwargs)
+                        html = render_to_string('billing/cart_element.html', context, request=request)
+                        return JsonResponse({'html': html, 'cart_item_count': cart_item_count(request.user)})
+                    messages.success(request, _(
+                        "Le cours a bien été enlevé de votre panier"))
+                else:
+                    messages.warning(request, _(
+                        "Le cours ne se trouve pas dans votre panier"))
+                if order.courses.all().count() == 0 and order.coupon is not None:
+                    if order.coupon.deactivate_date < timezone.now():
+                        order.coupon.limited += 1
+                        order.coupon.save()
+                    order.coupon = None
+                    order.save()
             else:
-                messages.warning(request, _(
-                    "Le cours ne se trouve pas dans votre panier"))
-            if order.courses.all().count() == 0 and order.coupon is not None:
-                if order.coupon.deactivate_date < timezone.now():
-                    order.coupon.limited += 1
-                    order.coupon.save()
-                order.coupon = None
-                order.save()
+                messages.info(request, _("Votre panier est actuellement vide"))
         else:
-            messages.info(request, _("Votre panier est actuellement vide"))
+            messages.warning(request, _("Vous n'êtes pas connecté actuellement. Veuillez vous connecter pour enlever le cours de votre panier s'il si trouve"))
         return redirect('courses:detail', slug=course.slug)
 
     def get_context_data(self, **kwargs):

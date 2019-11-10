@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
+from .managers import UserExperienceJournalManager
+
 
 User = get_user_model()
 
@@ -16,6 +18,8 @@ class UserExperienceJournal(models.Model):
         default=0, verbose_name=_("expérience"))
     timestamp = models.DateTimeField(
         auto_now_add=True, verbose_name=_("date/heure"))
+
+    objects = UserExperienceJournalManager()
 
     class Meta:
         verbose_name = _("journal d'expérience utilisateur")

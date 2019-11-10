@@ -57,12 +57,16 @@ class CourseManager(models.Manager):
 
 
 class TutorialQuerySet(models.QuerySet):
-    pass
+    def get_authorized_tutorials(self, user):
+        return self.filter(course_students_in=[user])
 
 
 class TutorialManager(models.Manager):
     def get_queryset(self):
         return TutorialQuerySet(self.model, using=self._db)
+
+    def get_authorized_tutorials(self, user):
+        return self.get_queryset().get_authorized_tutorials(user)
 
     def search(self, query):
         if settings.SEARCH_TYPE == 'multiple':

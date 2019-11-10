@@ -22,6 +22,11 @@ User = get_user_model()
 class IndexView(NavbarSearchMixin, TemplateView):
     template_name = "main/index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['last_courses'] = Course.objects.get_published_courses()[:3]
+        return context
+
 
 class AboutView(NavbarSearchMixin, TemplateView):
     template_name = "main/about.html"
@@ -45,7 +50,8 @@ class ContactView(NavbarSearchMixin, View):
                 messages.error(request, _(
                     "Vous devez être connecté pour envoyer votre message"))
             else:
-                body = contact_form.cleaned_data['body'] + f"\n\n{request.user.username} ({request.user.id}) --- {request.user.email}"
+                body = contact_form.cleaned_data['body'] + \
+                    f"\n\n{request.user.username} ({request.user.id}) --- {request.user.email}"
                 send_mail(
                     contact_form.cleaned_data['subject'],
                     body,
