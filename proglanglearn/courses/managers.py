@@ -58,7 +58,7 @@ class CourseManager(models.Manager):
 
 class TutorialQuerySet(models.QuerySet):
     def get_authorized_tutorials(self, user):
-        return self.filter(course_students_in=[user])
+        return self.filter(course__students_in=[user])
 
 
 class TutorialManager(models.Manager):
