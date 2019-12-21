@@ -1,0 +1,11 @@
+{% if field.device %}
+    <div class="row {{ field.device }}">
+        {% for subfield in field.subfields %}
+            <div class="col-{{ field.size }} {{ field.device }}">
+                {% include 'includes/form_field.html' with field=subfield %}
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    {% include 'includes/form_field.html' with field=field %}
+{% endif %}

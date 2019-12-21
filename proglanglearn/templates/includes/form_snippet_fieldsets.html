@@ -5,12 +5,12 @@
         <fieldset>
             <legend>{{ fieldset.legend|safe }}</legend>
             {% for field in fieldset %}
-                {% include 'includes/form_field2.html' %}
+                {% include 'includes/form_field.html' %}
             {% endfor %}
         </fieldset>
     {% else %}
         {% for field in fieldset %}
-            {% include 'includes/form_field2.html' %}
+            {% include 'includes/form_field.html' %}
         {% endfor %}
     {% endif %}
 {% endfor %}

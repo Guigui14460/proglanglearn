@@ -191,14 +191,44 @@ input[type="radio"]{
 }
 
 .form {
+    .form-error {
+        margin-bottom: 0.5em;
+        color: red;
+        font-weight: 700;
+        padding: 0 15px 0 15px;
+        font-size: 18px;
+    }
+
     .form-group {
         margin: 1.2rem 0;
+
+        &.form-error__fields input{
+            border-bottom-color: #ff0000;
+            color: #ff0000;
+
+            &::placeholder {
+                color: #e06666;
+            }
+        }
+
+        &:not(.form-error__fields) input,
+        &:not(.form-error__fields) textarea{
+            &:valid {
+                border-color: $green;
+            }
+        }
     }
 
     .form-text {
         display: block;
         margin-top: 0.3rem;
         color: $gray2;
+    }
+
+    .form-text-error {
+        display: block;
+        margin-top: 0.3rem;
+        color: #ff0000;
     }
 
     label.abs-icon {
@@ -238,10 +268,6 @@ input[type="radio"]{
         border-bottom: 2px solid $black;
         background: transparent;
         color: $black;
-
-        &:valid {
-            border-color: $green;
-        }
         
         &:-webkit-autofill,
         &:-webkit-autofill:hover, 

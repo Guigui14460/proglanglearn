@@ -29,15 +29,15 @@
     {{ education_form.media }}
     <fieldset>
         <legend><i class="fas fa-user-graduate"></i>&nbsp;{% trans "Ajouter une école" %}</legend>
-        {% include 'includes/form_field2.html' with field=education_form.school %}
-        {% include 'includes/form_field2.html' with field=education_form.degree %}
-        {% include 'includes/form_field2.html' with field=education_form.description2 %}
+        {% include 'includes/form_field.html' with field=education_form.school %}
+        {% include 'includes/form_field.html' with field=education_form.degree %}
+        {% include 'includes/form_field.html' with field=education_form.description2 %}
         <div class="row small-device">
             <div class="col-50 small-device">
-                {% include 'includes/form_field2.html' with field=education_form.entry_date %}
+                {% include 'includes/form_field.html' with field=education_form.entry_date %}
             </div>
             <div class="col-50 small-device">
-                {% include 'includes/form_field2.html' with field=education_form.exit_date %}
+                {% include 'includes/form_field.html' with field=education_form.exit_date %}
             </div>
         </div>
     </fieldset>

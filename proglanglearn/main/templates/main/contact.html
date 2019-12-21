@@ -19,8 +19,8 @@
                 </p>
             </div>
         </div>
-        {% include "includes/form_field2.html" with field=contact_form.subject %}
-        {% include "includes/form_field2.html" with field=contact_form.body %}
+        {% include "includes/form_field.html" with field=contact_form.subject %}
+        {% include "includes/form_field.html" with field=contact_form.body %}
     </fieldset>
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">
@@ -39,8 +39,8 @@
                 <p>{% trans "Votre authentification n'est pas requise." %}</p>
             </div>
         </div>
-        {% include "includes/form_field2.html" with field=bug_form.b_subject %}
-        {% include "includes/form_field2.html" with field=bug_form.b_body %}
+        {% include "includes/form_field.html" with field=bug_form.b_subject %}
+        {% include "includes/form_field.html" with field=bug_form.b_body %}
     </fieldset>
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">

@@ -1,11 +1,35 @@
-{% if field.device %}
-    <div class="row {{ field.device }}">
-        {% for subfield in field.subfields %}
-            <div class="col-{{ field.size }} {{ field.device }}">
-                {% include 'includes/form_field2.html' with field=subfield %}
+{% load account_extras %}
+
+<div class="form-group {% if field.errors %}form-error__fields{% endif %}">
+    {% if field.field.widget.input_type == 'text' and 'password' in field.label or 'passe' in field.label %}
+        <div class="password">
+            {{ field.label_tag }}{% if field.field.required %}&nbsp;<span class="required-input">*</span>{% endif %}
+            {{ field }}
+            <input type="checkbox" id="{{ field.field.widget.attrs.id|id_for_view_password }}">
+            <label class="eye" for="{{ field.field.widget.attrs.id|id_for_view_password }}"></label>
+        </div>
+    {% elif field.field.widget.input_type == 'checkbox' %}
+        <label>{{ field }}&nbsp;&nbsp;{{ field.label }}{% if field.field.required %}&nbsp;<span class="required-input">*</span>{% endif %}</label>
+    {% else %}
+        {{ field.label_tag }}{% if field.field.required %}&nbsp;<span class="required-input">*</span>{% endif %}<br>
+        {% if field.field.widget.input_type == 'select' and not default_select %}
+            <div class="{{ field.field.widget.attrs.class }}">
+                {{ field }}
             </div>
-        {% endfor %}
-    </div>
-{% else %}
-    {% include 'includes/form_field2.html' with field=field %}
-{% endif %}
+        {% else %}
+            {{ field }}
+        {% endif %}
+    {% endif %}
+    {% if field.help_text %}
+        <small class="form-text">
+            {{ field.help_text|safe }}
+        </small>
+    {% endif %}
+    {% if field.errors %}
+        <small class="form-text-error">
+            {% for error in field.errors %}
+                {{ error }}&nbsp;
+            {% endfor %}
+        </small>
+    {% endif %}
+</div>

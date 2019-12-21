@@ -1,6 +1,6 @@
 {% load i18n %}
-{% comment %} visible_fields {% endcomment %}
+
 {% for field in form.visible_fields %} 
-    {% include 'includes/form_field2.html' with field=field %}
+    {% include 'includes/form_field.html' with field=field %}
 {% endfor %}
 {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}

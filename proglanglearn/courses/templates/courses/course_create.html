@@ -25,13 +25,13 @@
     {{ form.non_field_errors }}
     <fieldset>
         <legend>{% trans 'Informations générales' %}</legend>
-        {% include 'includes/form_field2.html' with field=form.title %}
-        {% include 'includes/form_field2.html' with field=form.thumbnail %}
-        {% include 'includes/form_field2.html' with field=form.content_introduction %}
-        {% include 'includes/form_field2.html' with field=form.difficulty default_select=True %}
-        {% include 'includes/form_field2.html' with field=form.languages %}
-        {% include 'includes/form_field2.html' with field=form.tags %}
-        {% include 'includes/form_field2.html' with field=form.pdf %}
+        {% include 'includes/form_field.html' with field=form.title %}
+        {% include 'includes/form_field.html' with field=form.thumbnail %}
+        {% include 'includes/form_field.html' with field=form.content_introduction %}
+        {% include 'includes/form_field.html' with field=form.difficulty default_select=True %}
+        {% include 'includes/form_field.html' with field=form.languages %}
+        {% include 'includes/form_field.html' with field=form.tags %}
+        {% include 'includes/form_field.html' with field=form.pdf %}
         {% if type == 'modify' %}
             <hr class="dashed">
             <div class="form-group">
@@ -57,10 +57,10 @@
     <fieldset>
         <legend>{% trans 'Informations complémentaires' %}</legend>
         {% if form.published_date %}
-            {% include 'includes/form_field2.html' with field=form.published_date %}
+            {% include 'includes/form_field.html' with field=form.published_date %}
         {% endif %}
-        {% include 'includes/form_field2.html' with field=form.old_price %}
-        {% include 'includes/form_field2.html' with field=form.new_price %}
+        {% include 'includes/form_field.html' with field=form.old_price %}
+        {% include 'includes/form_field.html' with field=form.new_price %}
     </fieldset>
     {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
     <div class="center-text">

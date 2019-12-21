@@ -15,17 +15,17 @@
     {{ form.non_field_errors }}
     <fieldset>
         <legend>{% trans 'Informations générales' %}</legend>
-        {% include 'includes/form_field2.html' with field=form.title %}
-        {% include 'includes/form_field2.html' with field=form.thumbnail %}
-        {% include 'includes/form_field2.html' with field=form.content %}
-        {% include 'includes/form_field2.html' with field=form.languages %}
-        {% include 'includes/form_field2.html' with field=form.tags %}
+        {% include 'includes/form_field.html' with field=form.title %}
+        {% include 'includes/form_field.html' with field=form.thumbnail %}
+        {% include 'includes/form_field.html' with field=form.content %}
+        {% include 'includes/form_field.html' with field=form.languages %}
+        {% include 'includes/form_field.html' with field=form.tags %}
     </fieldset>
     {% if form.timestamp %}
         <fieldset>
             <legend>{% trans 'Informations complémentaires' %}</legend>
             <div class="form-group">
-                {% include 'includes/form_field2.html' with field=form.timestamp %}
+                {% include 'includes/form_field.html' with field=form.timestamp %}
             </div>
         </fieldset>
     {% endif %}

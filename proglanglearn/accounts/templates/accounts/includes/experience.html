@@ -28,15 +28,15 @@
     {{ experience_form.non_field_errors }}
     <fieldset>
         <legend><i class="fas fa-user-tie"></i>&nbsp;{% trans "Ajouter une expérience" %}</legend>
-        {% include 'includes/form_field2.html' with field=experience_form.entreprise %}
-        {% include 'includes/form_field2.html' with field=experience_form.employment %}
-        {% include 'includes/form_field2.html' with field=experience_form.description %}
+        {% include 'includes/form_field.html' with field=experience_form.entreprise %}
+        {% include 'includes/form_field.html' with field=experience_form.employment %}
+        {% include 'includes/form_field.html' with field=experience_form.description %}
         <div class="row small-device">
             <div class="col-50 small-device">
-                {% include 'includes/form_field2.html' with field=experience_form.entry_date %}
+                {% include 'includes/form_field.html' with field=experience_form.entry_date %}
             </div>
             <div class="col-50 small-device">
-                {% include 'includes/form_field2.html' with field=experience_form.exit_date %}
+                {% include 'includes/form_field.html' with field=experience_form.exit_date %}
             </div>
         </div>
     </fieldset>

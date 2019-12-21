@@ -35,22 +35,22 @@
                 {{ personal_form.non_field_errors }}
                 <fieldset>
                     <legend><i class="fas fa-user"></i> {% trans "Informations générales" %}</legend>
-                    {% if not accounts %}{% include 'includes/form_field2.html' with field=image_form.image %}{% endif %}
-                    {% include 'includes/form_field2.html' with field=personal_form.username %}
-                    {% if not accounts %}{% include 'includes/form_field2.html' with field=personal_form.email %}{% endif %}
-                    {% include 'includes/form_field2.html' with field=personal_form.email_notification %}
+                    {% if not accounts %}{% include 'includes/form_field.html' with field=image_form.image %}{% endif %}
+                    {% include 'includes/form_field.html' with field=personal_form.username %}
+                    {% if not accounts %}{% include 'includes/form_field.html' with field=personal_form.email %}{% endif %}
+                    {% include 'includes/form_field.html' with field=personal_form.email_notification %}
                     {% if not accounts %}
                         <div class="row small-device">
                             <div class="col-50 small-device">
-                                {% include 'includes/form_field2.html' with field=personal_form.first_name %}
+                                {% include 'includes/form_field.html' with field=personal_form.first_name %}
                             </div>
                             <div class="col-50 small-device">
-                                {% include 'includes/form_field2.html' with field=personal_form.last_name %}
+                                {% include 'includes/form_field.html' with field=personal_form.last_name %}
                             </div>
                         </div>
                     {% endif %}
-                    {% include 'includes/form_field2.html' with field=personal_form.prog_type default_select=True %}
-                    {% include 'includes/form_field2.html' with field=personal_form.country default_select=True %}
+                    {% include 'includes/form_field.html' with field=personal_form.prog_type default_select=True %}
+                    {% include 'includes/form_field.html' with field=personal_form.country default_select=True %}
                 </fieldset>
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span> {% trans "sont obligatoires." %}</small>
                 <div class="center-text">
@@ -67,9 +67,9 @@
                     {{ password_change_form.non_field_errors }}
                     <fieldset>
                         <legend><i class="fas fa-user-lock"></i> {% trans "Mot de passe" %}</legend>
-                        {% include 'includes/form_field2.html' with field=password_change_form.oldpassword %}
-                        {% include 'includes/form_field2.html' with field=password_change_form.password1 %}
-                        {% include 'includes/form_field2.html' with field=password_change_form.password2 %}
+                        {% include 'includes/form_field.html' with field=password_change_form.oldpassword %}
+                        {% include 'includes/form_field.html' with field=password_change_form.password1 %}
+                        {% include 'includes/form_field.html' with field=password_change_form.password2 %}
                     </fieldset>
                     <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
                         {% trans "sont obligatoires." %}</small>
@@ -87,8 +87,8 @@
                 {{ profile_form.non_field_errors }}
                 <fieldset>
                     <legend><i class="fas fa-user-tie"></i> {% trans "Informations importantes" %}</legend>
-                    {% include 'includes/form_field2.html' with field=profile_form.biography %}
-                    {% include 'includes/form_field2.html' with field=profile_form.skills %}
+                    {% include 'includes/form_field.html' with field=profile_form.biography %}
+                    {% include 'includes/form_field.html' with field=profile_form.skills %}
                 </fieldset>
                 <fieldset>
                     <legend><i class="fas fa-external-link-alt"></i> {% trans "Liens externes" %}</legend>
@@ -119,7 +119,7 @@
                 </fieldset>
                 <fieldset>
                     <legend><i class="fab fa-github"></i> {% trans "Vos dépôts Github" %}</legend>
-                    {% include 'includes/form_field2.html' with field=profile_form.github %}
+                    {% include 'includes/form_field.html' with field=profile_form.github %}
                 </fieldset>
                 {% if request.user.profile.is_dev or request.user.profile.is_student %}
                     <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="{% url 'accounts:profile-edit' user_id=request.user.id %}">{% trans "cette page" %}</a>.</p>
@@ -140,7 +140,7 @@
                     {{ danger_zone_form.non_field_errors }}
                     <fieldset>
                         <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
-                        {% include 'includes/form_field2.html' with field=danger_zone_form.password %}
+                        {% include 'includes/form_field.html' with field=danger_zone_form.password %}
                     </fieldset>
                     <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
                         {% trans "sont obligatoires." %}</small>
