@@ -28,7 +28,6 @@
         list-style: none;
         @include medium-device {
             grid-column: 1 / span 2;
-
             display: grid;
             grid-template-columns: 1fr 1fr;
         }
