@@ -28,5 +28,4 @@
 </div>
 {% endblock main %}
 
-{% block jquery %}
-function ajaxPollVote(){$('#poll-form').submit(function(e){e.preventDefault();var item = $('#poll-form input[name=item]:checked').val();if (typeof item === 'undefined'){alert('{% trans "Veuillez sélectionner une réponse" %}');return false;}$.ajax({method: $(this).attr('method'),url: $(this).attr('action'),data: {'item': item},dataType: 'json',success: function(response){$('#poll-container').html(response.html);},error: function(rs, e){console.log(rs.responseText);},});});};ajaxPollVote();{% endblock jquery %}
+{% block jquery %}function ajaxPollVote(){$('#poll-form').submit(function(e){e.preventDefault();var item = $('#poll-form input[name=item]:checked').val();if (typeof item === 'undefined'){alert('{% trans "Veuillez sélectionner une réponse" %}');return false;}$.ajax({method: $(this).attr('method'),url: $(this).attr('action'),data: {'item': item},dataType: 'json',success: function(response){$('#poll-container').html(response.html);},error: function(rs, e){console.log(rs.responseText);},});});};ajaxPollVote();{% endblock jquery %}

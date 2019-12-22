@@ -214,8 +214,8 @@
 {% endblock main %}
 
 {% block javascript %}
-    <script src="{% static 'js/TweenMax.min.js' %}"></script>
-    <script src="{% static 'js/TimelineMax.min.js' %}"></script>
+<script src="{% static 'js/TweenMax.min.js' %}"></script>
+<script src="{% static 'js/TimelineMax.min.js' %}"></script>
 {% endblock javascript %}
 
 {% block jquery %}var tl = new TimelineMax(); tl.from('#Groupe_3', .6, { y: '-180', opacity: 0, ease: Power1.easeIn }).from('#Groupe_4', .4, { x: '+100', opacity: 0, ease: Power1.easeOut }); {% endblock jquery %}

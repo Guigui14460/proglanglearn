@@ -43,8 +43,8 @@
         {% endif %}
         <form class="form" action="{{ object.get_absolute_url }}" method="POST">
             {% csrf_token %}
+            {% include 'includes/form_errors.html' with form=form %}
             {{ form.media }}
-            {{ form.no_field_errors }}
             {% include 'includes/form_snippet_fields.html' with form=form %}
             <div class="center-text">
                 <button type="submit" class="btn btn__large btn__info">{% trans "Répondre" %}</button>

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
@@ -192,6 +193,7 @@ class TutorialDetailView(LoginRequiredMixin, UserCanViewTutorial, TutorialObject
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['CODE_COLOURS'] = settings.CODE_COLOURS
         context['course_tutorials'] = self.get_other_tutorial()
         for i, tut in enumerate(context['course_tutorials']):
             if tut == self.get_object():

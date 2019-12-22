@@ -9,6 +9,7 @@
 {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
 <form class="form mb-3" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
     {% csrf_token %}
+    {% include 'includes/form_errors.html' with form=form %}
     {% include 'includes/form_snippet_fields.html' with form=form %}
     {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />

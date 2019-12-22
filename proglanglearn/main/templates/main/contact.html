@@ -10,7 +10,7 @@
 <p class="lead"><i class="fas fa-pen-alt"></i>&nbsp;{% trans "Contactez-nous dans l'espace approprié à chaque demande !" %}</p>
 <form id="subject" method='POST' class="form mb-3">
     {% csrf_token %}
-    {{ contact_form.non_field_errors }}
+    {% include 'includes/form_errors.html' with form=contact_form %}
     <fieldset>
         <legend><i class="fas fa-pen-nib"></i>&nbsp;{% trans "Demandes ou autre motif" %}</legend>
         <div class="form-group">
@@ -31,7 +31,7 @@
 <hr class="my-2">
 <form id="bug" method='POST' class="form mb-3">
     {% csrf_token %}
-    {{ contact_form.non_field_errors }}
+    {% include 'includes/form_errors.html' with form=contact_form %}
     <fieldset>
         <legend><i class="fas fa-bug"></i>&nbsp;{% trans "Rapporter un bug" %}</legend>
         <div class="form-group">

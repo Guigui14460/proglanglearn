@@ -7,8 +7,8 @@
 <h1 class="large">{% trans "S'identifier" %}</h1>
 <p class="lead"><i class="fas fa-user"></i>&nbsp;{% trans "Connectez-vous à votre compte !" %}</p>
 <form method='POST' class="form mb-3">
-    {{ form.errors }}
     {% csrf_token %}
+    {% include 'includes/form_errors.html' with form=form %}
     {% include 'includes/form_snippet_fields.html' with form=form %}
     <div class="center-text">
         <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "S'identifier" %}</button>

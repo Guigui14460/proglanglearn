@@ -5,6 +5,7 @@
         {% if request.user.is_authenticated %}
             <form method="POST" class="form comment-form" action=".">
                 {% csrf_token %}
+                {% include 'includes/form_errors.html' with form=form %}
                 <fieldset>
                     <legend>{% trans 'Rédiger un commentaire' %}</legend>
                     {% include "includes/form_field.html" with field=form.content %}
@@ -57,6 +58,7 @@
                             <div class="reply">
                                 <form method="POST" class="form reply-form" action=".">
                                     {% csrf_token %}
+                                    {% include 'includes/form_errors.html' with form=form %}
                                     <fieldset>
                                         <legend>{% trans 'Rédiger une réponse' %}</legend>
                                         <input type="hidden" name="parent_id" value="{{ parent_comment.id }}">

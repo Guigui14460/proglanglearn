@@ -25,7 +25,7 @@
 </div>
 <form class="form my-1" method="POST">
     {% csrf_token %}
-    {{ education_form.non_field_errors }}
+    {% include 'includes/form_errors.html' with form=education_form %}
     {{ education_form.media }}
     <fieldset>
         <legend><i class="fas fa-user-graduate"></i>&nbsp;{% trans "Ajouter une école" %}</legend>

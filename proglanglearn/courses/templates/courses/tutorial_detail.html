@@ -4,7 +4,7 @@
 {% block title %}{{ object.title }} - {% endblock title %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static '/style/css/vs2015.css' %}">
+<link rel="stylesheet" href="{{ CODE_COLOURS }}" />
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 <style>@media (max-width: 380px){#buttons, #buttons2, #buttons a, #buttons2 a{display: block} #buttons a, #buttons2 a{margin: 5px 0;}}</style>
 {% endblock extra_head %}
@@ -37,7 +37,7 @@
 </div>
 {% with favorite_tutorials=request.user.profile.favorite_tutorials.all %}
     <div id="infos" class="center-text">
-        {{ object.experience }}&nbsp;EXP&nbsp;|&nbsp;<i class="far fa-clock"></i>&nbsp;{{ object.content|safe|time_estimate }}&nbsp;{% trans 'minutes' %}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}{% if request.user.is_authenticated %}&nbsp;|&nbsp;<a data-href="{{ object.get_favorite_api_url }}" href="{{ object.get_favorite_url }}" title="{% if object in favorite_tutorials %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if object in favorite_tutorials %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}
+        {{ object.experience }}&nbsp;EXP&nbsp;|&nbsp;<i class="far fa-clock"></i>&nbsp;{{ object.content|safe|time_estimate }}&nbsp;{% trans 'minutes' %}&nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;{{ object.views }}{% if request.user.is_authenticated %}&nbsp;|&nbsp;<a href="{{ object.get_favorite_url }}" title="{% if object in favorite_tutorials %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if object in favorite_tutorials %}fas{% else %}far{% endif %} fa-star favorite"></i></a>{% endif %}
     </div>
 {% endwith %}
 <div>
@@ -65,14 +65,13 @@
 {% endblock comments %}
 
 {% block javascript %}
-<script src="{% static 'js/highlight.pack.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<script src="{% static 'js/typed.min.js' %}"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
 {% endblock javascript %}
 
 {% block jquery %}
 {% include 'main/includes/ajax_comments.html' %}
-function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', '{% trans "Retirer des favoris" %});$('body').append("<div class='toast'>{% trans "Tutoriel ajouté à vos favoris" %}</div>");} else {star.parent().attr('title', '{% trans "Ajouter aux favoris" %}');$('body').append("<div class='toast'>{% trans "Tutoriel ajouté à vos favoris" %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', '{% trans "Retirer des favoris" %}');$('body').append("<div class='toast'>{% trans "Tutoriel ajouté à vos favoris" %}</div>");} else {star.parent().attr('title', '{% trans "Ajouter aux favoris" %}');$('body').append("<div class='toast'>{% trans "Tutoriel ajouté à vos favoris" %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
 {% include 'main/includes/ajax_favorite.html' %}
 {% endblock jquery %}

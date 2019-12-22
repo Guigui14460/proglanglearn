@@ -40,7 +40,7 @@
 <form method="POST" action="{% url 'account_email' %}" class="form mb-3">
     {% csrf_token %}
     {% include 'includes/form_errors.html' with form=form %}
-    {{ form.as_p }}
+    {% include 'includes/form_snippet_fields.html' with form=form %}
     <button name="action_add" type="submit">{% trans "Add E-mail" %}</button>
 </form>
 {% endblock main %}

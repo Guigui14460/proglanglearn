@@ -10,9 +10,8 @@
 <h1 class="large">{% if type == 'add' %}{% trans 'Ajouter un sujet' %}{% else %}{% trans 'Modifier un sujet' %}{% endif %}</h1>
 <form method="POST" class="form">
     {% csrf_token %}
+    {% include 'includes/form_snippet_fields.html' with form=form %}
     {{ form.media }}
-    {{ form.errors }}
-    {{ form.non_field_errors }}
     <fieldset>
         <legend>{% trans 'Informations générales' %}</legend>
         {% include 'includes/form_field.html' with field=form.title %}

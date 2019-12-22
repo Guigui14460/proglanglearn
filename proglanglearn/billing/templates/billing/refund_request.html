@@ -8,6 +8,7 @@
 <div>
     <form class="form" method="POST">
         {% csrf_token %}
+        {% include 'includes/form_errors.html' with form=form %}
         {% include 'includes/form_snippet_fields.html' with form=form %}
         <div class="center-text">
             <button type="submit" class="btn btn__outline_info btn__300">{% trans 'Demander' %}</button>

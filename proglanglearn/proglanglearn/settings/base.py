@@ -295,3 +295,11 @@ MAX_STRIKE = 3
 RESET_LOGIN_AFTER_PASSWORD_RESET = False
 SEARCH_TYPE = 'multiple'  # 'simple' or 'multiple'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+CODE_COLOURS_LIST = {
+    'android-studio': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/androidstudio.min.css",
+    'github': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css",
+    'monokai': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css",
+    'monokai-sublime': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai-sublime.min.css",
+    'vscode': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css",
+}
+CODE_COLOURS = CODE_COLOURS_LIST['vscode']

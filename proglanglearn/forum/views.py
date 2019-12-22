@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, Http404
@@ -61,6 +62,7 @@ class SubjectDetailView(SubjectObjectMixin, NavbarSearchMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['CODE_COLOURS'] = settings.CODE_COLOURS
         context['form'] = SubjectAnswerForm()
         context['last_subjects'] = Subject.objects.get_last_subjects(3)
         context['tags_used'] = self.get_most_used_tags()

@@ -6,10 +6,6 @@
 
 {% block title %}{% if type == 'add' %}{% trans 'Ajouter un cours' %}{% else %}{% trans 'Modifier un cours' %}{% endif %} - {% endblock title %}
 
-{% block extra_head %}
-<link rel="stylesheet" href="{% static 'style/css/vs2015.css' %}" />
-{% endblock extra_head %}
-
 {% block main %}
 <h1 class="large">{% if type == 'add' %}{% trans 'Ajouter un cours' %}{% else %}{% trans 'Modifier un cours' %}{% endif %}</h1>
 {% if type == 'modify' %}
@@ -20,9 +16,8 @@
 {% endif %}
 <form method="POST" class="form" enctype="multipart/form-data">
     {% csrf_token %}
+    {% include 'includes/form_errors.html' with form=form %}
     {{ form.media }}
-    {{ form.errors }}
-    {{ form.non_field_errors }}
     <fieldset>
         <legend>{% trans 'Informations générales' %}</legend>
         {% include 'includes/form_field.html' with field=form.title %}
