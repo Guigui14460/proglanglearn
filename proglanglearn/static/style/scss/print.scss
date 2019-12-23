@@ -1,18 +1,139 @@
-// // Minimum
-// @import "includes/_variables";
-// @import "includes/_texts";
-// @import "includes/_spaces";
+// Minimum
+@import "includes/_variables";
+@import "includes/_mixins";
+@import "includes/_texts";
+@import "includes/_spaces";
 
-// // Other components
-// @import "includes/_alerts";
-// @import "includes/_animations";
-// @import "includes/_buttons";
-// @import "includes/_cards";
-// @import "includes/_forms";
-// @import "includes/_images";
-// @import "includes/_mixins";
-// @import "includes/_modals";
-// @import "includes/_navbar";
-// @import "includes/_tables";
-
+// Other components
+// @import "includes/accordions";
+// @import "includes/alerts";
+// @import "includes/animations";
+// @import "includes/badges";
+// @import "includes/buttons";
+@import "includes/cards";
+// @import "includes/carousels";
+// @import "includes/collapsibles";
+// @import "includes/dropdowns";
+// @import "includes/forms";
+@import "includes/grid";
+@import "includes/images";
+// @import "includes/modals";
+// @import "includes/navbar";
+@import "includes/notes";
+@import "includes/paginations";
+// @import "includes/placeholder";
+@import "includes/profiles";
+@import "includes/progress";
+@import "includes/tables";
+// @import "includes/toasts";
+// @import "includes/tooltips";
 // // Rest of style
+
+.loader,
+#btnScrollToTop,
+#version-switcher,
+#page-scroll-progress,
+div.burger,
+.navbar-logo,
+ul.navbar-links,
+li.navbar-item,
+.navbar-search-expandable,
+div.navbar-changeable,
+.grecaptcha-badge,
+.btn,
+#buttons,
+.comment-form,
+.important-links {
+    display: none !important;
+}
+
+h1 {
+    text-align: center;
+    font-size: 25;
+}
+
+a {
+    color: #000073;
+}
+
+p {
+    margin: 10px;
+}
+
+#infos {
+    font-weight: 700;
+    color: red;
+}
+
+.comments.py-2 {
+    padding: 0;
+}
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    text-align: center;
+
+    .social-media {
+        text-align: center;
+
+        a {
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: $large-font-size;
+            transition: all 1s ease-in-out;
+
+            & {
+                @each $social, $color in $social-network-colors {
+                    @if ($social == github) {
+                        .fa-#{$social} {
+                            color: $black;
+                        }
+                        &:hover .fa-#{$social},
+                        &:focus .fa-#{$social} {
+                            color: $white;
+                        }
+                    } @else if ($social == snapchat) {
+                        .fa-#{$social}-ghost {
+                            color: $color;
+                        }
+                        &:hover .fa-#{$social}-ghost,
+                        &:focus .fa-#{$social}-ghost {
+                            color: map-get($social-network-dark-colors, $social);
+                        }
+                    } @else if ($social == linkedin) {
+                        .fa-#{$social}-in {
+                            color: $color;
+                        }
+                        &:hover .fa-#{$social}-in,
+                        &:focus .fa-#{$social}-in {
+                            color: map-get($social-network-dark-colors, $social);
+                        }
+                    } @else if ($social == facebook){
+                        .fa-#{$social}-square {
+                            color: $color;
+                        }
+                        &:hover .fa-#{$social}-square,
+                        &:focus .fa-#{$social}-square {
+                            color: map-get($social-network-dark-colors, $social);
+                        }
+                    } @else {
+                        .fa-#{$social} {
+                            color: $color;
+                        }
+                        &:hover .fa-#{$social},
+                        &:focus .fa-#{$social} {
+                            color: map-get($social-network-dark-colors, $social);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .copyright p {
+        text-align: center;
+        color: $gray2;
+    }
+}
