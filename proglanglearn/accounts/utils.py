@@ -46,7 +46,7 @@ def check_level(request, actual_user_level=None, user_experience=None):
     if user_experience is None:
         user_experience = request.user.profile.level_experience
     next_experience_limit = get_exp_limit(actual_user_level, df=df)
-    if user_experience > next_experience_limit:
+    if user_experience >= next_experience_limit:
         if user_experience > MAX_EXPERIENCE and actual_user_level == MAX_LEVEL:
             return actual_user_level
         actual_user_level += 1

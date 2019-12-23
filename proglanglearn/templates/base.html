@@ -22,11 +22,17 @@
     <meta name="msapplication-navbutton-color" content="#c5a31b" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+    
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta proterty="og:type" content="website" />
+    <meta property="og:title" content="ProgLangLearn" />
+    <meta property="og:description" content="{% trans 'Apprenez les bases de la programmation en les manipulant dans des exemples simples et des projets plus complexes.' %}" />
+    
     <title>{% block title %}{% endblock title%}ProgLangLearn</title>
     <link rel="shortcut icon" href="{% static 'images/favicon.jpg' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'style/css/global.min.css' %}" media="screen" />
-    <link rel="stylesheet" href="style/css/print.min.css" media="print" />
+    <link rel="stylesheet" href="{% static 'style/css/print.min.css' %}" media="print" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     {% recaptcha_init %}
@@ -79,10 +85,12 @@
     </main>
     <main>
         {% block comments %}{% endblock comments %}
+        <div id="fb-root"></div>
     </main>
     <footer>
         {% include 'includes/footer.html' %}
     </footer>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v5.0"></script>
     <script src="{% static 'js/main.jquery.js' %}"></script>
     {% block javascript %}{% endblock javascript %}
     <script>$(function () { $("#langForm select").change(function () { $(this).closest('form').submit() }); {% block jquery %} {% endblock jquery %} });</script>

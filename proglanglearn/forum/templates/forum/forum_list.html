@@ -10,31 +10,29 @@
         <div class="mb-1 center-text">
             <a class="btn btn__outline__warning" href="{% url 'forum:subject-create' %}">{% trans "Créez un sujet" %}</a>
         </div>
-        {% with favorite_subjects=request.user.profile.favorite_subjects.all %}
-            {% for subject in object_list %}
-                <div class="mb-2">
-                    <h3 class="subject-title"><a href="{{ subject.get_absolute_url }}">{{ subject.title }}</a>&nbsp;<a href="{{ subject.get_favorite_url }}" title="{% if subject in favorite_subjects %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if subject in favorite_subjects %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
-                    <div class="my-1">
-                        <div class="tags small-fs">
-                            {% include 'main/includes/tags.html' with object=subject %}
+        {% for subject in object_list %}
+            <div class="mb-2">
+                <h3 class="subject-title"><a href="{{ subject.get_absolute_url }}">{{ subject.title }}</a>&nbsp;<a href="{{ subject.get_favorite_url }}" title="{% if subject in request.user.profile.favorite_subjects.all %}{% trans 'Enlever des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}" class="favorite-span"><i class="{% if subject in request.user.profile.favorite_subjects.all %}fas{% else %}far{% endif %} fa-star favorite"></i></a></h3>
+                <div class="my-1">
+                    <div class="tags small-fs">
+                        {% include 'main/includes/tags.html' with object=subject %}
+                    </div>
+                    <div class="my-1 d-flex align">
+                        <div class="d-inline-block">
+                            <i class="far fa-clock"></i>&nbsp;{{ subject.timestamp }}
                         </div>
-                        <div class="my-1 d-flex align">
-                            <div class="d-inline-block">
-                                <i class="far fa-clock"></i>&nbsp;{{ subject.timestamp }}
-                            </div>
-                            <span class="d-inline-block mx-1">|</span>
-                            <div class="d-inline-block">
-                                <i class="far fa-eye"></i>&nbsp;{{ subject.views }}
-                            </div>
-                            <span class="d-inline-block mx-1">|</span>
-                            <div class="d-inline-block">
-                                {% if subject.is_closed %}<span class="success-color" title="{% trans "Résolu" %}"><i class="fas fa-check-circle"></i></span>{% else %}<span class="red-color" title="Non résolu"><i class="fas fa-times-circle"></i></span>{% endif %}
-                            </div>
+                        <span class="d-inline-block mx-1">|</span>
+                        <div class="d-inline-block">
+                            <i class="far fa-eye"></i>&nbsp;{{ subject.views }}
+                        </div>
+                        <span class="d-inline-block mx-1">|</span>
+                        <div class="d-inline-block">
+                            {% if subject.is_closed %}<span class="success-color" title="{% trans "Résolu" %}"><i class="fas fa-check-circle"></i></span>{% else %}<span class="red-color" title="Non résolu"><i class="fas fa-times-circle"></i></span>{% endif %}
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        {% endwith %}
+            </div>
+        {% endfor %}
         <div class="center-text mb-2">
             {% if is_paginated %}
                 {% include "includes/pagination.html" %}

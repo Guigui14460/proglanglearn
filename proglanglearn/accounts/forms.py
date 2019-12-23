@@ -12,17 +12,10 @@ from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
 
 from main.models import Language
-from .models import Profile, Education, Experience
+from .models import ProgType, Profile, Education, Experience
 
 
 User = get_user_model()
-
-
-PROG_TYPE = [
-    ('A', _("Amateur")),
-    ('S', _("Étudiant")),
-    ('D', _("Développeur professionel"))
-]
 
 
 class SignUpForm(UserCreationForm):
@@ -162,7 +155,7 @@ class PersonalInformationForm(forms.Form):
         label=_("Nom"), widget=forms.TextInput(attrs={'placeholder': 'Doe'}))
     email_notification = forms.BooleanField(required=False, label=_(
         "Recevoir des notifications par email"), widget=forms.CheckboxInput)
-    prog_type = forms.ChoiceField(label=_("Quel statut en programmation ou dans la vie avez-vous ?"), choices=PROG_TYPE, widget=forms.Select(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), help_text=_(
+    prog_type = forms.ModelChoiceField(label=_("Quel statut en programmation ou dans la vie avez-vous ?"), queryset=ProgType.objects.all(), widget=forms.Select(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), help_text=_(
         "Les statuts de développeur et étudiant permet de vous mettre en avant. En choisissant un de ces deux choix, vous activerez la visibilité totale de votre profil (informations éducatives et professionnelles"))
     country = CountryField(blank_label=_("Sélectionner un pays")).formfield(widget=CountrySelectWidget(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), label=_(
         "Pays"), help_text=_("Le renseignement de votre pays permet aux étudiants de développeurs d'être mis en avant. Cette donnée est utilisée pour statistiques"))
@@ -198,7 +191,7 @@ class PersonalInformationForm(forms.Form):
 class ProfileInformationForm(forms.Form):
     biography = forms.CharField(max_length=1500, label=_("Biographie"), widget=forms.Textarea(attrs={'placeholder': _('Une courte biographie')}), required=False, help_text=_(
         "Courte biographie ou une phrase/expression que vous aimez pour vous décrire rapidement (1500 caractères)"))
-    skills = forms.ModelMultipleChoiceField(label=_("Choisissez des compétences (langages ou frameworks)"), queryset=Language.objects.all(), widget=forms.SelectMultiple(attrs={
+    skills = forms.ModelMultipleChoiceField(required=False, label=_("Choisissez des compétences (langages ou frameworks)"), queryset=Language.objects.all(), widget=forms.SelectMultiple(attrs={
         'class': 'custom-multiple-select select-multiple__light', 'size': 7,
     }), help_text=_(
         "N.B. : multiple sélection possible<br>S'il manque une bibliothèque ou un langage, demandez à le rajouter dans la page contact."))

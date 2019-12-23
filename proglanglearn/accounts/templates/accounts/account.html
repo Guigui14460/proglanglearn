@@ -31,8 +31,8 @@
             <h2>{% trans "Modifier mes informations personnelles" %}</h2>
             <form method="POST" action="{% url 'accounts:handle-personal-info' %}" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% include 'includes/form_snippet_fields.html' with form=image_form %}
-                {% include 'includes/form_snippet_fields.html' with form=personal_form %}
+                {% include 'includes/form_errors.html' with form=image_form %}
+                {% include 'includes/form_errors.html' with form=personal_form %}
                 <fieldset>
                     <legend><i class="fas fa-user"></i> {% trans "Informations générales" %}</legend>
                     {% if not accounts %}{% include 'includes/form_field.html' with field=image_form.image %}{% endif %}
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     {% endif %}
-                    {% include 'includes/form_field.html' with field=personal_form.prog_type default_select=True %}
+                    {% include 'includes/form_field.html' with field=personal_form.prog_type default_select=True not_show_error=True %}
                     {% include 'includes/form_field.html' with field=personal_form.country default_select=True %}
                 </fieldset>
                 <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span> {% trans "sont obligatoires." %}</small>
@@ -64,7 +64,7 @@
                 <h2>{% trans "Changer mon mot de passe" %}</h2>
                 <form method="POST" action="{% url 'accounts:handle-change-password' %}" class="form">
                     {% csrf_token %}
-                    {% include 'includes/form_snippet_fields.html' with form=password_change_form %}
+                    {% include 'includes/form_errors.html' with form=password_change_form %}
                     <fieldset>
                         <legend><i class="fas fa-user-lock"></i> {% trans "Mot de passe" %}</legend>
                         {% include 'includes/form_field.html' with field=password_change_form.oldpassword %}
@@ -84,7 +84,7 @@
             <h2>{% trans "Modifier les informations visibles sur mon profil" %}</h2>
             <form method="POST" action="{% url 'accounts:handle-profile-info' %}" class="form">
                 {% csrf_token %}
-                {% include 'includes/form_snippet_fields.html' with form=profile_form %}
+                {% include 'includes/form_errors.html' with form=profile_form %}
                 <fieldset>
                     <legend><i class="fas fa-user-tie"></i> {% trans "Informations importantes" %}</legend>
                     {% include 'includes/form_field.html' with field=profile_form.biography %}
@@ -137,7 +137,7 @@
                 <h2>{% trans "Zone de danger" %}</h2>
                 <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
                     {% csrf_token %}
-                    {% include 'includes/form_snippet_fields.html' with form=danger_zone_form %}
+                    {% include 'includes/form_errors.html' with form=danger_zone_form %}
                     <fieldset>
                         <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
                         {% include 'includes/form_field.html' with field=danger_zone_form.password %}

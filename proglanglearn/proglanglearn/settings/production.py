@@ -17,6 +17,20 @@ PROTOCOL = 'https'
 #         'PORT': 9999,
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'init_command': 'SET default_storage_engine=INNODB',
+#             'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
+#             'NAME': 'guillaumeletelli$ProgLangLearn',
+#             'USER': 'guillaumeletelli',
+#             'PASSWORD': '9,:bkCJx{(mRbSLgcbs?`-BM@6y*XT,w.\+%zZXyqY',
+#             'HOST': 'guillaumeletellier.mysql.pythonanywhere-services.com',
+#             'PORT': 9999,
+#         },
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

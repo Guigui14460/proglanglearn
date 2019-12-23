@@ -25,7 +25,7 @@
             {{ field.help_text|safe }}
         </small>
     {% endif %}
-    {% if field.errors %}
+    {% if field.errors and not not_show_error %}
         <small class="form-text-error">
             {% for error in field.errors %}
                 {{ error }}&nbsp;

@@ -1,5 +1,28 @@
 html[data-theme="dark"]{
     .form {
+        .form-error {
+            color: rgb(204, 49, 49);
+        }
+
+        .form-group {
+            &.form-error__fields input,
+            &.form-error__fields textarea {
+                border-bottom-color: rgb(204, 49, 49) !important;
+                color: rgb(204, 49, 49) !important;
+
+                &::placeholder {
+                    color: rgb(199, 85, 85) !important;
+                }
+            }
+
+            &:not(.form-error__fields) input,
+            &:not(.form-error__fields) textarea {
+                &:valid {
+                    border-color: $green;
+                }
+            }
+        }
+
         input[type="text"],
         input[type="email"],
         input[type="password"],
@@ -17,10 +40,6 @@ html[data-theme="dark"]{
 
             &::placeholder {
                 color: darken($gray1, 5%);
-            }
-
-            &:valid {
-                border-color: $green;
             }
 
             &:-webkit-autofill,
@@ -202,12 +221,13 @@ input[type="radio"]{
     .form-group {
         margin: 1.2rem 0;
 
-        &.form-error__fields input{
-            border-bottom-color: #ff0000;
-            color: #ff0000;
+        &.form-error__fields input, 
+        &.form-error__fields textarea {
+            border-bottom-color: #ff0000 !important;
+            color: #ff0000 !important;
 
             &::placeholder {
-                color: #e06666;
+                color: #e06666 !important;
             }
         }
 

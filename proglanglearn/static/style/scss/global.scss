@@ -796,3 +796,8 @@ footer {
         color: $gray2;
     }
 }
+
+// Facebook and Twitter buttons alignment
+.fb_iframe_widget > span {
+    vertical-align: baseline !important;
+}

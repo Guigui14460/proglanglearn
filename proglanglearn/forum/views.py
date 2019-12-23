@@ -21,6 +21,7 @@ class SubjectListView(NavbarSearchMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['object_list'] = self.queryset
         context['activate'] = 'subject-list'
         context['last_subjects'] = Subject.objects.get_last_subjects(3)
         context['tags_used'] = self.get_most_used_tags()

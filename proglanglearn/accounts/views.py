@@ -22,7 +22,7 @@ from .allauth_forms import (
     ChangePasswordForm as PasswordChangeForm
 )
 from .forms import (
-    PROG_TYPE, LoginForm, 
+    LoginForm, 
     SignUpForm, PasswordResetForm, 
     ChangeProfileImageForm, PersonalInformationForm, 
     ProfileInformationForm, 
@@ -31,7 +31,7 @@ from .forms import (
 )
 from .github_backend import GithubRepo
 from .mixins import UserCanModifyProfile, ProfileObjectMixin
-from .models import Profile, Education, Experience, ProfileReport
+from .models import ProgType, Profile, Education, Experience, ProfileReport
 from .utils import check_level
 from .tokens import AccountActivationTokenGenerator
 
@@ -228,11 +228,11 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
     def get_personal_info(self):
         user = self.request.user
         if user.profile.is_dev:
-            prog_type = PROG_TYPE[-1]
+            prog_type = ProgType.objects.get(type_id='D')
         elif user.profile.is_student:
-            prog_type = PROG_TYPE[1]
+            prog_type = ProgType.objects.get(type_id='S')
         else:
-            prog_type = PROG_TYPE[0]
+            prog_type = ProgType.objects.get(type_id='A')
         info_dict = {
             'username': user.username,
             'email': user.email,
@@ -270,19 +270,22 @@ class PersonalInfo(View):
             request.POST or None, request=request)
         if image_form.is_valid() and personal_form.is_valid():
             prog_type = personal_form.cleaned_data['prog_type']
-            if prog_type == 'D':
+            if prog_type.type_id == 'D':
                 user.profile.is_dev = True
                 user.profile.is_student = False
-            elif prog_type == 'S':
+            elif prog_type.type_id == 'S':
                 user.profile.is_dev = False
                 user.profile.is_student = True
             else:
                 user.profile.is_dev = False
                 user.profile.is_student = False
             user.username = personal_form.cleaned_data['username']
-            user.email = personal_form.cleaned_data['email']
-            user.first_name = personal_form.cleaned_data['first_name']
-            user.last_name = personal_form.cleaned_data['last_name'].upper()
+            if len(user.socialaccount_set.all()) > 0:
+                user.email = user.socialaccount_set.all()[0].extra_data['email']
+            else:
+                user.email = personal_form.cleaned_data['email']
+                user.first_name = personal_form.cleaned_data['first_name']
+                user.last_name = personal_form.cleaned_data['last_name'].upper()
             user.save()
             if image_form.cleaned_data['image'] != 'user_pictures/default.png':
                 user.profile.image = image_form.cleaned_data['image']

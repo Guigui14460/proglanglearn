@@ -21,6 +21,21 @@ from .utils import get_user_type
 User = get_user_model()
 
 
+class ProgType(models.Model):
+    type_id = models.CharField(max_length=1, verbose_name=_("ID du type"))
+    profession_type = models.CharField(
+        max_length=40, verbose_name=_("type de profession"))
+
+    class Meta:
+        verbose_name = _("statut en programmation")
+        verbose_name_plural = _("statuts en programmation")
+
+    def __str__(self):
+        return self.profession_type
+    
+    def __repr__(self):
+        return self.profession_type
+
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, verbose_name=_("utilisateur associé"), related_name='profile')

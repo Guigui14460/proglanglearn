@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Education, Experience, Profile, ProfileReport
+from .models import Education, Experience, Profile, ProfileReport, ProgType
 
 
 def strike_profile(modeladmin, request, queryset):
@@ -34,6 +34,10 @@ class EducationAdmin(ImportExportModelAdmin):
 
 
 class ExperienceAdmin(ImportExportModelAdmin):
+    pass
+
+
+class ProgTypeAdmin(ImportExportModelAdmin):
     pass
 
 
@@ -67,3 +71,4 @@ admin.site.register(Education, EducationAdmin)
 admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(ProfileReport, ProfileReportAdmin)
+admin.site.register(ProgType, ProgTypeAdmin)
