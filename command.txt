@@ -1,5 +1,5 @@
 Project creation :
-python v_env/Scripts/django-admin.py startproject proglanglearn
+python env/Scripts/django-admin.py startproject proglanglearn
 
 Github commands:
 git add .
