@@ -90,7 +90,7 @@
 
 <body>
     <header>
-        <h1>{% trans 'Confirmation du paiement' %}{% if order.refund_granted is True %}<span style="color: red; font-weight: bold;"> Remboursé</span>{% endif %}</h1>
+        <h1>{% trans 'Confirmation du paiement' %}{% if order.refund_granted is True %}<span style="color: red; font-weight: bold;"> {% trans "Remboursé" %}</span>{% endif %}</h1>
     </header>
     <main>
         <div class="container">

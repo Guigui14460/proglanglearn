@@ -474,7 +474,7 @@ class ProfileReportView(ProfileObjectMixin, View):
                 profile.save()
                 messages.info(request, _("Profil signalé"))
             else:
-                messages.error(request, _("Vous ne pouvez pas vous signalé vous-même"))
+                messages.error(request, _("Vous ne pouvez pas vous signaler vous-même"))
         else:
             messages.warning(request, _("Le profil a déjà été signalé et est en attente de modification par le gérant de ce profil"))
         return redirect('accounts:profile', user_id=profile.user.id)

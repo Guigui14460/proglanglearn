@@ -56,7 +56,7 @@ class UserCanModifyCourse(UserPassesTestMixin):
                 messages.error(self.request, self.permission_denied_message)
                 return redirect('courses:list')
             messages.info(self.request, _(
-                "Le cours auquel vous essayez d'accéder n'existe pas ou plus ou est inaccessible"))
+                "Le cours auquel vous essayez d'accéder n'existe pas, ou plus, ou est inaccessible"))
             return Http404
         return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())
 

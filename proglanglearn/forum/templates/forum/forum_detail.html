@@ -36,8 +36,8 @@
                         {% if object.is_closed %}<span class="success-color" title="{% trans "Résolu" %}"><i class="fas fa-check-circle"></i></span>{% else %}<span class="red-color" title="Non résolu"><i class="fas fa-times-circle"></i></span>{% endif %}
                     </div>
                 </div>
-                <div class="fb-share-button" data-href="{{ request.get_absolute_uri }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
-                &nbsp;<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="fb-share-button" data-href="{{ request.get_absolute_uri }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{% trans "Partager" %}</a></div>
+                &nbsp;<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">{% trans "Tweet" %}</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             <div>{{ object.content|safe }}</div>
             <hr class="my-1">
@@ -60,7 +60,7 @@
 
 {% block jquery %}
 function favori(star) {if (star.hasClass('fas')) {star.parent().attr('title', '{% trans "Retirer des favoris" %}');$('body').append("<div class='toast'>{% trans "Sujet ajouté aux favoris" %}</div>");} else {star.parent().attr('title', "{% trans "Ajouter aux favoris" %}");$('body').append("<div class='toast'>{% trans "Sujet enlevé de vos favoris" %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
-function like_answer(like) {if (like.hasClass('fas')) {like.parent().attr('title', '{% trans "Enlever votre like" %}');like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) + 1);$('body').append("<div class='toast'>{% trans "Réponse liker" %}</div>");} else {like.parent().attr('title', '{% trans "Liker la réponse" %}');like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) - 1);$('body').append("<div class='toast'>{% trans 'Réponse dislikée' %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
+function like_answer(like) {if (like.hasClass('fas')) {like.parent().attr('title', '{% trans "Enlever votre like" %}');like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) + 1);$('body').append("<div class='toast'>{% trans "Réponse likée" %}</div>");} else {like.parent().attr('title', '{% trans "Liker la réponse" %}');like.parent().children('.like-count').text(Number(like.parent().children('.like-count').text()) - 1);$('body').append("<div class='toast'>{% trans 'Like retiré' %}</div>");}$('.toast').css({ 'visibility': 'visible' }).delay(3000).fadeOut('fast');};
 {% include 'main/includes/ajax_favorite.html' %}
 {% include 'forum/includes/ajax_like_answer.html' %}
 {% endblock jquery %}

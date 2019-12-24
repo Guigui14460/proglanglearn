@@ -7,6 +7,7 @@
 
 {% block main %}
 {% get_social_accounts user as accounts %}
+{% url 'accounts:profile-edit' user_id=request.user.id as edit_profile_url %}
 <h1 class="large">{% trans "Réglages de votre compte" %}</h1>
 <p class="lead"><i class="fas fa-user-cog"></i>&nbsp;{% trans "Modifier les paramètres et informations de votre compte !" %}
 </p>
@@ -52,7 +53,7 @@
                     {% include 'includes/form_field.html' with field=personal_form.prog_type default_select=True not_show_error=True %}
                     {% include 'includes/form_field.html' with field=personal_form.country default_select=True %}
                 </fieldset>
-                <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span> {% trans "sont obligatoires." %}</small>
+                <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
                 <div class="center-text">
                     <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "Changer" %}</button>
                 </div>
@@ -71,8 +72,7 @@
                         {% include 'includes/form_field.html' with field=password_change_form.password1 %}
                         {% include 'includes/form_field.html' with field=password_change_form.password2 %}
                     </fieldset>
-                    <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
-                        {% trans "sont obligatoires." %}</small>
+                    <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
                     <div class="center-text">
                         <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "Changer" %}</button>
                     </div>
@@ -122,10 +122,9 @@
                     {% include 'includes/form_field.html' with field=profile_form.github %}
                 </fieldset>
                 {% if request.user.profile.is_dev or request.user.profile.is_student %}
-                    <p class="mt-0 mb-1">{% trans "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur" %} <a href="{% url 'accounts:profile-edit' user_id=request.user.id %}">{% trans "cette page" %}</a>.</p>
+                    <p class="mt-0 mb-1">{% blocktrans %}Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez vous rendre sur <a href="{{ edit_profile_url }}">cette page</a>.{% endblocktrans %}</p>
                 {% endif %}
-                <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
-                    {% trans "sont obligatoires." %}</small>
+                <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
                 <div class="center-text">
                     <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "Mettre à jour mon profil" %}</button>
                 </div>
@@ -142,8 +141,7 @@
                         <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
                         {% include 'includes/form_field.html' with field=danger_zone_form.password %}
                     </fieldset>
-                    <small class="d-block mb-1">{% trans "Tous les champs avec un" %} <span class="required-input">*</span>
-                        {% trans "sont obligatoires." %}</small>
+                    <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
                     <div class="center-text">
                         <button type="submit" class="btn btn__danger btn__large btn__300">{% trans "Supprimer" %}</button>
                     </div>

@@ -6,67 +6,67 @@
 {% block main %}
 {% admin_url as admin_url_profile %}
 <h1 class="large">{% trans 'À propos' %}</h1>
-<div class="lead">
-    {% blocktrans with admin_url=admin_url_profile %}<div class="my-1">
-        Créé en 2020 par <a href="{{ admin_url }}">Guillaume Letellier</a>, étudiant en informatique,
+<div>
+    <div class="my-1">
+        {% blocktrans with admin_url=admin_url_profile %}Créé en 2020 par <a href="{{ admin_url }}">Guillaume Letellier</a>, étudiant en informatique,
         ProgLangLearn est un ensemble d'outil
         spécialisé dans le domaine de la programmation informatique. Il s'adresse à tout public désirant se
-        former et maîtriser ces outils numériques.
-    </div>{% endblocktrans %}
-    <section class="my-4">
-        {% blocktrans %}<h2>1. Qu'apprendrez-vous sur ProgLangLearn ?</h2>
-        <p>Les informations publiées sont accessible pour :</p>
+        former et maîtriser ces outils numériques.{% endblocktrans %}
+    </div>
+    <section class="my-4" id="learning">
+        <h2>{% trans "1. Qu'apprendrez-vous sur ProgLangLearn ?" %}</h2>
+        <p>{% trans "Les informations publiées sont accessible pour :" %}</p>
         <ul>
-            <li>Développer vos connaissances</li>
-            <li>Augmenter votre notoriété</li>
-            <li>Discuter avec des professionnels ou personnes dans le domaine de la programmation</li>
-        </ul>{% endblocktrans %}
+            <li>{% trans "Développer vos connaissances" %}</li>
+            <li>{% trans "Augmenter votre notoriété" %}</li>
+            <li>{% trans "Discuter avec des professionnels ou personnes dans le domaine de la programmation" %}</li>
+        </ul>
     </section>
-    <section class="my-4">
-        {% blocktrans %}<h2>2. Quelles ressources sont accessibles ?</h2>
-        <p>Les ressources suivantes sont à votre disposition :</p>
+    <section class="my-4" id="ressources">
+        <h2>{% trans "2. Quelles ressources sont accessibles ?" %}</h2>
+        <p>{% trans "Les ressources suivantes sont à votre disposition :" %}</p>
         <div class="mb-2">
-            <h3 class="fw-normal">2.1 Des ressources éducatives gratuites</h3>
+            <h3 class="fw-normal">{% trans "2.1 Des ressources éducatives gratuites" %}</h3>
             <ul>
-                <li>Des <strong>articles</strong> donnant des informations, des astuces sur différents
+                <li>{% trans "Des <strong>articles</strong> donnant des informations, des astuces sur différents
                     langages
                     concernant des mises à jour importantes, ou des fonctionnalités toutes nouvellement
-                    trouvées
+                    trouvées" %}
                 </li>
-                <li>Des <strong>sujets</strong> proposés par des personnes pour avoir de l'aide</li>
-                <li>Des <strong>cours</strong> gratuits, générallement des introductions à un langage ou un
-                    framework</li>
+                <li>{% trans "Des <strong>sujets</strong> proposés par des personnes pour avoir de l'aide" %}</li>
+                <li>{% trans "Des <strong>cours</strong> gratuits, générallement des introductions à un langage ou un
+                    framework" %}</li>
             </ul>
         </div>
         <div>
-            <h3 class="fw-normal">2.2 Les formations complètes (payantes)</h3>
+            <h3 class="fw-normal">{% trans "2.2 Les formations complètes (payantes)" %}</h3>
             <ul>
-                <li>Des <strong>projets complets</strong> destinés à accomplir une tâche réelle tel qu'un
-                    logiciel ou un site web</li>
+                <li>{% trans "Des <strong>projets complets</strong> destinés à accomplir une tâche réelle tel qu'un
+                    logiciel ou un site web" %}</li>
             </ul>
-        </div>{% endblocktrans %}
+        </div>
     </section>
-    <section class="my-4">
-        {% blocktrans %}<h2>3. Pourquoi utiliser ProgLangLearn ?</h2>
-        <p>ProgLangLearn permet de centraliser de nombreuses ressources importantes en
+    <section class="my-4" id="why">
+        <h2>{% trans "3. Pourquoi utiliser ProgLangLearn ?" %}</h2>
+        <p>{% blocktrans %}ProgLangLearn permet de centraliser de nombreuses ressources importantes en
             programmation. Nous possédons un service donnant des cours de programmation standards et des
             formations. Nous avons aussi un service permettant l'entreaide entre développeur, programmeur et
-            apprentis.</p>{% endblocktrans %}
+            apprentis.{% endblocktrans %}</p>
     </section>
-    <section class="mt-4 mb-5">
-        <h2>4. {% trans 'Au sujet de' %} Guillaume Letellier</h2>
+    <section class="mt-4 mb-5" id="creator">
+        <h2>{% trans '4. Au sujet de Guillaume Letellier' %}</h2>
         <img src="{% static 'images/logo_unicaen.png' %}" alt="Logo Université Caen Normadie" class="float-left image">
-        {% blocktrans %}<p>Guillaume Letellier est actuellement étudiant en informatique à l'<a href="https://www.unicaen.fr"
-                target="_blank">Université de Caen</a>, France.</p>
-        <p>Il a donc fait ProgLangLearn afin de propager ses connaissances qu'il a pu aquérir et prodiguer
+        <p>{% blocktrans %}Guillaume Letellier est actuellement étudiant en informatique à l'<a href="https://www.unicaen.fr"
+                target="_blank">Université de Caen</a>, France.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Il a donc fait ProgLangLearn afin de propager ses connaissances qu'il a pu aquérir et prodiguer
             ses
             conseils pour programmer plus rapidement, facilement et avec une meilleur optimisation. Cette
             phrase
-            définit sa vision de pensée de l'avenir :</p>
+            définit sa vision de pensée de l'avenir :{% endblocktrans %}</p>
         <blockquote>
-            Ne grandissons pas dans un monde sans le comprendre. Apprendre la
-            programmation, c'est comprendre l'avenir et agir sur celui-ci !
-        </blockquote>{% endblocktrans %}
+            {% blocktrans %}Ne grandissons pas dans un monde sans le comprendre. Apprendre la
+            programmation, c'est comprendre l'avenir et agir sur celui-ci !{% endblocktrans %}
+        </blockquote>
     </section>
 </div>
 {% endblock main %}

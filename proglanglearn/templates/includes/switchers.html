@@ -2,7 +2,7 @@
 
 <div id="version-switcher">
     <input type="checkbox" id="switch" class="switch" name="theme" />
-    <label class="switch-label" for="switch">Light/Dark toggle</label>
+    <label class="switch-label" for="switch">Theme toggle</label>
     <form id="langForm" action="{% url 'set_language' %}" method="POST" style="pointer-events: all;">{% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}">
         <select title="{% trans 'Cliquez sur les liens pour changer de langue' %}" name="language" style="display: block; appearance: none; ">

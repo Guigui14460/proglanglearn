@@ -32,7 +32,7 @@ class GithubRepo:
                     description = text.split("\n")
             except:
                 description = [_(
-                    "Aucun fichier nommé 'README.md' n'a été trouvé à la racine de ce dépôt")]
+                    "Aucun fichier nommé 'README.md' n'a été trouvé à la racine de ce dépôt.")]
             obj = {
                 'name': repo.name,
                 'url': repo.html_url,
@@ -59,7 +59,7 @@ class GithubRepo:
                         description = text
                 except:
                     description = [_(
-                        "Aucun fichier nommé 'README.md' n'a été trouvé à la racine de ce dépôt")]
+                        "Aucun fichier nommé 'README.md' n'a été trouvé à la racine de ce dépôt.")]
                 obj = {
                     'name': repo.name,
                     'url': repo.html_url,

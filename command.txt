@@ -21,3 +21,6 @@ django-admin compilemessages
 
 Sass commands :
 sass --watch .\scss\global.scss:.\css\global.min.css .\scss\print.scss:.\css\print.min.css --style compressed
+
+Custom commands :
+python manage.py uselessdata

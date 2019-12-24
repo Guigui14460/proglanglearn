@@ -19,7 +19,7 @@ def send_email_article(model_admin, request, queryset):
         article.published = True
         article.save()
     messages.success(request, _(
-        "Article publiés avec succès"))
+        "Articles publiés avec succès"))
 
 
 send_email_article.short_description = _(

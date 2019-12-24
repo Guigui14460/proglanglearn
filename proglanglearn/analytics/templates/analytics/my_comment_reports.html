@@ -4,17 +4,17 @@
 {% block title %}{% trans 'Mes signalement' %} - {% endblock title %}
 
 {% block main %}
+{% url 'main:terms' as terms_url %}
 <h1 class="large">{% trans 'Mes signalements de commentaire' %}</h1>
 <div>
-    <p>{% trans "Le signalement d'une personne peut avoir de sérieuses conséquences, comme ce qui est écrit dans les" %}
-        <a href="{% url 'main:terms' %}">{% trans "termes et conditions d'utilisation" %}</a> {% trans "donc ne faîtes pas de signalement abusif." %}</p>
+    <p>{% blocktrans %}Le signalement d'une personne peut avoir de sérieuses conséquences, comme ce qui est écrit dans les <a href="{{ terms_url }}">termes et conditions générales d'utilisation</a> donc ne faîtes pas de signalement abusif.{% endblocktrans %}</p>
     {% for object in data %}
         <div class="my-2">
             {% trans "État de cette demande :" %} {% if object.striked %}<span class="success-color">{% trans "commentaire sanctionné" %}</span>{% elif object.verified %}<span class="red-color">{% trans "commentaire vérifié mais non sanctionné" %}</span>{% else %}{% trans "en cours de traitement" %}{% endif %}
             <br><strong>{% trans "Votre signalement :" %}</strong>
             <div class="card card__info">
                 <div class="card-container">
-                    {% blocktrans %}<h3 class="card-title">Type : {{ object.get_type_alert_display }}</h3>{% endblocktrans %}
+                    <h3 class="card-title">{% trans "Type :" %} {{ object.get_type_alert_display }}</h3>
                     <div class="card-content p-1">{{ object.content_alert }}</div>
                 </div>
             </div>
@@ -22,12 +22,12 @@
             {% if object.comment %}
                 <div class="card card__warning">
                     <div class="card-container">
-                        <h3 class="card-title">{% trans "Commentaire de" %} {{ object.comment.author.username }} {% trans "posté le" %} {{ object.comment.timestamp }}</h3>
+                        <h3 class="card-title">{% blocktrans %}Commentaire de {{ object.comment.author.username }} posté le {{ object.comment.timestamp }}{% endblocktrans %}</h3>
                         <div class="card-content p-1">{{ object.comment.content }}</div>
                     </div>
                 </div>
             {% else %}
-                <h3>Le commentaire a été supprimé</h3>
+                <h3>{% trans "Le commentaire a été supprimé" %}</h3>
             {% endif %}
         </div>
     {% endfor %}

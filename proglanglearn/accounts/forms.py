@@ -35,9 +35,7 @@ class SignUpForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={
             'placeholder': '••••••••••',
             'id': 'showPWDInput'
-        }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
-    Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.
-    Il doit aussi contenir %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
+        }), help_text=_("""Entrez un mot de passe fort (avec minuscules, majuscules, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
     password2 = forms.CharField(
         min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
             1]['OPTIONS']['min_length'],
@@ -124,9 +122,7 @@ class PasswordChangeForm(BasePasswordChangeForm):
     }), help_text=_("Entrez votre mot de passe actuel"))
     new_password1 = forms.CharField(min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length'], label=_("Nouveau mot de passe"), widget=forms.PasswordInput(attrs={
         'id': 'showNewPWDInput', 'placeholder': '••••••••••'
-    }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux)
-    Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.
-    Il doit aussi contenir %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
+    }), help_text=_("""Entrez un mot de passe fort (avec minuscules, majuscules, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
     new_password2 = forms.CharField(min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length'], label=_("Confirmation du nouveau mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
         'id': 'showNewPWDConfirmInput'
@@ -158,7 +154,7 @@ class PersonalInformationForm(forms.Form):
     prog_type = forms.ModelChoiceField(label=_("Quel statut en programmation ou dans la vie avez-vous ?"), queryset=ProgType.objects.all(), widget=forms.Select(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), help_text=_(
         "Les statuts de développeur et étudiant permet de vous mettre en avant. En choisissant un de ces deux choix, vous activerez la visibilité totale de votre profil (informations éducatives et professionnelles"))
     country = CountryField(blank_label=_("Sélectionner un pays")).formfield(widget=CountrySelectWidget(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), label=_(
-        "Pays"), help_text=_("Le renseignement de votre pays permet aux étudiants de développeurs d'être mis en avant. Cette donnée est utilisée pour statistiques"))
+        "Pays"), help_text=_("Le renseignement de votre pays permet aux étudiants et développeurs d'être mis en avant. Cette donnée est utilisée pour des études statistiques."))
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -175,7 +171,7 @@ class PersonalInformationForm(forms.Form):
         if qs.count() > 0:
             if qs.first() != self.request.user:
                 raise forms.ValidationError(
-                    _("Cette addresse email a déjà été utilisée. Il faut en choisir une autre ou garder votre ancienne addresse si possible"))
+                    _("Cette adresse email a déjà été utilisée. Il faut en choisir une autre ou garder votre ancienne adresse si possible"))
         return email
 
     def clean_username(self):
@@ -190,25 +186,25 @@ class PersonalInformationForm(forms.Form):
 
 class ProfileInformationForm(forms.Form):
     biography = forms.CharField(max_length=1500, label=_("Biographie"), widget=forms.Textarea(attrs={'placeholder': _('Une courte biographie')}), required=False, help_text=_(
-        "Courte biographie ou une phrase/expression que vous aimez pour vous décrire rapidement (1500 caractères)"))
+        "Courte biographie ou une phrase/expression que vous aimez pour vous décrire rapidement (1500 caractères)."))
     skills = forms.ModelMultipleChoiceField(required=False, label=_("Choisissez des compétences (langages ou frameworks)"), queryset=Language.objects.all(), widget=forms.SelectMultiple(attrs={
         'class': 'custom-multiple-select select-multiple__light', 'size': 7,
     }), help_text=_(
-        "N.B. : multiple sélection possible<br>S'il manque une bibliothèque ou un langage, demandez à le rajouter dans la page contact."))
+        "N.B. : multiple sélection possible.<br>S'il manque une bibliothèque ou un langage, demandez à le rajouter dans la page contact."))
     website_url = forms.URLField(required=False, widget=forms.URLInput(
         attrs={'placeholder': _('URL de votre site web')}))
     twitter_url = forms.URLField(required=False, widget=forms.URLInput(
-        attrs={'placeholder': _('URL de votre profile Twitter')}))
+        attrs={'placeholder': _('URL de votre profil Twitter')}))
     youtube_url = forms.URLField(required=False, widget=forms.URLInput(
         attrs={'placeholder': _('URL de votre chaîne Youtube')}))
     facebook_url = forms.URLField(required=False, widget=forms.URLInput(
-        attrs={'placeholder': _('URL de votre profile Facebook')}))
+        attrs={'placeholder': _('URL de votre profil Facebook')}))
     linked_in_url = forms.URLField(required=False, widget=forms.URLInput(
-        attrs={'placeholder': _('URL de votre profile LinkedIn')}))
+        attrs={'placeholder': _('URL de votre profil LinkedIn')}))
     instagram_url = forms.URLField(required=False, widget=forms.URLInput(
-        attrs={'placeholder': _('URL de votre profile Intagram')}))
+        attrs={'placeholder': _('URL de votre profil Intagram')}))
     github = forms.CharField(required=False, label=_("Nom d'utilisateur de votre compte Github"), widget=forms.TextInput(attrs={'placeholder': 'johndoe93'}), help_text=_(
-        "<i class='fas fa-exclamation-triangle'></i> En renseignant ce champ, vous accepter de publier les liens et les informations de vos dépôts publics de votre compte Github"))
+        "<i class='fas fa-exclamation-triangle'></i> En renseignant ce champ, vous accepter de publier les liens et les informations de vos dépôts publics de votre compte Github."))
 
 
 class DangerZoneForm(forms.Form):
@@ -243,12 +239,12 @@ class EducationForm(forms.ModelForm):
         widgets = {
             'school': forms.TextInput(attrs={'placeholder': 'Epitech'}),
             'degree': forms.TextInput(attrs={'placeholder': _('Master en sécurité informatique')}),
-            'description2': TinyMCE(attrs={'placeholder': _("Explications ..."), 'rows': 5}),
+            'description2': TinyMCE(attrs={'placeholder': _("Renseignements ..."), 'rows': 5}),
             'entry_date': forms.DateInput(attrs={'type': 'date'}),
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
         }
         help_text = {
-            'description2': _("Vous pouvez dire quelques explications sur les compétences acquises, vos résultats, etc")
+            'description2': _("Vous pouvez donner quelques renseignements sur les compétences acquises, vos résultats, etc")
         }
 
 
@@ -260,12 +256,12 @@ class ExperienceForm(forms.ModelForm):
         widgets = {
             'entreprise': forms.TextInput(attrs={'placeholder': 'Google'}),
             'employment': forms.TextInput(attrs={'placeholder': _("Analyste de données")}),
-            'description': forms.Textarea(attrs={'placeholder': _("Explications ...")}),
+            'description': forms.Textarea(attrs={'placeholder': _("Renseignements ...")}),
             'entry_date': forms.DateInput(attrs={'type': 'date'}),
             'exit_date': forms.DateInput(attrs={'type': 'date'}),
         }
         help_text = {
-            'description': _("Vous pouvez donner quelques explications sur le type d'emploi que vous êtes/étiez affecté, les compétences demandées/requises, ce que vous faîtes/faisiez, etc")
+            'description': _("Vous pouvez donner quelques renseignements sur le type d'emploi où vous êtes/étiez affecté, les compétences demandées/requises, ce que vous faîtes/faisiez, etc")
         }
 
 
@@ -273,4 +269,4 @@ class ProfileSearchForm(forms.Form):
     q_profile = forms.CharField(label=_("Recherche de profil"), widget=forms.TextInput(attrs={
         'id': 'profile_search',
         'placeholder': _("Nom d'utilisateur, prénom ou nom de famille")
-    }), required=False, help_text=_("N.B. : séparez les mots clés par des espaces pour plus de résultats"))
+    }), required=False, help_text=_("N.B. : séparez les mots clés par des espaces pour plus de résultats."))

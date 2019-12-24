@@ -3,13 +3,9 @@
 
 {% block title %}{% trans "Tableau de bord" %} - {% endblock title %}
 
-{% block extra_head %}
-<link rel="stylesheet" href="{% static 'style/css/Chart.min.css' %}">
-<style>
-.dashboard-grid {display: grid; grid-gap: 10px; grid-template-columns: 1fr 1fr;}
-@media screen and (max-width: 1050px){.dashboard-grid{grid-template-columns: 1fr;}}
-</style>
-{% endblock extra_head %}
+{% block extra_head2 %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+{% endblock extra_head2 %}
 
 {% block main %}
 <h1 class="large">{% trans "Tableau de bord" %}</h1>
@@ -54,5 +50,4 @@
 <script src="{% static 'js/utils.js' %}"></script>
 {% endblock javascript %}
 
-{% block jquery %}$('.chart').easyPieChart({easing: 'easeOutBounce',barColor: "#1780e8",lineWidth: 12,size: 160,scaleColor: false,trackColor: '#a0a0a0',lineCap: 'circle',animate: 1150,});
-var color = Chart.helpers.color;var barChartData = {labels: {{ label|js }},datasets: [{label: '{% trans "Expérience" %}',backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),borderColor: window.chartColors.orange,borderWidth: 1,data: {{ data|js }},}]};window.onload = function () {var ctx1 = $('#chart1');window.myBar = new Chart(ctx1, {type: 'bar',data: barChartData,options: {plugins: {datalabels: {clamp: true}},responsive: true,legend: {display: false,}}});};{% endblock jquery %}
+{% block jquery %}$('.chart').easyPieChart({easing: 'easeOutBounce',barColor: "#1780e8",lineWidth: 12,size: 160,scaleColor: false,trackColor: '#a0a0a0',lineCap: 'circle',animate: 1150,});var color = Chart.helpers.color;var barChartData = {labels: {{ label|js }},datasets: [{label: '{% trans "Expérience" %}',backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),borderColor: window.chartColors.orange,borderWidth: 1,data: {{ data|js }},}]};window.onload = function () {var ctx1 = $('#chart1');window.myBar = new Chart(ctx1, {type: 'bar',data: barChartData,options: {plugins: {datalabels: {clamp: true}},responsive: true,legend: {display: false,}}});};{% endblock jquery %}

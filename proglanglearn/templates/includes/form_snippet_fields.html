@@ -3,4 +3,4 @@
 {% for field in form.visible_fields %} 
     {% include 'includes/form_field.html' with field=field %}
 {% endfor %}
-{% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
+<small class="d-block mb-1">{% blocktrans %}Tous les champs avec un <span class="required-input">*</span> sont obligatoires.{% endblocktrans %}</small>

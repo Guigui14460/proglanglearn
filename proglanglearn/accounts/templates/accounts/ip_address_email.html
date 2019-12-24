@@ -3,11 +3,11 @@
 {% autoescape off %}
 {% blocktrans %}Salut, cher utilisateur de ProgLangLearn,
 
-Quelqu'un vient de se connecter à ton compte depuis un autre endroit :(
+Quelqu'un vient de se connecter à ton compte depuis un autre endroit.
 
 Si c'est vous, aucune inquiétude !
 
-Sinon, changez votre mot de passe car votre compte a été certainement compromis. Nous vous conseillons de changer votre mot de passe à cet url{% endblocktrans %}
+Sinon, changez votre mot de passe car votre compte a certainement été compromis. Nous vous conseillons de changer votre mot de passe à cet url{% endblocktrans %}
 {{ protocol }}://{{ domain }}{% url 'accounts:password_reset' %}
 
 {% trans "Si vous ne parvenez pas à changer votre mot de passe, cliquez sur le lien ci-dessous et suivez les instructions." %}

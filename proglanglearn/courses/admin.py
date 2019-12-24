@@ -55,7 +55,7 @@ class TutorialInline(admin.StackedInline):
                                            obj._meta.model_name), args=[str(obj.pk)])
             return mark_safe("<a href='{}'>{}</a>".format(url, _('Éditer le %s séparement') % obj._meta.verbose_name))
         return _('Enregistrez et continuez à éditer pour créer un lien')
-    get_edit_link.short_description = _("Édit le lien")
+    get_edit_link.short_description = _("Éditer le lien")
     get_edit_link.allow_tags = True
 
 
@@ -90,9 +90,9 @@ class TutorialAdmin(ImportExportModelAdmin):
 
     empty_value_display = _("Inconnu")
     fieldsets = (
-        (_("Info générales"), {'fields': (
+        (_("Infos générales"), {'fields': (
             'course', 'title', 'title_fr', 'title_en', 'content_fr', 'content_en')}),
-        (_("Info complémentaires"), {
+        (_("Infos complémentaires"), {
          'fields': ('resources', 'experience', 'published_date')})
     )
 

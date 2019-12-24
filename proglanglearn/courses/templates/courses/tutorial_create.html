@@ -19,7 +19,7 @@
         {% include 'includes/form_field.html' with field=form.experience %}
         {% include 'includes/form_field.html' with field=form.resources %}
     </fieldset>
-    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
+    <small class="d-block mb-1">{% blocktrans %}Tous les champs avec un <span class="required-input">*</span> sont obligatoires.{% endblocktrans %}</small>
     <div class="center-text">
         {% if type == 'modify' %}
             <a href="{{ object.get_absolute_url }}" class="btn btn__warning btn__large btn__300">{% trans 'Retour' %}</a>

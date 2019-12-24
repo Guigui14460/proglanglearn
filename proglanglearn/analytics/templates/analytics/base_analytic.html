@@ -3,6 +3,11 @@
 
 {% block main_attr %}class="aside"{% endblock main_attr %}
 
+{% block extra_head %}
+{% block extra_head2 %}{% endblock extra_head2 %}
+<style>.dashboard-grid {display: grid; grid-gap: 10px; grid-template-columns: 1fr 1fr;}@media screen and (max-width: 1050px){.dashboard-grid{grid-template-columns: 1fr;}}</style>
+{% endblock extra_head %}
+
 {% block aside_left %}
 <aside class="navbar navbar__dark navbar__vertical">
     <div class="burger">

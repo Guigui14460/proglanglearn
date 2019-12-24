@@ -7,9 +7,9 @@
 
 {% block main %}
 <div class="d-flex space-between">
-    <a href="{% url 'accounts:profile-list' %}" class="btn btn__dark mb-1">Voir tous les profils</a>
-    {% if request.user == object.user %}<a href="{% url 'accounts:profile-edit' user_id=object.user.id %}" class="btn btn__warning mb-1">Éditer mon profil</a>{% endif %}
-    <a href="{% url 'accounts:profile-report' profile_id=object.id %}" class="btn btn__danger mb-1">Signaler le profil</a>
+    <a href="{% url 'accounts:profile-list' %}" class="btn btn__dark mb-1">{% trans "Voir tous les profils" %}</a>
+    {% if request.user == object.user %}<a href="{% url 'accounts:profile-edit' user_id=object.user.id %}" class="btn btn__warning mb-1">{% trans "Éditer mon profil" %}</a>{% endif %}
+    <a href="{% url 'accounts:profile-report' profile_id=object.id %}" class="btn btn__danger mb-1">{% trans "Signaler le profil" %}</a>
 </div>
 <div class="profile-grid my-1">
     <div class="profile-top bg-info p-2">
@@ -70,7 +70,7 @@
         </div>
     </div>
     <div class="profile-experience bg-white p-2">
-        <h2 class="primary-color">{% trans "Espace expériences" %}</h2>
+        <h2 class="primary-color">{% trans "Espace expérience" %}</h2>
         {% for experience in object.experiences.all %}
             <div>
                 <h3>{{ experience.entreprise }}</h3>
@@ -83,7 +83,7 @@
         {% endfor %}
     </div>
     <div class="profile-education bg-white p-2">
-        <h2 class="primary-color">{% trans "Espace éducations" %}</h2>
+        <h2 class="primary-color">{% trans "Espace éducation" %}</h2>
         {% for education in object.educations.all %}
             <div>
                 <h3>{{ education.school }}</h3>

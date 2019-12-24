@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% url 'main:contact' as contact_url %}
-{% url 'main:contact' as contact %}
-
 {% block title %}{% if type == 'add' %}{% trans 'Ajouter un article' %}{% else %}{% trans 'Modifier un article' %}{% endif %} - {% endblock title %}
 
 {% block main %}
@@ -28,7 +25,7 @@
             </div>
         </fieldset>
     {% endif %}
-    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
+    <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
     <div class="center-text">
         <button type="submit" class="btn btn__success btn__large btn__300">{% if type == 'add' %}{% trans 'Ajouter un article' %}{% else %}{% trans 'Modifier un article' %}{% endif %}</button>
     </div>

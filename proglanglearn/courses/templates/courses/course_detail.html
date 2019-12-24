@@ -9,13 +9,13 @@
 
 {% block main %}
 <h1 class="large">{{ object.title }}</h1>
-{% if object.author == request.user or request.user.is_staff %}
-    <div id="buttons" class="my-2 d-flex space-between">
-        <a href="{% url 'courses:list' %}" class="btn btn__success btn__large">{% trans 'Retour' %}</a>
+<div id="buttons" class="my-2 d-flex space-between">
+    <a href="{% url 'courses:list' %}" class="btn btn__success btn__large">{% trans 'Retour' %}</a>
+    {% if object.author == request.user or request.user.is_staff %}
         <a href="{% url 'courses:update' slug=object.slug %}" class="btn btn__info btn__large">{% trans "Modifier l'aperçu du cours" %}</a>
         <a href="{% url 'courses:delete' slug=object.slug %}" class="btn btn__danger btn__large">{% trans 'Supprimer le cours' %}</a>
-    </div>
-{% endif %}
+    {% endif %}
+</div>
 <section>
     <h2>{% trans 'Informations générales' %}</h2>
     <figure>

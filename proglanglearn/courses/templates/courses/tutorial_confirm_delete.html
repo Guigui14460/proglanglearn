@@ -8,7 +8,7 @@
 <form method="POST" class="form">
     {% csrf_token %}
     <div class="note note__danger">
-        {% blocktrans %}<p>La suppression du tutoriel est <strong>irréversible</strong>. Les commentaires seront <strong>également supprimés</strong> ainsi que les <strong>ressources associées</strong>.</p>{% endblocktrans %}
+        <p>{% blocktrans %}La suppression du tutoriel est <strong>irréversible</strong>. Les commentaires seront <strong>également supprimés</strong> ainsi que les <strong>ressources associées</strong>.{% endblocktrans %}</p>
     </div>
     <div class="center-text">
         <a href="{% url 'courses:tutorial-detail' course_slug=object.course.slug tutorial_slug=object.slug %}" class="btn btn__primary btn__large btn__300">{% trans 'Retour en arrière' %}</a>

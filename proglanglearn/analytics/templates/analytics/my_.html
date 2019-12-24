@@ -3,13 +3,6 @@
 
 {% block title %}{% if type == 'my_subjects' %}{% trans "Mes sujets" %}{% elif type == "my_articles" %}{% trans "Mes articles" %}{% else %}{% trans "Mes cours" %}{% endif %} - {% endblock title %}
 
-{% block extra_head %}
-<style>
-.dashboard-grid {display: grid; grid-gap: 10px; grid-template-columns: 1fr 1fr;}
-@media screen and (max-width: 1050px){.dashboard-grid{grid-template-columns: 1fr;}}
-</style>
-{% endblock extra_head %}
-
 {% block main %}
 <h1 class="large">{% if type == 'my_subjects' %}{% trans "Mes sujets" %}{% elif type == "my_articles" %}{% trans "Mes articles" %}{% else %}{% trans "Mes cours" %}{% endif %}</h1>
 <div class="center-text mb-1">

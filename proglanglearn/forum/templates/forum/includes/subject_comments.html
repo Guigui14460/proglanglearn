@@ -38,9 +38,10 @@
     {% if request.user.is_authenticated %}
         {% if object.is_closed %}
             <div class="note note__danger">
-                <p>{% trans "Ce sujet est actuellement résolu. Nous vous conseillons vivement d'ouvrir un nouveau sujet, qui plus est si ce sujet est ancien" %}</p>
+                <p>{% trans "Ce sujet est actuellement résolu. Nous vous conseillons vivement d'ouvrir un nouveau sujet." %}</p>
             </div>
         {% endif %}
+        <p>{% trans "Si ce sujet est trop ancien, nous vous conseillons vivement d'ouvrir un nouveau sujet." %}</p>
         <form class="form" action="{{ object.get_absolute_url }}" method="POST">
             {% csrf_token %}
             {% include 'includes/form_errors.html' with form=form %}
@@ -51,6 +52,6 @@
             </div>
         </form>
     {% else %}
-        <div class="center-text"><h4>{% trans "Vous devez être connecté pour tenter de répondre au problème posé" %}</h4></div>
+        <div class="center-text"><h4>{% trans "Vous devez être connecté pour tenter de répondre au problème posé." %}</h4></div>
     {% endif %}
 </div>

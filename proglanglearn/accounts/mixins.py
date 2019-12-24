@@ -34,7 +34,7 @@ class UserCanModifyProfile(UserPassesTestMixin):
                 messages.error(self.request, self.permission_denied_message)
                 return redirect('accounts:profile', user_id=obj.user.id)
             messages.info(self.request, _(
-                "Le profil auquel vous essayez d'accéder n'existe pas ou plus ou est actuellement inaccessible"))
+                "Le profil auquel vous essayez d'accéder n'existe pas, ou plus, ou est actuellement inaccessible"))
             return Http404
         return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())
 

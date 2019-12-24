@@ -5,6 +5,7 @@
 {% block title %}{% trans "Sign In" %} - {% endblock title %}
 
 {% block main %}
+{% url 'account_reset_password' as forgotten_password_url %}
 <h1 class="large">{% trans "Sign In" %}</h1>
 <p class="lead"><i class="fas fa-user"></i>&nbsp;{% trans "Connectez-vous à votre compte !" %}</p>
 
@@ -33,6 +34,6 @@
     <div class="center-text">
         <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "Sign In" %}</button>
     </div>
-    <p class="mt-1">{% trans 'Vous avez oublié votre mot de passe ?' %} <a href="{% url 'account_reset_password' %}">{% trans 'Changer mon mot de passe' %}</a>.</p>
+    <p class="mt-1">{% blocktrans %}Vous avez oublié votre mot de passe ? <a href="{{ forgotten_password_url }}">Changer mon mot de passe{% endblocktrans %}</a>.</p>
 </form>
 {% endblock main %}

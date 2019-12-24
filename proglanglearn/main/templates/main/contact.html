@@ -8,27 +8,6 @@
 {% url "account_signup" as register_url %}
 <h1 class="large">{% trans 'Contacter' %}</h1>
 <p class="lead"><i class="fas fa-pen-alt"></i>&nbsp;{% trans "Contactez-nous dans l'espace approprié à chaque demande !" %}</p>
-<form id="subject" method='POST' class="form mb-3">
-    {% csrf_token %}
-    {% include 'includes/form_errors.html' with form=contact_form %}
-    <fieldset>
-        <legend><i class="fas fa-pen-nib"></i>&nbsp;{% trans "Demandes ou autre motif" %}</legend>
-        <div class="form-group">
-            <div class="note note__warning">
-                <p>{% blocktrans %}Votre <strong>authentification</strong> est <strong>requise</strong> pour pouvoir vous envoyer une réponse. <strong><a href="{{ login_url }}">Connectez-vous</a></strong> ou <strong><a href="{{ register_url }}">inscrivez-vous</a></strong> tout de suite.{% endblocktrans %}
-                </p>
-            </div>
-        </div>
-        {% include "includes/form_field.html" with field=contact_form.subject %}
-        {% include "includes/form_field.html" with field=contact_form.body %}
-    </fieldset>
-    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
-    <div class="center-text">
-        <button type="submit" class="btn btn__primary btn__large btn__300"><i
-                class="fas fa-paper-plane"></i>&nbsp;{% trans "Envoyer" %}</button>
-    </div>
-</form>
-<hr class="my-2">
 <form id="bug" method='POST' class="form mb-3">
     {% csrf_token %}
     {% include 'includes/form_errors.html' with form=contact_form %}
@@ -42,7 +21,28 @@
         {% include "includes/form_field.html" with field=bug_form.b_subject %}
         {% include "includes/form_field.html" with field=bug_form.b_body %}
     </fieldset>
-    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
+    <small class="d-block mb-1">{% blocktrans %}Tous les champs avec un <span class="required-input">*</span> sont obligatoires.{% endblocktrans %}</small>
+    <div class="center-text">
+        <button type="submit" class="btn btn__primary btn__large btn__300"><i
+                class="fas fa-paper-plane"></i>&nbsp;{% trans "Envoyer" %}</button>
+    </div>
+</form>
+<hr class="my-2">
+<form id="subject" method='POST' class="form mb-3">
+    {% csrf_token %}
+    {% include 'includes/form_errors.html' with form=contact_form %}
+    <fieldset>
+        <legend><i class="fas fa-pen-nib"></i>&nbsp;{% trans "Demandes ou autres motifs" %}</legend>
+        <div class="form-group">
+            <div class="note note__warning">
+                <p>{% blocktrans %}Votre <strong>authentification</strong> est <strong>requise</strong> pour pouvoir vous envoyer une réponse. <strong><a href="{{ login_url }}">Connectez-vous</a></strong> ou <strong><a href="{{ register_url }}">inscrivez-vous</a></strong> tout de suite.{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+        {% include "includes/form_field.html" with field=contact_form.subject %}
+        {% include "includes/form_field.html" with field=contact_form.body %}
+    </fieldset>
+    <small class="d-block mb-1">{% blocktrans %}Tous les champs avec un <span class="required-input">*</span> sont obligatoires.{% endblocktrans %}</small>
     <div class="center-text">
         <button type="submit" class="btn btn__primary btn__large btn__300"><i
                 class="fas fa-paper-plane"></i>&nbsp;{% trans "Envoyer" %}</button>

@@ -4,6 +4,8 @@
 {% block title %}{% trans 'Connexion' %} - {% endblock title %}
 
 {% block main %}
+{% url 'account_signup' as signup_url %}
+{% url 'accounts:password_reset' as password_reset_url %}
 <h1 class="large">{% trans "S'identifier" %}</h1>
 <p class="lead"><i class="fas fa-user"></i>&nbsp;{% trans "Connectez-vous à votre compte !" %}</p>
 <form method='POST' class="form mb-3">
@@ -14,5 +16,5 @@
         <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "S'identifier" %}</button>
     </div>
 </form>
-<p class="mt-1">{% trans "Vous n'avez pas encore de compte ?" %} <a href="{% url 'account_signup' %}">{% trans 'Inscrivez-vous' %}</a>&nbsp;!<br>{% trans 'Vous avez oublié votre mot de passe ?' %} <a href="{% url 'accounts:password_reset' %}">{% trans 'Changer mon mot de passe' %}</a>.</p>
+<p class="mt-1">{% blocktrans %}Vous n'avez pas encore de compte ? <a href="{{ signup_url }}">Inscrivez-vous</a>&nbsp;!<br>Vous avez oublié votre mot de passe ? <a href="{{ password_reset_url }}">Changer mon mot de passe</a>.{% endblocktrans %}</p>
 {% endblock main %}

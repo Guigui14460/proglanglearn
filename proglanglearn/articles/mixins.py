@@ -30,7 +30,7 @@ class UserCanModifyArticle(UserPassesTestMixin):
                 messages.error(self.request, self.permission_denied_message)
                 return redirect('articles:list')
             messages.info(self.request, _(
-                "L'article auquel vous essayez d'accéder n'existe pas ou plus ou est actuellement inaccessible"))
+                "L'article auquel vous essayez d'accéder n'existe pas, ou plus, ou est actuellement inaccessible"))
             return Http404
         return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())
 

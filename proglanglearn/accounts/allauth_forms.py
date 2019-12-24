@@ -35,7 +35,7 @@ class SignupForm(AllauthSignupForm):
             widget=forms.PasswordInput(attrs={
                 'placeholder': '••••••••••',
                 'id': 'showPWDInput'
-            }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
+            }), help_text=_("""Entrez un mot de passe fort (avec minuscules, majuscules, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
         self.fields['password2'] = forms.CharField(
             min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
                 1]['OPTIONS']['min_length'],
@@ -63,7 +63,7 @@ class ChangePasswordForm(AllauthChangePasswordForm):
         widget=forms.PasswordInput(attrs={
             'placeholder': '••••••••••',
             'id': 'showNewPWDInput'
-        }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
+        }), help_text=_("""Entrez un mot de passe fort (avec minuscules, majuscules, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
     password2 = forms.CharField(
         min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
             1]['OPTIONS']['min_length'],
@@ -83,7 +83,7 @@ class SetPasswordForm(AllauthSetPasswordForm):
         widget=forms.PasswordInput(attrs={
             'placeholder': '••••••••••',
             'id': 'showPWDInput'
-        }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
+        }), help_text=_("""Entrez un mot de passe fort (avec minuscules, majuscules, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
     password2 = forms.CharField(
         min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
             1]['OPTIONS']['min_length'],
@@ -103,7 +103,7 @@ class ResetPasswordKeyForm(AllauthResetPasswordKeyForm):
         widget=forms.PasswordInput(attrs={
             'placeholder': '••••••••••',
             'id': 'showNewPWDInput'
-        }), help_text=_("""Entrez un mot de passe fort (avec minuscule, majuscule, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
+        }), help_text=_("""Entrez un mot de passe fort (avec minuscules, majuscules, chiffres et caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %(password_length)d caractères.""") % {'password_length': 12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[1]['OPTIONS']['min_length']})
     password2 = forms.CharField(
         min_length=12 if settings.DEBUG else settings.AUTH_PASSWORD_VALIDATORS[
             1]['OPTIONS']['min_length'],

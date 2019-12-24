@@ -4,6 +4,7 @@
 {% block title %}{% trans "S'enregistrer" %} - {% endblock title %}
 
 {% block main %}
+{% url 'account_login' as login_url %}
 <h1 class="large">{% trans "S'enregistrer" %}</h1>
 <p class="lead"><i class="fas fa-user-plus"></i>&nbsp;{% trans 'Créez votre compte dès maintenant !' %}</p>
 <form method='POST' class="form mb-3">
@@ -24,12 +25,12 @@
         {% include 'includes/form_field.html' with field=form.password2 %}
     </div>
     <div class="form-group">
-        <label><input type="checkbox" name="user-terms" required />&nbsp;{% trans 'Accepter les' %} <a href="{% url 'main:terms' %}">{% blocktrans %}termes et conditions d'utilisation</a> de Proglanglearn <span class="required-input">*</span></label>{% endblocktrans %}
+        <label><input type="checkbox" name="user-terms" required />&nbsp;&nbsp;{% blocktrans %}En cochant cette case, vous certifiez avoir lu et accepté les <a href="{{ terms_url }}">conditions générales d'utilisation et de vente</a> de Proglanglearn <span class="required-input">*</span></label>{% endblocktrans %}
     </div>
-    {% blocktrans %}<small class="d-block mb-1">Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.</small>{% endblocktrans %}
+    <small class="d-block mb-1">{% blocktrans %}Tous les champs avec d'un <span class="required-input">*</span> sont obligatoires.{% endblocktrans %}</small>
     <div class="center-text">
         <button type="submit" class="btn btn__primary btn__large btn__300">{% trans "S'enregistrer" %}</button>
     </div>
 </form>
-<p class="mt-1">{% trans 'Vous avez déjà un compte ?' %}&nbsp;<a href="{% url 'account_login' %}">{% trans 'Connectez-vous' %}</a>&nbsp;!</p>
+<p class="mt-1">{% blocktrans %}Vous avez déjà un compte ?&nbsp;<a href="{{ login_url }}">Connectez-vous</a>&nbsp;!{% endblocktrans %}</p>
 {% endblock main %}

@@ -326,6 +326,7 @@ class RefundRequestView(LoginRequiredMixin, NavbarSearchMixin, View):
                 if Refund.objects.filter(order=order, rejected=True).count() > 0:
                     messages.error(request, _(
                         "La demande de remboursement a été rejetée"))
+                    return redirect('main:analytics:orders')
                 messages.error(request, _(
                     "La période de remboursement a expiré ou vous avez déjà envoyé une demande"))
                 return redirect('main:analytics:orders')

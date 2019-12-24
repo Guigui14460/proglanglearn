@@ -32,9 +32,10 @@ class ProgType(models.Model):
 
     def __str__(self):
         return self.profession_type
-    
+
     def __repr__(self):
         return self.profession_type
+
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -55,7 +56,7 @@ class Profile(models.Model):
     strike = models.PositiveSmallIntegerField(
         default=0, verbose_name=_("signalement"))
     email_confirmed = models.BooleanField(
-        default=False, verbose_name=_("addresse e-mail confirmée"))
+        default=False, verbose_name=_("adresse e-mail confirmée"))
     email_notification = models.BooleanField(
         default=True, verbose_name=_("notification par email"))
     # Advanced options
@@ -76,13 +77,14 @@ class Profile(models.Model):
     github_username = models.CharField(max_length=100,
                                        blank=True, null=True, verbose_name=_("nom d'utilisateur Github"))
     links = models.TextField(blank=True, null=True, default=";;;;;",
-                             verbose_name=_("liens vers les médias sociaux"))
+                             verbose_name=_("liens vers les réseaux sociaux"))
 
     objects = ProfileManager()
 
     class Meta:
         ordering = ['-level', '-level_experience']
         verbose_name = _("profil")
+        verbose_name_plural = _("profils")
 
     def __str__(self):
         return self.user.username
@@ -145,7 +147,7 @@ post_save.connect(create_user_profile, sender=User)
 
 class Education(models.Model):
     profile = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name='educations', verbose_name=_("profile associé"))
+        Profile, on_delete=models.CASCADE, related_name='educations', verbose_name=_("profil associé"))
     school = models.CharField(max_length=50, verbose_name=_("nom de l'école"))
     degree = models.CharField(max_length=50, verbose_name=_("diplôme obtenu"))
     description2 = HTMLField(verbose_name=_("description"))
@@ -164,7 +166,7 @@ class Education(models.Model):
 
 class Experience(models.Model):
     profile = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name='experiences', verbose_name=_("profile associé"))
+        Profile, on_delete=models.CASCADE, related_name='experiences', verbose_name=_("profil associé"))
     entreprise = models.CharField(
         max_length=50, verbose_name=_("nom de l'entreprise"))
     employment = models.CharField(
