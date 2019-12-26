@@ -120,11 +120,8 @@ class Profile(models.Model):
         temporary_resized_image = temporary_image.thumbnail((675, 675))
         temporary_image.save(output_io, format='JPEG', quality=60)
         output_io.seek(0)
-        random_letters = ''.join(random.choices(
-            string.ascii_lowercase + string.digits, k=6))
-        print(random_letters)
         image = InMemoryUploadedFile(
-            output_io, 'ImageField', f"{self.user.username}_{random_letters}.jpg", 'image/jpeg', sys.getsizeof(output_io), None)
+            output_io, 'ImageField', f"{self.user.username}.jpg", 'image/jpeg', sys.getsizeof(output_io), None)
         return image
 
     @property
