@@ -1,6 +1,11 @@
+from io import BytesIO
 from itertools import chain
+import random
+import string
+import sys
 
 from django.contrib.auth import get_user_model
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_delete, post_save
@@ -17,6 +22,7 @@ from main.models import Language, Tag
 from .managers import ProfileManager
 from .utils import get_user_type
 
+from PIL import Image
 
 User = get_user_model()
 
@@ -97,6 +103,7 @@ class Profile(models.Model):
             profile = Profile.objects.get(user__id=self.id)
             if profile.image != self.image and profile.image.url != '/media/user_pictures/default.png':
                 profile.image.delete()
+            self.image = self.compress_image(self.image)
         except:
             pass
         super(Profile, self).save(*args, **kwargs)
@@ -106,6 +113,19 @@ class Profile(models.Model):
 
     def get_user_profile_type(self):
         return get_user_type(self.level)
+
+    def compress_image(self, image):
+        temporary_image = Image.open(image)
+        output_io = BytesIO()
+        temporary_resized_image = temporary_image.thumbnail((675, 675))
+        temporary_image.save(output_io, format='JPEG', quality=60)
+        output_io.seek(0)
+        random_letters = ''.join(random.choices(
+            string.ascii_lowercase + string.digits, k=6))
+        print(random_letters)
+        image = InMemoryUploadedFile(
+            output_io, 'ImageField', f"{self.user.username}_{random_letters}.jpg", 'image/jpeg', sys.getsizeof(output_io), None)
+        return image
 
     @property
     def get_last_experience_or_education(self):
