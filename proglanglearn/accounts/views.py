@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.timezone import now
 from django.utils.translation import gettext as _, activate, get_language
 from django.views.generic import View, TemplateView, ListView
 
@@ -222,7 +223,7 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
         if len(self.request.user.socialaccount_set.all()) == 0:
             context['password_change_form'] = PasswordChangeForm(
                 user=self.request.user)
-            context['danger_zone_form'] = DangerZoneForm(user=self.request.user)
+        context['danger_zone_form'] = DangerZoneForm(user=self.request.user)
         return context
 
     def get_personal_info(self):
@@ -347,6 +348,7 @@ class DangerZone(View):
         form = DangerZoneForm(user, request.POST or None)
         if form.is_valid():
             user.is_active = False
+            user.last_login = now()
             user.save()
             logout(request)
             messages.success(request, _("Votre compte a été désactivé"))

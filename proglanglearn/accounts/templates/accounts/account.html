@@ -8,6 +8,7 @@
 {% block main %}
 {% get_social_accounts user as accounts %}
 {% url 'accounts:profile-edit' user_id=request.user.id as edit_profile_url %}
+{% url 'main:privacy' as privacy_url %}
 <h1 class="large">{% trans "Réglages de votre compte" %}</h1>
 <p class="lead"><i class="fas fa-user-cog"></i>&nbsp;{% trans "Modifier les paramètres et informations de votre compte !" %}
 </p>
@@ -130,24 +131,27 @@
                 </div>
             </form>
         </section>
-        {% if danger_zone_form %}
-            <hr class="dashed mx-1 my-2">
-            <section id="danger-zone">
-                <h2>{% trans "Zone de danger" %}</h2>
-                <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
-                    {% csrf_token %}
-                    {% include 'includes/form_errors.html' with form=danger_zone_form %}
+        <hr class="dashed mx-1 my-2">
+        <section id="danger-zone">
+            <h2>{% trans "Zone de danger" %}</h2>
+            <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
+                {% csrf_token %}
+                {% include 'includes/form_errors.html' with form=danger_zone_form %}
+                {% if danger_zone_form.password %}
                     <fieldset>
                         <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
                         {% include 'includes/form_field.html' with field=danger_zone_form.password %}
                     </fieldset>
                     <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
-                    <div class="center-text">
-                        <button type="submit" class="btn btn__danger btn__large btn__300">{% trans "Supprimer" %}</button>
-                    </div>
-                </form>
-            </section>
-        {% endif %}
+                {% else %}
+                    <p>{% blocktrans %}La désactivation de votre compte sera définitive.{% endblocktrans %}</p>
+                    <p>{% blocktrans %}Si vous cliquez, vous perdrez l'accès à votre compte ainsi qu'aux achats effectués sur celui-ci ! Pour plus d'informations, vous pouvez aller voir nos <a href="{{ privacy_url }}">politiques de confidentialité</a>.{% endblocktrans %}</p>
+                {% endif %}
+                <div class="center-text">
+                    <button type="submit" class="btn btn__danger btn__large btn__300">{% trans "Supprimer définitivement" %}</button>
+                </div>
+            </form>
+        </section>
     </div>
 </div>
 {% endblock main %}

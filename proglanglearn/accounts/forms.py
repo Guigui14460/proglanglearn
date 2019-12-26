@@ -216,10 +216,13 @@ class DangerZoneForm(forms.Form):
         'placeholder': '••••••••••',
         'id': 'showPWDDeleteConfirmInput'
     }))
+    hidden = forms.HiddenInput()
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(DangerZoneForm, self).__init__(*args, **kwargs)
+        if len(self.user.socialaccount_set.all()) > 0:
+            del self.fields['password']
 
     def clean_password(self):
         password = self.cleaned_data["password"]
