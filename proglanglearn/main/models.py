@@ -18,7 +18,7 @@ from .signals import comment_signal
 ALERT_CHOICES = (
     ('A', _('Harcèlement')),
     ('B', _('Discriminations physiques, racistes, sexistes')),
-    ('C', _('Incitations ou apologie du terrorisme')),
+    ('C', _('Apologie du terrorisme')),
     ('D', _('Incitations à la violence et à la haine')),
     ('E', _('Autre (explications demandées)'))
 )

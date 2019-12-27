@@ -161,7 +161,7 @@ class PersonalInformationForm(forms.Form):
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         if len(self.request.user.socialaccount_set.all()) > 0:
             social_account = self.request.user.socialaccount_set.all()[0]
-            del self.fields['email']
+            # del self.fields['email']
             del self.fields['last_name']
             del self.fields['first_name']
 
@@ -214,7 +214,7 @@ class DangerZoneForm(forms.Form):
 
     password = forms.CharField(label=_("Mot de passe"), widget=forms.PasswordInput(attrs={
         'placeholder': '••••••••••',
-        'id': 'showPWDDeleteConfirmInput'
+        'id': 'showPWDDeleteConfirmInput',
     }))
     hidden = forms.HiddenInput()
 

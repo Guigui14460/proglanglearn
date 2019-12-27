@@ -134,24 +134,33 @@
         <hr class="dashed mx-1 my-2">
         <section id="danger-zone">
             <h2>{% trans "Zone de danger" %}</h2>
-            <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
-                {% csrf_token %}
-                {% include 'includes/form_errors.html' with form=danger_zone_form %}
-                {% if danger_zone_form.password %}
-                    <fieldset>
-                        <legend><i class="fas fa-user-times"></i> {% trans "Supprimer mon compte" %}</legend>
-                        {% include 'includes/form_field.html' with field=danger_zone_form.password %}
-                    </fieldset>
-                    <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
-                {% else %}
-                    <p>{% blocktrans %}La désactivation de votre compte sera définitive.{% endblocktrans %}</p>
-                    <p>{% blocktrans %}Si vous cliquez, vous perdrez l'accès à votre compte ainsi qu'aux achats effectués sur celui-ci ! Pour plus d'informations, vous pouvez aller voir nos <a href="{{ privacy_url }}">politiques de confidentialité</a>.{% endblocktrans %}</p>
-                {% endif %}
-                <div class="center-text">
-                    <button type="submit" class="btn btn__danger btn__large btn__300">{% trans "Supprimer définitivement" %}</button>
-                </div>
-            </form>
+            <p>{% blocktrans %}La désactivation de votre compte sera définitive.{% endblocktrans %}</p>
+            <p>{% blocktrans %}Si vous cliquez, vous perdrez l'accès à votre compte ainsi qu'aux achats effectués sur celui-ci ! Pour plus d'informations, vous pouvez aller voir nos <a href="{{ privacy_url }}">politiques de confidentialité</a>.{% endblocktrans %}</p>
+            <div class="center-text">
+                <a id="modal-btn" href="#modal-danger-zone" rel="modal:open" class="btn btn__danger btn__large btn__300">{% trans "Désactiver mon compte" %}</a>
+            </div>
+            <div id="modal-danger-zone" class="modal">
+                <h2>{% trans "Confirmation de la désactivation de votre compte" %}</h2>
+                <form method="POST" action="{% url 'accounts:handle-danger-zone' %}" class="form">
+                    {% csrf_token %}
+                    {% include 'includes/form_errors.html' with form=danger_zone_form %}
+                    {% if danger_zone_form.password %}
+                        <fieldset>
+                            <legend><i class="fas fa-user-times"></i> {% trans "Désactiver maintenant" %}</legend>
+                            {% include 'includes/form_field.html' with field=danger_zone_form.password %}
+                        </fieldset>
+                        <small class="d-block mb-1">{% trans 'Tous les champs avec un <span class="required-input">*</span> sont obligatoires.' %}</small>
+                    {% endif %}
+                    <div class="center-text">
+                        <button type="submit" class="btn btn__outline__danger btn__large">{% trans "Désactiver définitivement" %}</button>
+                    </div>
+                </form>
+            </div>
         </section>
     </div>
 </div>
 {% endblock main %}
+
+{% block jquery %}
+$("#modal-btn").click(function(e){e.preventDefault(); this.blur();});
+{% endblock jquery %}
