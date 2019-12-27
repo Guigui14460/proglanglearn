@@ -39,7 +39,7 @@
                     <legend><i class="fas fa-user"></i> {% trans "Informations générales" %}</legend>
                     {% if not accounts %}{% include 'includes/form_field.html' with field=image_form.image %}{% endif %}
                     {% include 'includes/form_field.html' with field=personal_form.username %}
-                    {% if not accounts %}{% include 'includes/form_field.html' with field=personal_form.email %}{% endif %}
+                    {% comment %} {% if not accounts %}{% include 'includes/form_field.html' with field=personal_form.email %}{% endif %} {% endcomment %}
                     {% include 'includes/form_field.html' with field=personal_form.email_notification %}
                     {% if not accounts %}
                         <div class="row small-device">

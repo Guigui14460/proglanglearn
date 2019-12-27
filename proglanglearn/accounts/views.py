@@ -236,7 +236,7 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
             prog_type = ProgType.objects.get(type_id='A')
         info_dict = {
             'username': user.username,
-            'email': user.email,
+            # 'email': user.email,
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email_notification': user.profile.email_notification,
@@ -284,7 +284,7 @@ class PersonalInfo(View):
             if len(user.socialaccount_set.all()) > 0:
                 user.email = user.socialaccount_set.all()[0].extra_data['email']
             else:
-                user.email = personal_form.cleaned_data['email']
+                # user.email = personal_form.cleaned_data['email']
                 user.first_name = personal_form.cleaned_data['first_name']
                 user.last_name = personal_form.cleaned_data['last_name'].upper()
             user.save()

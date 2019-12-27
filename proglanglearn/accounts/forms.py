@@ -143,8 +143,8 @@ class ChangeProfileImageForm(forms.ModelForm):
 class PersonalInformationForm(forms.Form):
     username = forms.CharField(label=_("Nom d'utilisateur"), widget=forms.TextInput(
         attrs={'placeholder': 'johndoe', 'id': 'username_id_custom'}))
-    email = forms.EmailField(label=_(
-        "Addresse e-mail"), widget=forms.EmailInput(attrs={'placeholder': 'johndoe@gmail.com'}))
+    # email = forms.EmailField(label=_(
+    #     "Addresse e-mail"), widget=forms.EmailInput(attrs={'placeholder': 'johndoe@gmail.com'}))
     first_name = forms.CharField(
         label=_("Prénom"), widget=forms.TextInput(attrs={'placeholder': 'John'}))
     last_name = forms.CharField(
