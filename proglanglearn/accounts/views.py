@@ -236,7 +236,7 @@ class AccountView(LoginRequiredMixin, NavbarSearchMixin, View):
             prog_type = ProgType.objects.get(type_id='A')
         info_dict = {
             'username': user.username,
-            # 'email': user.email,
+            'public_profile': user.profile.public_profile,
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email_notification': user.profile.email_notification,
@@ -284,7 +284,6 @@ class PersonalInfo(View):
             if len(user.socialaccount_set.all()) > 0:
                 user.email = user.socialaccount_set.all()[0].extra_data['email']
             else:
-                # user.email = personal_form.cleaned_data['email']
                 user.first_name = personal_form.cleaned_data['first_name']
                 user.last_name = personal_form.cleaned_data['last_name'].upper()
             user.save()
@@ -293,6 +292,7 @@ class PersonalInfo(View):
             user.profile.email_notification = personal_form.cleaned_data['email_notification']
             user.profile.country = personal_form.cleaned_data['country']
             user.profile.profile_reported = False
+            user.profile.public_profile = personal_form.cleaned_data['public_profile']
             user.profile.save()
             messages.info(request, _(
                 "Vos informations personnelles ont été mises à jour"))
@@ -349,6 +349,8 @@ class DangerZone(View):
         if form.is_valid():
             user.is_active = False
             user.last_login = now()
+            user.profile.public_profile = False
+            user.profile.save()
             user.save()
             logout(request)
             messages.success(request, _("Votre compte a été désactivé"))

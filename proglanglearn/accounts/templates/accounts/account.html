@@ -39,8 +39,8 @@
                     <legend><i class="fas fa-user"></i> {% trans "Informations générales" %}</legend>
                     {% if not accounts %}{% include 'includes/form_field.html' with field=image_form.image %}{% endif %}
                     {% include 'includes/form_field.html' with field=personal_form.username %}
-                    {% comment %} {% if not accounts %}{% include 'includes/form_field.html' with field=personal_form.email %}{% endif %} {% endcomment %}
                     {% include 'includes/form_field.html' with field=personal_form.email_notification %}
+                    {% include 'includes/form_field.html' with field=personal_form.public_profile %}
                     {% if not accounts %}
                         <div class="row small-device">
                             <div class="col-50 small-device">
@@ -160,7 +160,3 @@
     </div>
 </div>
 {% endblock main %}
-
-{% block jquery %}
-$("#modal-btn").click(function(e){e.preventDefault(); this.blur();});
-{% endblock jquery %}

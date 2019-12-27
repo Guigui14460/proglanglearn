@@ -65,6 +65,8 @@ class Profile(models.Model):
         default=False, verbose_name=_("adresse e-mail confirmée"))
     email_notification = models.BooleanField(
         default=True, verbose_name=_("notification par email"))
+    public_profile = models.BooleanField(
+        default=False, verbose_name=_("profil public"))
     # Advanced options
     profile_reported = models.BooleanField(default=False)
     level = models.PositiveSmallIntegerField(

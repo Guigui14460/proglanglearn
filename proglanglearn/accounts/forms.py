@@ -143,16 +143,16 @@ class ChangeProfileImageForm(forms.ModelForm):
 class PersonalInformationForm(forms.Form):
     username = forms.CharField(label=_("Nom d'utilisateur"), widget=forms.TextInput(
         attrs={'placeholder': 'johndoe', 'id': 'username_id_custom'}))
-    # email = forms.EmailField(label=_(
-    #     "Addresse e-mail"), widget=forms.EmailInput(attrs={'placeholder': 'johndoe@gmail.com'}))
     first_name = forms.CharField(
         label=_("Prénom"), widget=forms.TextInput(attrs={'placeholder': 'John'}))
     last_name = forms.CharField(
         label=_("Nom"), widget=forms.TextInput(attrs={'placeholder': 'Doe'}))
     email_notification = forms.BooleanField(required=False, label=_(
         "Recevoir des notifications par email"), widget=forms.CheckboxInput)
+    public_profile = forms.BooleanField(required=False, label=_(
+        "Rendre mon profil public"), widget=forms.CheckboxInput, help_text=_("Votre profil sera visible mais pas indexé lors de la recherche de profils"))
     prog_type = forms.ModelChoiceField(label=_("Quel statut en programmation ou dans la vie avez-vous ?"), queryset=ProgType.objects.all(), widget=forms.Select(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), help_text=_(
-        "Les statuts de développeur et étudiant permet de vous mettre en avant. En choisissant un de ces deux choix, vous activerez la visibilité totale de votre profil (informations éducatives et professionnelles"))
+        "Les statuts de développeur et étudiant permet de vous mettre en avant. Cela vous permet de vous indexé lors des recherches de profils."))
     country = CountryField(blank_label=_("Sélectionner un pays")).formfield(widget=CountrySelectWidget(attrs={'style': 'width: 100%; font-size: 1.1rem;'}), label=_(
         "Pays"), help_text=_("Le renseignement de votre pays permet aux étudiants et développeurs d'être mis en avant. Cette donnée est utilisée pour des études statistiques."))
 
@@ -161,7 +161,6 @@ class PersonalInformationForm(forms.Form):
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         if len(self.request.user.socialaccount_set.all()) > 0:
             social_account = self.request.user.socialaccount_set.all()[0]
-            # del self.fields['email']
             del self.fields['last_name']
             del self.fields['first_name']
 

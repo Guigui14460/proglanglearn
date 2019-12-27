@@ -5,13 +5,13 @@ from django.db.models import Q
 
 class ProfileQuerySet(models.QuerySet):
     def dev_profile_shown(self):
-        return self.filter(is_dev=True, user__is_active=True)
+        return self.filter(is_dev=True, public_profile=True)
 
     def student_profile_shown(self):
-        return self.filter(is_student=True, user__is_active=True)
+        return self.filter(is_student=True, public_profile=True)
 
     def email(self):
-        return self.filter(email_notification=True, user__is_active=True)
+        return self.filter(email_notification=True, public_profile=True)
 
 
 class ProfileManager(models.Manager):
@@ -25,7 +25,7 @@ class ProfileManager(models.Manager):
         return self.get_queryset().email()
 
     def all_dev_student(self):
-        return self.get_queryset().filter((Q(user__is_active=True) & (Q(is_dev=True) | Q(is_student=True))))
+        return self.get_queryset().filter((Q(public_profile=True) & (Q(is_dev=True) | Q(is_student=True))))
 
     def search(self, query):
         if settings.SEARCH_TYPE == 'multiple':
@@ -39,7 +39,7 @@ class ProfileManager(models.Manager):
         if query is not None:
             or_lookup = (Q(user__username__icontains=query) | Q(
                 user__first_name__icontains=query) | Q(user__last_name__icontains=query))
-            qs = qs.filter((or_lookup & Q(user__is_active=True)
+            qs = qs.filter((or_lookup & Q(public_profile=True)
                             & (Q(is_dev=True) | Q(is_student=True))))
         return qs
 
@@ -50,6 +50,6 @@ class ProfileManager(models.Manager):
                 or_lookup = (Q(user__username__icontains=word) | Q(
                     user__first_name__icontains=word) | Q(user__last_name__icontains=word))
                 qs = qs | self.get_queryset().filter(
-                    (or_lookup & Q(user__is_active=True) & (Q(is_dev=True) | Q(is_student=True))))
+                    (or_lookup & Q(public_profile=True) & (Q(is_dev=True) | Q(is_student=True))))
             qs.distinct()
         return qs

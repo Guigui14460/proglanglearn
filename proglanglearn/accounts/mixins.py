@@ -20,6 +20,8 @@ class ProfileObjectMixin(object):
         obj = None
         if id is not None:
             obj = get_object_or_404(User, id=user_id)
+        if obj != self.request.user and not obj.profile.public_profile:
+            raise Http404()
         return obj.profile
 
 
@@ -35,7 +37,7 @@ class UserCanModifyProfile(UserPassesTestMixin):
                 return redirect('accounts:profile', user_id=obj.user.id)
             messages.info(self.request, _(
                 "Le profil auquel vous essayez d'accéder n'existe pas, ou plus, ou est actuellement inaccessible"))
-            return Http404
+            raise Http404()
         return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())
 
     def test_func(self):
