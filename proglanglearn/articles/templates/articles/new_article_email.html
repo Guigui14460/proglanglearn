@@ -1,6 +1,7 @@
 {% load i18n %}
 
 {% autoescape off %}
+{% url 'accounts:account' as account_url %}
 {% blocktrans with article=article %}Salut, cher utilisateur de ProgLangLearn,
 
 Un tout nouvel article vient d'être publié intitulé : "{{ article.title }}"
@@ -11,4 +12,6 @@ Tu peux désormais venir le lire si t'es intéressé :{% endblocktrans %}
 
 {% trans "De la part de toute l'équipe de ProgLangLearn," %}
 LETELLIER Guillaume
+
+{% blocktrans %}Vous pouvez vous désabonner et ne plus recevoir les notifications allant à cette adresse {{ account_url }} dans la rubrique "Modifier mes informations personnelles".{% endblocktrans %}
 {% endautoescape %}

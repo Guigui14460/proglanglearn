@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -77,6 +78,26 @@ class EmailAdminNotificationForUsers(models.Model):
             super().save(**kwargs)
 
 
+class IndexBanner(models.Model):
+    content = HTMLField(verbose_name=_(
+        "contenu du bandeau"), null=True, blank=True, help_text=_("Très petits écrans (téléphones portables) : 500px.\nPetits écrans (tablettes) : 800px.\nÉcrans moyens : 1050px.\nÉcrans larges : 1300px.\nÉcrans très larges : >1600px."))
+    start_time = models.DateTimeField(
+        verbose_name=_("date de posage du bandeau"))
+    end_time = models.DateTimeField(verbose_name=_("date de fin du bandeau"))
+
+    class Meta:
+        verbose_name = _("bandeau de la page d'accueil")
+        verbose_name_plural = _("bandeaux de la page d'accueil")
+
+    def save(self, *args, **kwargs):
+        qs = IndexBanner.objects.filter(
+            end_time__gt=self.start_time).order_by(-'end_time')
+        if qs.exists():
+            messages.warning(_("Vous ne pouvez pas afficher un bandeau sur un autre."))
+            self.start_time = qs[0].end_time
+        super().save(**kwargs)
+
+
 class Language(models.Model):
     name = models.CharField(max_length=30, unique=True,
                             verbose_name=_("nom du langage de programmation/bibliothèque"))
@@ -85,7 +106,7 @@ class Language(models.Model):
     image = models.ImageField(
         upload_to='languages_tags/', verbose_name=_("logo"), null=True, blank=True)
     credit = models.URLField(null=True, blank=True,
-        max_length=120, verbose_name=_("URL vers l'image initiale"))
+                             max_length=120, verbose_name=_("URL vers l'image initiale"))
     content = HTMLField(verbose_name=_(
         "description du langage"), null=True, blank=True)
 
@@ -110,7 +131,7 @@ class Tag(models.Model):
     image = models.ImageField(upload_to='languages_tags/',
                               verbose_name=_("illustration"), null=True, blank=True)
     credit = models.URLField(null=True, blank=True,
-        max_length=120, verbose_name=_("URL vers l'image initiale"))
+                             max_length=120, verbose_name=_("URL vers l'image initiale"))
     content = HTMLField(verbose_name=_(
         "description de la catégorie"), null=True, blank=True)
 

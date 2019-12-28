@@ -1,6 +1,7 @@
 {% load i18n %}
 
 {% autoescape off %}
+{% url 'accounts:account' as account_url %}
 {% blocktrans with title=course.title %}Salut, cher utilisateur de ProgLangLearn,
 
 Une toute nouvelle formation vient d'être publiée et est intitulée : "{{ title }}"
@@ -11,4 +12,6 @@ Tu peux venir regarder les détails de celle-ci par ce lien :{% endblocktrans %}
 
 {% trans "De la part de toute l'équipe de ProgLangLearn," %}
 LETELLIER Guillaume
+
+{% blocktrans %}Vous pouvez vous désabonner et ne plus recevoir les notifications allant à cette adresse {{ account_url }} dans la rubrique "Modifier mes informations personnelles".{% endblocktrans %}
 {% endautoescape %}

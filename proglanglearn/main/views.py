@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.timezone import now
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView, View, ListView
 
@@ -13,7 +14,7 @@ from courses.models import Course, Tutorial
 from forum.models import Subject
 from .forms import CommentReportForm, SearchForm, NavbarSearchForm, ContactForm, BugForm
 from .mixins import NavbarSearchMixin
-from .models import Comment, Language, Tag, CommentReport
+from .models import Comment, Language, Tag, CommentReport, IndexBanner
 
 
 User = get_user_model()
@@ -25,7 +26,15 @@ class IndexView(NavbarSearchMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['last_courses'] = Course.objects.get_published_courses()[:3]
+        context['banner'] = self.get_banner()
         return context
+    
+    def get_banner(self):
+        now_ = now()
+        qs = IndexBanner.objects.filter(start_time__lte=now_, end_time__gte=now_)
+        if qs.exists():
+            return qs[0]
+        return False
 
 
 class AboutView(NavbarSearchMixin, TemplateView):
