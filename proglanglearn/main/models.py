@@ -130,7 +130,7 @@ class Language(models.Model):
             language = Language.objects.get(id=self.id)
             if language.image != self.image:
                 language.image.delete()
-            self.image = self.compress_image(self.image)
+                self.image = self.compress_image(self.image)
         except:
             pass
         super(Language, self).save(*args, **kwargs)
@@ -175,7 +175,7 @@ class Tag(models.Model):
             tag = Tag.objects.get(id=self.id)
             if tag.image != self.image:
                 tag.image.delete()
-            self.image = self.compress_image(self.image)
+                self.image = self.compress_image(self.image)
         except:
             pass
         super(Tag, self).save(*args, **kwargs)

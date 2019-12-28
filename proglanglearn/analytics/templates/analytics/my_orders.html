@@ -13,8 +13,8 @@
                     <h4 class="card-title">{% trans "Commande du" %} {{ order.ordered_date }} ({% trans "code de référence" %} : {{ order.ref_code }})</h4>
                     <div class="card-content mt-2">
                         {% with refund=order.get_refund %}
-                            {% trans "Demande de remboursement :" %} {% if order.refund_requested and order.refund_accepted %}<a class="success-color" href="{{ refund.get_absolute_url }}">{% trans "Acceptée" %}</a>{% elif order.refund_requested and refund.rejected %}<a class="red-color" href="{{ refund.get_absolute_url }}">{% trans "Rejetée" %}</a>{% elif order.refund_requested %}<a href="{{ refund.get_absolute_url }}">{% trans "En cours de traitement" %}</a>{% else %}{% trans "Aucune demande formulée" %}{% endif %}
-                            <br>{% if not order.refund_requested %}<a href="{% url 'main:billing:refund' %}">{% trans "Formuler une demande" %}</a>{% endif %}
+                            {% trans "Demande de remboursement :" %} {% if refund.order.refund_requested and refund.accepted %}<a class="success-color" href="{{ refund.get_absolute_url }}">{% trans "Acceptée" %}</a>{% elif refund.order.refund_requested and refund.rejected %}<a class="red-color" href="{{ refund.get_absolute_url }}">{% trans "Rejetée" %}</a>{% elif refund.order.refund_requested %}<a href="{{ refund.get_absolute_url }}">{% trans "En cours de traitement" %}</a>{% else %}{% trans "Aucune demande formulée" %}{% endif %}
+                            {% comment %} <br>{% if not order.refund_requested %}<a href="{% url 'main:billing:refund' %}">{% trans "Formuler une demande" %}</a>{% endif %} {% endcomment %}
                         {% endwith %}
                     </div>
                     <div class="card-content mt-1" style="text-align: right;">

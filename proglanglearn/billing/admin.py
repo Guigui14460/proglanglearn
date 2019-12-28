@@ -21,7 +21,8 @@ def make_refund_accepted(model_admin, request, queryset):
             refund.order.save()
             charge_id = refund.order.payment.stripe_charge_id[2:-3]
             refund_object = stripe.Refund.create(
-                charge=charge_id
+                charge=charge_id,
+                amount=int(refund.order.payment.amount * 95),
             )
             refund.refund_id = refund_object['id']
             refund.accepted = True

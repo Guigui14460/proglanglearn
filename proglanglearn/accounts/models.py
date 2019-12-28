@@ -105,7 +105,7 @@ class Profile(models.Model):
             profile = Profile.objects.get(user__id=self.id)
             if profile.image != self.image and profile.image.url != '/media/user_pictures/default.png':
                 profile.image.delete()
-            self.image = self.compress_image(self.image)
+                self.image = self.compress_image(self.image)
         except:
             pass
         super(Profile, self).save(*args, **kwargs)
