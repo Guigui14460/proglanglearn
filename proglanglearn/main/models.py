@@ -80,7 +80,7 @@ class EmailAdminNotificationForUsers(models.Model):
 
 class IndexBanner(models.Model):
     content = HTMLField(verbose_name=_(
-        "contenu du bandeau"), null=True, blank=True, help_text=_("Très petits écrans (téléphones portables) : 500px.\nPetits écrans (tablettes) : 800px.\nÉcrans moyens : 1050px.\nÉcrans larges : 1300px.\nÉcrans très larges : >1600px."))
+        "contenu du bandeau"), help_text=_("Très petits écrans (téléphones portables) : 500px.\nPetits écrans (tablettes) : 800px.\nÉcrans moyens : 1050px.\nÉcrans larges : 1300px.\nÉcrans très larges : >1600px."))
     start_time = models.DateTimeField(
         verbose_name=_("date de posage du bandeau"))
     end_time = models.DateTimeField(verbose_name=_("date de fin du bandeau"))
@@ -89,11 +89,15 @@ class IndexBanner(models.Model):
         verbose_name = _("bandeau de la page d'accueil")
         verbose_name_plural = _("bandeaux de la page d'accueil")
 
+    def __str__(self):
+        return f"Visible {self.start_time} to {self.end_time}"
+
     def save(self, *args, **kwargs):
         qs = IndexBanner.objects.filter(
-            end_time__gt=self.start_time).order_by(-'end_time')
+            end_time__gt=self.start_time).order_by('-end_time')
         if qs.exists():
-            messages.warning(_("Vous ne pouvez pas afficher un bandeau sur un autre."))
+            messages.warning(
+                _("Vous ne pouvez pas afficher un bandeau sur un autre."))
             self.start_time = qs[0].end_time
         super().save(**kwargs)
 

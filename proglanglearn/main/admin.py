@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Comment, CommentReport, EmailAdminNotificationForUsers, Language, Tag, User
+from .models import Comment, CommentReport, EmailAdminNotificationForUsers, IndexBanner, Language, Tag, User
 
 
 def give_staff_status(modeladmin, request, queryset):
@@ -60,6 +60,10 @@ class EmailAdminNotificationForUsersAdmin(ImportExportModelAdmin):
     list_filter = ['to_send']
 
 
+class IndexBannerAdmin(ImportExportModelAdmin):
+    pass
+
+
 class LanguageAdmin(ImportExportModelAdmin):
     fields = ['name', 'name_fr', 'name_en',
               'image', 'credit', 'content_fr', 'content_en']
@@ -79,6 +83,7 @@ admin.site.register(Comment, CommentAdmin)
 admin.site.register(CommentReport, CommentReportAdmin)
 admin.site.register(EmailAdminNotificationForUsers,
                     EmailAdminNotificationForUsersAdmin)
+admin.site.register(IndexBanner, IndexBannerAdmin)
 admin.site.register(Language, LanguageAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(User, UserAdmin)

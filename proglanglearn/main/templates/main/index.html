@@ -25,9 +25,9 @@
 
 {% block main %}
 {% if banner %}
-<div class="mt-3 mb-5">{{ banner }}</div>
+<div class="mt-3 mb-5">{{ banner.content|safe }}</div>
 {% endif %}
-<div class="mt-5 mb-5">
+<div class="{% if banner %}mt-5{% else %}mt-3{% endif %} mb-5">
   <h2 class="center-text">{% trans "Vous apprendrez tous ces langages et frameworks ..." %}</h2>
   <div class="small-vertical-carousel">
     <ul>
