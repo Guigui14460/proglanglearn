@@ -216,6 +216,12 @@ input[type="radio"]{
     }
 }
 
+select:not(.custom-multiple-select),
+select:not(.custom-select) {
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
 .form {
     .form-error {
         margin-bottom: 0.5em;
@@ -365,12 +371,6 @@ input[type="radio"]{
     textarea {
         resize: none;
         height: calc(#{$font-size-form} * 7);
-    }
-
-    select:not(.custom-multiple-select),
-    select:not(.custom-select) {
-        padding: 3px 5px;
-        border-radius: 5px;
     }
 
     .custom-select {
