@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-24 14:52+0100\n"
+"POT-Creation-Date: 2019-12-28 11:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Espace critique"
 msgstr ""
 
-#: .\accounts\admin.py:56 .\accounts\templates\accounts\account.html:38
+#: .\accounts\admin.py:56 .\accounts\templates\accounts\account.html:39
 #: .\articles\templates\articles\article_create.html:13
 #: .\courses\templates\courses\course_create.html:19
 #: .\courses\templates\courses\course_detail.html:20
@@ -70,8 +70,8 @@ msgstr ""
 
 #: .\accounts\allauth_forms.py:20 .\accounts\allauth_forms.py:34
 #: .\accounts\allauth_forms.py:82 .\accounts\forms.py:34
-#: .\accounts\forms.py:69 .\accounts\forms.py:215
-#: .\accounts\templates\accounts\account.html:70
+#: .\accounts\forms.py:69 .\accounts\forms.py:214
+#: .\accounts\templates\accounts\account.html:71
 msgid "Mot de passe"
 msgstr ""
 
@@ -174,19 +174,24 @@ msgid "Photo de profil"
 msgstr ""
 
 #: .\accounts\forms.py:147
-msgid "Addresse e-mail"
-msgstr ""
-
-#: .\accounts\forms.py:149
 msgid "Prénom"
 msgstr ""
 
-#: .\accounts\forms.py:151
+#: .\accounts\forms.py:149
 msgid "Nom"
 msgstr ""
 
-#: .\accounts\forms.py:153
+#: .\accounts\forms.py:151
 msgid "Recevoir des notifications par email"
+msgstr ""
+
+#: .\accounts\forms.py:153
+msgid "Rendre mon profil public"
+msgstr ""
+
+#: .\accounts\forms.py:153
+msgid ""
+"Votre profil sera visible mais pas indexé lors de la recherche de profils"
 msgstr ""
 
 #: .\accounts\forms.py:154
@@ -195,9 +200,8 @@ msgstr ""
 
 #: .\accounts\forms.py:155
 msgid ""
-"Les statuts de développeur et étudiant permet de vous mettre en avant. En "
-"choisissant un de ces deux choix, vous activerez la visibilité totale de "
-"votre profil (informations éducatives et professionnelles"
+"Les statuts de développeur et étudiant permet de vous mettre en avant. Cela "
+"vous permet de vous indexé lors des recherches de profils."
 msgstr ""
 
 #: .\accounts\forms.py:156
@@ -214,115 +218,115 @@ msgid ""
 "mis en avant. Cette donnée est utilisée pour des études statistiques."
 msgstr ""
 
-#: .\accounts\forms.py:174
+#: .\accounts\forms.py:173
 msgid ""
 "Cette adresse email a déjà été utilisée. Il faut en choisir une autre ou "
 "garder votre ancienne adresse si possible"
 msgstr ""
 
-#: .\accounts\forms.py:183
+#: .\accounts\forms.py:182
 msgid ""
 "Ce nom d'utilisateur a déjà été utilisée. Il faut en choisir un autre ou "
 "garder votre ancien nom d'utilisateur si possible"
 msgstr ""
 
-#: .\accounts\forms.py:188
+#: .\accounts\forms.py:187
 msgid "Biographie"
 msgstr ""
 
-#: .\accounts\forms.py:188
+#: .\accounts\forms.py:187
 msgid "Une courte biographie"
 msgstr ""
 
-#: .\accounts\forms.py:189
+#: .\accounts\forms.py:188
 msgid ""
 "Courte biographie ou une phrase/expression que vous aimez pour vous décrire "
 "rapidement (1500 caractères)."
 msgstr ""
 
-#: .\accounts\forms.py:190
+#: .\accounts\forms.py:189
 msgid "Choisissez des compétences (langages ou frameworks)"
 msgstr ""
 
-#: .\accounts\forms.py:193
+#: .\accounts\forms.py:192
 msgid ""
 "N.B. : multiple sélection possible.<br>S'il manque une bibliothèque ou un "
 "langage, demandez à le rajouter dans la page contact."
 msgstr ""
 
-#: .\accounts\forms.py:195
+#: .\accounts\forms.py:194
 msgid "URL de votre site web"
 msgstr ""
 
-#: .\accounts\forms.py:197
+#: .\accounts\forms.py:196
 msgid "URL de votre profil Twitter"
 msgstr ""
 
-#: .\accounts\forms.py:199
+#: .\accounts\forms.py:198
 msgid "URL de votre chaîne Youtube"
 msgstr ""
 
-#: .\accounts\forms.py:201
+#: .\accounts\forms.py:200
 msgid "URL de votre profil Facebook"
 msgstr ""
 
-#: .\accounts\forms.py:203
+#: .\accounts\forms.py:202
 msgid "URL de votre profil LinkedIn"
 msgstr ""
 
-#: .\accounts\forms.py:205
+#: .\accounts\forms.py:204
 msgid "URL de votre profil Intagram"
 msgstr ""
 
-#: .\accounts\forms.py:206
+#: .\accounts\forms.py:205
 msgid "Nom d'utilisateur de votre compte Github"
 msgstr ""
 
-#: .\accounts\forms.py:207
+#: .\accounts\forms.py:206
 msgid ""
 "<i class='fas fa-exclamation-triangle'></i> En renseignant ce champ, vous "
 "accepter de publier les liens et les informations de vos dépôts publics de "
 "votre compte Github."
 msgstr ""
 
-#: .\accounts\forms.py:212
+#: .\accounts\forms.py:211
 msgid "Le mot de passe que vous avez entré est incorrect. Veuillez réessayer."
 msgstr ""
 
-#: .\accounts\forms.py:241
+#: .\accounts\forms.py:243
 msgid "Master en sécurité informatique"
 msgstr ""
 
-#: .\accounts\forms.py:242 .\accounts\forms.py:259
+#: .\accounts\forms.py:244 .\accounts\forms.py:261
 msgid "Renseignements ..."
 msgstr ""
 
-#: .\accounts\forms.py:247
+#: .\accounts\forms.py:249
 msgid ""
 "Vous pouvez donner quelques renseignements sur les compétences acquises, vos "
 "résultats, etc"
 msgstr ""
 
-#: .\accounts\forms.py:258
+#: .\accounts\forms.py:260
 msgid "Analyste de données"
 msgstr ""
 
-#: .\accounts\forms.py:264
+#: .\accounts\forms.py:266
 msgid ""
 "Vous pouvez donner quelques renseignements sur le type d'emploi où vous êtes/"
 "étiez affecté, les compétences demandées/requises, ce que vous faîtes/"
 "faisiez, etc"
 msgstr ""
 
-#: .\accounts\forms.py:269
+#: .\accounts\forms.py:271
 msgid "Recherche de profil"
 msgstr ""
 
-#: .\accounts\forms.py:271
+#: .\accounts\forms.py:273
 msgid "Nom d'utilisateur, prénom ou nom de famille"
 msgstr ""
 
-#: .\accounts\forms.py:272
+#: .\accounts\forms.py:274
 msgid "N.B. : séparez les mots clés par des espaces pour plus de résultats."
 msgstr ""
 
@@ -330,202 +334,206 @@ msgstr ""
 msgid "Aucun fichier nommé 'README.md' n'a été trouvé à la racine de ce dépôt."
 msgstr ""
 
-#: .\accounts\mixins.py:28
+#: .\accounts\mixins.py:30
 msgid "Vous n'avez pas l'autorisation de modifier ce profil"
 msgstr ""
 
-#: .\accounts\mixins.py:37
+#: .\accounts\mixins.py:39
 msgid ""
 "Le profil auquel vous essayez d'accéder n'existe pas, ou plus, ou est "
 "actuellement inaccessible"
 msgstr ""
 
-#: .\accounts\models.py:25
+#: .\accounts\models.py:31
 msgid "ID du type"
 msgstr ""
 
-#: .\accounts\models.py:27
+#: .\accounts\models.py:33
 msgid "type de profession"
 msgstr ""
 
-#: .\accounts\models.py:30
+#: .\accounts\models.py:36
 msgid "statut en programmation"
 msgstr ""
 
-#: .\accounts\models.py:31
+#: .\accounts\models.py:37
 msgid "statuts en programmation"
 msgstr ""
 
-#: .\accounts\models.py:42 .\analytics\models.py:16 .\forum\models.py:17
+#: .\accounts\models.py:48 .\analytics\models.py:16 .\forum\models.py:17
 #: .\forum\models.py:57 .\polls\models.py:73
 msgid "utilisateur associé"
 msgstr ""
 
-#: .\accounts\models.py:44
+#: .\accounts\models.py:50
 msgid "est un développeur"
 msgstr ""
 
-#: .\accounts\models.py:46
+#: .\accounts\models.py:52
 msgid "est un étudiant en informatique"
 msgstr ""
 
-#: .\accounts\models.py:48
+#: .\accounts\models.py:54
 msgid "est un formateur"
 msgstr ""
 
-#: .\accounts\models.py:50
+#: .\accounts\models.py:56
 msgid "image de profil"
 msgstr ""
 
-#: .\accounts\models.py:51
+#: .\accounts\models.py:57
 msgid "pays"
 msgstr ""
 
-#: .\accounts\models.py:53
+#: .\accounts\models.py:59
 msgid "biographie"
 msgstr ""
 
-#: .\accounts\models.py:55
+#: .\accounts\models.py:61
 msgid "langages maîtrisés"
 msgstr ""
 
-#: .\accounts\models.py:57
+#: .\accounts\models.py:63
 msgid "signalement"
 msgstr ""
 
-#: .\accounts\models.py:59
+#: .\accounts\models.py:65
 msgid "adresse e-mail confirmée"
 msgstr ""
 
-#: .\accounts\models.py:61
+#: .\accounts\models.py:67
 msgid "notification par email"
 msgstr ""
 
-#: .\accounts\models.py:65
-msgid "niveau"
-msgstr ""
-
-#: .\accounts\models.py:67
-msgid "expérience acquise"
-msgstr ""
-
 #: .\accounts\models.py:69
-msgid "articles favoris"
-msgstr ""
-
-#: .\accounts\models.py:71
-msgid "sujets marqués comme favoris"
+msgid "profil public"
 msgstr ""
 
 #: .\accounts\models.py:73
-msgid "tutoriels marqués comme terminé"
+msgid "niveau"
 msgstr ""
 
 #: .\accounts\models.py:75
+msgid "expérience acquise"
+msgstr ""
+
+#: .\accounts\models.py:77
+msgid "articles favoris"
+msgstr ""
+
+#: .\accounts\models.py:79
+msgid "sujets marqués comme favoris"
+msgstr ""
+
+#: .\accounts\models.py:81
+msgid "tutoriels marqués comme terminé"
+msgstr ""
+
+#: .\accounts\models.py:83
 msgid "tutoriels favoris"
 msgstr ""
 
-#: .\accounts\models.py:78
+#: .\accounts\models.py:86
 msgid "nom d'utilisateur Github"
 msgstr ""
 
-#: .\accounts\models.py:80
+#: .\accounts\models.py:88
 msgid "liens vers les réseaux sociaux"
 msgstr ""
 
-#: .\accounts\models.py:86
+#: .\accounts\models.py:94
 msgid "profil"
 msgstr ""
 
-#: .\accounts\models.py:87
+#: .\accounts\models.py:95
 msgid "profils"
 msgstr ""
 
-#: .\accounts\models.py:120
+#: .\accounts\models.py:139
 msgid "Aucune école ou expérience renseignée"
 msgstr ""
 
-#: .\accounts\models.py:150 .\accounts\models.py:169
+#: .\accounts\models.py:169 .\accounts\models.py:188
 msgid "profil associé"
 msgstr ""
 
-#: .\accounts\models.py:151
+#: .\accounts\models.py:170
 msgid "nom de l'école"
 msgstr ""
 
-#: .\accounts\models.py:152
+#: .\accounts\models.py:171
 msgid "diplôme obtenu"
 msgstr ""
 
-#: .\accounts\models.py:153
+#: .\accounts\models.py:172
 msgid "description"
 msgstr ""
 
-#: .\accounts\models.py:154
+#: .\accounts\models.py:173
 msgid "date d'entrée dans l'école"
 msgstr ""
 
-#: .\accounts\models.py:156
+#: .\accounts\models.py:175
 msgid "date de sortie de l'école"
 msgstr ""
 
-#: .\accounts\models.py:160
+#: .\accounts\models.py:179
 msgid "éducation"
 msgstr ""
 
-#: .\accounts\models.py:161
+#: .\accounts\models.py:180
 msgid "éducations"
 msgstr ""
 
-#: .\accounts\models.py:171
+#: .\accounts\models.py:190
 msgid "nom de l'entreprise"
 msgstr ""
 
-#: .\accounts\models.py:173
+#: .\accounts\models.py:192
 msgid "type de l'emploi"
 msgstr ""
 
-#: .\accounts\models.py:174
+#: .\accounts\models.py:193
 msgid "description de l'emploi"
 msgstr ""
 
-#: .\accounts\models.py:176
+#: .\accounts\models.py:195
 msgid "date d'arrivée dans l'entreprise"
 msgstr ""
 
-#: .\accounts\models.py:178
+#: .\accounts\models.py:197
 msgid "date de sortie de l'entreprise"
 msgstr ""
 
-#: .\accounts\models.py:182 .\analytics\models.py:18
+#: .\accounts\models.py:201 .\analytics\models.py:18
 msgid "expérience"
 msgstr ""
 
-#: .\accounts\models.py:183
+#: .\accounts\models.py:202
 msgid "expériences"
 msgstr ""
 
-#: .\accounts\models.py:191
+#: .\accounts\models.py:210
 msgid "profil reporté"
 msgstr ""
 
-#: .\accounts\models.py:193 .\main\models.py:205
+#: .\accounts\models.py:212 .\main\models.py:205
 msgid "vérifié"
 msgstr ""
 
-#: .\accounts\models.py:194 .\main\models.py:206
+#: .\accounts\models.py:213 .\main\models.py:206
 msgid "à striker"
 msgstr ""
 
-#: .\accounts\models.py:195 .\main\models.py:207
+#: .\accounts\models.py:214 .\main\models.py:207
 msgid "striké"
 msgstr ""
 
-#: .\accounts\models.py:198
+#: .\accounts\models.py:217
 msgid "signalement de profil"
 msgstr ""
 
-#: .\accounts\models.py:199
+#: .\accounts\models.py:218
 msgid "signalements de profil"
 msgstr ""
 
@@ -534,44 +542,44 @@ msgstr ""
 msgid "Mon compte"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:11
+#: .\accounts\templates\accounts\account.html:12
 msgid "Réglages de votre compte"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:12
+#: .\accounts\templates\accounts\account.html:13
 msgid "Modifier les paramètres et informations de votre compte !"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:15
+#: .\accounts\templates\accounts\account.html:16
 #: .\accounts\templates\accounts\edit_profile.html:9
 msgid "Voir mon profil"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:20
-#: .\accounts\templates\accounts\account.html:32
+#: .\accounts\templates\accounts\account.html:21
+#: .\accounts\templates\accounts\account.html:33
 msgid "Modifier mes informations personnelles"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:22
-#: .\accounts\templates\accounts\account.html:65
+#: .\accounts\templates\accounts\account.html:23
+#: .\accounts\templates\accounts\account.html:66
 #: .\templates\registration\account_activation_invalid.html:11
 msgid "Changer mon mot de passe"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:24
-#: .\accounts\templates\accounts\account.html:84
+#: .\accounts\templates\accounts\account.html:25
+#: .\accounts\templates\accounts\account.html:85
 msgid "Modifier les informations visibles sur mon profil"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:26
+#: .\accounts\templates\accounts\account.html:27
 #: .\accounts\templates\accounts\account.html:136
 msgid "Zone de danger"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:56
-#: .\accounts\templates\accounts\account.html:75
-#: .\accounts\templates\accounts\account.html:127
-#: .\accounts\templates\accounts\account.html:144
+#: .\accounts\templates\accounts\account.html:57
+#: .\accounts\templates\accounts\account.html:76
+#: .\accounts\templates\accounts\account.html:128
+#: .\accounts\templates\accounts\account.html:152
 #: .\accounts\templates\accounts\includes\education.html:44
 #: .\accounts\templates\accounts\includes\experience.html:43
 #: .\articles\templates\articles\article_create.html:28
@@ -586,48 +594,60 @@ msgid ""
 "obligatoires."
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:58
-#: .\accounts\templates\accounts\account.html:77
+#: .\accounts\templates\accounts\account.html:59
+#: .\accounts\templates\accounts\account.html:78
 msgid "Changer"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:89
+#: .\accounts\templates\accounts\account.html:90
 msgid "Informations importantes"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:94
+#: .\accounts\templates\accounts\account.html:95
 msgid "Liens externes"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:121
+#: .\accounts\templates\accounts\account.html:122
 msgid "Vos dépôts Github"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:125
+#: .\accounts\templates\accounts\account.html:126
 #, python-format
 msgid ""
 "Pour ajouter ou supprimer d'autres informations sur votre profil, vous devez "
 "vous rendre sur <a href=\"%(edit_profile_url)s\">cette page</a>."
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:129
+#: .\accounts\templates\accounts\account.html:130
 msgid "Mettre à jour mon profil"
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:141
-msgid "Supprimer mon compte"
+#: .\accounts\templates\accounts\account.html:137
+msgid "La désactivation de votre compte sera définitive."
 msgstr ""
 
-#: .\accounts\templates\accounts\account.html:146
-#: .\accounts\templates\accounts\includes\education.html:17
-#: .\accounts\templates\accounts\includes\experience.html:17
-#: .\analytics\templates\analytics\my_.html:58
-#: .\analytics\templates\analytics\my_.html:95
-#: .\articles\templates\articles\article_detail.html:27
-#: .\courses\templates\courses\course_create.html:37
-#: .\main\templates\main\includes\comments.html:33
-#: .\main\templates\main\includes\comments.html:43
-msgid "Supprimer"
+#: .\accounts\templates\accounts\account.html:138
+#, python-format
+msgid ""
+"Si vous cliquez, vous perdrez l'accès à votre compte ainsi qu'aux achats "
+"effectués sur celui-ci ! Pour plus d'informations, vous pouvez aller voir "
+"nos <a href=\"%(privacy_url)s\">politiques de confidentialité</a>."
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:140
+msgid "Désactiver mon compte"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:143
+msgid "Confirmation de la désactivation de votre compte"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:149
+msgid "Désactiver maintenant"
+msgstr ""
+
+#: .\accounts\templates\accounts\account.html:155
+msgid "Désactiver définitivement"
 msgstr ""
 
 #: .\accounts\templates\accounts\edit_profile.html:4
@@ -673,6 +693,17 @@ msgstr ""
 #: .\accounts\templates\accounts\profile.html:77
 #: .\accounts\templates\accounts\profile.html:90
 msgid "Maintenant"
+msgstr ""
+
+#: .\accounts\templates\accounts\includes\education.html:17
+#: .\accounts\templates\accounts\includes\experience.html:17
+#: .\analytics\templates\analytics\my_.html:58
+#: .\analytics\templates\analytics\my_.html:95
+#: .\articles\templates\articles\article_detail.html:27
+#: .\courses\templates\courses\course_create.html:37
+#: .\main\templates\main\includes\comments.html:33
+#: .\main\templates\main\includes\comments.html:43
+msgid "Supprimer"
 msgstr ""
 
 #: .\accounts\templates\accounts\includes\education.html:21
@@ -885,105 +916,105 @@ msgid ""
 "(actual_user_level)s"
 msgstr ""
 
-#: .\accounts\views.py:60
+#: .\accounts\views.py:61
 msgid "Suspicion de compromission de votre compte ProgLangLearn"
 msgstr ""
 
-#: .\accounts\views.py:93 .\accounts\views.py:124
+#: .\accounts\views.py:94 .\accounts\views.py:125
 msgid "Activez votre compte ProgLangLearn"
 msgstr ""
 
-#: .\accounts\views.py:105
+#: .\accounts\views.py:106
 #, python-format
 msgid "Envoi du mail d'activation du compte %(username)s effectué avec succès"
 msgstr ""
 
-#: .\accounts\views.py:108 .\accounts\views.py:139
+#: .\accounts\views.py:109 .\accounts\views.py:140
 msgid "Échec de l'envoi de l'email d'activation"
 msgstr ""
 
-#: .\accounts\views.py:136
+#: .\accounts\views.py:137
 #, python-format
 msgid ""
 "Votre compte existait déjà mais n'a pas été activé. Envoi du mail "
 "d'activation du compte %(username)s effectué avec succès"
 msgstr ""
 
-#: .\accounts\views.py:147
+#: .\accounts\views.py:148
 msgid ""
 "Votre compte a déjà été activé. Connectez-vous ou demandez à changer de mot "
 "de passe"
 msgstr ""
 
-#: .\accounts\views.py:150
+#: .\accounts\views.py:151
 msgid ""
 "Veuillez respecter et remplir correctement <strong>TOUS</strong> les champs "
 "obligatoires"
 msgstr ""
 
-#: .\accounts\views.py:184
+#: .\accounts\views.py:185
 msgid "Activation de votre compte effectuée avec succès"
 msgstr ""
 
-#: .\accounts\views.py:297
+#: .\accounts\views.py:298
 msgid "Vos informations personnelles ont été mises à jour"
 msgstr ""
 
-#: .\accounts\views.py:300
+#: .\accounts\views.py:301
 msgid ""
 "Vos informations personnelles n'ont pas pu être modifiées. Rétablissement "
 "des anciennes informations"
 msgstr ""
 
-#: .\accounts\views.py:337
+#: .\accounts\views.py:338
 msgid "Les informations sur votre profil ont été mises à jour"
 msgstr ""
 
-#: .\accounts\views.py:340
+#: .\accounts\views.py:341
 msgid ""
 "Vos informations visibles de votre profil n'ont pas pu être modifiées. "
 "Rétablissement des anciennes informations"
 msgstr ""
 
-#: .\accounts\views.py:352
+#: .\accounts\views.py:356
 msgid "Votre compte a été désactivé"
 msgstr ""
 
-#: .\accounts\views.py:354
+#: .\accounts\views.py:358
 msgid "Votre compte n'a pas pu être désactiver"
 msgstr ""
 
-#: .\accounts\views.py:434
+#: .\accounts\views.py:438
 msgid "École ajoutée à votre espace éducation"
 msgstr ""
 
-#: .\accounts\views.py:453
+#: .\accounts\views.py:457
 msgid "Expérience ajoutée à votre espace expérience"
 msgstr ""
 
-#: .\accounts\views.py:475
+#: .\accounts\views.py:479
 msgid "Profil signalé"
 msgstr ""
 
-#: .\accounts\views.py:477
+#: .\accounts\views.py:481
 msgid "Vous ne pouvez pas vous signaler vous-même"
 msgstr ""
 
-#: .\accounts\views.py:479
+#: .\accounts\views.py:483
 msgid ""
 "Le profil a déjà été signalé et est en attente de modification par le gérant "
 "de ce profil"
 msgstr ""
 
-#: .\accounts\views.py:488
+#: .\accounts\views.py:492
 msgid "Expérience supprimée"
 msgstr ""
 
-#: .\accounts\views.py:491 .\accounts\views.py:503
+#: .\accounts\views.py:495 .\accounts\views.py:507
 msgid "Vous n'avez pas l'autorisation de le supprimer"
 msgstr ""
 
-#: .\accounts\views.py:500
+#: .\accounts\views.py:504
 msgid "Éducation supprimée"
 msgstr ""
 
@@ -2768,7 +2799,7 @@ msgid "Discriminations physiques, racistes, sexistes"
 msgstr ""
 
 #: .\main\models.py:21
-msgid "Incitations ou apologie du terrorisme"
+msgid "Apologie du terrorisme"
 msgstr ""
 
 #: .\main\models.py:22
@@ -2945,13 +2976,37 @@ msgstr ""
 msgid "2.1 Des ressources éducatives gratuites"
 msgstr ""
 
+#: .\main\templates\main\about.html:31
+msgid ""
+"Des <strong>articles</strong> donnant des informations, des astuces sur "
+"différents\n"
+"                    langages\n"
+"                    concernant des mises à jour importantes, ou des "
+"fonctionnalités toutes nouvellement\n"
+"                    trouvées"
+msgstr ""
+
 #: .\main\templates\main\about.html:36
 msgid ""
 "Des <strong>sujets</strong> proposés par des personnes pour avoir de l'aide"
 msgstr ""
 
+#: .\main\templates\main\about.html:37
+msgid ""
+"Des <strong>cours</strong> gratuits, générallement des introductions à un "
+"langage ou un\n"
+"                    framework"
+msgstr ""
+
 #: .\main\templates\main\about.html:42
 msgid "2.2 Les formations complètes (payantes)"
+msgstr ""
+
+#: .\main\templates\main\about.html:44
+msgid ""
+"Des <strong>projets complets</strong> destinés à accomplir une tâche réelle "
+"tel qu'un\n"
+"                    logiciel ou un site web"
 msgstr ""
 
 #: .\main\templates\main\about.html:50

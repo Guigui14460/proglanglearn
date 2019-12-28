@@ -64,6 +64,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Session settings
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_AGE = 3600 * 24 * 7
+
+
 # Allauth settings
 SITE_ID = 4
 

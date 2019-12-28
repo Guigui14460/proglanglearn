@@ -62,12 +62,12 @@ class EmailAdminNotificationForUsersAdmin(ImportExportModelAdmin):
 
 class LanguageAdmin(ImportExportModelAdmin):
     fields = ['name', 'name_fr', 'name_en',
-              'image', 'content_fr', 'content_en']
+              'image', 'credit', 'content_fr', 'content_en']
 
 
 class TagAdmin(ImportExportModelAdmin):
     fields = ['name', 'name_fr', 'name_en',
-              'image', 'content_fr', 'content_en']
+              'image', 'credit', 'content_fr', 'content_en']
 
 
 class UserAdmin(BaseUserAdmin, ImportExportModelAdmin):

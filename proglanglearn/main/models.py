@@ -84,6 +84,8 @@ class Language(models.Model):
                             verbose_name=_("URL d'accès"))
     image = models.ImageField(
         upload_to='languages_tags/', verbose_name=_("logo"), null=True, blank=True)
+    credit = models.URLField(null=True, blank=True,
+        max_length=120, verbose_name=_("URL vers l'image initiale"))
     content = HTMLField(verbose_name=_(
         "description du langage"), null=True, blank=True)
 
@@ -107,6 +109,8 @@ class Tag(models.Model):
                             verbose_name=_("URL d'accès"))
     image = models.ImageField(upload_to='languages_tags/',
                               verbose_name=_("illustration"), null=True, blank=True)
+    credit = models.URLField(null=True, blank=True,
+        max_length=120, verbose_name=_("URL vers l'image initiale"))
     content = HTMLField(verbose_name=_(
         "description de la catégorie"), null=True, blank=True)
 

@@ -24,6 +24,10 @@ figure {
     @include medium-device {
         width: 100%;
     }
+
+    figcaption {
+        font-style: italic;
+    }
 }
 
 .clear {
@@ -68,8 +72,3 @@ svg {
         width: 100%;
     }
 }
-
-// video {
-//     width: auto;
-//     height: 100%;
-// }

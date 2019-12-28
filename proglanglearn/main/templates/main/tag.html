@@ -7,7 +7,10 @@
 <h1 class="large">{{ tag.name }}</h1>
 <div class="my-1">
     {% if tag.image %}
-        <img class="mb-2" src="{{ tag.image.url }}" alt="{% trans "Image d'illustration" %}">
+        <figure class="image float-right" style="width: 300px;">
+            <img src="{{ tag.image.url }}" class="mb-1" alt="{% trans "Image d'illustration" %}">
+            {% if tag.credit %}<figcaption>&copy; <a href="{{ tag.credit }}" title="{{ tag.credit }}">{% trans "Crédit" %}</a></figcaption>{% endif %}
+        </figure>
     {% endif %}
     {{ tag.content|safe }}
 </div>

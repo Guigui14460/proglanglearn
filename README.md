@@ -31,6 +31,10 @@ To compile translations :
 ```
 django-admin compilemessages
 ```
+To clear sessions :
+```
+python manage.py clearsessions
+```
 
 To update style files :
 ```
