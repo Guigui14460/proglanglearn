@@ -1,7 +1,11 @@
+from io import BytesIO
+import sys
+
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.mail import send_mass_mail
 from django.db import models
 from django.db.models.signals import pre_save
@@ -9,6 +13,7 @@ from django.shortcuts import reverse
 from django.utils.text import slugify
 from django.utils.translation import activate, get_language, gettext_lazy as _
 
+from PIL import Image
 from tinymce.models import HTMLField
 
 from .managers import LanguageManager, TagManager
@@ -120,6 +125,26 @@ class Language(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        try:
+            language = Language.objects.get(id=self.id)
+            if language.image != self.image:
+                language.image.delete()
+            self.image = self.compress_image(self.image)
+        except:
+            pass
+        super(Language, self).save(*args, **kwargs)
+
+    def compress_image(self, image):
+        temporary_image = Image.open(image)
+        output_io = BytesIO()
+        temporary_resized_image = temporary_image.thumbnail((500, 500))
+        temporary_image.save(output_io, format='JPEG', quality=60)
+        output_io.seek(0)
+        image = InMemoryUploadedFile(
+            output_io, 'ImageField', f"{self.user.username}.jpg", 'image/jpeg', sys.getsizeof(output_io), None)
+        return image
+
     def get_absolute_url(self):
         return reverse('main:language_tag', kwargs={'slug': self.slug})
 
@@ -144,6 +169,25 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        try:
+            tag = Tag.objects.get(id=self.id)
+            if tag.image != self.image:
+                tag.image.delete()
+            self.image = self.compress_image(self.image)
+        except:
+            pass
+        super(Tag, self).save(*args, **kwargs)
+
+    def compress_image(self, image):
+        temporary_image = Image.open(image)
+        output_io = BytesIO()
+        temporary_image.save(output_io, format='JPEG', quality=70)
+        output_io.seek(0)
+        image = InMemoryUploadedFile(
+            output_io, 'ImageField', f"{self.user.username}.jpg", 'image/jpeg', sys.getsizeof(output_io), None)
+        return image
 
     def get_absolute_url(self):
         return reverse('main:language_tag', kwargs={'slug': self.slug})
