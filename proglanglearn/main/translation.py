@@ -1,6 +1,6 @@
 from modeltranslation.translator import register, TranslationOptions
 
-from .models import Language, Tag, EmailAdminNotificationForUsers
+from .models import Language, Tag, EmailAdminNotificationForUsers, IndexBanner
 
 
 @register(Language)
@@ -16,3 +16,8 @@ class TagTranslationOptions(TranslationOptions):
 @register(EmailAdminNotificationForUsers)
 class EmailAdminNotificationForUsersTranslationOptions(TranslationOptions):
     fields = ('subject', 'body')
+
+
+@register(IndexBanner)
+class IndexBannerTranslationOptions(TranslationOptions):
+    fields = ('content',)

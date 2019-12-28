@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -80,7 +79,7 @@ class EmailAdminNotificationForUsers(models.Model):
 
 class IndexBanner(models.Model):
     content = HTMLField(verbose_name=_(
-        "contenu du bandeau"), help_text=_("Très petits écrans (téléphones portables) : 500px.\nPetits écrans (tablettes) : 800px.\nÉcrans moyens : 1050px.\nÉcrans larges : 1300px.\nÉcrans très larges : >1600px."))
+        "contenu du bandeau"), help_text=_("Très petits écrans (téléphones portables) : 500px.<br>Petits écrans (tablettes) : 800px.<br>Écrans moyens : 1050px.<br>Écrans larges : 1300px.<br>Écrans très larges : >1600px."))
     start_time = models.DateTimeField(
         verbose_name=_("date de posage du bandeau"))
     end_time = models.DateTimeField(verbose_name=_("date de fin du bandeau"))
@@ -94,10 +93,8 @@ class IndexBanner(models.Model):
 
     def save(self, *args, **kwargs):
         qs = IndexBanner.objects.filter(
-            end_time__gt=self.start_time).order_by('-end_time')
+            end_time__gt=self.start_time).exclude(id=self.id).order_by('-end_time')
         if qs.exists():
-            messages.warning(
-                _("Vous ne pouvez pas afficher un bandeau sur un autre."))
             self.start_time = qs[0].end_time
         super().save(**kwargs)
 

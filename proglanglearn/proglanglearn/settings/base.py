@@ -138,6 +138,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
+
 # Email config
 DEFAULT_FROM_EMAIL = 'ProgLangLearn <proglanglearn@gmail.com>'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -147,6 +148,10 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASS')
+
+
+# Session settings
+SESSION_COOKIE_AGE = 3600 * 24 * 7
 
 
 # Account settings

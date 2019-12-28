@@ -28,10 +28,10 @@ class IndexView(NavbarSearchMixin, TemplateView):
         context['last_courses'] = Course.objects.get_published_courses()[:3]
         context['banner'] = self.get_banner()
         return context
-    
+
     def get_banner(self):
         now_ = now()
-        qs = IndexBanner.objects.filter(start_time__lte=now_, end_time__gte=now_)
+        qs = IndexBanner.objects.all().filter(start_time__lte=now_, end_time__gte=now_)
         if qs.exists():
             return qs[0]
         return False
