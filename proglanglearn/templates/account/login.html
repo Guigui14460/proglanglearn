@@ -1,10 +1,11 @@
 {% extends "account/base.html" %}
-{% load i18n %}
-{% load account socialaccount %}
+{% load i18n account socialaccount recaptcha3 %}
 
 {% block title %}{% trans "Sign In" %} - {% endblock title %}
 
 {% block main %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name='/' %}
 {% url 'account_reset_password' as forgotten_password_url %}
 <h1 class="large">{% trans "Sign In" %}</h1>
 <p class="lead"><i class="fas fa-user"></i>&nbsp;{% trans "Connectez-vous à votre compte !" %}</p>

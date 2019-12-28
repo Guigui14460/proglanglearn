@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n recaptcha3 %}
 
 {% block title %}{% if type == 'add' %}{% trans 'Ajouter un tutoriel' %}{% else %}{% trans 'Modifier un tutoriel' %}{% endif %} - {% endblock title %}
 
 {% block main %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name='/' %}
 <h1 class="large">{% if type == 'add' %}{% trans 'Ajouter un tutoriel au cours' %}{% else %}{% trans 'Modifier un tutoriel du cours' %}{% endif %} "{{ course.title }}"</h1>
 <form method="POST" class="form" enctype="multipart/form-data">
     {% csrf_token %}

@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n recaptcha3 %}
 
 {% block title %}{% trans "S'enregistrer" %} - {% endblock title %}
 
 {% block main %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name='/' %}
 {% url 'account_login' as login_url %}
 <h1 class="large">{% trans "S'enregistrer" %}</h1>
 <p class="lead"><i class="fas fa-user-plus"></i>&nbsp;{% trans 'Créez votre compte dès maintenant !' %}</p>

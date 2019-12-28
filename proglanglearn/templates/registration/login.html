@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n recaptcha3 %}
 
 {% block title %}{% trans 'Connexion' %} - {% endblock title %}
 
 {% block main %}
+{% recaptcha_init %}
+{% recaptcha_ready action_name='/' %}
 {% url 'account_signup' as signup_url %}
 {% url 'accounts:password_reset' as password_reset_url %}
 <h1 class="large">{% trans "S'identifier" %}</h1>

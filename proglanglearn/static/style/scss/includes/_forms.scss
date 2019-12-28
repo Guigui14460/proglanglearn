@@ -70,6 +70,12 @@ html[data-theme="dark"]{
         }
     }
 
+    select:not(.custom-multiple-select),
+    select:not(.custom-select){
+        color: #ffffff;
+        background: #666666;
+    }
+
     .custom-select {
         .select-selected {
             @include set-background($main-black-container);
@@ -219,6 +225,22 @@ input[type="radio"]{
         font-size: 18px;
     }
 
+    fieldset {
+        border: 2px solid $black;
+        border-radius: 5px;
+        padding: 0 $font-size-form;
+        margin: 1.3rem 0;
+
+        legend {
+            font-size: 1.1rem;
+            padding: 0 0.5rem;
+        }
+
+        .form-group {
+            margin: 1.2rem;
+        }
+    }
+
     .form-group {
         margin: 1.2rem 0;
 
@@ -345,6 +367,12 @@ input[type="radio"]{
         height: calc(#{$font-size-form} * 7);
     }
 
+    select:not(.custom-multiple-select),
+    select:not(.custom-select) {
+        padding: 3px 5px;
+        border-radius: 5px;
+    }
+
     .custom-select {
         position: relative;
         width: 100%;
@@ -406,22 +434,6 @@ input[type="radio"]{
     
         .select-items div:hover, .same-as-selected {
             @include set-background(rgb(228, 220, 220));
-        }
-    }
-
-    fieldset {
-        border: 2px solid $black;
-        border-radius: 5px;
-        padding: 0 $font-size-form;
-        margin: 1.3rem 0;
-
-        legend {
-            font-size: 1.1rem;
-            padding: 0 0.5rem;
-        }
-
-        .form-group {
-            margin: 1.2rem;
         }
     }
 

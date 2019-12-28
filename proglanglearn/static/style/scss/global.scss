@@ -44,6 +44,19 @@ html {
 
 html[data-theme="dark"] {
     @include set-background($main-black-container);
+
+    ::-webkit-scrollbar-track {
+        background: #171717;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #8b8b8b;
+        border-radius: 10px;
+    }
 }
 
 html.transition,

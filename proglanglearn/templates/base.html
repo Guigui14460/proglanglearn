@@ -1,4 +1,4 @@
-{% load static recaptcha3 i18n %}
+{% load static i18n %}
 
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -35,21 +35,7 @@
     <link rel="stylesheet" href="{% static 'style/css/print.min.css' %}" media="print" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    {% recaptcha_init %}
-    {% recaptcha_ready action_name='/' %}
     <style>
-        select:not(.custom-multiple-select),
-        select:not(.custom-select) {
-            padding: 3px 5px;
-            border-radius: 5px;
-        }
-
-        html[data-theme="dark"] select:not(.custom-multiple-select),
-        html[data-theme="dark"] select:not(.custom-select){
-            color: #ffffff;
-            background: #666666;
-        }
-
         select[name="language"],
         html[data-theme="dark"] select[name="language"] {
             font-size: 1rem;
