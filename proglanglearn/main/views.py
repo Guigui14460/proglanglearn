@@ -1,7 +1,9 @@
 from itertools import chain
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -91,6 +93,15 @@ class ContactView(NavbarSearchMixin, View):
 
 class TermsView(NavbarSearchMixin, TemplateView):
     template_name = "main/terms.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TermsView, self).get_context_data(**kwargs)
+        current_site = get_current_site(self.request)
+        context['protocol'] = settings.PROTOCOL
+        context['domain'] = current_site.domain
+        context['max_strike'] = settings.MAX_STRIKE
+        return context
+    
 
 
 class PrivacyView(NavbarSearchMixin, TemplateView):

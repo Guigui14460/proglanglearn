@@ -4,5 +4,129 @@
 {% block title %}{% trans 'Termes et conditions' %} - {% endblock title %}
 
 {% block main %}
+{% url 'main:analytics:dashboard' as dashboard_url %}
+{% url 'main:billing:refund' as refund_url %}
+{% url 'main:contact' as contact_url %}
+{% url 'accounts:account' as account_url %}
+{% url 'account_reset_password' as forgotten_password_url %}
 <h1 class="large">{% trans "Termes et conditions générales d'utilisation et de vente" %}</h1>
+<div>
+    <div class="my-1">
+        {% blocktrans %}Cette page contient toutes les informations concernant nos conditions générales 
+        d'utilisation et de ventes sur notre site. Veuillez les lire afin de n'avoir aucune surprise 
+        lors de la navigation sur ProgLangLearn. Voici les quelques points abordés :{% endblocktrans %}
+    </div>
+    <ol>
+        <li><a href="#objectives">{% trans "Notre objectif" %}</a></li>
+        <li><a href="#users_rights_obligations">{% trans "Vos droits et obligations en tant qu'utilisateur" %}</a></li>
+        <li><a href="#sanctions">{% trans "Les sanctions" %}</a></li>
+        <li><a href="#profiles">{% trans "Les profils" %}</a></li>
+        <li><a href="#forums_comments">{% trans "Le forum et les autres espaces de libre-échanges" %}</a></li>
+        <li><a href="#admins_rights_obligations">{% trans "Nos droits et nos obligations en tant qu'administrateurs" %}</a></li>
+        <li><a href="#copyrights_intellectual_property">{% trans "Droits d'auteur et droit de la propriété intellectuelle" %}</a></li>
+        <li><a href="#sales">{% trans "Vente" %}</a></li>
+        <li><a href="#promotional_coupons">{% trans "Codes promotionnels" %}</a></li>
+        <li><a href="#dispute_resolutions">{% trans "Modalités de règlement des litiges" %}</a></li>
+        <li><a href="#account_creation">{% trans "Étapes à suivre lors de la création de votre compte" %}</a></li>
+    </ol>
+    <section id="objectives" class="my-4">
+        <h2>1. {% trans "Notre objectif" %}</h2>
+        <p>{% blocktrans %}Les objectifs du site sont de vous permettre d’apprendre les bases de la programmation informatiques et de les appliquer sur des projets concrets. Ces projets ont pour but aussi de montrer la démarche de conception d’un logiciel. Des éléments seront ajoutés, toujours en lien avec la programmation, comme des maths pour permettre de comprendre certains concepts plus ou moins complexe, du traitement de texte pour rédiger et lire facilement de beaux rapports scientifiques.{% endblocktrans %}</p>
+    </section>
+    <section id="users_rights_obligations" class="my-4">
+        <h2>2. {% trans "Vos droits et obligations en tant qu'utilisateur" %}</h2>
+        <p><strong>{% trans "L’utilisateur doit :" %}</strong></p>
+        <ul>
+            <li>{% blocktrans %}garder secret ses identifiants pour ne pas se faire voler son compte. En cas de perte ou de vol de votre compte, vous pourrez <a href="{{ forgotten_password_url }}">réinitialiser votre mot de passe</a>. Si votre compte ne peut pas être récupéré, vous pourrez ouvrir un autre compte (avec une adresse électronique différente) pour ensuite <a href="{{ contact_url }}">faire une demande</a> auprès de notre administration pour récupérer vos informations et les transférer sur votre nouveau compte et supprimer l’ancien ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}ne pas tenter de nuire au bon fonctionnement du site. En cas d’entrave au bon fonctionnement de notre site, l’utilisateur peut se voir perdre définitivement l’accès à son compte et de possibles poursuites juridiques pourront être engagés ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}ne pas tenir de propos injurieux, racistes, sexistes envers d’autres utilisateurs ou harceler sur les espaces de libre-échanges et l’espace commentaire de chaque tutoriel. Il ne devra pas non plus tenir des propos incitant à la violence, à la haine, ou encore à l’apologie du terrorisme, au négationnisme. Si l’une de ces interdictions sont signalées par les utilisateurs et vérifiées par les modérateurs du site, l’utilisateur s’expose à des sanctions ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}ne pas tenir les mêmes propos (que précédemment énoncés) et/ou avoir une image de profil inappropriée. Dans ce cas, le profil sera signalé et sanctionné.{% endblocktrans %}</li>
+        </ul>
+        <p><strong>{% trans "L'utilisateur peut :" %}</strong></p>
+        <ul>
+            <li>{% blocktrans %}désactiver son compte à tout moment dans l’onglet "Mon compte" dans la rubrique "Zone de danger" (ou en <a href="{{ account_url }}#danger-zone">cliquant ici</a>). Vous n’aurez donc plus accès à votre compte et tous les paiements fait avec celui-ci, seront perdus ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}souhaiter rester anonyme. Pour cela, dans l’espace "Mon Compte", dans la rubrique "Modifier mes informations personnelles", (ou en <a href="{{ account_url }}#personal-info">cliquant ici</a>), vous avez juste à décocher le champ de formulaire "Rendre mon profil public" ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}signaler un bug dans l’esthétique ou l’architecture du site ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}signaler un commentaire ou un profil ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}se désabonner de la newsletter afin de ne plus recevoir les messages notificatifs (à part les messages de l’administration du site).{% endblocktrans %}</li>
+        </ul>
+    </section>
+    <section id="sanctions" class="my-4">
+        <h2>3. {% trans "Les sanctions" %}</h2>
+        <p>{% blocktrans %}À chaque signalement, une vérification est ouverte pour l’analyser au plus vite. Chaque utilisateur peut être sanctionné pour différentes raisons. 
+        Une vérification de signalement correspond à une sanction. À chaque sanction, vous recevez un message électronique pour vous informer du nombre de sanctions de votre 
+        compte. Au bout de {{ max_strike }} signalements sanctionnés, votre compte est automatiquement désactiver et aucun recours ne pourra être formulé. Vous pouvez voir le 
+        nombre de signalements sanctionnées sur votre <a href="{{ dashboard_url }}">tableau de bord</a>.{% endblocktrans %}</p>
+    </section>
+    <section id="profiles" class="my-4">
+        <h2>4. {% trans "Les profils" %}</h2>
+        <p>{% blocktrans %}Aucun propos ou visuels inappropriés ne doit être présents sur votre profil. En cas de signalement, vous vous exposez à des sanctions.<br>
+        Votre profil est entièrement personnalisable sauf la première section de celui-ci. Cela permet au site de garder une certaine homogénéité.<br>
+        Vous pouvez aisément depuis l’espace "Mon compte" :{% endblocktrans %}</p>
+        <ul>
+            <li>{% blocktrans %}modifier votre biographie (permet de mieux vous connaître) ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}choisir vos compétences ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}ajouter des liens externes menant à vos réseaux sociaux (seulement votre site web personnel, chaîne YouTube, profil LinkedIn, Facebook, Twitter et/ou Instagram) ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}ajouter votre nom d’utilisateur Github (même si vous vous connectez avec un compte Github, nous n’accédons pas aux informations sur vos dépôts). Seuls les dépôts publics sont affichés.{% endblocktrans %}</li>
+        </ul>
+        <p>{% blocktrans %}Pour éditer votre profil plus en profondeur, vous devez aller sur votre profil et cliquer sur le bouton "Éditer mon profil". Sur cette page, vous pourrez :{% endblocktrans %}</p>
+        <ul>
+            <li>{% blocktrans %}ajouter ou supprimer des expériences personnelles ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}ajouter ou supprimer des écoles.{% endblocktrans %}</li>
+        </ul>
+        <p>{% blocktrans %}Cela permet de constituer un CV.<br>
+        En résumé, votre profil permet d’améliorer la visibilité de vos projets et de votre parcours professionnel.<br>
+        Vous pouvez aussi souhaiter rester anonyme sur la plateforme (choix par défaut pour tous les utilisateurs). Pour cela, vous devez vous rendre dans l’espace "Mon Compte", puis dans la rubrique "Modifier mes informations personnelles", (ou en <a href="{{ account_url }}#personal-info">cliquant ici</a>), vous avez juste à décocher le champ de formulaire "Rendre mon profil public".{% endblocktrans %}</p>
+    </section>
+    <section id="forums_comments" class="my-4">
+        <h2>5. {% trans "Le forum et les autres espaces de libre-échanges" %}</h2>
+        <p>{% blocktrans %}Comme dit plus haut, ces espaces doivent restés conviviales et n’ayant aucun contenu inapproprié.<br>
+        Autre précision, la publication de contenu n’est pas régi ou analysé par les modérateurs. En somme, en cas de publication de contenu entravant les droits de propriété intellectuelle d’un tiers, seul l’utilisateur ayant publié ce contenu devra répondre aux poursuites juridiques de la tiers personne.
+        Les administrateurs du site se doivent de fournir les informations personnelles (nom, prénom, adresse électronique, adresse IP) de la personne incriminée.{% endblocktrans %}</p>
+    </section>
+    <section id="admins_rights_obligations" class="my-4">
+        <h2>6. {% trans "Nos droits et nos obligations en tant qu'administrateurs" %}</h2>
+        <p>{% trans "Les administrateurs du site se doivent :" %}</p>
+        <ul>
+            <li>{% blocktrans %}de maintenir l’accès au site et assurer son bon fonctionnement. En cas d’interruption d’accès au site, nous essaieront de rétablir l’accès au plus vite ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}garder secret toutes les informations transmises par les utilisateurs ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}ne pas nuire au fonctionnement du site ou entraver les libertés naturelles des utilisateurs ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}suivre toutes les règles énoncées aux sections précédentes.{% endblocktrans %}</li>
+        </ul>
+        <p>{% blocktrans %}Si le site a été utilisé par un tiers pour une utilisation frauduleuse, l’éditeur du site se décharge de toute responsabilité sur les actions qui ont été entreprises et engagera des poursuites juridiques vers la tiers personne.{% endblocktrans %}</p>
+    </section>
+    <section id="copyrights_intellectual_property" class="my-4">
+        <h2>7. {% trans "Droits d'auteur et droit de la propriété intellectuelle" %}</h2>
+        <p>{% blocktrans %}Les codes des projets et des introductions au langage est placé sous la licence MIT et accessible à tous car le but premier du site est de faire de l’apprentissage de langage, de l’inspiration pour les internautes. Tous les codes peuvent être récupérés et modifiés pour une utilisation commerciale ou privée. Pour plus d’informations, vous pouvez aller voir le site <a href="https://opensource.org/licenses/MIT" target="_blank">OpenSource.org</a>.{% endblocktrans %}</p>
+        <p>{% blocktrans %}En ce qui concerne le cours, l’ensemble fait objet de la propriété intellectuelle exclusive. Tout plagiat pourra engagé des poursuites juridiques (si utilisé pour le commercial, des compensations financières).{% endblocktrans %}</p>
+    </section>
+    <section id="sales" class="my-4">
+        <h2>8. {% trans "Vente" %}</h2>
+        <p>{% blocktrans %}Le site vend exclusivement aux particuliers. Pour une utilisation commerciale des formations, veuillez contacter l’administration pour en savoir plus.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Lors du paiement de formations, l’utilisateur a droit à 14 jours de rétractation. 95 % du paiement initial sera remboursé. Les 5 % restant sont liés aux frais de traitement lors de l’achat et du remboursement demandés par Stripe et ProgLangLearn. Vous pouvez formuler une réclamation <a href="{{ refund_url }}">ce lien</a>.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Vos coordonnées bancaires ne sont stockés sur aucun serveur. Seulement quelques informations liés au traitement de votre demande sont stockés sur les serveurs chiffrés et sécurisé de <a href="https://stripe.com/" target="_blank">Stripe</a> tel que les 4 derniers chiffres de votre carte de crédit, le type de carte, le mois/année d’expiration afin de pouvoir identifié votre paiement. Nous n’avons en aucun cas, accès à la transaction en cours. La seule information visible lors du traitement de votre demande est le succès ou non de la transaction. {% endblocktrans %}</p>
+        <p>{% blocktrans %}Si le paiement a été effectué et que vous n’avez pas accès aux formations qui vous avez acheté, veuillez contacter l’administration au plus vite à la page "Contact" et dans la partie "Demande".{% endblocktrans %}</p>
+    </section>
+    <section id="promotional_coupons" class="my-4">
+        <h2>9. {% trans "Codes promotionnels" %}</h2>
+        <p>{% blocktrans %}Les codes sont utilisables seulement lors des achats. Si la valeur du coupon de réduction 
+        est supérieure à la somme totale du panier, le reste du coupon sera perdu.Des codes promotionnels sont disponible 
+        à la fin de certaines formations, lors de période de soldes (tel que le Black Friday, …) et même dans des endroits 
+        cachés du site, ou lors de recherches, qui sait. Donc soyez attentifs ;){% endblocktrans %}</p>
+    </section>
+    <section id="dispute_resolutions" class="my-4">
+        <h2>10. {% trans "Modalités de règlement des litiges" %}</h2>
+        <p>{% blocktrans %}En cas de litiges liés au différentes sections disponibles sur cette page, les parties tenteront de régler le conflit à l’amiable. À défaut de règlement amiable, les administrateurs du site respecteront les règles d’attribution de compétence matérielle et territoriale. En somme, en cas de poursuites pénales, l’utilisateur aura le choix entre le tribunal de son domicile ou le tribunal du lieu où notre site a été créé.{% endblocktrans %}</p>
+    </section>
+    <section id="account_creation" class="my-4">
+        <h2>11. {% trans "Étapes à suivre lors de la création de votre compte" %}</h2>
+        <p>{% trans "Vous pouvez créer votre compte ProgLangLearn de deux manières :" %}</p>
+        <ul>
+            <li>{% blocktrans %}soit en vous connectant avec un réseau social (seul Facebook, Google, Github et Twitter) ;{% endblocktrans %}</li>
+            <li>{% blocktrans %}soit en créant un compte complètement de zéro.{% endblocktrans %}</li>
+        </ul>
+        <p>{% blocktrans %}En choisissant la première option, nous allons vérifié que l’adresse électronique associée à votre compte social est bien réelle. En choisissant la seconde, vous allez tout d’abord renseigner des identifiants (<strong>que vous garderez <span class="underline">secrets</span></strong>) et ensuite, vous devrez cliquer sur un lien pour activer votre compte depuis votre adresse électronique.<br>
+        Voilà ! Votre compte a été créé et prêt à être utilisé ;){% endblocktrans %}</p>
+    </section>
+</div>
 {% endblock main %}
