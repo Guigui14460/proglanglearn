@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-29 16:32+0100\n"
+"POT-Creation-Date: 2019-12-30 10:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -786,7 +786,7 @@ msgid "Amateur"
 msgstr ""
 
 #: .\accounts\templates\accounts\profile.html:19
-#: .\analytics\templates\analytics\dashboard.html:20
+#: .\analytics\templates\analytics\dashboard.html:21
 #: .\analytics\templates\analytics\ranking.html:16
 msgid "Niveau"
 msgstr ""
@@ -1090,26 +1090,25 @@ msgid "Mes sujets favoris"
 msgstr ""
 
 #: .\analytics\templates\analytics\dashboard.html:4
-#: .\analytics\templates\analytics\dashboard.html:11
+#: .\analytics\templates\analytics\dashboard.html:12
 #: .\templates\includes\navbar.html:71
 msgid "Tableau de bord"
 msgstr ""
 
-#: .\analytics\templates\analytics\dashboard.html:15
+#: .\analytics\templates\analytics\dashboard.html:16
 msgid "Progression"
 msgstr ""
 
-#: .\analytics\templates\analytics\dashboard.html:28
+#: .\analytics\templates\analytics\dashboard.html:29
 msgid "Signalements"
 msgstr ""
 
-#: .\analytics\templates\analytics\dashboard.html:37
-msgid "Expérience gagnée cette dernière semaine"
+#: .\analytics\templates\analytics\dashboard.html:38
+msgid "Points d'expérience gagnés cette dernière semaine"
 msgstr ""
 
-#: .\analytics\templates\analytics\dashboard.html:53
-#: .\analytics\templates\analytics\ranking.html:17
-msgid "Expérience"
+#: .\analytics\templates\analytics\dashboard.html:77
+msgid "Points d'expérience"
 msgstr ""
 
 #: .\analytics\templates\analytics\my_.html:10
@@ -1330,6 +1329,10 @@ msgstr ""
 
 #: .\analytics\templates\analytics\ranking.html:15
 msgid "Profil"
+msgstr ""
+
+#: .\analytics\templates\analytics\ranking.html:17
+msgid "Expérience"
 msgstr ""
 
 #: .\analytics\templates\analytics\ranking.html:27

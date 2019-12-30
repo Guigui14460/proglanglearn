@@ -3,9 +3,9 @@
 
 {% block title %}{% trans "Tableau de bord" %} - {% endblock title %}
 
-{% block extra_head2 %}
+{% comment %} {% block extra_head2 %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-{% endblock extra_head2 %}
+{% endblock extra_head2 %} {% endcomment %}
 
 {% block main %}
 <h1 class="large">{% trans "Tableau de bord" %}</h1>
@@ -34,10 +34,10 @@
 </div>
 <div class="card card-hoverable my-1">
     <div class="card-container">
-        <h3 class="card-title center-text">{% trans "Expérience gagnée cette dernière semaine" %}</h3>
+        <h3 class="card-title center-text">{% trans "Points d'expérience gagnés cette dernière semaine" %}</h3>
         <div class="card-content">
             <div style="position: relative; width: 100%; height: auto;">
-                <canvas id="chart1"></canvas>
+                <div id="chartContainer" style="height: 500px; width: 100%;"></div>
             </div>
         </div>
     </div>
@@ -46,8 +46,54 @@
 
 {% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-<script src="{% static 'js/utils.js' %}"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="{% static 'js/utils.js' %}"></script> {% endcomment %}
 {% endblock javascript %}
 
-{% block jquery %}$('.chart').easyPieChart({easing: 'easeOutBounce',barColor: "#1780e8",lineWidth: 12,size: 160,scaleColor: false,trackColor: '#a0a0a0',lineCap: 'circle',animate: 1150,});var color = Chart.helpers.color;var barChartData = {labels: {{ label|js }},datasets: [{label: '{% trans "Expérience" %}',backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),borderColor: window.chartColors.orange,borderWidth: 1,data: {{ data|js }},}]};window.onload = function () {var ctx1 = $('#chart1');window.myBar = new Chart(ctx1, {type: 'bar',data: barChartData,options: {plugins: {datalabels: {clamp: true}},responsive: true,legend: {display: false,}}});};{% endblock jquery %}
+
+{% block jquery %}
+$('.chart').easyPieChart({easing: 'easeOutBounce',barColor: "#1780e8",lineWidth: 12,size: 160,scaleColor: false,trackColor: '#a0a0a0',lineCap: 'circle',animate: 1150,});
+window.onload = function () {
+
+var options = {
+    theme: (localStorage.getItem("theme")).concat('1'),
+    height: 500,
+    axisX: {
+        interval: 1,
+        margin: 50,
+        labelAutoFit: true,
+        labelFontSize: 10,
+        labelAngle: 45,
+    },
+    toolTip: {
+		shared: true		
+	},
+	data: [              
+	{
+		type: "column",
+        name: "{% trans "Points d'expérience" %}",
+		dataPoints: [
+            {% for label in labels %}
+                    {% for d in  data %}
+			            {% if forloop.parentloop.counter0 == forloop.counter0 %}
+                            { label: "{{ label }}",  y: {{ d }}  },
+                        {% endif %}
+                    {% endfor %}
+            {% endfor %}
+		]
+	}
+	]
+};
+
+$("#chartContainer").CanvasJSChart(options);
+}
+{% endblock jquery %}
+
+{% comment %} {% block jquery %}$('.chart').easyPieChart({easing: 'easeOutBounce',barColor: "#1780e8",lineWidth: 12,size: 160,scaleColor: false,trackColor: '#a0a0a0',lineCap: 'circle',animate: 1150,});
+var color = Chart.helpers.color;var barChartData = {
+    labels: {{ labels|js }},
+    datasets: [{label: '{% trans "Expérience" %}',
+    backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),borderColor: window.chartColors.orange,borderWidth: 1,
+    data: {{ data|js }},}]};window.onload = function () {var ctx1 = $('#chart1');window.myBar = new Chart(ctx1, {type: 'bar',data: barChartData,options: {plugins: {datalabels: {clamp: true}},responsive: true,legend: {display: false,}}});};
+{% endblock jquery %} {% endcomment %}

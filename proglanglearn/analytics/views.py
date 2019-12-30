@@ -31,7 +31,7 @@ class DashboardView(LoginRequiredMixin, NavbarSearchMixin, TemplateView):
         exp_limit_level = get_exp_limit(level)
         context['level_experience'] = f"{user_exp}/{exp_limit_level}"
         context['level_percent'] = f"{round(user_exp / exp_limit_level * 100)}"
-        context['label'], context['data'] = get_recent_user_exp_journal(
+        context['labels'], context['data'] = get_recent_user_exp_journal(
             self.request.user)
         context['strike'] = ngettext(
             'Vous avez %(count)d signalement. Cliquez <a href="%(url)s" title="Les signalements">ici</a> pour en savoir plus sur nos conditions liés aux signalements.',
