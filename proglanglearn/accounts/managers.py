@@ -11,7 +11,7 @@ class ProfileQuerySet(models.QuerySet):
         return self.filter(is_student=True, public_profile=True)
 
     def email(self):
-        return self.filter(email_notification=True, public_profile=True)
+        return self.filter(user__is_active=True)
 
 
 class ProfileManager(models.Manager):

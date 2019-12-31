@@ -58,7 +58,7 @@ window.onload = function () {
 
 var options = {
     theme: (localStorage.getItem("theme")).concat('1'),
-    height: 500,
+    height: 490,
     axisX: {
         interval: 1,
         margin: 50,
@@ -87,6 +87,8 @@ var options = {
 };
 
 $("#chartContainer").CanvasJSChart(options);
+{% comment %} $('input#switch').click(function(){options['theme'] = (localStorage.getItem("theme")).concat('1'); 
+$("#chartContainer").CanvasJSChart(options);}); {% endcomment %}
 }
 {% endblock jquery %}
 

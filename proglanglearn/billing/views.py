@@ -358,7 +358,10 @@ class PDFPaymentView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         order = get_object_or_404(
             Order, user=request.user, ref_code=self.kwargs.get('ref_code'), ordered=True)
+        current_site = get_current_site(request)
         params = {
+            'protocol': settings.PROTOCOL,
+            'domain': current_site.domain,
             'order': order,
             'payment': order.payment,
             'stripe_charge': stripe.Charge.retrieve(order.payment.stripe_charge_id[2:-3]),

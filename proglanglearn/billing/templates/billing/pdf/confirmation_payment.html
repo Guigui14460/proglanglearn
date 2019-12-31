@@ -104,7 +104,7 @@
                     <tbody>
                         {% for course in order.courses.all %}
                             <tr>
-                                <td colspan="2"><a href="http://127.0.0.1:8000{{ course.get_absolute_url }}">{{ course.title }}</a></td>
+                                <td colspan="2"><a href="{{ protocol }}://{{ domain }}{{ course.get_absolute_url }}">{{ course.title }}</a></td>
                             </tr>
                         {% endfor %}
                         {% if order.coupon %}
@@ -127,6 +127,6 @@
     <footer>
         {% trans "Ce document fait office de confirmation officielle de paiement. Il vous sera demander de le délivrer en cas de problèmes liés à votre compte (perte et remplacement par un autre compte) ou lors" %} <a href="http://127.0.0.1:8000{{ refund_url }}">{% trans "d'une demande de remboursement" %}</a> {% trans "(possible sous 14 jours à compter de la date de la transaction <strong>et</strong> avec un motif valable)." %}
     </footer>
-    <div id="site"><a href="http://127.0.0.1:8000/" id="websiteLink" title="{% trans 'Aller sur le site' %}">ProgLangLearn</a></div>
+    <div id="site"><a href="{{ protocol }}://{{ domain }}/" id="websiteLink" title="{% trans 'Aller sur le site' %}">ProgLangLearn</a></div>
 </body>
 </html>

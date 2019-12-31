@@ -350,6 +350,7 @@ class DangerZone(View):
             user.is_active = False
             user.last_login = now()
             user.profile.public_profile = False
+            user.profile.email_notification = False
             user.profile.save()
             user.save()
             logout(request)
