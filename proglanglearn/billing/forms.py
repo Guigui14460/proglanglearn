@@ -11,7 +11,7 @@ class CheckoutForm(forms.Form):
         attrs={'placeholder': '4242 4242 4242 4242', 'data-mask': '0000 0000 0000 0000'}))
     cc_date = forms.CharField(label=_("Date d'expiration"), min_length=4, max_length=7, widget=forms.TextInput(
         attrs={'placeholder': 'MM / YY', 'data-mask': '00 / 00'}))
-    cc_cvc = forms.CharField(label=_("CCV / CVC"), min_length=3, max_length=4, widget=forms.TextInput(
+    cc_cvc = forms.CharField(label=_("CVV / CVC"), min_length=3, max_length=4, widget=forms.TextInput(
         attrs={'placeholder': '????', 'data-mask': '0000'}))
     save_info = forms.BooleanField(label=_(
         "Sauvegarder la carte pour une prochaine fois"), widget=forms.CheckboxInput(), required=False)

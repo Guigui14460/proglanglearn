@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-31 15:10+0100\n"
+"POT-Creation-Date: 2020-01-02 15:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,11 +148,11 @@ msgstr ""
 
 #: .\accounts\forms.py:101
 msgid "New password"
-msgstr ""
+msgstr "Nouveau mot de passe"
 
 #: .\accounts\forms.py:110
 msgid "New password confirmation"
-msgstr ""
+msgstr "Confirmation du nouveau mot de passe"
 
 #: .\accounts\forms.py:119
 msgid "Ancien mot de passe"
@@ -1656,23 +1656,25 @@ msgstr ""
 
 #: .\billing\admin.py:40 .\billing\views.py:106
 msgid "Rate limit error"
-msgstr ""
+msgstr "Erreur : trop de débit d'informations"
 
 #: .\billing\admin.py:42 .\billing\views.py:109
 msgid "Invalid parameters"
-msgstr ""
+msgstr "Paramètres invalides"
 
 #: .\billing\admin.py:44 .\billing\views.py:113
 msgid "Not authenticated"
-msgstr ""
+msgstr "Non authentifié"
 
 #: .\billing\admin.py:46 .\billing\views.py:116
 msgid "Network error"
-msgstr ""
+msgstr "Erreur réseau"
 
 #: .\billing\admin.py:49 .\billing\views.py:121
 msgid "Something went wrong. You were not charged. Please try again"
 msgstr ""
+"Quelque chose a mal tourné. Vous n'avez pas été inculpé. Veuillez essayer à "
+"nouveau"
 
 #: .\billing\admin.py:55
 msgid "Mise des commandes vers l'acceptation du remboursement"
@@ -1727,8 +1729,8 @@ msgid "Date d'expiration"
 msgstr ""
 
 #: .\billing\forms.py:14
-msgid "CCV / CVC"
-msgstr ""
+msgid "CVV / CVC"
+msgstr "CVC"
 
 #: .\billing\forms.py:17
 msgid "Sauvegarder la carte pour une prochaine fois"
@@ -2054,11 +2056,11 @@ msgstr ""
 
 #: .\billing\views.py:125
 msgid "Stripe error"
-msgstr ""
+msgstr "Erreur de Stripe"
 
 #: .\billing\views.py:135
 msgid "A serious error occurred. We have been notified"
-msgstr ""
+msgstr "Une erreur grave s'est produite. Nous avons été informés"
 
 #: .\billing\views.py:161
 msgid "Le cours que vous essayez d'ajouter se trouve déjà dans le panier"
@@ -3369,7 +3371,7 @@ msgid "le type de carte utilisée (VISA, MasterCard, ...) ;"
 msgstr ""
 
 #: .\main\templates\main\privacy.html:48
-msgid "si le CCV de la carte utilisée est valide ;"
+msgid "si le CVC de la carte utilisée est valide ;"
 msgstr ""
 
 #: .\main\templates\main\privacy.html:49
@@ -4162,75 +4164,78 @@ msgstr ""
 #: .\templates\account\account_inactive.html:4
 #: .\templates\account\account_inactive.html:7
 msgid "Account Inactive"
-msgstr ""
+msgstr "Compte inactif"
 
 #: .\templates\account\account_inactive.html:8
 msgid "This account is inactive."
-msgstr ""
+msgstr "Ce compte est inactif."
 
 #: .\templates\account\email.html:4
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 #: .\templates\account\email.html:7
 msgid "E-mail Addresses"
-msgstr ""
+msgstr "Adresses e-mail"
 
 #: .\templates\account\email.html:9
 msgid "The following e-mail addresses are associated with your account:"
-msgstr ""
+msgstr "Les adresses e-mail suivantes sont associées à votre compte :"
 
 #: .\templates\account\email.html:20
 msgid "Verified"
-msgstr ""
+msgstr "Vérifiée"
 
 #: .\templates\account\email.html:22
 msgid "Unverified"
-msgstr ""
+msgstr "Non vérifiée"
 
 #: .\templates\account\email.html:24
 msgid "Primary"
-msgstr ""
+msgstr "Primaire"
 
 #: .\templates\account\email.html:29
 msgid "Make Primary"
-msgstr ""
+msgstr "Rendre primaire"
 
 #: .\templates\account\email.html:30
 msgid "Re-send Verification"
-msgstr ""
+msgstr "Ré-envoyer la vérification"
 
 #: .\templates\account\email.html:31
 #: .\templates\socialaccount\connections.html:31
 msgid "Remove"
-msgstr ""
+msgstr "Enlever"
 
 #: .\templates\account\email.html:36
 msgid "Warning:"
-msgstr ""
+msgstr "Attention :"
 
 #: .\templates\account\email.html:36
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
 msgstr ""
+"Vous n'avez actuellement aucune adresse e-mail configurée. Vous devriez  "
+"vraiment ajouter une adresse e-mail pour pouvoir recevoir des notifications, "
+"réinitialiser votre mot de passe, etc."
 
 #: .\templates\account\email.html:38
 msgid "Add E-mail Address"
-msgstr ""
+msgstr "Ajouter une adresse e-mail"
 
 #: .\templates\account\email.html:44
 msgid "Add E-mail"
-msgstr ""
+msgstr "Ajouter un e-mail"
 
 #: .\templates\account\email.html:49
 msgid "Do you really want to remove the selected e-mail address?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer l'adresse e-mail sélectionnée ?"
 
 #: .\templates\account\email_confirm.html:5
 #: .\templates\account\email_confirm.html:9
 msgid "Confirm E-mail Address"
-msgstr ""
+msgstr "Confirmer l'adresse e-mail"
 
 #: .\templates\account\email_confirm.html:12
 #, python-format
@@ -4238,10 +4243,12 @@ msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
 "address for user %(user_display)s."
 msgstr ""
+"Veuillez confirmer que <a href=\"mailto:%(email)s\">%(email)s</a> est une "
+"adresse e-mail de l'utilisateur %(user_display)s."
 
 #: .\templates\account\email_confirm.html:17
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: .\templates\account\email_confirm.html:22
 #, python-format
@@ -4249,11 +4256,14 @@ msgid ""
 "This e-mail confirmation link expired or is invalid. Please <a href=\"%"
 "(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
+"Ce lien de confirmation par e-mail a expiré ou n'est pas valide.Veuillez <a "
+"href=\"%(email_url)s\">émettre une nouvelle demande de confirmation par "
+"courriel</a>."
 
 #: .\templates\account\login.html:4 .\templates\account\login.html:10
 #: .\templates\account\login.html:36
 msgid "Sign In"
-msgstr ""
+msgstr "S'identifier"
 
 #: .\templates\account\login.html:11 .\templates\registration\login.html:12
 msgid "Connectez-vous à votre compte !"
@@ -4267,6 +4277,9 @@ msgid ""
 "\">sign up</a>\n"
 "    for a %(site_name)s account and sign in below:"
 msgstr ""
+"Veuillez vous identifier avec l'un des comptes sociaux existant. Ou, <a href="
+"\"%(signup_url)s\">inscrivez-vous</a> à un compte %(site_name)s et "
+"identifiez-vous ci-dessous :"
 
 #: .\templates\account\login.html:24 .\templates\account\signup.html:19
 #, python-format
@@ -4274,6 +4287,8 @@ msgid ""
 "If you have not created an account yet, then please\n"
 "    <a href=\"%(signup_url)s\">sign up</a> first."
 msgstr ""
+"Si vous n'avez pas encore créé de compte, veuillez d'abord <a href=\"%"
+"(signup_url)s\">vous inscrire</a>."
 
 #: .\templates\account\login.html:38
 #, python-format
@@ -4285,11 +4300,11 @@ msgstr ""
 #: .\templates\account\logout.html:4 .\templates\account\logout.html:7
 #: .\templates\account\logout.html:14
 msgid "Sign Out"
-msgstr ""
+msgstr "Se déconnecter"
 
 #: .\templates\account\logout.html:8
 msgid "Are you sure you want to sign out?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir vous déconnecter ?"
 
 #: .\templates\account\password_change.html:4
 #: .\templates\account\password_change.html:9
@@ -4299,20 +4314,23 @@ msgstr ""
 #: .\templates\account\password_reset_from_key_done.html:4
 #: .\templates\account\password_reset_from_key_done.html:7
 msgid "Change Password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #: .\templates\account\password_reset.html:4
 #: .\templates\account\password_reset.html:9
 #: .\templates\account\password_reset_done.html:5
 #: .\templates\account\password_reset_done.html:8
 msgid "Password Reset"
-msgstr ""
+msgstr "Réinitialiser le mot de passe"
 
 #: .\templates\account\password_reset.html:13
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
+"Vous avez oublié votre mot de passe ? Entrez votre adresse e-mail ci-"
+"dessous, et nous vous enverrons un e-mail vous permettant de le "
+"réinitialiser."
 
 #: .\templates\account\password_reset.html:19
 #: .\templates\registration\password_reset_confirm.html:9
@@ -4323,16 +4341,20 @@ msgstr ""
 #: .\templates\account\password_reset.html:22
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
+"Veuillez nous contacter si vous avez des difficultés à réinitialiser votre "
+"mot de passe."
 
 #: .\templates\account\password_reset_done.html:12
 msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
+"Nous vous avons envoyé un e-mail. Veuillez nous contacter si vous ne le "
+"recevez pas dans les minutes qui suivent."
 
 #: .\templates\account\password_reset_from_key.html:9
 msgid "Bad Token"
-msgstr ""
+msgstr "Mauvais jeton"
 
 #: .\templates\account\password_reset_from_key.html:12
 #, python-format
@@ -4341,29 +4363,32 @@ msgid ""
 "used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
 "a>."
 msgstr ""
+"Le lien de réinitialisation du mot de passe n'était pas valide, peut-être "
+"parce qu'il a déjà été utilisé. Veuillez faire une <a href=\"%"
+"(passwd_reset_url)s\">nouvelle de demande</a>."
 
 #: .\templates\account\password_reset_from_key.html:20
 msgid "Change password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #: .\templates\account\password_reset_from_key.html:24
 #: .\templates\account\password_reset_from_key_done.html:8
 msgid "Your password is now changed."
-msgstr ""
+msgstr "Votre mot de passe est maintenant changé."
 
 #: .\templates\account\password_set.html:4
 #: .\templates\account\password_set.html:9
 #: .\templates\account\password_set.html:15
 msgid "Set Password"
-msgstr ""
+msgstr "Définir le mot de passe"
 
 #: .\templates\account\signup.html:4 .\templates\socialaccount\signup.html:4
 msgid "Signup"
-msgstr ""
+msgstr "S'identifier"
 
 #: .\templates\account\signup.html:10 .\templates\socialaccount\signup.html:9
 msgid "Sign Up"
-msgstr ""
+msgstr "S'identifier"
 
 #: .\templates\account\signup.html:11
 #: .\templates\registration\register.html:11
@@ -4407,18 +4432,18 @@ msgstr ""
 #: .\templates\account\signup_closed.html:4
 #: .\templates\account\signup_closed.html:7
 msgid "Sign Up Closed"
-msgstr ""
+msgstr "Inscription fermée"
 
 #: .\templates\account\signup_closed.html:8
 msgid "We are sorry, but the sign up is currently closed."
-msgstr ""
+msgstr "Nous sommes désolés, mais l'inscription est actuellement fermée."
 
 #: .\templates\account\verification_sent.html:4
 #: .\templates\account\verification_sent.html:7
 #: .\templates\account\verified_email_required.html:4
 #: .\templates\account\verified_email_required.html:7
 msgid "Verify Your E-mail Address"
-msgstr ""
+msgstr "Vérifiez votre adresse e-mail"
 
 #: .\templates\account\verification_sent.html:8
 msgid ""
@@ -4426,6 +4451,9 @@ msgid ""
 "finalize the signup process. Please contact us if you do not receive it "
 "within a few minutes."
 msgstr ""
+"Nous vous avons envoyé un e-mail pour vérification. Suivez le lien fourni "
+"pour finaliser le processus d'inscription. Veuillez nous contacter si vous "
+"ne le recevez pas dans les minutes qui suivent."
 
 #: .\templates\account\verified_email_required.html:9
 msgid ""
@@ -4433,6 +4461,9 @@ msgid ""
 "you are who you claim to be. For this purpose, we require that you\n"
 "verify ownership of your e-mail address. "
 msgstr ""
+"Cette partie du site nous oblige à vérifier que vous êtes bien la personne "
+"que vous prétendez être. À cette fin, nous vous demandons de vérifier la "
+"propriété de votre adresse électronique. "
 
 #: .\templates\account\verified_email_required.html:12
 msgid ""
@@ -4440,6 +4471,9 @@ msgid ""
 "verification. Please click on the link inside this e-mail. Please\n"
 "contact us if you do not receive it within a few minutes."
 msgstr ""
+"Nous vous avons envoyé un e-mail pour vérification. Veuillez cliquer sur le "
+"lien à l'intérieur de cet e-mail. Veuillez nous contacter si vous ne le "
+"recevez pas dans les minutes qui suivent."
 
 #: .\templates\account\verified_email_required.html:15
 #, python-format
@@ -4447,6 +4481,8 @@ msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
 "mail address</a>."
 msgstr ""
+"<strong>Note :</strong> vous pouvez toujours <a href=\"%(email_url)s"
+"\">changer votre adresse e-mail</a>."
 
 #: .\templates\includes\footer.html:6
 msgid "Politique de confidentialité"
@@ -4659,37 +4695,42 @@ msgstr ""
 #: .\templates\socialaccount\authentification_error.html:4
 #: .\templates\socialaccount\authentification_error.html:7
 msgid "Social Network Login Failure"
-msgstr ""
+msgstr "Échec de la connexion au réseau social"
 
 #: .\templates\socialaccount\authentification_error.html:8
 msgid ""
 "An error occurred while attempting to login via your social network account."
 msgstr ""
+"Une erreur est survenue lors de la tentative de connexion via votre compte "
+"de réseau social."
 
 #: .\templates\socialaccount\connections.html:4
 #: .\templates\socialaccount\connections.html:9
 msgid "Account Connections"
-msgstr ""
+msgstr "Connexions aux comptes"
 
 #: .\templates\socialaccount\connections.html:11
 msgid ""
 "You can sign in to your account using any of the following third party "
 "accounts:"
 msgstr ""
+"Vous pouvez vous connecter à votre compte en utilisant l'un des comptes "
+"sociaux suivants :"
 
 #: .\templates\socialaccount\connections.html:36
 msgid ""
 "You currently have no social network accounts connected to this account."
 msgstr ""
+"Vous n'avez actuellement aucun compte de réseau social connecté à ce compte."
 
 #: .\templates\socialaccount\connections.html:38
 msgid "Add a 3rd Party Account"
-msgstr ""
+msgstr "Ajouter un compte tiers"
 
 #: .\templates\socialaccount\login_cancelled.html:4
 #: .\templates\socialaccount\login_cancelled.html:7
 msgid "Login Cancelled"
-msgstr ""
+msgstr "Ouverture de session annulée"
 
 #: .\templates\socialaccount\login_cancelled.html:9
 #, python-format
@@ -4698,6 +4739,9 @@ msgid ""
 "accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
 "\">sign in</a>."
 msgstr ""
+"Vous avez décidé d'annuler la connexion à notre site en utilisant un de vos "
+"comptes existants. Si c'était une erreur, veuillez procéder à <a href=\"%"
+"(login_url)s\">l'identification</a>."
 
 #: .\templates\socialaccount\signup.html:10
 #, python-format
@@ -4705,3 +4749,6 @@ msgid ""
 "You are about to use your %(provider_name)s account to login to\n"
 "%(site_name)s. As a final step, please complete the following form:"
 msgstr ""
+"Vous êtes sur le point d'utiliser votre compte %(provider_name)s pour vous "
+"connecter à %(site_name)s. En guise de dernière étape, veuillez remplir le "
+"formulaire suivant :"
