@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import redirect_to_login
@@ -24,6 +25,7 @@ class NavbarSearchMixin(object):
         except AttributeError:
             context = {**kwargs}
         context['navbar_search_form'] = self.form_navbar()
+        context['last_privacy'] = settings.LAST_PRIVACY
         return context
 
 

@@ -96,16 +96,17 @@ class TermsView(NavbarSearchMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TermsView, self).get_context_data(**kwargs)
-        current_site = get_current_site(self.request)
-        context['protocol'] = settings.PROTOCOL
-        context['domain'] = current_site.domain
         context['max_strike'] = settings.MAX_STRIKE
         return context
-    
+
 
 
 class PrivacyView(NavbarSearchMixin, TemplateView):
     template_name = "main/privacy.html"
+
+
+class PrivacyModalView(TemplateView):
+    template_name = "main/includes/privacy_modal.html"
 
 
 class SearchView(NavbarSearchMixin, ListView):

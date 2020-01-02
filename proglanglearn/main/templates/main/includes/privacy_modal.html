@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<div id="modal-privacy" class="modal mt-3 mb-1">
+    <h2>{% trans "Mise à jour notre politique de confidentialité et de cookie" %}</h2>
+    {% include "main/includes/privacy_include.html" %}
+    <div class="center-text">
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn__danger btn__large btn__block">{% trans "Refuser" %}</a>
+        <a id="privacyAccepted" href="#" rel="modal:close" class="btn btn__info btn__large btn__block">{% trans "Accepter" %}</a>
+    </div>
+</div>

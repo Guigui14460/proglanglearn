@@ -8,6 +8,7 @@ from .views import (
     CommentDeleteView,
     ContactView,
     PrivacyView,
+    PrivacyModalView,
     TermsView,
     SearchView,
     LanguagesTagsView,
@@ -29,5 +30,7 @@ urlpatterns = [
     path('tags/<str:slug>/', LanguagesTagsView.as_view(), name='language_tag'),
     path('', include('analytics.urls')),
     path('payment/', include('billing.urls')),
-    path('robots.txt', TemplateView.as_view(template_name="main/robots.txt", content_type="text/plain")),
+    path('robots.txt', TemplateView.as_view(
+        template_name="main/robots.txt", content_type="text/plain")),
+    path('modal-privacy/', PrivacyModalView.as_view()),
 ]

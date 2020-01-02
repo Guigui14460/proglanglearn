@@ -308,3 +308,4 @@ CODE_COLOURS_LIST = {
     'vscode': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css",
 }
 CODE_COLOURS = CODE_COLOURS_LIST['vscode']
+LAST_PRIVACY = 1577999819972

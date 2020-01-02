@@ -1,0 +1,80 @@
+{% load i18n %}
+
+{% url 'main:terms' as terms_url %}
+{% url 'main:contact' as contact_url %}
+<div>
+    <div class="my-1">
+        {% blocktrans %}Cette page contient toutes les informations concernant notre politique de 
+        confidentialité des données et des cookie de notre site. Veuillez les lire afin de n'avoir 
+        aucune surprise lors de la navigation sur ProgLangLearn. Voici les quelques points abordés :{% endblocktrans %}
+    </div>
+    <ol>
+        <li><a href="#data">{% trans "Politique des données" %}</a></li>
+        <li><a href="#cookies">{% trans "Politique des cookies" %}</a></li>
+        <li><a href="#gdpr">{% trans "Règlement général sur la protection des données (RGPD)" %}</a></li>
+    </ol>
+    <section id="data" class="my-4">
+        <h2>1. {% trans "Politique des données" %}</h2>
+        <p>{% blocktrans %}Concernant l’aspect général de votre identité en tant qu’utilisateur sur notre site, nous collectons :{% endblocktrans %}</p>
+        <ul>
+            <li>{% trans "votre nom d’utilisateur ;" %}</li>
+            <li>{% trans "un mot de passe pour notre site (chiffré par une fonction de hachage cryptographique) ;" %}</li>
+            <li>{% trans "votre prénom et nom (demandé ou via l’API de votre compte social) ;" %}</li>
+            <li>{% trans "votre adresse électronique (demandé ou via l’API de votre compte social) ;" %}</li>
+            <li>{% trans "votre langage naturelle (utilisé pour analyses et pour décider votre langue de préférence) ;" %}</li>
+            <li>{% trans "votre adresse IP (utilisé pour sécuriser votre compte contre des personnes attaquant d’un autre lieu) ;" %}</li>
+            <li>{% trans "votre pays où vous vivez (utilisé pour analyses) ;" %}</li>
+            <li>{% trans "votre image de profil." %}</li>
+        </ul>
+        <p>{% blocktrans %}Lorsque la visibilité de votre profil est activé, nous n’avons accès qu’aux informations que vous voulez nous transmettre. En aucun cas, nous irons chercher des informations quelles qu’elles soient sur votre parcours personnel ou professionnel.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Lors des paiements sur notre site, nous n’avons pas accès aux informations transitant entre vous et <a href="https://www.stripe.com/" target="_blank">Stripe</a>. Sur nos bases de données, nous collectons seulement :{% endblocktrans %}</p>
+        <ul>
+            <li>{% trans "les cours achetés (utilisé aussi pour analyses) ;" %}</li>
+            <li>{% trans "l’identifiant du coupon de réduction utilisé ;" %}</li>
+            <li>{% trans "des dates (date de l’ajout du 1er cours et date de paiement) ;" %}</li>
+            <li>{% trans "le code de référence de votre commande ;" %}</li>
+            <li>{% trans "le montant de la transaction (utilisé aussi pour analyses) ;" %}</li>
+            <li>{% trans 'l’identifiant <a href="https://www.stripe.com/" target="_blank">Stripe</a> pour accéder à d’autres informations sur la transaction.' %}</li>
+        </ul>
+        <p>{% blocktrans %}Sur le site de <a href="https://www.stripe.com/" target="_blank">Stripe</a>, nous pouvons avoir accès à certains éléments de la transaction. Les éléments que nous utilisons sont pour le justificatif PDF de votre commande :{% endblocktrans %}</p>
+        <ul>
+            <li>{% trans "le montant de la transaction et la devise lors du paiement ;" %}</li>
+            <li>{% trans "le type de carte utilisée (VISA, MasterCard, ...) ;" %}</li>
+            <li>{% trans "si le CVC de la carte utilisée est valide ;" %}</li>
+            <li>{% trans "les quatre derniers chiffres utilisée ;" %}</li>
+            <li>{% trans "le pays d’où provient la carte utilisée ;" %}</li>
+            <li>{% trans "le mois et année d’expiration de la carte utilisée ;" %}</li>
+        </ul>
+        <p>{% blocktrans %}Lorsqu’un utilisateur demande un remboursement, les seules informations collectées sont :{% endblocktrans %}</p>
+        <ul>
+            <li>{% trans "la raison mentionnée ;" %}</li>
+            <li>{% trans 'l’identifiant <a href="https://www.stripe.com/" target="_blank">Stripe</a> du remboursement.' %}</li>
+        </ul>
+        <p>{% blocktrans %}Nous décidons de ne pas collecter plus de données afin de ne pas compromettre encore plus vos données personnelles en cas d’attaque sur nos systèmes (base de données, récupération, …).<br>
+        Les données qui sont stockées ne sont utilisées que pour permettre de vous identifier plus facilement depuis l’extérieur et l’intérieur du site, pour nous permettre d’effectuer des analyses statistiques afin d’améliorer notre site.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Lors de la désactivation de votre compte, nous décidons de garder vos informations pendant cinq ans pour des raisons légales. Passé ce délai, toutes vos informations personnelles seront supprimées et les discussions sur le forum et les espaces de libre-échange seront anonymisées.{% endblocktrans %}</p>
+    </section>
+    <section id="cookies" class="my-4">
+        <h2>2. {% trans "Politique des cookies" %}</h2>
+        <p>{% blocktrans %}Les cookies utilisés pour notre site pour :{% endblocktrans %}</p>
+        <ul>
+            <li>{% trans 'garder vos préférences de navigation sur votre navigateur internet ;' %}</li>
+            <li>{% trans 'garder votre session ouverte pour vous éviter de vous reconnecter à chaque fermeture de votre navigateur internet ;' %}</li>
+            <li>{% trans 'la langue que vous utilisez pour naviguer sur notre site ;' %}</li>
+            <li>{% trans 'jeton CSRF (Cross-Site Request Forgery) : permet d’éviter qu’un site ou un programme malveillant puisse effectuer des modifications sur notre serveur mais permet aussi entre autre, que l’attaquant ne puisse pas vous déconnecter, ou faire d’autres manipulations sur votre compte. Pour plus d’information, vous pouvez consulter <a href="https://www.wikiwand.com/fr/Cross-site_request_forgery" target="_blank">cette page</a>.' %}</li>
+        </ul>
+    </section>
+    <section id="gdpr" class="my-4">
+        <h2>3. {% trans "Règlement général sur la protection des données (RGPD)" %}</h2>
+        <p>{% blocktrans %}Le règlement européen sur la protection des données stipule que tout utilisateur à tous les droits tels qu’énoncés dans nos <a href="{{ terms_url }}#users_rights_obligations">conditions générales d’utilisation</a>, auxquelles s’ajoute :{% endblocktrans %}</p>
+        <ul>
+            <li>{% blocktrans %}le droit à l’information : vous avez le droit de demander sur quels fichiers votre nom apparaît, si vos informations sont collectées et enregistrées. Vous pouvez en faire la demande via <a href="{{ contact_url }}#request">ce formulaire</a>. Vous devez justifier un motif afin de vérifier que la demande ne soit pas abusive.{% endblocktrans %}</li>
+            <li>{% trans 'le droit à la rectification : vous pouvez modifier vos données, les compléter, les actualiser.' %}</li>
+            <li>{% trans 'le droit à l’opposition sur les données : opposition à figurer dans un fichier ou à une utilisation commerciale de celles-ci. Sur notre site, vos données personnelles ne seront jamais revendues.' %}</li>
+            <li>{% trans 'droit à la limitation du traitement de vos données : vous pouvez donc décider que vos données ne soient pas utilisées pour effectuer des analyses globales pour évaluer certaines caractéristiques du site.' %}</li>
+            <li>{% trans 'droit à l’oubli et à l’effacement des données : vous pouvez faire une demande afin de supprimer toutes traces de vous et de vos informations personnelles dans nos fichiers.' %}</li>
+            <li>{% blocktrans %}droit à la portabilité des données : ce droit vous offre la possibilité de récupérer une partie de vos informations personnelles dans un format ouvert et lisible par une machine (type JSON, CSV, Excel, …). Vous pouvez effectuer cette demande via <a href="{{ contact_url }}#request">ce formulaire</a>.{% endblocktrans %}</li>
+        </ul>
+        <p>{% blocktrans %}Si vous souhaitez ne pas faire une demande par formulaire, veuillez nous contacter à cette adresse électronique <a href="mailto:proglanglearn@gmail.com">proglanglearn@gmail.com</a> en donnant toutes les informations utiles afin de vous identifier sur notre base de données.{% endblocktrans %}</p>
+    </section>
+</div>

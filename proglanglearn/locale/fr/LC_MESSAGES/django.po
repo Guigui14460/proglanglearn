@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-02 15:37+0100\n"
+"POT-Creation-Date: 2020-01-02 22:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2794,7 +2794,7 @@ msgstr ""
 msgid "Description des faits"
 msgstr ""
 
-#: .\main\mixins.py:32
+#: .\main\mixins.py:34
 msgid ""
 "La page que vous essayez d'accéder n'est accessible que par les "
 "administrateurs du site"
@@ -3185,6 +3185,285 @@ msgstr ""
 msgid "Il n'y a pas encore de commentaire."
 msgstr ""
 
+#: .\main\templates\main\includes\privacy_include.html:7
+msgid ""
+"Cette page contient toutes les informations concernant notre politique de \n"
+"        confidentialité des données et des cookie de notre site. Veuillez "
+"les lire afin de n'avoir \n"
+"        aucune surprise lors de la navigation sur ProgLangLearn. Voici les "
+"quelques points abordés :"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:12
+#: .\main\templates\main\includes\privacy_include.html:17
+msgid "Politique des données"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:13
+#: .\main\templates\main\includes\privacy_include.html:58
+msgid "Politique des cookies"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:14
+#: .\main\templates\main\includes\privacy_include.html:68
+msgid "Règlement général sur la protection des données (RGPD)"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:18
+msgid ""
+"Concernant l’aspect général de votre identité en tant qu’utilisateur sur "
+"notre site, nous collectons :"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:20
+msgid "votre nom d’utilisateur ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:21
+msgid ""
+"un mot de passe pour notre site (chiffré par une fonction de hachage "
+"cryptographique) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:22
+msgid "votre prénom et nom (demandé ou via l’API de votre compte social) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:23
+msgid ""
+"votre adresse électronique (demandé ou via l’API de votre compte social) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:24
+msgid ""
+"votre langage naturelle (utilisé pour analyses et pour décider votre langue "
+"de préférence) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:25
+msgid ""
+"votre adresse IP (utilisé pour sécuriser votre compte contre des personnes "
+"attaquant d’un autre lieu) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:26
+msgid "votre pays où vous vivez (utilisé pour analyses) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:27
+msgid "votre image de profil."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:29
+msgid ""
+"Lorsque la visibilité de votre profil est activé, nous n’avons accès qu’aux "
+"informations que vous voulez nous transmettre. En aucun cas, nous irons "
+"chercher des informations quelles qu’elles soient sur votre parcours "
+"personnel ou professionnel."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:30
+msgid ""
+"Lors des paiements sur notre site, nous n’avons pas accès aux informations "
+"transitant entre vous et <a href=\"https://www.stripe.com/\" target=\"_blank"
+"\">Stripe</a>. Sur nos bases de données, nous collectons seulement :"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:32
+msgid "les cours achetés (utilisé aussi pour analyses) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:33
+msgid "l’identifiant du coupon de réduction utilisé ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:34
+msgid "des dates (date de l’ajout du 1er cours et date de paiement) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:35
+msgid "le code de référence de votre commande ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:36
+msgid "le montant de la transaction (utilisé aussi pour analyses) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:37
+msgid ""
+"l’identifiant <a href=\"https://www.stripe.com/\" target=\"_blank\">Stripe</"
+"a> pour accéder à d’autres informations sur la transaction."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:39
+msgid ""
+"Sur le site de <a href=\"https://www.stripe.com/\" target=\"_blank\">Stripe</"
+"a>, nous pouvons avoir accès à certains éléments de la transaction. Les "
+"éléments que nous utilisons sont pour le justificatif PDF de votre commande :"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:41
+msgid "le montant de la transaction et la devise lors du paiement ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:42
+msgid "le type de carte utilisée (VISA, MasterCard, ...) ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:43
+msgid "si le CVC de la carte utilisée est valide ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:44
+msgid "les quatre derniers chiffres utilisée ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:45
+msgid "le pays d’où provient la carte utilisée ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:46
+msgid "le mois et année d’expiration de la carte utilisée ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:48
+msgid ""
+"Lorsqu’un utilisateur demande un remboursement, les seules informations "
+"collectées sont :"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:50
+msgid "la raison mentionnée ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:51
+msgid ""
+"l’identifiant <a href=\"https://www.stripe.com/\" target=\"_blank\">Stripe</"
+"a> du remboursement."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:53
+msgid ""
+"Nous décidons de ne pas collecter plus de données afin de ne pas "
+"compromettre encore plus vos données personnelles en cas d’attaque sur nos "
+"systèmes (base de données, récupération, …).<br>\n"
+"        Les données qui sont stockées ne sont utilisées que pour permettre "
+"de vous identifier plus facilement depuis l’extérieur et l’intérieur du "
+"site, pour nous permettre d’effectuer des analyses statistiques afin "
+"d’améliorer notre site."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:55
+msgid ""
+"Lors de la désactivation de votre compte, nous décidons de garder vos "
+"informations pendant cinq ans pour des raisons légales. Passé ce délai, "
+"toutes vos informations personnelles seront supprimées et les discussions "
+"sur le forum et les espaces de libre-échange seront anonymisées."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:59
+msgid "Les cookies utilisés pour notre site pour :"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:61
+msgid "garder vos préférences de navigation sur votre navigateur internet ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:62
+msgid ""
+"garder votre session ouverte pour vous éviter de vous reconnecter à chaque "
+"fermeture de votre navigateur internet ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:63
+msgid "la langue que vous utilisez pour naviguer sur notre site ;"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:64
+msgid ""
+"jeton CSRF (Cross-Site Request Forgery) : permet d’éviter qu’un site ou un "
+"programme malveillant puisse effectuer des modifications sur notre serveur "
+"mais permet aussi entre autre, que l’attaquant ne puisse pas vous "
+"déconnecter, ou faire d’autres manipulations sur votre compte. Pour plus "
+"d’information, vous pouvez consulter <a href=\"https://www.wikiwand.com/fr/"
+"Cross-site_request_forgery\" target=\"_blank\">cette page</a>."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:69
+#, python-format
+msgid ""
+"Le règlement européen sur la protection des données stipule que tout "
+"utilisateur à tous les droits tels qu’énoncés dans nos <a href=\"%(terms_url)"
+"s#users_rights_obligations\">conditions générales d’utilisation</a>, "
+"auxquelles s’ajoute :"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:71
+#, python-format
+msgid ""
+"le droit à l’information : vous avez le droit de demander sur quels fichiers "
+"votre nom apparaît, si vos informations sont collectées et enregistrées. "
+"Vous pouvez en faire la demande via <a href=\"%(contact_url)s#request\">ce "
+"formulaire</a>. Vous devez justifier un motif afin de vérifier que la "
+"demande ne soit pas abusive."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:72
+msgid ""
+"le droit à la rectification : vous pouvez modifier vos données, les "
+"compléter, les actualiser."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:73
+msgid ""
+"le droit à l’opposition sur les données : opposition à figurer dans un "
+"fichier ou à une utilisation commerciale de celles-ci. Sur notre site, vos "
+"données personnelles ne seront jamais revendues."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:74
+msgid ""
+"droit à la limitation du traitement de vos données : vous pouvez donc "
+"décider que vos données ne soient pas utilisées pour effectuer des analyses "
+"globales pour évaluer certaines caractéristiques du site."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:75
+msgid ""
+"droit à l’oubli et à l’effacement des données : vous pouvez faire une "
+"demande afin de supprimer toutes traces de vous et de vos informations "
+"personnelles dans nos fichiers."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:76
+#, python-format
+msgid ""
+"droit à la portabilité des données : ce droit vous offre la possibilité de "
+"récupérer une partie de vos informations personnelles dans un format ouvert "
+"et lisible par une machine (type JSON, CSV, Excel, …). Vous pouvez effectuer "
+"cette demande via <a href=\"%(contact_url)s#request\">ce formulaire</a>."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_include.html:78
+msgid ""
+"Si vous souhaitez ne pas faire une demande par formulaire, veuillez nous "
+"contacter à cette adresse électronique <a href=\"mailto:proglanglearn@gmail."
+"com\">proglanglearn@gmail.com</a> en donnant toutes les informations utiles "
+"afin de vous identifier sur notre base de données."
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_modal.html:4
+msgid "Mise à jour notre politique de confidentialité et de cookie"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_modal.html:7
+msgid "Refuser"
+msgstr ""
+
+#: .\main\templates\main\includes\privacy_modal.html:8
+msgid "Accepter"
+msgstr ""
+
 #: .\main\templates\main\index.html:14
 msgid "Apprenez la programmation informatique"
 msgstr ""
@@ -3244,272 +3523,8 @@ msgstr ""
 msgid "Les derniers cours publiés"
 msgstr ""
 
-#: .\main\templates\main\privacy.html:4 .\main\templates\main\privacy.html:9
+#: .\main\templates\main\privacy.html:4 .\main\templates\main\privacy.html:7
 msgid "Politique de confidentialité des données et des cookies"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:12
-msgid ""
-"Cette page contient toutes les informations concernant notre politique de \n"
-"        confidentialité des données et des cookie de notre site. Veuillez "
-"les lire afin de n'avoir \n"
-"        aucune surprise lors de la navigation sur ProgLangLearn. Voici les "
-"quelques points abordés :"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:17 .\main\templates\main\privacy.html:22
-msgid "Politique des données"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:18 .\main\templates\main\privacy.html:63
-msgid "Politique des cookies"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:19 .\main\templates\main\privacy.html:73
-msgid "Règlement général sur la protection des données (RGPD)"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:23
-msgid ""
-"Concernant l’aspect général de votre identité en tant qu’utilisateur sur "
-"notre site, nous collectons :"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:25
-msgid "votre nom d’utilisateur ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:26
-msgid ""
-"un mot de passe pour notre site (chiffré par une fonction de hachage "
-"cryptographique) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:27
-msgid "votre prénom et nom (demandé ou via l’API de votre compte social) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:28
-msgid ""
-"votre adresse électronique (demandé ou via l’API de votre compte social) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:29
-msgid ""
-"votre langage naturelle (utilisé pour analyses et pour décider votre langue "
-"de préférence) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:30
-msgid ""
-"votre adresse IP (utilisé pour sécuriser votre compte contre des personnes "
-"attaquant d’un autre lieu) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:31
-msgid "votre pays où vous vivez (utilisé pour analyses) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:32
-msgid "votre image de profil."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:34
-msgid ""
-"Lorsque la visibilité de votre profil est activé, nous n’avons accès qu’aux "
-"informations que vous voulez nous transmettre. En aucun cas, nous irons "
-"chercher des informations quelles qu’elles soient sur votre parcours "
-"personnel ou professionnel."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:35
-msgid ""
-"Lors des paiements sur notre site, nous n’avons pas accès aux informations "
-"transitant entre vous et <a href=\"https://www.stripe.com/\" target=\"_blank"
-"\">Stripe</a>. Sur nos bases de données, nous collectons seulement :"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:37
-msgid "les cours achetés (utilisé aussi pour analyses) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:38
-msgid "l’identifiant du coupon de réduction utilisé ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:39
-msgid "des dates (date de l’ajout du 1er cours et date de paiement) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:40
-msgid "le code de référence de votre commande ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:41
-msgid "le montant de la transaction (utilisé aussi pour analyses) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:42
-msgid ""
-"l’identifiant <a href=\"https://www.stripe.com/\" target=\"_blank\">Stripe</"
-"a> pour accéder à d’autres informations sur la transaction."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:44
-msgid ""
-"Sur le site de <a href=\"https://www.stripe.com/\" target=\"_blank\">Stripe</"
-"a>, nous pouvons avoir accès à certains éléments de la transaction. Les "
-"éléments que nous utilisons sont pour le justificatif PDF de votre commande :"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:46
-msgid "le montant de la transaction et la devise lors du paiement ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:47
-msgid "le type de carte utilisée (VISA, MasterCard, ...) ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:48
-msgid "si le CVC de la carte utilisée est valide ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:49
-msgid "les quatre derniers chiffres utilisée ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:50
-msgid "le pays d’où provient la carte utilisée ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:51
-msgid "le mois et année d’expiration de la carte utilisée ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:53
-msgid ""
-"Lorsqu’un utilisateur demande un remboursement, les seules informations "
-"collectées sont :"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:55
-msgid "la raison mentionnée ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:56
-msgid ""
-"l’identifiant <a href=\"https://www.stripe.com/\" target=\"_blank\">Stripe</"
-"a> du remboursement."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:58
-msgid ""
-"Nous décidons de ne pas collecter plus de données afin de ne pas "
-"compromettre encore plus vos données personnelles en cas d’attaque sur nos "
-"systèmes (base de données, récupération, …).<br>\n"
-"        Les données qui sont stockées ne sont utilisées que pour permettre "
-"de vous identifier plus facilement depuis l’extérieur et l’intérieur du "
-"site, pour nous permettre d’effectuer des analyses statistiques afin "
-"d’améliorer notre site."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:60
-msgid ""
-"Lors de la désactivation de votre compte, nous décidons de garder vos "
-"informations pendant cinq ans pour des raisons légales. Passé ce délai, "
-"toutes vos informations personnelles seront supprimées et les discussions "
-"sur le forum et les espaces de libre-échange seront anonymisées."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:64
-msgid "Les cookies utilisés pour notre site pour :"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:66
-msgid "garder vos préférences de navigation sur votre navigateur internet ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:67
-msgid ""
-"garder votre session ouverte pour vous éviter de vous reconnecter à chaque "
-"fermeture de votre navigateur internet ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:68
-msgid "la langue que vous utilisez pour naviguer sur notre site ;"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:69
-msgid ""
-"jeton CSRF (Cross-Site Request Forgery) : permet d’éviter qu’un site ou un "
-"programme malveillant puisse effectuer des modifications sur notre serveur "
-"mais permet aussi entre autre, que l’attaquant ne puisse pas vous "
-"déconnecter, ou faire d’autres manipulations sur votre compte. Pour plus "
-"d’information, vous pouvez consulter <a href=\"https://www.wikiwand.com/fr/"
-"Cross-site_request_forgery\" target=\"_blank\">cette page</a>."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:74
-#, python-format
-msgid ""
-"Le règlement européen sur la protection des données stipule que tout "
-"utilisateur à tous les droits tels qu’énoncés dans nos <a href=\"%(terms_url)"
-"s#users_rights_obligations\">conditions générales d’utilisation</a>, "
-"auxquelles s’ajoute :"
-msgstr ""
-
-#: .\main\templates\main\privacy.html:76
-#, python-format
-msgid ""
-"le droit à l’information : vous avez le droit de demander sur quels fichiers "
-"votre nom apparaît, si vos informations sont collectées et enregistrées. "
-"Vous pouvez en faire la demande via <a href=\"%(contact_url)s#request\">ce "
-"formulaire</a>. Vous devez justifier un motif afin de vérifier que la "
-"demande ne soit pas abusive."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:77
-msgid ""
-"le droit à la rectification : vous pouvez modifier vos données, les "
-"compléter, les actualiser."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:78
-msgid ""
-"le droit à l’opposition sur les données : opposition à figurer dans un "
-"fichier ou à une utilisation commerciale de celles-ci. Sur notre site, vos "
-"données personnelles ne seront jamais revendues."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:79
-msgid ""
-"droit à la limitation du traitement de vos données : vous pouvez donc "
-"décider que vos données ne soient pas utilisées pour effectuer des analyses "
-"globales pour évaluer certaines caractéristiques du site."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:80
-msgid ""
-"droit à l’oubli et à l’effacement des données : vous pouvez faire une "
-"demande afin de supprimer toutes traces de vous et de vos informations "
-"personnelles dans nos fichiers."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:81
-#, python-format
-msgid ""
-"droit à la portabilité des données : ce droit vous offre la possibilité de "
-"récupérer une partie de vos informations personnelles dans un format ouvert "
-"et lisible par une machine (type JSON, CSV, Excel, …). Vous pouvez effectuer "
-"cette demande via <a href=\"%(contact_url)s#request\">ce formulaire</a>."
-msgstr ""
-
-#: .\main\templates\main\privacy.html:83
-msgid ""
-"Si vous souhaitez ne pas faire une demande par formulaire, veuillez nous "
-"contacter à cette adresse électronique <a href=\"mailto:proglanglearn@gmail."
-"com\">proglanglearn@gmail.com</a> en donnant toutes les informations utiles "
-"afin de vous identifier sur notre base de données."
 msgstr ""
 
 #: .\main\templates\main\report.html:4
@@ -3964,19 +3979,19 @@ msgstr ""
 msgid "Votre rapport d'erreur a été envoyé"
 msgstr ""
 
-#: .\main\views.py:193
+#: .\main\views.py:194
 msgid "Le commentaire a été signalé"
 msgstr ""
 
-#: .\main\views.py:197
+#: .\main\views.py:198
 msgid "Le commentaire n'a pas pu être signalé"
 msgstr ""
 
-#: .\main\views.py:217
+#: .\main\views.py:218
 msgid "Votre commentaire et les réponses sont supprimés"
 msgstr ""
 
-#: .\main\views.py:220
+#: .\main\views.py:221
 msgid "Vous ne pouvez pas supprimer ou modifier ce commentaire"
 msgstr ""
 
