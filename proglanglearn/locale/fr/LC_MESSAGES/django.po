@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-02 22:13+0100\n"
+"POT-Creation-Date: 2020-01-03 13:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1979,6 +1979,10 @@ msgstr ""
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:102
 msgid "Récapitulatif"
+msgstr ""
+
+#: .\billing\templates\billing\pdf\confirmation_payment.html:120
+msgid "Montant remboursé"
 msgstr ""
 
 #: .\billing\templates\billing\pdf\confirmation_payment.html:128

@@ -117,7 +117,7 @@
                     <tfoot>
                         <tr class="total">
                             <td>{% trans 'Total' %} :</td>
-                            <td style="text-align: right; padding-right: 5px;">{{ payment.amount }}</td>
+                            <td style="text-align: right; padding-right: 5px;">{{ payment.amount }}{% if refund_amount != 0 %}<br><span style="color: red;">{% trans "Montant remboursé" %} : {{ refund_amount }}</span>{% endif %}</td>
                         </tr>
                     </tfoot>
                 </table>

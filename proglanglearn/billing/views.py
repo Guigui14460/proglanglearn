@@ -359,6 +359,8 @@ class PDFPaymentView(LoginRequiredMixin, View):
         order = get_object_or_404(
             Order, user=request.user, ref_code=self.kwargs.get('ref_code'), ordered=True)
         current_site = get_current_site(request)
+        refund = Refund.objects.filter(order=order)
+        stripe_refund = stripe.Refund.retrieve(refund[0].refund_id).amount if refund.exists() else 0
         params = {
             'protocol': settings.PROTOCOL,
             'domain': current_site.domain,
@@ -366,5 +368,6 @@ class PDFPaymentView(LoginRequiredMixin, View):
             'payment': order.payment,
             'stripe_charge': stripe.Charge.retrieve(order.payment.stripe_charge_id[2:-3]),
             'refund_url': reverse('main:billing:refund'),
+            'refund_amount': stripe_refund / 100,
         }
         return RenderPDF.render(self.pdf_template_name, params, f"{order.ref_code}")
