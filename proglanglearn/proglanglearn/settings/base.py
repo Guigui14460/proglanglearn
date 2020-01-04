@@ -155,6 +155,7 @@ SESSION_COOKIE_AGE = 3600 * 24 * 7
 
 
 # Account settings
+SOCIALACCOUNT_ENABLED = 'allauth.socialaccount' in INSTALLED_APPS
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'METHOD': 'oauth2',

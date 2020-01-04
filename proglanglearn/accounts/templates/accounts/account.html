@@ -41,7 +41,7 @@
                     {% include 'includes/form_field.html' with field=personal_form.username %}
                     {% include 'includes/form_field.html' with field=personal_form.email_notification %}
                     {% include 'includes/form_field.html' with field=personal_form.public_profile %}
-                    {% if not accounts %}
+                    {% if not accounts or user.socialaccount_set.all.0.provider == 'github' %}
                         <div class="row small-device">
                             <div class="col-50 small-device">
                                 {% include 'includes/form_field.html' with field=personal_form.first_name %}

@@ -282,7 +282,11 @@ class PersonalInfo(View):
                 user.profile.is_student = False
             user.username = personal_form.cleaned_data['username']
             if len(user.socialaccount_set.all()) > 0:
-                user.email = user.socialaccount_set.all()[0].extra_data['email']
+                if user.socialaccount_set.all()[0].provider in ["google", "twitter"]:
+                    user.email = user.socialaccount_set.all()[0].extra_data['email']
+                if user.socialaccount_set.all()[0].provider in ["github"]:
+                    user.first_name = personal_form.cleaned_data['first_name']
+                    user.last_name = personal_form.cleaned_data['last_name'].upper()
             else:
                 user.first_name = personal_form.cleaned_data['first_name']
                 user.last_name = personal_form.cleaned_data['last_name'].upper()
@@ -412,7 +416,7 @@ class ProfileListView(NavbarSearchMixin, ListView):
         if self.query is not None and self.query != '':
             qs = Profile.objects.search(self.query)
         else:
-            qs = Profile.objects.all_dev_student()
+            qs = Profile.objects.full_profile_shown()
         self.count = len(qs)
         return qs
 

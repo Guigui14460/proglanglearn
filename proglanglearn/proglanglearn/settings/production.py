@@ -17,31 +17,33 @@ PROTOCOL = 'https'
 #         'PORT': 9999,
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'init_command': 'SET default_storage_engine=INNODB',
-            'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
-            'NAME': 'guillaumeletelli$ProgLangLearn',
-            'USER': 'guillaumeletelli',
-            'PASSWORD': '9,:bkCJx{(mRbSLgcbs?`-BM@6y*XT,w.\+%zZXyqY',
-            'HOST': 'guillaumeletellier.mysql.pythonanywhere-services.com',
-            'PORT': 9999,
-        },
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'init_command': 'SET default_storage_engine=INNODB',
+#             'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
+#             'NAME': 'guillaumeletelli$ProgLangLearn',
+#             'USER': 'guillaumeletelli',
+#             'PASSWORD': '9,:bkCJx{(mRbSLgcbs?`-BM@6y*XT,w.\+%zZXyqY',
+#             'HOST': 'guillaumeletellier.mysql.pythonanywhere-services.com',
+#             'PORT': 9999,
+#         },
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Staticfiles settings
-STATIC_ROOT = '/home/guillaumeletellier/proglanglearn/static_cdn'
-MEDIA_ROOT = '/home/guillaumeletellier/proglanglearn/media_cdn'
+# STATIC_ROOT = '/home/guillaumeletellier/proglanglearn/static_cdn'
+# MEDIA_ROOT = '/home/guillaumeletellier/proglanglearn/media_cdn'
+STATIC_ROOT = 'D:\projects\proglanglearn\proglanglearn\static'
+MEDIA_ROOT = 'D:\projects\proglanglearn\proglanglearn\media_cdn'
 
 
 # Password validation settings

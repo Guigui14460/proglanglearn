@@ -1,4 +1,0 @@
-in body, put info to pass to api
-in Auth -> Type : API key, put Key: Authorization, value: Token <token> in Header
-
-Barrer facebook token user

@@ -161,8 +161,9 @@ class PersonalInformationForm(forms.Form):
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         if len(self.request.user.socialaccount_set.all()) > 0:
             social_account = self.request.user.socialaccount_set.all()[0]
-            del self.fields['last_name']
-            del self.fields['first_name']
+            if social_account.provider in ["google", "twitter"]:
+                del self.fields['last_name']
+                del self.fields['first_name']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

@@ -34,7 +34,7 @@ class User(AbstractUser):
     ip_address = models.GenericIPAddressField(
         verbose_name=_("adresse IP"), null=True, blank=True)
     natural_language = models.CharField(
-        max_length=5, verbose_name=_("langage naturel de l'utilisateur"))
+        max_length=5, default='en', verbose_name=_("langage naturel de l'utilisateur"))
 
 
 class EmailAdminNotificationForUsers(models.Model):

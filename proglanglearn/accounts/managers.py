@@ -13,13 +13,16 @@ class ProfileQuerySet(models.QuerySet):
     def email(self):
         return self.filter(user__is_active=True)
 
+    def all_profile(self):
+        return self.filter(public_profile=True)
+
 
 class ProfileManager(models.Manager):
     def get_queryset(self):
         return ProfileQuerySet(self.model, using=self._db)
 
     def full_profile_shown(self):
-        return (self.get_queryset().dev_profile_shown() | self.get_queryset().student_profile_shown()).distinct()
+        return self.get_queryset().all_profile().order_by('-public_profile', '-is_dev', '-is_student')
 
     def send_email(self):
         return self.get_queryset().email()
