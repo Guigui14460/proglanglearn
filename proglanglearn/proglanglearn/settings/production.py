@@ -67,6 +67,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 # Session settings
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # SESSION_COOKIE_SECURE = True
