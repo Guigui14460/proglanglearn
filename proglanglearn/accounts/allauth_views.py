@@ -24,14 +24,14 @@ class LoginView(NavbarSearchMixin, AllauthLoginView):
     def post(self, *args, **kwargs):
         older_post = super(LoginView, self).post(*args, **kwargs)
         ip_address = get_ip_address_client(self.request)
-        print(ip_address)
-        if self.request.user.ip_address == None:
-            self.request.user.ip_address = ip_address
-            self.request.user.save()
-        else:
-            if ip_address != self.request.user.ip_address:
-                send_mail("Votre compte a sûrement été compromis",
-                          "<ip_addess_of_atk>")
+        if self.request.user.is_authenticated:
+            if self.request.user.ip_address == None:
+                self.request.user.ip_address = ip_address
+                self.request.user.save()
+            else:
+                if ip_address != self.request.user.ip_address:
+                    send_mail("Votre compte a sûrement été compromis",
+                              "<ip_addess_of_atk>")
         return older_post
 
 

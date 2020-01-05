@@ -29,7 +29,7 @@
     <meta property="og:description" content="{% trans 'Apprenez les bases de la programmation en les manipulant dans des exemples simples et des projets plus complexes.' %}" />
     
     <title>{% block title %}{% endblock title%}ProgLangLearn</title>
-    <link rel="shortcut icon" href="{% static 'images/favicon.jpg' %}" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'style/css/global.min.css' %}" media="screen" />
     <link rel="stylesheet" href="{% static 'style/css/print.min.css' %}" media="print" />
@@ -79,7 +79,7 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v5.0"></script>
     <script src="{% static 'js/main.jquery.js' %}"></script>
     {% block javascript %}{% endblock javascript %}
-    <script>if (parseInt(localStorage.getItem("last_privacy")) < {{ last_privacy }}){$.get("/modal-privacy/", function(html){$(html).appendTo('body').modal({escapeClose: false, clickClose: false, showClose: false, fadeDuration: 150,}); $("#privacyAccepted").click(function (){localStorage.setItem("last_privacy", {{ last_privacy }});});});}; $(function () { $("#langForm select").change(function () { $(this).closest('form').submit(); }); {% block jquery %} {% endblock jquery %} });</script>
+    <script>{% if last_privacy %}if (parseInt(localStorage.getItem("last_privacy")) < {{ last_privacy }}){$.get("/modal-privacy/", function(html){$(html).appendTo('body').modal({escapeClose: false, clickClose: false, showClose: false, fadeDuration: 150,}); $("#privacyAccepted").click(function (){localStorage.setItem("last_privacy", {{ last_privacy }});});});};{% endif %}$(function () { $("#langForm select").change(function () { $(this).closest('form').submit(); }); {% block jquery %} {% endblock jquery %} });</script>
 </body>
 
 </html>
