@@ -194,7 +194,7 @@ ACCOUNT_FORMS = {
     'set_password': 'accounts.allauth_forms.SetPasswordForm',
     'reset_password_from_key': 'accounts.allauth_forms.ResetPasswordKeyForm',
 }
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
