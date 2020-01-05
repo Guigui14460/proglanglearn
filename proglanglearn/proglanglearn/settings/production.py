@@ -40,10 +40,8 @@ DATABASES = {
 
 
 # Staticfiles settings
-# STATIC_ROOT = '/home/guillaumeletellier/proglanglearn/static_cdn'
-# MEDIA_ROOT = '/home/guillaumeletellier/proglanglearn/media_cdn'
-STATIC_ROOT = 'D:\projects\proglanglearn\proglanglearn\static'
-MEDIA_ROOT = 'D:\projects\proglanglearn\proglanglearn\media_cdn'
+STATIC_ROOT = '/home/guillaumeletellier/proglanglearn/proglanglearn/static_cdn'
+MEDIA_ROOT = '/home/guillaumeletellier/proglanglearn/proglanglearn/media_cdn'
 
 
 # Password validation settings
@@ -79,7 +77,5 @@ SITE_ID = 4
 
 
 # Stripe settings
-# STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
-# STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
-STRIPE_PUBLIC_KEY = 'pk_test_buF4FsDmstqHzKr4Nc5TKxbH00rXE4mpbI'
-STRIPE_SECRET_KEY = 'sk_test_bokSwLp3jIVrQ0WYZP4ff8tx009fk1ZPGJ'
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
