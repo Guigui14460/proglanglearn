@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-03 13:57+0100\n"
+"POT-Creation-Date: 2020-01-05 16:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,7 @@ msgstr "Advanced options"
 
 #: .\accounts\allauth_forms.py:20 .\accounts\allauth_forms.py:34
 #: .\accounts\allauth_forms.py:82 .\accounts\forms.py:34
-#: .\accounts\forms.py:69 .\accounts\forms.py:214
+#: .\accounts\forms.py:69 .\accounts\forms.py:215
 #: .\accounts\templates\accounts\account.html:71
 msgid "Mot de passe"
 msgstr "Password"
@@ -237,7 +237,7 @@ msgstr ""
 "Your country's intelligence allows students and developers to be put "
 "forward. This data is used for statistical studies."
 
-#: .\accounts\forms.py:173
+#: .\accounts\forms.py:174
 msgid ""
 "Cette adresse email a déjà été utilisée. Il faut en choisir une autre ou "
 "garder votre ancienne adresse si possible"
@@ -245,7 +245,7 @@ msgstr ""
 "This email address has already been used. You should choose another one or "
 "keep your old address if possible."
 
-#: .\accounts\forms.py:182
+#: .\accounts\forms.py:183
 msgid ""
 "Ce nom d'utilisateur a déjà été utilisée. Il faut en choisir un autre ou "
 "garder votre ancien nom d'utilisateur si possible"
@@ -253,15 +253,15 @@ msgstr ""
 "This username has already been used. You should choose another one or keep "
 "your old username if possible."
 
-#: .\accounts\forms.py:187
+#: .\accounts\forms.py:188
 msgid "Biographie"
 msgstr "Biography"
 
-#: .\accounts\forms.py:187
+#: .\accounts\forms.py:188
 msgid "Une courte biographie"
 msgstr "A short biography"
 
-#: .\accounts\forms.py:188
+#: .\accounts\forms.py:189
 msgid ""
 "Courte biographie ou une phrase/expression que vous aimez pour vous décrire "
 "rapidement (1500 caractères)."
@@ -269,11 +269,11 @@ msgstr ""
 "Short biography or a phrase/expression you like to describe yourself quickly "
 "(1500 characters)."
 
-#: .\accounts\forms.py:189
+#: .\accounts\forms.py:190
 msgid "Choisissez des compétences (langages ou frameworks)"
 msgstr "Choose skills (languages or frameworks)"
 
-#: .\accounts\forms.py:192
+#: .\accounts\forms.py:193
 msgid ""
 "N.B. : multiple sélection possible.<br>S'il manque une bibliothèque ou un "
 "langage, demandez à le rajouter dans la page contact."
@@ -281,35 +281,35 @@ msgstr ""
 "N.B.: multiple selection possible.<br>If a library or language is missing, "
 "ask to add it in the contact page."
 
-#: .\accounts\forms.py:194
+#: .\accounts\forms.py:195
 msgid "URL de votre site web"
 msgstr "URL of your website"
 
-#: .\accounts\forms.py:196
+#: .\accounts\forms.py:197
 msgid "URL de votre profil Twitter"
 msgstr "URL of your Twitter profile"
 
-#: .\accounts\forms.py:198
+#: .\accounts\forms.py:199
 msgid "URL de votre chaîne Youtube"
 msgstr "URL of your Youtube channel"
 
-#: .\accounts\forms.py:200
+#: .\accounts\forms.py:201
 msgid "URL de votre profil Facebook"
 msgstr "Your Facebook profile URL"
 
-#: .\accounts\forms.py:202
+#: .\accounts\forms.py:203
 msgid "URL de votre profil LinkedIn"
 msgstr "URL of your LinkedIn profile"
 
-#: .\accounts\forms.py:204
+#: .\accounts\forms.py:205
 msgid "URL de votre profil Intagram"
 msgstr "URL of your Intagram profile"
 
-#: .\accounts\forms.py:205
+#: .\accounts\forms.py:206
 msgid "Nom d'utilisateur de votre compte Github"
 msgstr "Username of your Github account"
 
-#: .\accounts\forms.py:206
+#: .\accounts\forms.py:207
 msgid ""
 "<i class='fas fa-exclamation-triangle'></i> En renseignant ce champ, vous "
 "accepter de publier les liens et les informations de vos dépôts publics de "
@@ -319,19 +319,19 @@ msgstr ""
 "agree to publish links and public repos informations from your Github "
 "account."
 
-#: .\accounts\forms.py:211
+#: .\accounts\forms.py:212
 msgid "Le mot de passe que vous avez entré est incorrect. Veuillez réessayer."
 msgstr "The password you entered is incorrect. Please try again."
 
-#: .\accounts\forms.py:243
+#: .\accounts\forms.py:244
 msgid "Master en sécurité informatique"
 msgstr "Master in Computer Security"
 
-#: .\accounts\forms.py:244 .\accounts\forms.py:261
+#: .\accounts\forms.py:245 .\accounts\forms.py:262
 msgid "Renseignements ..."
 msgstr "Information ..."
 
-#: .\accounts\forms.py:249
+#: .\accounts\forms.py:250
 msgid ""
 "Vous pouvez donner quelques renseignements sur les compétences acquises, vos "
 "résultats, etc"
@@ -339,11 +339,11 @@ msgstr ""
 "You can give some information about the skills you have acquired, your "
 "results, etc."
 
-#: .\accounts\forms.py:260
+#: .\accounts\forms.py:261
 msgid "Analyste de données"
 msgstr "Data scientist"
 
-#: .\accounts\forms.py:266
+#: .\accounts\forms.py:267
 msgid ""
 "Vous pouvez donner quelques renseignements sur le type d'emploi où vous êtes/"
 "étiez affecté, les compétences demandées/requises, ce que vous faîtes/"
@@ -352,15 +352,15 @@ msgstr ""
 "You can give some information about the type of job you are/were in, what "
 "skills are/required, what you do/were doing, etc."
 
-#: .\accounts\forms.py:271
+#: .\accounts\forms.py:272
 msgid "Recherche de profil"
 msgstr "Profile search"
 
-#: .\accounts\forms.py:273
+#: .\accounts\forms.py:274
 msgid "Nom d'utilisateur, prénom ou nom de famille"
 msgstr "Username, first or last name"
 
-#: .\accounts\forms.py:274
+#: .\accounts\forms.py:275
 msgid "N.B. : séparez les mots clés par des espaces pour plus de résultats."
 msgstr "N.B.: Separate keywords with spaces for more results."
 
@@ -697,12 +697,12 @@ msgid "Édition du profil"
 msgstr "Editing the profile"
 
 #: .\accounts\templates\accounts\edit_profile.html:8
-#: .\accounts\templates\accounts\profile.html:10
+#: .\accounts\templates\accounts\profile.html:11
 msgid "Voir tous les profils"
 msgstr "View all profiles"
 
 #: .\accounts\templates\accounts\edit_profile.html:11
-#: .\accounts\templates\accounts\profile.html:11
+#: .\accounts\templates\accounts\profile.html:12
 msgid "Éditer mon profil"
 msgstr "Edit my profile"
 
@@ -723,7 +723,7 @@ msgid "École"
 msgstr "Schools"
 
 #: .\accounts\templates\accounts\includes\education.html:8
-#: .\accounts\templates\accounts\profile.html:91
+#: .\accounts\templates\accounts\profile.html:92
 msgid "Diplôme"
 msgstr "Diploma"
 
@@ -734,8 +734,8 @@ msgstr "Years"
 
 #: .\accounts\templates\accounts\includes\education.html:16
 #: .\accounts\templates\accounts\includes\experience.html:16
-#: .\accounts\templates\accounts\profile.html:77
-#: .\accounts\templates\accounts\profile.html:90
+#: .\accounts\templates\accounts\profile.html:78
+#: .\accounts\templates\accounts\profile.html:91
 msgid "Maintenant"
 msgstr "Now"
 
@@ -774,7 +774,7 @@ msgid "Entreprise"
 msgstr "Compagny"
 
 #: .\accounts\templates\accounts\includes\experience.html:8
-#: .\accounts\templates\accounts\profile.html:78
+#: .\accounts\templates\accounts\profile.html:79
 msgid "Poste"
 msgstr "Job"
 
@@ -816,99 +816,99 @@ msgstr ""
 msgid "Profil de"
 msgstr "Profile of"
 
-#: .\accounts\templates\accounts\profile.html:12
+#: .\accounts\templates\accounts\profile.html:13
 msgid "Signaler le profil"
 msgstr "Report the profile"
 
-#: .\accounts\templates\accounts\profile.html:16
-#: .\accounts\templates\accounts\profiles.html:21
+#: .\accounts\templates\accounts\profile.html:17
+#: .\accounts\templates\accounts\profiles.html:22
 msgid "Image de profil"
 msgstr "Profile picture"
 
-#: .\accounts\templates\accounts\profile.html:18
+#: .\accounts\templates\accounts\profile.html:19
 msgid "Étudiant"
 msgstr "Student"
 
-#: .\accounts\templates\accounts\profile.html:18
+#: .\accounts\templates\accounts\profile.html:19
 msgid "Développeur professionnel"
 msgstr "Professional Developer"
 
-#: .\accounts\templates\accounts\profile.html:18
+#: .\accounts\templates\accounts\profile.html:19
 msgid "Amateur"
 msgstr "Amateur"
 
-#: .\accounts\templates\accounts\profile.html:19
+#: .\accounts\templates\accounts\profile.html:20
 #: .\analytics\templates\analytics\dashboard.html:21
 #: .\analytics\templates\analytics\ranking.html:16
 msgid "Niveau"
 msgstr "Level"
 
-#: .\accounts\templates\accounts\profile.html:23
+#: .\accounts\templates\accounts\profile.html:24
 msgid "Aucun réseau social n'est relié a ce compte"
 msgstr "No social network is connected to this account"
 
-#: .\accounts\templates\accounts\profile.html:28
+#: .\accounts\templates\accounts\profile.html:29
 msgid "Site web"
 msgstr "Website"
 
-#: .\accounts\templates\accounts\profile.html:58
+#: .\accounts\templates\accounts\profile.html:59
 msgid "Votre biographie"
 msgstr "Your biography"
 
-#: .\accounts\templates\accounts\profile.html:58
+#: .\accounts\templates\accounts\profile.html:59
 msgid "Biographie de"
 msgstr "Biography of"
 
-#: .\accounts\templates\accounts\profile.html:59
+#: .\accounts\templates\accounts\profile.html:60
 msgid "Biographie vide"
 msgstr "Empty biography"
 
-#: .\accounts\templates\accounts\profile.html:61
+#: .\accounts\templates\accounts\profile.html:62
 msgid "Mes conpétences"
 msgstr "My skills"
 
-#: .\accounts\templates\accounts\profile.html:61
+#: .\accounts\templates\accounts\profile.html:62
 msgid "Ses compétences"
 msgstr "His skills"
 
-#: .\accounts\templates\accounts\profile.html:68
+#: .\accounts\templates\accounts\profile.html:69
 msgid "Aucune compétence renseignée"
 msgstr "No skills reported"
 
-#: .\accounts\templates\accounts\profile.html:73
+#: .\accounts\templates\accounts\profile.html:74
 msgid "Espace expérience"
 msgstr "Experience space"
 
-#: .\accounts\templates\accounts\profile.html:79
-#: .\accounts\templates\accounts\profile.html:92
+#: .\accounts\templates\accounts\profile.html:80
+#: .\accounts\templates\accounts\profile.html:93
 msgid "Description"
 msgstr "Description"
 
-#: .\accounts\templates\accounts\profile.html:82
+#: .\accounts\templates\accounts\profile.html:83
 msgid "Aucune expérience renseignée"
 msgstr "No experience reported"
 
-#: .\accounts\templates\accounts\profile.html:86
+#: .\accounts\templates\accounts\profile.html:87
 msgid "Espace éducation"
 msgstr "Education space"
 
-#: .\accounts\templates\accounts\profile.html:95
+#: .\accounts\templates\accounts\profile.html:96
 msgid "Aucune école renseignée"
 msgstr "No schools reported"
 
-#: .\accounts\templates\accounts\profile.html:100
+#: .\accounts\templates\accounts\profile.html:101
 msgid "Dépôts Github"
 msgstr "Github repositories"
 
-#: .\accounts\templates\accounts\profile.html:110
+#: .\accounts\templates\accounts\profile.html:111
 msgid "Étoiles"
 msgstr "Stars"
 
-#: .\accounts\templates\accounts\profile.html:111
+#: .\accounts\templates\accounts\profile.html:112
 msgid "Vues"
 msgstr "Views"
 
-#: .\accounts\templates\accounts\profile.html:116
+#: .\accounts\templates\accounts\profile.html:117
 msgid "Son compte Github n'est pas relié. Aucun dépôt ne peut être trouvé"
 msgstr "His Github account is unlinked. No deposits can be found"
 
@@ -931,11 +931,11 @@ msgid_plural "%(counter)s profils trouvés"
 msgstr[0] "%(counter)s profile found"
 msgstr[1] "%(counter)s profiles found"
 
-#: .\accounts\templates\accounts\profiles.html:26
+#: .\accounts\templates\accounts\profiles.html:27
 msgid "Voir le profil"
 msgstr "See the profile"
 
-#: .\accounts\templates\accounts\profiles.html:37
+#: .\accounts\templates\accounts\profiles.html:38
 msgid "Aucun profil trouvé"
 msgstr "No profiles found"
 
@@ -1017,22 +1017,22 @@ msgstr ""
 msgid "Activation de votre compte effectuée avec succès"
 msgstr "Successful activation of your account"
 
-#: .\accounts\views.py:298
+#: .\accounts\views.py:302
 msgid "Vos informations personnelles ont été mises à jour"
 msgstr "Your personal information has been updated"
 
-#: .\accounts\views.py:301
+#: .\accounts\views.py:305
 msgid ""
 "Vos informations personnelles n'ont pas pu être modifiées. Rétablissement "
 "des anciennes informations"
 msgstr ""
 "Your personal information could not be changed. Restoring old information"
 
-#: .\accounts\views.py:338
+#: .\accounts\views.py:342
 msgid "Les informations sur votre profil ont été mises à jour"
 msgstr "Your profile information has been updated"
 
-#: .\accounts\views.py:341
+#: .\accounts\views.py:345
 msgid ""
 "Vos informations visibles de votre profil n'ont pas pu être modifiées. "
 "Rétablissement des anciennes informations"
@@ -1040,31 +1040,31 @@ msgstr ""
 "The information visible in your profile could not be modified. Restoring old "
 "information"
 
-#: .\accounts\views.py:357
+#: .\accounts\views.py:361
 msgid "Votre compte a été désactivé"
 msgstr "Your account has been deactivated"
 
-#: .\accounts\views.py:359
+#: .\accounts\views.py:363
 msgid "Votre compte n'a pas pu être désactiver"
 msgstr "Your account could not be deactivated"
 
-#: .\accounts\views.py:439
+#: .\accounts\views.py:443
 msgid "École ajoutée à votre espace éducation"
 msgstr "School added to your education space"
 
-#: .\accounts\views.py:458
+#: .\accounts\views.py:462
 msgid "Expérience ajoutée à votre espace expérience"
 msgstr "Experience added to your experience space"
 
-#: .\accounts\views.py:480
+#: .\accounts\views.py:484
 msgid "Profil signalé"
 msgstr "Reported profile"
 
-#: .\accounts\views.py:482
+#: .\accounts\views.py:486
 msgid "Vous ne pouvez pas vous signaler vous-même"
 msgstr "You can't report yourself"
 
-#: .\accounts\views.py:484
+#: .\accounts\views.py:488
 msgid ""
 "Le profil a déjà été signalé et est en attente de modification par le gérant "
 "de ce profil"
@@ -1072,15 +1072,15 @@ msgstr ""
 "The profile has already been reported and is awaiting modification by the "
 "manager of this profile"
 
-#: .\accounts\views.py:493
+#: .\accounts\views.py:497
 msgid "Expérience supprimée"
 msgstr "Experience removed"
 
-#: .\accounts\views.py:496 .\accounts\views.py:508
+#: .\accounts\views.py:500 .\accounts\views.py:512
 msgid "Vous n'avez pas l'autorisation de le supprimer"
 msgstr "You do not have authorization to delete it."
 
-#: .\accounts\views.py:505
+#: .\accounts\views.py:509
 msgid "Éducation supprimée"
 msgstr "Education removed"
 
