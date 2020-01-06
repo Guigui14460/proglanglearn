@@ -18,6 +18,7 @@ ALLOWED_HOSTS = ['guillaumeletellier.pythonanywhere.com',
                  'proglanglearn.com',
                  '127.0.0.1',
                  'ec2-18-191-209-94.us-east-2.compute.amazonaws.com',
+                 '18.191.209.94'
                  ]
 INTERNAL_IPS = ('127.0.0.1',)
 

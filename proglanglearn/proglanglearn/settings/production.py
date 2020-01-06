@@ -40,8 +40,11 @@ DATABASES = {
 
 
 # Staticfiles settings
-STATIC_ROOT = '/home/guillaumeletellier/proglanglearn/proglanglearn/static_cdn'
-MEDIA_ROOT = '/home/guillaumeletellier/proglanglearn/proglanglearn/media_cdn'
+# STATIC_ROOT = '/home/guillaumeletellier/proglanglearn/proglanglearn/static_cdn'
+# MEDIA_ROOT = '/home/guillaumeletellier/proglanglearn/proglanglearn/media_cdn'
+STATIC_ROOT = '/home/ubuntu/pll_root/proglanglearn/static_cdn'
+MEDIA_ROOT = '/home/ubuntu/pll_root/proglanglearn/media_cdn'
+
 
 
 # Password validation settings
@@ -99,7 +102,8 @@ PATH_TINYMCE = STATIC_ROOT + 'tinymce/'
 
 
 # Allauth settings
-SITE_ID = 4
+#SITE_ID = 4
+SITE_ID = 1
 USE_X_FORWARDED_HOST = True
 
 
