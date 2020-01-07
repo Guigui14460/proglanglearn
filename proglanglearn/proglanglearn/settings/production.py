@@ -9,8 +9,8 @@ PROTOCOL = 'https'
 # Database settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'proglanglearn-database-1',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'proglanglearn_db',
         'USER': 'pll_master',
         'PASSWORD': 'kN9jutdGK85cn2MLthrp2zrcry2bQrG9CfXbndKTF6gPNW8X32dp8Na2xRr9Z8ygCvHPV6afKWF',
         'HOST': 'proglanglearn-database-1.cahphcqcqndw.eu-west-3.rds.amazonaws.com',
@@ -46,7 +46,6 @@ STATIC_ROOT = '/home/ubuntu/pll_root/proglanglearn/static_cdn'
 MEDIA_ROOT = '/home/ubuntu/pll_root/proglanglearn/media_cdn'
 
 
-
 # Password validation settings
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -76,18 +75,18 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Session settings
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
 
 # Security settings
-CSRF_COOKIE_SECURE = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_SSL_REDIRECT = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+# CSRF_COOKIE_SECURE = True
+# X_FRAME_OPTIONS = 'DENY'
+# SECURE_SSL_REDIRECT = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_HSTS_SECONDS = 3600
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
 
 
 # Filebrowser settings
