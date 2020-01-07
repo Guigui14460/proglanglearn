@@ -7,16 +7,16 @@ PROTOCOL = 'https'
 
 
 # Database settings
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': '',
-#         'USER': '',
-#         'PASSWORD': '',
-#         'HOST': '',
-#         'PORT': 9999,
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'proglanglearn-database-1',
+        'USER': 'pll_master',
+        'PASSWORD': 'kN9jutdGK85cn2MLthrp2zrcry2bQrG9CfXbndKTF6gPNW8X32dp8Na2xRr9Z8ygCvHPV6afKWF',
+        'HOST': 'proglanglearn-database-1.cahphcqcqndw.eu-west-3.rds.amazonaws.com',
+        'PORT': 5432,
+    }
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -31,12 +31,12 @@ PROTOCOL = 'https'
 #         },
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Staticfiles settings
