@@ -17,8 +17,8 @@ ADMINS = [
 ALLOWED_HOSTS = ['guillaumeletellier.pythonanywhere.com',
                  'proglanglearn.com',
                  '127.0.0.1',
-                 'ec2-35-181-9-142.eu-west-3.compute.amazonaws.com',
-		 '35.181.9.142',
+                 'ec2-35-180-0-237.eu-west-3.compute.amazonaws.com',
+                 '35.180.0.237',
                  ]
 INTERNAL_IPS = ('127.0.0.1',)
 
