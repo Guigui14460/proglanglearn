@@ -9,7 +9,7 @@ PROTOCOL = 'https'
 # Database settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'proglanglearn_db',
         'USER': 'pll_master',
         'PASSWORD': 'kN9jutdGK85cn2MLthrp2zrcry2bQrG9CfXbndKTF6gPNW8X32dp8Na2xRr9Z8ygCvHPV6afKWF',
