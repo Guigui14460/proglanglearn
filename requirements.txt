@@ -7,7 +7,7 @@ chardet==3.0.4
 defusedxml==0.6.0
 Deprecated==1.2.6
 diff-match-patch==20181111
-Django==2.2.22
+Django==2.2.24
 django-allauth==0.41.0
 django-countries==5.5
 django-filebrowser==3.11.1
