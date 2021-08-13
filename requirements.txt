@@ -7,7 +7,7 @@ chardet==3.0.4
 defusedxml==0.6.0
 Deprecated==1.2.6
 diff-match-patch==20181111
-Django==2.2.19
+Django==2.2.20
 django-allauth==0.41.0
 django-countries==5.5
 django-filebrowser==3.11.1
@@ -30,7 +30,7 @@ oauthlib==3.1.0
 odfpy==1.4.0
 openpyxl==3.0.0
 pandas==0.25.3
-Pillow==8.1.1
+Pillow==8.1.2
 pycodestyle==2.5.0
 pycparser==2.19
 PyGithub==1.44
@@ -40,7 +40,7 @@ python-dateutil==2.8.0
 python-decouple==3.1
 python3-openid==3.1.0
 pytz==2019.3
-PyYAML==5.3.1
+PyYAML==5.4
 reportlab==3.5.55
 requests==2.22.0
 requests-oauthlib==1.2.0
