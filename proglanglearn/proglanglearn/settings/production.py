@@ -7,36 +7,36 @@ PROTOCOL = 'https'
 
 
 # Database settings
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'proglanglearn_db',
-        'USER': 'pll_master',
-        'PASSWORD': 'kN9jutdGK85cn2MLthrp2zrcry2bQrG9CfXbndKTF6gPNW8X32dp8Na2xRr9Z8ygCvHPV6afKWF',
-        'HOST': 'proglanglearn-database-1.cahphcqcqndw.eu-west-3.rds.amazonaws.com',
-        'PORT': 5432,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '',
+#         'PORT': 5432,
+#     }
+# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'OPTIONS': {
 #             'init_command': 'SET default_storage_engine=INNODB',
 #             'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
-#             'NAME': 'guillaumeletelli$ProgLangLearn',
-#             'USER': 'guillaumeletelli',
-#             'PASSWORD': '9,:bkCJx{(mRbSLgcbs?`-BM@6y*XT,w.\+%zZXyqY',
-#             'HOST': 'guillaumeletellier.mysql.pythonanywhere-services.com',
+#             'NAME': '',
+#             'USER': '',
+#             'PASSWORD': '',
+#             'HOST': '',
 #             'PORT': 9999,
 #         },
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Staticfiles settings
