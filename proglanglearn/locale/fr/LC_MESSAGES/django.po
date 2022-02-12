@@ -23,6 +23,9 @@ msgid ""
 "votre compte n'est plus possible. Aucun recours sera possible comme stipulé "
 "dans nos conditions générales d'utilisation."
 msgstr ""
+"You are permanently banned from ProgLangLearn, i.e. access to "
+" your account is no longer possible. No recourse will be possible as stipulated "
+"in our general terms of use."
 
 #: .\accounts\admin.py:19
 #, python-format
@@ -30,10 +33,12 @@ msgid ""
 "Il ne vous reste que %(nb)d signalements pour être définitivement banni et "
 "perdre votre compte ProgLangLearn"
 msgstr ""
+"You only have %(nb)d reports left to be permanently banned and "
+"lose your ProgLangLearn account"
 
 #: .\accounts\admin.py:21
 msgid "Votre profil a été signalé"
-msgstr ""
+msgstr "Your profile has been reported"
 
 #: .\accounts\admin.py:22
 #, python-format
@@ -41,20 +46,22 @@ msgid ""
 "Votre profil a été signalé le %(date)s car il comporte des irrégularités. "
 "Veuillez les corriger au plus vite. %(strike_msg)s"
 msgstr ""
+"Your profile was flagged on %(date)s because it has irregularities. "
+"Please correct them as soon as possible. %(strike_msg)s"
 
 #: .\accounts\admin.py:29
 msgid "Striker le profil"
-msgstr ""
+msgstr "Strike the profile"
 
 #: .\accounts\admin.py:52 .\articles\admin.py:55 .\courses\admin.py:71
 #: .\courses\admin.py:91 .\forum\admin.py:38 .\forum\admin.py:54
 #: .\main\admin.py:52
 msgid "Inconnu"
-msgstr ""
+msgstr "Unknown"
 
 #: .\accounts\admin.py:54
 msgid "Espace critique"
-msgstr ""
+msgstr "Critical area"
 
 #: .\accounts\admin.py:56 .\accounts\templates\accounts\account.html:39
 #: .\articles\templates\articles\article_create.html:15
@@ -62,18 +69,18 @@ msgstr ""
 #: .\courses\templates\courses\course_detail.html:20
 #: .\forum\templates\forum\forum_create.html:13
 msgid "Informations générales"
-msgstr ""
+msgstr "General information"
 
 #: .\accounts\admin.py:58
 msgid "Options avancées"
-msgstr ""
+msgstr "Advanced options"
 
 #: .\accounts\allauth_forms.py:20 .\accounts\allauth_forms.py:34
 #: .\accounts\allauth_forms.py:82 .\accounts\forms.py:34
 #: .\accounts\forms.py:69 .\accounts\forms.py:215
 #: .\accounts\templates\accounts\account.html:71
 msgid "Mot de passe"
-msgstr ""
+msgstr "Password"
 
 #: .\accounts\allauth_forms.py:38 .\accounts\allauth_forms.py:66
 #: .\accounts\allauth_forms.py:86 .\accounts\allauth_forms.py:106
@@ -85,55 +92,59 @@ msgid ""
 "ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %"
 "(password_length)d caractères."
 msgstr ""
+"Entrez un mot de passe fort (avec minuscules, majuscules, chiffres et "
+"caractères spéciaux).<br>Votre mot de passe ne devrait pas contenir ou "
+"ressembler à votre nom d'utilisateur.<br>Il doit contenir au minimum %"
+"(password_length)d caractères."
 
 #: .\accounts\allauth_forms.py:42 .\accounts\allauth_forms.py:90
 #: .\accounts\forms.py:42
 msgid "Confirmation du mot de passe"
-msgstr ""
+msgstr "Confirmation of the password"
 
 #: .\accounts\allauth_forms.py:46 .\accounts\allauth_forms.py:74
 #: .\accounts\allauth_forms.py:94 .\accounts\allauth_forms.py:114
 #: .\accounts\forms.py:46 .\accounts\forms.py:129
 msgid "Entrez le même mot de passe"
-msgstr ""
+msgstr "Enter the same password"
 
 #: .\accounts\allauth_forms.py:54
 msgid "Mot de passe actuel"
-msgstr ""
+msgstr "Current password"
 
 #: .\accounts\allauth_forms.py:62 .\accounts\allauth_forms.py:102
 #: .\accounts\forms.py:123
 msgid "Nouveau mot de passe"
-msgstr ""
+msgstr "New password"
 
 #: .\accounts\allauth_forms.py:70 .\accounts\allauth_forms.py:110
 #: .\accounts\forms.py:126
 msgid "Confirmation du nouveau mot de passe"
-msgstr ""
+msgstr "Confirmation of the new password"
 
 #: .\accounts\apps.py:7
 msgid "Comptes"
-msgstr ""
+msgstr "Accounts"
 
 #: .\accounts\forms.py:22 .\accounts\forms.py:62 .\accounts\forms.py:144
 msgid "Nom d'utilisateur"
-msgstr ""
+msgstr "Username"
 
 #: .\accounts\forms.py:26
 msgid "Courriel"
-msgstr ""
+msgstr "Email address"
 
 #: .\accounts\forms.py:30
 msgid "Informez une addresse e-mail valide"
-msgstr ""
+msgstr "Provide a valid email address"
 
 #: .\accounts\forms.py:57
 msgid "Cette addresse email a déjà été utilisée. Il faut en choisir une autre"
-msgstr ""
+msgstr "This email address has already been used. You must choose another one"
 
 #: .\accounts\forms.py:84
 msgid "Le nom d'utilisateur mentionné n'existe pas"
-msgstr ""
+msgstr "The mentioned user name does not exist"
 
 #: .\accounts\forms.py:90
 msgid ""
@@ -141,10 +152,13 @@ msgid ""
 "et si vous ne trouvez pas le mail, réinscrivez-vous avec les identifiants "
 "renseignés"
 msgstr ""
+"Your account has not been activated. Check your emails and your spam folder "
+"and if you can't find the email, re-register with the credentials "
+"filled in"
 
 #: .\accounts\forms.py:94
 msgid "Votre compte est banni. Vous n'y avez plus accès"
-msgstr ""
+msgstr "Your account is banned. You no longer have access to it"
 
 #: .\accounts\forms.py:101
 msgid "New password"
@@ -156,11 +170,11 @@ msgstr "Confirmation du nouveau mot de passe"
 
 #: .\accounts\forms.py:119
 msgid "Ancien mot de passe"
-msgstr ""
+msgstr "Old password"
 
 #: .\accounts\forms.py:122
 msgid "Entrez votre mot de passe actuel"
-msgstr ""
+msgstr "Enter your current password"
 
 #: .\accounts\forms.py:137
 #: .\articles\templates\articles\article_detail.html:31
@@ -171,116 +185,128 @@ msgstr ""
 #: .\main\templates\main\includes\comments.html:41
 #: .\templates\includes\navbar.html:42
 msgid "Photo de profil"
-msgstr ""
+msgstr "Profile picture"
 
 #: .\accounts\forms.py:147
 msgid "Prénom"
-msgstr ""
+msgstr "Firstname"
 
 #: .\accounts\forms.py:149
 msgid "Nom"
-msgstr ""
+msgstr "Lastname"
 
 #: .\accounts\forms.py:151
 msgid "Recevoir des notifications par email"
-msgstr ""
+msgstr "Receive email notifications"
 
 #: .\accounts\forms.py:153
 msgid "Rendre mon profil public"
-msgstr ""
+msgstr "Make my profile public"
 
 #: .\accounts\forms.py:153
 msgid ""
 "Votre profil sera visible mais pas indexé lors de la recherche de profils"
-msgstr ""
+msgstr "Your profile will be visible but not indexed in the profile search"
 
 #: .\accounts\forms.py:154
 msgid "Quel statut en programmation ou dans la vie avez-vous ?"
-msgstr ""
+msgstr "What status in programming or in life do you have?"
 
 #: .\accounts\forms.py:155
 msgid ""
 "Les statuts de développeur et étudiant permet de vous mettre en avant. Cela "
 "vous permet de vous indexé lors des recherches de profils."
 msgstr ""
+"Developer and student status puts you in the spotlight. This "
+"allows you to be indexed in profile searches."
 
 #: .\accounts\forms.py:156
 msgid "Sélectionner un pays"
-msgstr ""
+msgstr "Select a country"
 
 #: .\accounts\forms.py:157
 msgid "Pays"
-msgstr ""
+msgstr "Country"
 
 #: .\accounts\forms.py:157
 msgid ""
 "Le renseignement de votre pays permet aux étudiants et développeurs d'être "
 "mis en avant. Cette donnée est utilisée pour des études statistiques."
 msgstr ""
+"Your country's intelligence allows students and developers to be "
+"put forward. This data is used for statistical studies."
 
 #: .\accounts\forms.py:174
 msgid ""
 "Cette adresse email a déjà été utilisée. Il faut en choisir une autre ou "
 "garder votre ancienne adresse si possible"
 msgstr ""
+"This email address has already been used. You should choose another one or "
+"keep your old address if possible"
 
 #: .\accounts\forms.py:183
 msgid ""
 "Ce nom d'utilisateur a déjà été utilisée. Il faut en choisir un autre ou "
 "garder votre ancien nom d'utilisateur si possible"
 msgstr ""
+"This username has already been used. You should choose another one or "
+"keep your old username if possible"
 
 #: .\accounts\forms.py:188
 msgid "Biographie"
-msgstr ""
+msgstr "Biography"
 
 #: .\accounts\forms.py:188
 msgid "Une courte biographie"
-msgstr ""
+msgstr "A short biography"
 
 #: .\accounts\forms.py:189
 msgid ""
 "Courte biographie ou une phrase/expression que vous aimez pour vous décrire "
 "rapidement (1500 caractères)."
 msgstr ""
+"Short biography or a phrase/expression you like to describe yourself "
+"quickly (1500 characters)."
 
 #: .\accounts\forms.py:190
 msgid "Choisissez des compétences (langages ou frameworks)"
-msgstr ""
+msgstr "Choose skills (languages or frameworks)"
 
 #: .\accounts\forms.py:193
 msgid ""
 "N.B. : multiple sélection possible.<br>S'il manque une bibliothèque ou un "
 "langage, demandez à le rajouter dans la page contact."
 msgstr ""
+"N.B.: multiple selection possible.<br>If a library or a "
+" language, ask to add it in the contact page."
 
 #: .\accounts\forms.py:195
 msgid "URL de votre site web"
-msgstr ""
+msgstr "URL of your website"
 
 #: .\accounts\forms.py:197
 msgid "URL de votre profil Twitter"
-msgstr ""
+msgstr "URL of your Twitter profile"
 
 #: .\accounts\forms.py:199
 msgid "URL de votre chaîne Youtube"
-msgstr ""
+msgstr "URL of your Youtube channel"
 
 #: .\accounts\forms.py:201
 msgid "URL de votre profil Facebook"
-msgstr ""
+msgstr "URL of your Facebook profile"
 
 #: .\accounts\forms.py:203
 msgid "URL de votre profil LinkedIn"
-msgstr ""
+msgstr "URL of your LinkedIn profile"
 
 #: .\accounts\forms.py:205
-msgid "URL de votre profil Intagram"
-msgstr ""
+msgid "URL de votre profil Instagram"
+msgstr "URL of your Instagram profile"
 
 #: .\accounts\forms.py:206
 msgid "Nom d'utilisateur de votre compte Github"
-msgstr ""
+msgstr "User name of your Github account"
 
 #: .\accounts\forms.py:207
 msgid ""
@@ -288,28 +314,33 @@ msgid ""
 "accepter de publier les liens et les informations de vos dépôts publics de "
 "votre compte Github."
 msgstr ""
+"<i class='fas fa-exclamation-triangle'></i> By filling out this field, you "
+"agree to publish links and information from your public repositories from "
+"your Github account."
 
 #: .\accounts\forms.py:212
 msgid "Le mot de passe que vous avez entré est incorrect. Veuillez réessayer."
-msgstr ""
+msgstr "The password you entered is incorrect. Please try again."
 
 #: .\accounts\forms.py:244
 msgid "Master en sécurité informatique"
-msgstr ""
+msgstr "Master in computer security"
 
 #: .\accounts\forms.py:245 .\accounts\forms.py:262
 msgid "Renseignements ..."
-msgstr ""
+msgstr "Information ..."
 
 #: .\accounts\forms.py:250
 msgid ""
 "Vous pouvez donner quelques renseignements sur les compétences acquises, vos "
 "résultats, etc"
 msgstr ""
+"You can give some information about the skills you have acquired, your "
+"results, etc."
 
 #: .\accounts\forms.py:261
 msgid "Analyste de données"
-msgstr ""
+msgstr "Data Analyst"
 
 #: .\accounts\forms.py:267
 msgid ""
@@ -317,117 +348,122 @@ msgid ""
 "étiez affecté, les compétences demandées/requises, ce que vous faîtes/"
 "faisiez, etc"
 msgstr ""
+"Can you give some information about the type of job you are/"
+"were assigned, skills required/required, what you do/"
+"were doing, etc."
 
 #: .\accounts\forms.py:272
 msgid "Recherche de profil"
-msgstr ""
+msgstr "Profile search"
 
 #: .\accounts\forms.py:274
 msgid "Nom d'utilisateur, prénom ou nom de famille"
-msgstr ""
+msgstr "User name, first name or last name"
 
 #: .\accounts\forms.py:275
 msgid "N.B. : séparez les mots clés par des espaces pour plus de résultats."
-msgstr ""
+msgstr "N.B.: Separate keywords with spaces for more results."
 
 #: .\accounts\github_backend.py:35 .\accounts\github_backend.py:62
 msgid "Aucun fichier nommé 'README.md' n'a été trouvé à la racine de ce dépôt."
-msgstr ""
+msgstr "No file named 'README.md' was found in the root of this repository."
 
 #: .\accounts\mixins.py:30
 msgid "Vous n'avez pas l'autorisation de modifier ce profil"
-msgstr ""
+msgstr "You do not have permission to edit this profile"
 
 #: .\accounts\mixins.py:39
 msgid ""
 "Le profil auquel vous essayez d'accéder n'existe pas, ou plus, ou est "
 "actuellement inaccessible"
 msgstr ""
+"The profile you are trying to access does not exist, or no longer exists, or is "
+"currently inaccessible"
 
 #: .\accounts\models.py:31
 msgid "ID du type"
-msgstr ""
+msgstr "Type ID"
 
 #: .\accounts\models.py:33
 msgid "type de profession"
-msgstr ""
+msgstr "type of profession"
 
 #: .\accounts\models.py:36
 msgid "statut en programmation"
-msgstr ""
+msgstr "status in programming"
 
 #: .\accounts\models.py:37
 msgid "statuts en programmation"
-msgstr ""
+msgstr "status in programming"
 
 #: .\accounts\models.py:48 .\analytics\models.py:16 .\forum\models.py:17
 #: .\forum\models.py:57 .\polls\models.py:73
 msgid "utilisateur associé"
-msgstr ""
+msgstr "associated user"
 
 #: .\accounts\models.py:50
 msgid "est un développeur"
-msgstr ""
+msgstr "is a developer"
 
 #: .\accounts\models.py:52
 msgid "est un étudiant en informatique"
-msgstr ""
+msgstr "is a computer science student"
 
 #: .\accounts\models.py:54
 msgid "est un formateur"
-msgstr ""
+msgstr "is an instructor"
 
 #: .\accounts\models.py:56
 msgid "image de profil"
-msgstr ""
+msgstr "profile picture"
 
 #: .\accounts\models.py:57
 msgid "pays"
-msgstr ""
+msgstr "country"
 
 #: .\accounts\models.py:59
 msgid "biographie"
-msgstr ""
+msgstr "biography"
 
 #: .\accounts\models.py:61
 msgid "langages maîtrisés"
-msgstr ""
+msgstr "languages mastered"
 
 #: .\accounts\models.py:63
 msgid "signalement"
-msgstr ""
+msgstr "report"
 
 #: .\accounts\models.py:65
 msgid "adresse e-mail confirmée"
-msgstr ""
+msgstr "confirmed email address"
 
 #: .\accounts\models.py:67
 msgid "notification par email"
-msgstr ""
+msgstr "email notification"
 
 #: .\accounts\models.py:69
 msgid "profil public"
-msgstr ""
+msgstr "public profile"
 
 #: .\accounts\models.py:73
 msgid "niveau"
-msgstr ""
+msgstr "level"
 
 #: .\accounts\models.py:75
 msgid "expérience acquise"
-msgstr ""
+msgstr "acquired experience"
 
 #: .\accounts\models.py:77
 msgid "articles favoris"
-msgstr ""
+msgstr "favorite articles"
 
 #: .\accounts\models.py:79
 msgid "sujets marqués comme favoris"
-msgstr ""
+msgstr "topics marked as favorites"
 
 #: .\accounts\models.py:81
 msgid "tutoriels marqués comme terminé"
-msgstr ""
+msgstr "tutorials marked as completed"
 
 #: .\accounts\models.py:83
 msgid "tutoriels favoris"
@@ -889,7 +925,7 @@ msgstr ""
 
 #: .\accounts\utils.py:9
 msgid "apprenti"
-msgstr ""
+msgstr "apprentice"
 
 #: .\accounts\utils.py:10
 msgid "avancé"

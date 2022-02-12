@@ -23,7 +23,7 @@ et-xmlfile==1.0.1
 html5lib==1.0.1
 idna==2.8
 jdcal==1.4.1
-jsmin==2.2.2
+jsmin>=2.2.2
 MarkupPy==1.14
 numpy==1.17.3
 oauthlib==3.1.0
@@ -33,8 +33,8 @@ pandas==0.25.3
 Pillow==6.2.1
 pycodestyle==2.5.0
 pycparser==2.19
-PyGithub==1.44
-PyJWT==1.7.1
+PyGithub>=1.44
+PyJWT>=1.7.1
 PyPDF2==1.26.0
 python-dateutil==2.8.0
 python-decouple==3.1
