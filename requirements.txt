@@ -7,8 +7,8 @@ chardet==3.0.4
 defusedxml==0.6.0
 Deprecated==1.2.6
 diff-match-patch==20181111
-Django==2.2.6
-django-allauth==0.40.0
+Django==2.2.24
+django-allauth==0.41.0
 django-countries==5.5
 django-filebrowser==3.11.1
 django-grappelli==2.12.3
@@ -18,7 +18,7 @@ django-modeltranslation==0.13.4
 django-recaptcha3==0.1.0
 django-rest-auth==0.9.5
 django-tinymce4-lite==1.7.5
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 et-xmlfile==1.0.1
 html5lib==1.0.1
 idna==2.8
@@ -30,7 +30,7 @@ oauthlib==3.1.0
 odfpy==1.4.0
 openpyxl==3.0.0
 pandas==0.25.3
-Pillow==6.2.1
+Pillow==8.3.0
 pycodestyle==2.5.0
 pycparser==2.19
 PyGithub>=1.44
@@ -40,8 +40,8 @@ python-dateutil==2.8.0
 python-decouple==3.1
 python3-openid==3.1.0
 pytz==2019.3
-PyYAML==5.1.2
-reportlab==3.5.32
+PyYAML==5.4
+reportlab==3.5.55
 requests==2.22.0
 requests-oauthlib==1.2.0
 six==1.12.0
@@ -49,7 +49,7 @@ soupsieve==1.9.5
 sqlparse==0.3.0
 stripe==2.41.0
 tablib==0.14.0
-urllib3==1.25.6
+urllib3==1.26.5
 webencodings==0.5.1
 wrapt==1.11.2
 xhtml2pdf==0.2.3
