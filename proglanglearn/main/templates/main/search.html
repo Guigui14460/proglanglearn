@@ -27,7 +27,9 @@
                         {% if klass == 'Course' or klass == 'Article' %}
                             <img src="{{ object.thumbnail.url }}" alt="{% trans "Vignette" %}">
                         {% elif klass == 'Tag' or klass == 'Language' %}
-                            <img src="{{ object.image.url }}" alt="{% trans "Logo représentatif" %}" >
+                            {% if object.image %}
+                                <img src="{{ object.image.url }}" alt="{% trans "Logo représentatif" %}" >
+                            {% endif %}
                         {% endif %}
                         <h3>{% if klass == 'Course' and not request.user.is_staff and not request.user in object.students.all and request.user != object.author %}
                                 <i class="fas fa-lock"></i>&nbsp;

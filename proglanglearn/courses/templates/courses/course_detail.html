@@ -19,7 +19,7 @@
 <section>
     <h2>{% trans 'Informations générales' %}</h2>
     <figure>
-        <img src="{{ object.thumbnail.url }}" alt="Vignette du cours">
+        <img src="{{ object.thumbnail.url }}" alt="{% trans "Vignette du cours" %}">
     </figure>
     {{ object.content_introduction|safe }}
     <p>{% trans "Cours rédigé par" %} <a href="{% url 'accounts:profile' user_id=object.author.id %}">{{ object.author.username }}</a> {% trans 'et paru le' %} {{ object.published_date }}</p>

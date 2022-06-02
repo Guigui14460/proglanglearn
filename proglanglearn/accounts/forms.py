@@ -202,7 +202,7 @@ class ProfileInformationForm(forms.Form):
     linked_in_url = forms.URLField(required=False, widget=forms.URLInput(
         attrs={'placeholder': _('URL de votre profil LinkedIn')}))
     instagram_url = forms.URLField(required=False, widget=forms.URLInput(
-        attrs={'placeholder': _('URL de votre profil Intagram')}))
+        attrs={'placeholder': _('URL de votre profil Instagram')}))
     github = forms.CharField(required=False, label=_("Nom d'utilisateur de votre compte Github"), widget=forms.TextInput(attrs={'placeholder': 'johndoe93'}), help_text=_(
         "<i class='fas fa-exclamation-triangle'></i> En renseignant ce champ, vous accepter de publier les liens et les informations de vos dépôts publics de votre compte Github."))
 
