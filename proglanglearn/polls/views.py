@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
@@ -20,7 +20,7 @@ class VoteView(View):
             if poll.end_date is not None and poll.end_date < datetime.date.today():
                 messages.error(request, _(
                     "Ce sondage n'est plus actif. Vous ne pouvez plus y répondre"))
-                return HttpResponseRedirect(poll.get_result_url())
+                return redirect(poll.get_result_url())
             item = get_object_or_404(Item, pk=request.GET.get('item', None))
             Vote.objects.create(
                 poll=poll, ip=request.META['REMOTE_ADDR'], user=request.user, item=item)
@@ -50,7 +50,7 @@ class PollDetailView(NavbarSearchMixin, View):
         if poll.end_date is not None and poll.end_date >= datetime.date.today():
             messages.error(request, _(
                 "Ce sondage n'est plus actif. Vous ne pouvez plus y répondre"))
-            return HttpResponseRedirect(poll.get_result_url())
+            return redirect(poll.get_result_url())
         if Vote.objects.filter(poll=poll, ip=request.META['REMOTE_ADDR']).exists():
             messages.warning(request, _("Vous avez déjà répondu à ce sondage"))
             return redirect('polls:poll_result', poll_pk=poll.pk)

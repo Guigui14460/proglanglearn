@@ -9,7 +9,7 @@ User = get_user_model()
 class ProfileTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(
-            username='Julia', email='julia@gmail.com', password='jules cesar')
+            username='Julia', email='julia@gmail.com', password='julia cesar')
 
     def test_create_profile(self):
         julia = Profile.objects.get(user__username='Julia')

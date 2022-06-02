@@ -28,8 +28,8 @@ SITE_ID = 3
 
 
 # Stripe settings
-STRIPE_PUBLIC_KEY = 'pk_test_buF4FsDmstqHzKr4Nc5TKxbH00rXE4mpbI'
-STRIPE_SECRET_KEY = 'sk_test_bokSwLp3jIVrQ0WYZP4ff8tx009fk1ZPGJ'
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 
 
 # HTML minifier settings
